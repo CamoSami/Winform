@@ -1,0 +1,25 @@
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe.config
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.pdb
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\MaterialSkin.dll
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.csproj.AssemblyReference.cache
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormLogin.resources
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.Properties.Resources.resources
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.csproj.GenerateResource.cache
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.csproj.CopyComplete
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
+C:\Users\Minh Hieu\source\repos\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe.config
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.pdb
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\MaterialSkin.dll
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.csproj.AssemblyReference.cache
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormLogin.resources
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.Properties.Resources.resources
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.csproj.GenerateResource.cache
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.csproj.CoreCompileInputs.cache
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.csproj.CopyComplete
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb
+D:\06_C#_exe\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources

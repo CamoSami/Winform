@@ -1,0 +1,15 @@
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe.config
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.pdb
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\MaterialSkin.dll
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\bin\Debug\System.ComponentModel.Annotations.dll
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong_Simplified.csproj.AssemblyReference.cache
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormCreateKhachHang.resources
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormLogin.resources
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.Properties.Resources.resources
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong_Simplified.csproj.GenerateResource.cache
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong_Simplified.csproj.CoreCompileInputs.cache
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong_Simplified.csproj.CopyComplete
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
+D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb
