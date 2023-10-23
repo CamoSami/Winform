@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WinformWithExternalLibrary.DataTransferObjects
 {
-	public class KhachHangDTO : IBaseDTO
+	public class KhachHangDTO
 	{
 		[Required(
 			ErrorMessage = "Thiếu họ tên kìa!"

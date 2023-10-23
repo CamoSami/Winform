@@ -345,7 +345,7 @@ namespace WinformWithExternalLibrary
 					.Text = text;
 		}
 
-		private IBaseDTO GetInput()
+		private dynamic GetInput()
 		{
 			//		TODO: If Else XD
 
@@ -368,7 +368,7 @@ namespace WinformWithExternalLibrary
 			return new KhachHangDTO();
 		}
 
-		private IBaseDTO GetBaseDTOFromTabPage()
+		private dynamic GetBaseDTOFromTabPage()
 		{
 			if (this.materialTabControl1.SelectedTab == this.tabPageHoaDonBan)
 			{

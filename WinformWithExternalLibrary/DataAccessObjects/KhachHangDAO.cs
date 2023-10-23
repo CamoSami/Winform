@@ -16,7 +16,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public KhachHangDAO() { }
 
-		public bool IfPhoneNumberTaken(IBaseDTO baseDTO)
+		public bool IfPhoneNumberTaken(dynamic baseDTO)
 		{
 			KhachHangDTO khachHangDTO = baseDTO as KhachHangDTO;
 
@@ -30,7 +30,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return dataTable.Rows.Count > 0;
 		}
 
-		public bool InsertKhachHang(IBaseDTO baseDTO)
+		public bool InsertKhachHang(dynamic baseDTO)
 		{
 			KhachHangDTO khachHangDTO = baseDTO as KhachHangDTO;
 

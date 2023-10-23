@@ -8,7 +8,7 @@ using System.ComponentModel;
 
 namespace WinformWithExternalLibrary.DataTransferObjects
 {
-	public class LoginDTO : IBaseDTO
+	public class LoginDTO
 	{
 		[Required(
 			ErrorMessage = "Thiếu tên đăng nhập kìa!"

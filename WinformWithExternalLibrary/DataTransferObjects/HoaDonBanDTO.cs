@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WinformWithExternalLibrary.DataTransferObjects
 {
-	public class HoaDonBanDTO : IBaseDTO
+	public class HoaDonBanDTO
 	{
 		[Required(
 			ErrorMessage = "Thiếu ngày bán kìa!"

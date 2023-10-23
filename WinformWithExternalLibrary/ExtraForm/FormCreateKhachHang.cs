@@ -311,7 +311,7 @@ namespace WinformWithExternalLibrary
 			}
 
 			//		New Object
-			IBaseDTO temp = this.GetInput();
+			dynamic temp = this.GetInput();
 			List<ValidationResult> results = new List<ValidationResult>();
 
 			//		Try Validating
@@ -351,7 +351,7 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		private IBaseDTO GetInput()
+		private dynamic GetInput()
 		{
 			return new KhachHangDTO(
 				khachHangDTO_TenKhachHang: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDTO_TenKhachHang),
