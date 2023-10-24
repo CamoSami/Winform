@@ -27,3 +27,27 @@ D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrar
 D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
 D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb
 D:\06_C#_exe\_Group Project\WinformWithExternalLibrary\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormCreateKhachHang.resources
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe.config
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\MaterialSkin.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.ComponentModel.Annotations.dll
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.AssemblyReference.cache
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormCreateKhachHang.resources
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormLogin.resources
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.Properties.Resources.resources
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.GenerateResource.cache
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CoreCompileInputs.cache
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CopyComplete
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.xml

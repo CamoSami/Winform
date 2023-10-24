@@ -1,4 +1,6 @@
-﻿using MaterialSkin;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,8 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using WinformWithExternalLibrary.DataAccessObjects;
 using WinformWithExternalLibrary.DataTransferObjects;
+using System.Windows.Media;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace WinformWithExternalLibrary
 {
@@ -28,9 +32,10 @@ namespace WinformWithExternalLibrary
 		{
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
+			this.InitializeAnalyticsForm();
 
-			//		Data Access Objects
-			this.InitializeDAOs();
+            //		Data Access Objects
+            this.InitializeDAOs();
 
 			//		Attributes
 			this.InitializeHardCodedAttributes();
@@ -77,7 +82,7 @@ namespace WinformWithExternalLibrary
 						}
 
 						//		Label for Validation
-						tempLabel.ForeColor = Color.Red;
+						tempLabel.ForeColor = System.Drawing.Color.Red;
 					}
 					//		TextBoxBase (MaterialTextBox, ...)
 					else if (control is TextBoxBase)
@@ -223,10 +228,89 @@ namespace WinformWithExternalLibrary
 			};
 		}
 
+		private void InitializeAnalyticsForm()
+		{
+			this.InitializeChart1();
+			this.InitializeChart2();
+        }
+
+		private void InitializeChart1()
+		{
+            // Chart 1
+            cartesianChart1.Series = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title = "2015",
+                    Values = new ChartValues<double> { 10, 50, 39, 50 }
+                }
+            };
+
+            //adding series will update and animate the chart automatically
+            cartesianChart1.Series.Add(new ColumnSeries
+            {
+                Title = "2016",
+                Values = new ChartValues<double> { 11, 56, 42 }
+            });
+
+            //also adding values updates and animates the chart automatically
+            cartesianChart1.Series[1].Values.Add(48d);
+
+            cartesianChart1.AxisX.Add(new Axis
+            {
+                Title = "Sales Man",
+                Labels = new[] { "Maria", "Susan", "Charles", "Frida" }
+            });
+
+            cartesianChart1.AxisY.Add(new Axis
+            {
+                Title = "Sold Apps",
+                LabelFormatter = value => value.ToString("N")
+            });
+        }
+
+		private void InitializeChart2()
+		{
+            cartesianChart2.Series = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Series 1",
+                    Values = new ChartValues<double> {4, 6, 5, 2, 7}
+                },
+                new LineSeries
+                {
+                    Title = "Series 2",
+                    Values = new ChartValues<double> {6, 7, 3, 4, 6},
+                    PointGeometry = null
+                }
+            };
+
+            cartesianChart2.AxisX.Add(new Axis
+            {
+                Title = "Month",
+                Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" }
+            });
+
+            cartesianChart2.AxisY.Add(new Axis
+            {
+                Title = "Sales",
+                LabelFormatter = value => value.ToString("C")
+            });
+
+            cartesianChart2.LegendLocation = LegendLocation.Right;
 
 
-		//		Event Section
-		private void MaterialTextBox_GotFocus(object sender, EventArgs e)
+            cartesianChart2.DataClick += CartesianChart2OnDataClick;
+        }
+
+        private void CartesianChart2OnDataClick(object sender, ChartPoint chartPoint)
+        {
+            MessageBox.Show("You clicked (" + chartPoint.X + "," + chartPoint.Y + ")");
+        }
+
+        //		Event Section
+        private void MaterialTextBox_GotFocus(object sender, EventArgs e)
 		{
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
 			TextBoxBase textboxTemp = sender as TextBoxBase;
@@ -382,5 +466,5 @@ namespace WinformWithExternalLibrary
 		{
 			return this.materialTabControl1.SelectedIndex;
 		}
-	}
+    }
 }
