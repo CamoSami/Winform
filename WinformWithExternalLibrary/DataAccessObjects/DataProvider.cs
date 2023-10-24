@@ -53,8 +53,15 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 					return true;
 				}
-				catch (SqlException)
+				catch (SqlException ex)
 				{
+					MaterialMessageBox.Show(
+					text: "Có vấn đề j đó vừa xảy ra ._.\n\n" + ex.Message,
+					caption: "ExecuteQuery",
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+
 					return false;
 				}
 			}

@@ -131,7 +131,49 @@ namespace WinformWithExternalLibrary
 			this.KhachHangDTO_TenKhachHang.KeyPress += this.TextBoxBase_KeyPress_AlphabetOnly;
 
 			//		Button
-			this.materialButtonSubmit.Click += this.MaterialButtonSubmit_Click;
+			//			Submit
+			this.materialButtonSubmit.Click += (obj, e) => 
+			{
+				//		Form is completed -> Interaction = true
+				for (int i = 0; i < this.isInterracted.Count; i++)
+				{
+					this.isInterracted[i] = true;
+				}
+
+				//		Try validating
+				if (!this.TryValidation())
+				{
+					return;
+				}
+
+				//		Send Query
+				if (KhachHangDAO.Instance.InsertKhachHang(this.GetInput() as KhachHangDTO))
+				{
+					MaterialMessageBox.Show(
+						text: "Dữ liệu khách hàng đã được nhập thành công O~O",
+						caption: this.Text,
+						UseRichTextBox: false,
+						buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+						);
+
+					this.hasDone = true;
+
+					//		TODO: Send PhoneNumbers back to HoaDonBan or something
+					if (this.onlyOnce)
+					{
+						this.Close();
+					}
+				}
+				else
+				{
+					MaterialMessageBox.Show(
+						text: "Có vấn đề j đó vừa xảy ra ._.",
+						caption: this.Text,
+						UseRichTextBox: false,
+						buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+						);
+				}
+			};
 
 			//		Form
 			//			DirtyData check before closing
@@ -224,16 +266,6 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		private void FormLogin_Load(object sender, EventArgs e)
-		{
-			
-		}
-
-		private void FormLogin_Click(object sender, EventArgs e)
-		{
-			
-		}
-
 		private void MaterialTextBox_GotFocus(object sender, EventArgs e)
 		{
 			TextBoxBase textboxTemp = sender as TextBoxBase;
@@ -252,52 +284,9 @@ namespace WinformWithExternalLibrary
 			this.TryValidation();
 		}
 
-		private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			
-		}
-
 		private void MaterialButtonSubmit_Click(object sender, EventArgs e)
 		{
-			//		Form is completed -> Interaction = true
-			for (int i = 0; i < this.isInterracted.Count; i++)
-			{
-				this.isInterracted[i] = true;
-			}
-
-			//		Try validating
-			if (!this.TryValidation())
-			{
-				return;
-			}
-
-			//		Send Query
-			if (KhachHangDAO.Instance.InsertKhachHang(this.GetInput() as KhachHangDTO))
-			{
-				MaterialMessageBox.Show(
-					text: "Dữ liệu khách hàng đã được nhập thành công O~O",
-					caption: this.Text,
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-					);
-
-				this.hasDone = true;
-
-				//		TODO: Send PhoneNumbers back to HoaDonBan or something
-				if (this.onlyOnce)
-				{
-					this.Close();
-				}
-			}
-			else
-			{
-				MaterialMessageBox.Show(
-					text: "Có vấn đề j đó vừa xảy ra ._.",
-					caption: this.Text,
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-					);
-			}
+			
 		}
 
 

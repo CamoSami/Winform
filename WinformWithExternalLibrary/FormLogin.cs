@@ -263,7 +263,10 @@ namespace WinformWithExternalLibrary
 				this.CheckTextboxTextEqualToString(this.LoginDTO_password, "123"))
 			{
 				//		[MAY NEED] Try Connecting => Login via Usernames and Password from DTB
-				this.InitiateAndTestDataProvider();
+				if (!this.InitiateAndTestDataProvider())
+				{
+					return;
+				}
 
 				MaterialMessageBox.Show(
 					text: "Đăng nhập được rồi nè ~.~",
@@ -302,14 +305,14 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		private void InitiateAndTestDataProvider()
+		private bool InitiateAndTestDataProvider()
 		{
 			if (DataProvider.Instance == null)
 			{
 				DataProvider.Instance = new DataProvider();
 			}
 
-			DataProvider.Instance.TestConnection();
+			return DataProvider.Instance.TestConnection();
 
 			//Console.WriteLine(DataProvider.Instance.TestConnection());
 		}
