@@ -75,3 +75,29 @@ D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\W
 D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CopyComplete
 D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
 D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe.config
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.pdb
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\Bogus.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\MaterialSkin.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\System.ComponentModel.Annotations.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\Bogus.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.pdb
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.pdb
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.pdb
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.AssemblyReference.cache
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormCreateKhachHang.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormLogin.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.Properties.Resources.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.GenerateResource.cache
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CoreCompileInputs.cache
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CopyComplete
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb

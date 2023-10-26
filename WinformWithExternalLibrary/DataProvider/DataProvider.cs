@@ -25,7 +25,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		public const string CHITIETHDNHAP_TABLE = "tChiTietHDNhap";
 		public const string CONGVIEC_TABLE = "tCongViec";
 		public const string NHANVIEN_TABLE = "tNhanVien";
-		public const string DANHMUCHANGHOA_TABLE = "tDMHangHoa";
+		public const string DMSANPHAM_TABLE = "tDMSanPham";
 		#endregion
 
 		public static DataProvider Instance { get; set; }

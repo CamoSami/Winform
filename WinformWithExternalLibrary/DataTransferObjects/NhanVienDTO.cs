@@ -10,53 +10,58 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 {
     public class NhanVienDTO
     {
-        [Required(ErrorMessage = "Thiếu mã nhân viên!")]
-        [DisplayName("Mã nhân viên")]
-        public int NhanVienDTO_MaNhanVien { get; set; }
-
-        [Required(ErrorMessage = "Thiếu mã công việc!")]
+        [Required(ErrorMessage = "Vui lòng nhập mã công việc")]
         [DisplayName("Mã công việc")]
-        public int NhanVienDTO_MaCongViec { get; set; }
+        public Guid NhanVienDTO_MaCongViec { get; set; }
 
-        [Required(ErrorMessage = "Thiếu tên nhân viên!")]
+
+
+        [Required(ErrorMessage = "Vui lòng nhập tên nhân viên")]
         [StringLength(maximumLength: 40,
                        MinimumLength = 4,
-                    ErrorMessage = "Nhập tên nhân viên từ 4-40 kí tự.")]
+                    ErrorMessage = "Tên nhân viên phải từ 4-40 kí tự.")]
         [DisplayName("Tên nhân viên")]
         public string NhanVienDTO_TenNhanVien { get; set; }
 
-        [Required(ErrorMessage = "Thiếu ngày sinh!")]
+
+
+        [Required(ErrorMessage = "Vui lòng nhập ngày sinh")]
         [DisplayName("Ngày sinh")]
         [DataType(DataType.Date)]
         public DateTime NhanVienDTO_NgaySinh { get; set; }
 
-        [Required(ErrorMessage = "Thiếu địa chỉ!")]
-        [StringLength(maximumLength: 100,
+
+
+        [Required(ErrorMessage = "Vui lòng nhập địa chỉ")]
+        [StringLength(maximumLength: 150,
                         MinimumLength = 4,
-            ErrorMessage = "Nhập địa chỉ từ 4-100 kí tự.")]
+            ErrorMessage = "Nhập địa chỉ từ 4-150 kí tự.")]
         [DisplayName("Địa chỉ")]
         public string NhanVienDTO_DiaChi { get; set; }
 
-        [Required(ErrorMessage = "Thiếu số điện thoại!")]
+
+
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
         [StringLength(  maximumLength: 10,
                         MinimumLength = 10,
-                        ErrorMessage = "Nhập số điện thoại 10 kí tự.")]
+                        ErrorMessage = "Số điện thoại phải dài 10 kí tự.")]
         [DisplayName("Số điện thoại")]
         public string NhanVienDTO_DienThoai { get; set; }
 
-        [Required(ErrorMessage = "Thiếu giới tính!")]
+
+
+        [Required(ErrorMessage = "Vui lòng nhập giới tính!")]
         [DisplayName("Giới tính")]
         public string NhanVienDTO_GioiTinh { get; set; }
 
-        public NhanVienDTO(int maNhanVien, int maCongViec, string tenNhanVien, DateTime ngaySinh, string diaChi, string dienThoai, string gioiTinh)
+        public NhanVienDTO(Guid nhanVienDTO_MaCongViec, string nhanVienDTO_TenNhanVien, DateTime nhanVienDTO_NgaySinh, string nhanVienDTO_DiaChi, string nhanVienDTO_DienThoai, string nhanVienDTO_GioiTinh)
         {
-            this.NhanVienDTO_MaNhanVien = maNhanVien;
-            this.NhanVienDTO_MaCongViec = maCongViec;
-            this.NhanVienDTO_TenNhanVien = tenNhanVien;
-            this.NhanVienDTO_NgaySinh = ngaySinh;
-            this.NhanVienDTO_DiaChi = diaChi;
-            this.NhanVienDTO_DienThoai = dienThoai;
-            this.NhanVienDTO_GioiTinh = gioiTinh;
+            this.NhanVienDTO_MaCongViec = nhanVienDTO_MaCongViec;
+            this.NhanVienDTO_TenNhanVien = nhanVienDTO_TenNhanVien;
+            this.NhanVienDTO_NgaySinh = nhanVienDTO_NgaySinh;
+            this.NhanVienDTO_DiaChi = nhanVienDTO_DiaChi;
+            this.NhanVienDTO_DienThoai = nhanVienDTO_DienThoai;
+            this.NhanVienDTO_GioiTinh = nhanVienDTO_GioiTinh;
         }
 
         public NhanVienDTO() { }

@@ -11,7 +11,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 	public class KhachHangDTO
 	{
 		[Required(
-			ErrorMessage = "Thiếu họ tên kìa!"
+			ErrorMessage = "Vui lòng nhập họ tên"
 			)]
 		[StringLength(
 			maximumLength: 40,
@@ -23,26 +23,30 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 			)]
 		public string KhachHangDTO_TenKhachHang { get; set; }
 
+
+
 		[Required(
-			ErrorMessage = "Thiếu địa chỉ kìa!"
+			ErrorMessage = "Vui lòng nhập địa chỉ"
 			)]
 		[StringLength(
-			maximumLength: 100,
+			maximumLength: 150,
 			MinimumLength = 4,
-			ErrorMessage = "Nhập địa chỉ chỉ từ 4-100 kí tự nhá ._."
+			ErrorMessage = "Địa chỉ phải có từ 4-150 kí tự"
 			)]
 		[DisplayName(
 			"Địa chỉ"
 			)]
 		public string KhachHangDTO_DiaChi { get; set; }
 
+
+
 		[Required(
-			ErrorMessage = "Thiếu số điện thoại kìa!"
+			ErrorMessage = "Vui lòng nhập số điện thoại"
 			)]
 		[StringLength(
 			maximumLength: 10,
 			MinimumLength = 10,
-			ErrorMessage = "Nhập số điện thoại chỉ 10 kí tự nhá ._."
+			ErrorMessage = "Số điện thoại chỉ 10 kí tự"
 			)]
 		[DisplayName(
 			"Số điện thoại"

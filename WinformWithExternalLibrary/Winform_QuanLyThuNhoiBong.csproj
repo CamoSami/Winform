@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bogus, Version=34.0.2.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.34.0.2\lib\net40\Bogus.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -68,12 +71,19 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccessObjects\DataProvider.cs" />
+    <Compile Include="DataProvider\BogusAmogus.cs" />
     <Compile Include="DataAccessObjects\KhachHangDAO.cs" />
+    <Compile Include="DataProvider\DataProvider.cs" />
+    <Compile Include="DataTransferObjects\ChiTietHDBanDTO.cs" />
+    <Compile Include="DataTransferObjects\ChiTietHDNhapDTO.cs" />
     <Compile Include="DataTransferObjects\CongViecDTO.cs" />
+    <Compile Include="DataTransferObjects\CustomValidation\DivisibleBy100Attribute.cs" />
+    <Compile Include="DataTransferObjects\DMSanPhamDTO.cs" />
     <Compile Include="DataTransferObjects\HoaDonBanDTO.cs" />
+    <Compile Include="DataTransferObjects\HoaDonNhapDTO.cs" />
     <Compile Include="DataTransferObjects\KhachHangDTO.cs" />
     <Compile Include="DataTransferObjects\LoginDTO.cs" />
+    <Compile Include="DataTransferObjects\NhaCungCapDTO.cs" />
     <Compile Include="DataTransferObjects\NhanVienDTO.cs" />
     <Compile Include="ExtraForm\FormCreateKhachHang.cs">
       <SubType>Form</SubType>

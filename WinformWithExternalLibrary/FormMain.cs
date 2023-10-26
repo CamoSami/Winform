@@ -17,6 +17,7 @@ using WinformWithExternalLibrary.DataAccessObjects;
 using WinformWithExternalLibrary.DataTransferObjects;
 using System.Windows.Media;
 using Brushes = System.Windows.Media.Brushes;
+using WinformWithExternalLibrary.CustomComponent;
 
 namespace WinformWithExternalLibrary
 {
@@ -30,6 +31,12 @@ namespace WinformWithExternalLibrary
 
 		public FormMain()
 		{
+			//		GenerateData
+			BogusAmogus bogusAmogus = new BogusAmogus();
+			bogusAmogus.GenerateFakeData();
+
+
+
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
 			this.InitializeAnalyticsForm();
@@ -103,11 +110,11 @@ namespace WinformWithExternalLibrary
 						//		Casting
 						DateTimePicker tempDateTimePicker = control as DateTimePicker;
 
-						//		Max Range = Now
-						tempDateTimePicker.MaxDate = DateTime.Now;
-
 						//		Current Day = Now
 						tempDateTimePicker.Value = DateTime.Now;
+
+						//		Max Range = Now
+						tempDateTimePicker.MaxDate = DateTime.Now;
 					}
 					//		MaterialListView
 					else if (control is MaterialListView)
@@ -203,11 +210,11 @@ namespace WinformWithExternalLibrary
 
 			this.Load += (obj, e) =>
 			{
-				this.FormBorderStyle = FormBorderStyle.None;
-				this.WindowState = FormWindowState.Maximized;
+				//this.FormBorderStyle = FormBorderStyle.None;
+				//this.WindowState = FormWindowState.Maximized;
 
-				this.MinimumSize = this.Size;
-				this.MaximumSize = this.Size;
+				//this.MinimumSize = this.Size;
+				//this.MaximumSize = this.Size;
 			};
 
 			//		Test 
@@ -442,14 +449,14 @@ namespace WinformWithExternalLibrary
 			//		TESTING
 			if (this.materialTabControl1.SelectedTab == this.tabPageHoaDonBan)
 			{
-				return new HoaDonBanDTO(
-					hoaDonBanDTO_MaNhanVien: Guid.NewGuid(),
-					hoaDonBanDTO_NgayBan: this.dateTimePicker1.Value,
-					hoaDonBanDTO_TongTien: 0
-					);
+				//return new HoaDonBanDTO(
+				//	hoaDonBanDTO_MaNhanVien: Guid.NewGuid(),
+				//	hoaDonBanDTO_NgayBan: this.dateTimePicker1.Value,
+				//	hoaDonBanDTO_TongTien: 0
+				//	);
 			}
 
-			return new KhachHangDTO();
+			return null;
 		}
 
 		private dynamic GetBaseDTOFromTabPage()

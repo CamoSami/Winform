@@ -23,6 +23,8 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 			)]
 		public string LoginDTO_loginName { get; set; }
 
+
+
 		[Required(
 			ErrorMessage = "Thiếu mật khẩu kìa!"
 			)]
