@@ -51,3 +51,27 @@ E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.pdb
 E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.xml
 E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.pdb
 E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.xml
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe.config
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.pdb
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.dll
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.dll
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.dll
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\MaterialSkin.dll
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\System.ComponentModel.Annotations.dll
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.pdb
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.xml
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.pdb
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.xml
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.pdb
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.xml
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.AssemblyReference.cache
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormCreateKhachHang.resources
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormLogin.resources
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.Properties.Resources.resources
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.GenerateResource.cache
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CoreCompileInputs.cache
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CopyComplete
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
+D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb
