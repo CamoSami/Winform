@@ -1,6 +1,4 @@
-﻿using LiveCharts.Wpf;
-using LiveCharts;
-using MaterialSkin;
+﻿using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -18,6 +16,11 @@ using WinformWithExternalLibrary.DataTransferObjects;
 using System.Windows.Media;
 using Brushes = System.Windows.Media.Brushes;
 using WinformWithExternalLibrary.CustomComponent;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView.Painting;
+using LiveChartsCore.SkiaSharpView;
+using SkiaSharp;
+using System.Collections.ObjectModel;
 
 namespace WinformWithExternalLibrary
 {
@@ -32,8 +35,8 @@ namespace WinformWithExternalLibrary
 		public FormMain()
 		{
 			//		GenerateData
-			BogusAmogus bogusAmogus = new BogusAmogus();
-			bogusAmogus.GenerateFakeData();
+			//BogusAmogus bogusAmogus = new BogusAmogus();
+			//bogusAmogus.GenerateFakeData();
 
 
 
@@ -243,77 +246,42 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeChart1()
 		{
-            // Chart 1
-            cartesianChart1.Series = new SeriesCollection
-            {
-                new ColumnSeries
-                {
-                    Title = "2015",
-                    Values = new ChartValues<double> { 10, 50, 39, 50 }
-                }
+			// Chart 1
+			cartesianChart1.Series = new ISeries[]
+			{
+                new ColumnSeries<double>
+				{
+					Values = new ObservableCollection<double> { 10, 10, 10, 10, 10, 10, 10 },
+					Stroke = null,
+					Fill = new SolidColorPaint(new SKColor(30, 30, 30, 30)),
+					IgnoresBarPosition = true
+				},
+				new ColumnSeries<double>
+				{
+					Values = new ObservableCollection<double> { 3, 10, 5, 3, 7, 3, 8 },
+					Stroke = null,
+					Fill = new SolidColorPaint(SKColors.CornflowerBlue),
+					IgnoresBarPosition = true
+				}
             };
-
-            //adding series will update and animate the chart automatically
-            cartesianChart1.Series.Add(new ColumnSeries
-            {
-                Title = "2016",
-                Values = new ChartValues<double> { 11, 56, 42 }
-            });
-
-            //also adding values updates and animates the chart automatically
-            cartesianChart1.Series[1].Values.Add(48d);
-
-            cartesianChart1.AxisX.Add(new Axis
-            {
-                Title = "Sales Man",
-                Labels = new[] { "Maria", "Susan", "Charles", "Frida" }
-            });
-
-            cartesianChart1.AxisY.Add(new Axis
-            {
-                Title = "Sold Apps",
-                LabelFormatter = value => value.ToString("N")
-            });
         }
 
 		private void InitializeChart2()
 		{
-            cartesianChart2.Series = new SeriesCollection
+            // Chart 2
+            cartesianChart2.Series = new ISeries[]
             {
-                new LineSeries
-                {
-                    Title = "Series 1",
-                    Values = new ChartValues<double> {4, 6, 5, 2, 7}
-                },
-                new LineSeries
-                {
-                    Title = "Series 2",
-                    Values = new ChartValues<double> {6, 7, 3, 4, 6},
-                    PointGeometry = null
-                }
+                new LineSeries<int>
+				{
+					Values = new [] { 4, 4, 7, 2, 8 },
+					GeometrySize = 10
+				},
+				new LineSeries<int>
+				{
+					Values = new [] { 7, 5, 3, 2, 6 },
+					GeometrySize = 30
+				}
             };
-
-            cartesianChart2.AxisX.Add(new Axis
-            {
-                Title = "Month",
-                Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" }
-            });
-
-            cartesianChart2.AxisY.Add(new Axis
-            {
-                Title = "Sales",
-                LabelFormatter = value => value.ToString("C")
-            });
-
-            cartesianChart2.LegendLocation = LegendLocation.Right;
-
-
-            cartesianChart2.DataClick += CartesianChart2OnDataClick;
-        }
-
-        private void CartesianChart2OnDataClick(object sender, ChartPoint chartPoint)
-        {
-            MessageBox.Show("You clicked (" + chartPoint.X + "," + chartPoint.Y + ")");
         }
 
         //		Event Section
