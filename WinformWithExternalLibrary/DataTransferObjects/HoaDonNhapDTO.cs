@@ -13,6 +13,10 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 	{
 		//		TODO: custom Attribute that uses DAO to detect if the Guid/PhoneNumber entered can be found in the DTB
 
+		public Guid HoaDonNhapDTO_MaHDNhap { get; set; }
+
+
+
 		[Required(ErrorMessage = "Vui lòng nhập mã nhà cung cấp")]
 		[DisplayName("Mã nhà cung cấp")]
 		public Guid HoaDonNhapDTO_MaNhaCungCap { get; set; }

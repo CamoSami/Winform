@@ -113,9 +113,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataProvider\BogusAmogus.cs" />
+    <Compile Include="DataAccessObjects\CongViecDAO.cs" />
+    <Compile Include="DataAccessObjects\NhanVienDAO.cs" />
+    <Compile Include="DataTransferObjects\CustomValidation\KhachHangDTO_UniqueDienThoaiAttribute.cs" />
+    <Compile Include="_DataProvider\BogusAmogus.cs" />
     <Compile Include="DataAccessObjects\KhachHangDAO.cs" />
-    <Compile Include="DataProvider\DataProvider.cs" />
+    <Compile Include="_DataProvider\DataProvider.cs" />
     <Compile Include="DataTransferObjects\ChiTietHDBanDTO.cs" />
     <Compile Include="DataTransferObjects\ChiTietHDNhapDTO.cs" />
     <Compile Include="DataTransferObjects\CongViecDTO.cs" />

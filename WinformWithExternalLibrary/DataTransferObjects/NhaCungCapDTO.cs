@@ -10,43 +10,47 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 {
     public class NhaCungCapDTO
     {
-        [Required(
-            ErrorMessage = "Chưa có tên nhà cung cấp, kiểm tra lại nhé!!"
-            )]
+		public Guid NhaCungCapDTO_MaNhaCungCap { get; set; }
+
+
+
+		[Required(
+            ErrorMessage = "Vui lòng nhập tên nhà cung cấp"
+			)]
         [StringLength(
             maximumLength: 30,
             MinimumLength = 2,
-            ErrorMessage = "Ơ, nhà cung cấp chỉ có 2-30 kí tự mà -_-"
-            )]
+            ErrorMessage = "Tên sản phẩm phải có độ dài từ 2 đến 30 ký tự"
+			)]
         [DisplayName(
-            "Họ tên"
+            "Tên nhà cung cấp"
             )]
         public string NhaCungCapDTO_TenNhaCungCap { get; set; }
 
 
 
         [Required(
-            ErrorMessage = "Bạn ơi, bạn bị thiếu số điện thoại rồi ạ!"
-            )]
+            ErrorMessage = "Vui lòng nhập số điện thoại"
+			)]
         [StringLength(
             maximumLength: 10,
             MinimumLength = 10,
-            ErrorMessage = "Số điện thoại phải có 10 chữ số nhé bạn!!"
+            ErrorMessage = "Số điện thoại phải có độ dài 10 chữ số"
             )]
         [DisplayName(
-            "Số điện thoại nhà cung cấp"
+            "Số điện thoại"
             )]
         public string NhaCungCapDTO_DienThoai { get; set; }
 
 
         [Required(
-            ErrorMessage = "Cốc cốc, bạn gì ơi, hình như bạn chưa nhập địa chỉ :))"
-            )]
+            ErrorMessage = "Vui lòng nhập địa chỉ"
+			)]
         [StringLength(
-            maximumLength: 100,
+            maximumLength: 150,
             MinimumLength = 4,
-            ErrorMessage = "Hãy nhớ rằng địa chỉ phải được nhập từ 4-100 kí tự nhá :(("
-            )]
+            ErrorMessage = "Địa chỉ phải có độ dài từ 4 đến 150 ký tự"
+			)]
         [DisplayName(
             "Địa chỉ"
             )]

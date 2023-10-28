@@ -16,16 +16,16 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public KhachHangDAO() { }
 
-		public bool IfPhoneNumberTaken(dynamic baseDTO)
+		public bool IfPhoneNumberTaken(string KhachHangDTO_DienThoai)
 		{
-			KhachHangDTO khachHangDTO = baseDTO as KhachHangDTO;
-
 			string selectPhoneNumber = "SELECT * FROM " +
 							DataProvider.KHACHHANG_TABLE +
 							" WHERE DienThoai = " +
-							"'" + khachHangDTO.KhachHangDTO_DienThoai + "'";
+							"'" + KhachHangDTO_DienThoai + "'";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectPhoneNumber);
+
+			//Debug.WriteLine(dataTable.Rows.Count);
 
 			return dataTable.Rows.Count > 0;
 		}

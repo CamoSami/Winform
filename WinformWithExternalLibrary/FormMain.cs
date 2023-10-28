@@ -38,14 +38,18 @@ namespace WinformWithExternalLibrary
 			//BogusAmogus bogusAmogus = new BogusAmogus();
 			//bogusAmogus.GenerateFakeData();
 
-
-
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
-			this.InitializeAnalyticsForm();
 
-            //		Data Access Objects
-            this.InitializeDAOs();
+			//		Specific
+			this.Initialize_NgoSachMinhHieu();
+			this.Initialize_TranHongThai();
+			this.Initialize_NguyenHongSon();
+			this.Initialize_NguyenThanhTruc();
+			this.Initialize_VuHongHanh();
+
+			//		Data Access Objects
+			this.InitializeDAOs();
 
 			//		Attributes
 			this.InitializeHardCodedAttributes();
@@ -55,7 +59,7 @@ namespace WinformWithExternalLibrary
 			this.InitializeSpecializedEvent();
 		}
 
-
+		#region Initialize
 
 		//		Initializing
 		private void InitializeDAOs()
@@ -194,6 +198,23 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
+		#endregion
+
+		#region Ngô Sách Minh Hiếu
+
+		private void Initialize_NgoSachMinhHieu()
+		{
+
+		}
+
+		#endregion
+
+		#region Trần Hồng Thái
+		private void Initialize_TranHongThai()
+		{
+			this.InitializeAnalyticsForm();
+		}
+
 		private void InitializeSpecializedEvent()
 		{
 			//		Form
@@ -213,11 +234,11 @@ namespace WinformWithExternalLibrary
 
 			this.Load += (obj, e) =>
 			{
-				//this.FormBorderStyle = FormBorderStyle.None;
-				//this.WindowState = FormWindowState.Maximized;
+				this.FormBorderStyle = FormBorderStyle.None;
+				this.WindowState = FormWindowState.Maximized;
 
-				//this.MinimumSize = this.Size;
-				//this.MaximumSize = this.Size;
+				this.MinimumSize = this.Size;
+				this.MaximumSize = this.Size;
 			};
 
 			//		Test 
@@ -284,8 +305,38 @@ namespace WinformWithExternalLibrary
             };
         }
 
-        //		Event Section
-        private void MaterialTextBox_GotFocus(object sender, EventArgs e)
+		#endregion
+
+		#region Nguyễn Hồng Sơn
+
+		private void Initialize_NguyenHongSon()
+		{
+
+		}
+
+		#endregion
+
+		#region Nguyễn Thanh Trúc
+
+		private void Initialize_NguyenThanhTruc()
+		{
+
+		}
+
+		#endregion
+
+		#region Vũ Hồng Hạnh
+
+		private void Initialize_VuHongHanh()
+		{
+
+		}
+
+		#endregion
+
+		#region Event
+
+		private void MaterialTextBox_GotFocus(object sender, EventArgs e)
 		{
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
 			TextBoxBase textboxTemp = sender as TextBoxBase;
@@ -306,8 +357,10 @@ namespace WinformWithExternalLibrary
 			this.TryValidation();
 		}
 
+		#endregion
 
-		//		Generalist Functions
+		#region Generalist Function
+
 		private bool TryValidation()
 		{
 			//		Selected TabPage
@@ -441,5 +494,7 @@ namespace WinformWithExternalLibrary
 		{
 			return this.materialTabControl1.SelectedIndex;
 		}
-    }
+
+		#endregion
+	}
 }

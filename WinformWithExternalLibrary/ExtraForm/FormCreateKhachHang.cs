@@ -319,16 +319,6 @@ namespace WinformWithExternalLibrary
 				}
 			}
 
-			//		Exception
-			if (KhachHangDAO.Instance.IfPhoneNumberTaken(temp))
-			{
-				this.label2.Text = "Đã tồn tại số điện thoại này!";
-
-				return false;
-			}
-
-
-
 			//		Validated or not
 			if (results.Count > 0)
 			{

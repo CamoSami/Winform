@@ -12,6 +12,10 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 {
 	public class HoaDonBanDTO
 	{
+		public Guid HoaDonBanDTO_MaHDBan { get; set; }
+
+
+
 		//		NOTE: NOT REQUIRED
 		[DisplayName("Mã khách hàng")]
 		public Guid HoaDonBanDTO_MaKhachHang { get; set; }

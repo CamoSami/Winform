@@ -5,11 +5,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinformWithExternalLibrary.DataTransferObjects.CustomValidation;
 
 namespace WinformWithExternalLibrary.DataTransferObjects
 {
 	public class KhachHangDTO
 	{
+		public Guid KhachHangDTO_MaKhachHang { get; set; }
+
+
+
 		[Required(
 			ErrorMessage = "Vui lòng nhập họ tên"
 			)]
@@ -47,6 +52,9 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 			maximumLength: 10,
 			MinimumLength = 10,
 			ErrorMessage = "Số điện thoại chỉ 10 kí tự"
+			)]
+		[KhachHangDTO_UniqueDienThoai(
+			ErrorMessage = "Số điện thoại vừa nhập đã tồn tại"
 			)]
 		[DisplayName(
 			"Số điện thoại"

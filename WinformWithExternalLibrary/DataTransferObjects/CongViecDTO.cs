@@ -10,6 +10,10 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 {
     public class CongViecDTO
     {
+		public Guid CongViecDTO_MaCongViec { get; set; }
+
+
+
         [Required(ErrorMessage = "Thiếu mức lương!")]
         [DisplayName("Mức lương")]
         public int CongViecDTO_MucLuong { get; set; }

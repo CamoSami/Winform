@@ -12,7 +12,11 @@ namespace WinformWithExternalLibrary.DataTransferObjects
     
     public class DMSanPhamDTO
     {
-        [Required(
+		public Guid DMSanPhamDTO_MaDMSanPham { get; set; }
+
+
+
+		[Required(
             ErrorMessage = "Vui lòng nhập mã của sản phẩm"
         )]
         [DisplayName("Mã sản phẩm")]

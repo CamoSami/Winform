@@ -235,7 +235,6 @@ namespace WinformWithExternalLibrary.CustomComponent
 				.RuleFor(name => name.thuBongName, (f, u) => (u.thuBong + u.thuBongCombineVerb + u.thuBongAdj + u.thuBongVerb + u.thuBongExtra));
 
 			Faker<DMSanPhamDTO> DTOfaker = new Faker<DMSanPhamDTO>(locale: "vi")
-				.StrictMode(true)
 				.RuleFor(DTO => DTO.DMSanPhamDTO_MaSanPham, f => f.Phone.PhoneNumber(format: "############"))
 				.RuleFor(DTO => DTO.DMSanPhamDTO_DonGiaNhap, f => f.Random.Number(min: 1000, max: 7990))
 				.RuleFor(DTO => DTO.DMSanPhamDTO_DonGiaBan, (f, DTO) => (DTO.DMSanPhamDTO_DonGiaNhap + f.Random.Number(min: 200, max: 500)))
@@ -334,7 +333,6 @@ namespace WinformWithExternalLibrary.CustomComponent
 			DateTime dateTimeMax = new DateTime(year: 2005, month: 12, day: 31);
 
 			Faker<NhanVienDTO> faker = new Faker<NhanVienDTO>(locale: "vi")
-				.StrictMode(true)
 				.RuleFor(DTO => DTO.NhanVienDTO_MaCongViec, f => f.PickRandom(tempMaCongViecs))
 				.RuleFor(DTO => DTO.NhanVienDTO_TenNhanVien, f => f.Name.LastName() + " " + f.Name.FirstName())
 				.RuleFor(DTO => DTO.NhanVienDTO_NgaySinh, f => f.Date.Between(start: dateTimeMin, end: dateTimeMax))
@@ -362,7 +360,6 @@ namespace WinformWithExternalLibrary.CustomComponent
 		private void Generate_NhaCungCapDTO(int soLuong)
 		{
 			Faker<NhaCungCapDTO> faker = new Faker<NhaCungCapDTO>(locale: "vi")
-				.StrictMode(true)
 				.RuleFor(DTO => DTO.NhaCungCapDTO_TenNhaCungCap, f => f.Company.CompanyName())
 				.RuleFor(DTO => DTO.NhaCungCapDTO_DienThoai, f => f.Phone.PhoneNumber(format: "##########"))
 				.RuleFor(DTO => DTO.NhaCungCapDTO_DiaChi, f => f.Address.StreetAddress())
@@ -424,7 +421,6 @@ namespace WinformWithExternalLibrary.CustomComponent
 			DateTime dateTimeMin = new DateTime(year: 2010, month: 1, day: 1);
 
 			Faker<HoaDonNhapDTO> faker = new Faker<HoaDonNhapDTO>(locale: "vi")
-				.StrictMode(true)
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhaCungCap, f => f.PickRandom(tempMaNhaCungCap))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_NgayNhap, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
@@ -458,7 +454,6 @@ namespace WinformWithExternalLibrary.CustomComponent
 		private void Generate_KhachHangDTO(int soLuong)
 		{
 			Faker<KhachHangDTO> faker = new Faker<KhachHangDTO>(locale: "vi")
-					.StrictMode(true)
 					.RuleFor(u => u.KhachHangDTO_TenKhachHang, f => f.Name.LastName() + " " + f.Name.FirstName())
 					.RuleFor(u => u.KhachHangDTO_DienThoai, f => f.Phone.PhoneNumber(format: "##########"))
 					.RuleFor(u => u.KhachHangDTO_DiaChi, f => f.Address.StreetAddress())
@@ -478,9 +473,9 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 			string queryStringLaTao = $"INSERT INTO {DataProvider.KHACHHANG_TABLE} " +
 						$"(TenKhachHang, DienThoai, DiaChi) VALUES (" +
-						$"{this.GetString("Camo")}," +
-						$"{this.GetString("1111111111")}," +
-						$"{this.GetString("Lang Vong")}" +
+						$"{this.GetString("Ngô Sách Minh Hiếu")}," +
+						$"{this.GetString("0977255636")}," +
+						$"{this.GetString("Làng Vòng")}" +
 						$")";
 
 			DataProvider.Instance.ExecuteNonQuery(queryStringLaTao);
@@ -524,7 +519,6 @@ namespace WinformWithExternalLibrary.CustomComponent
 			DateTime dateTimeMin = new DateTime(year: 2010, month: 1, day: 1);
 
 			Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
-				.StrictMode(true)
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, f => f.PickRandom(tempMaKhachHang))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_NgayBan, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))

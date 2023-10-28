@@ -5,11 +5,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinformWithExternalLibrary.DataAccessObjects;
+using System.Data;
 
 namespace WinformWithExternalLibrary.DataTransferObjects
 {
     public class NhanVienDTO
     {
+		public Guid NhanVienDTO_MaNhanVien { get; set; }
+
+
+
         [Required(ErrorMessage = "Vui lòng nhập mã công việc")]
         [DisplayName("Mã công việc")]
         public Guid NhanVienDTO_MaCongViec { get; set; }
@@ -19,7 +25,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
         [Required(ErrorMessage = "Vui lòng nhập tên nhân viên")]
         [StringLength(maximumLength: 40,
                        MinimumLength = 4,
-                    ErrorMessage = "Tên nhân viên phải từ 4-40 kí tự.")]
+                    ErrorMessage = "Tên nhân viên phải từ 4-40 kí tự")]
         [DisplayName("Tên nhân viên")]
         public string NhanVienDTO_TenNhanVien { get; set; }
 
@@ -35,7 +41,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
         [Required(ErrorMessage = "Vui lòng nhập địa chỉ")]
         [StringLength(maximumLength: 150,
                         MinimumLength = 4,
-            ErrorMessage = "Nhập địa chỉ từ 4-150 kí tự.")]
+            ErrorMessage = "Nhập địa chỉ từ 4-150 kí tự")]
         [DisplayName("Địa chỉ")]
         public string NhanVienDTO_DiaChi { get; set; }
 
@@ -44,13 +50,13 @@ namespace WinformWithExternalLibrary.DataTransferObjects
         [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
         [StringLength(  maximumLength: 10,
                         MinimumLength = 10,
-                        ErrorMessage = "Số điện thoại phải dài 10 kí tự.")]
+                        ErrorMessage = "Số điện thoại phải dài 10 kí tự")]
         [DisplayName("Số điện thoại")]
         public string NhanVienDTO_DienThoai { get; set; }
 
 
 
-        [Required(ErrorMessage = "Vui lòng nhập giới tính!")]
+        [Required(ErrorMessage = "Vui lòng nhập giới tính")]
         [DisplayName("Giới tính")]
         public string NhanVienDTO_GioiTinh { get; set; }
 
