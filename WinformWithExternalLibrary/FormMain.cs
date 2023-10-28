@@ -75,6 +75,9 @@ namespace WinformWithExternalLibrary
 			//		Font
 			this.Font = FormLogin.Instance.GetFont();
 
+			//		Date Time Picker
+			this.dateTimePicker1.Enabled = false;
+
 			//		Generalist Attributes
 			foreach (TabPage tabPage in this.materialTabControl1.TabPages) 
 			{ 
@@ -198,23 +201,6 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		#endregion
-
-		#region Ngô Sách Minh Hiếu
-
-		private void Initialize_NgoSachMinhHieu()
-		{
-
-		}
-
-		#endregion
-
-		#region Trần Hồng Thái
-		private void Initialize_TranHongThai()
-		{
-			this.InitializeAnalyticsForm();
-		}
-
 		private void InitializeSpecializedEvent()
 		{
 			//		Form
@@ -251,12 +237,23 @@ namespace WinformWithExternalLibrary
 
 				formCreateKhachHang.Show();
 			};
+		}
 
-			this.materialButtonTest.Click += (obj, e) =>
-			{
-				//		TODO: Create a Form and measure its Size
-				//			TODO: What if create a Winform with a TabControl to make it easier?
-			};
+		#endregion
+
+		#region Ngô Sách Minh Hiếu
+
+		private void Initialize_NgoSachMinhHieu()
+		{
+
+		}
+
+		#endregion
+
+		#region Trần Hồng Thái
+		private void Initialize_TranHongThai()
+		{
+			this.InitializeAnalyticsForm();
 		}
 
 		private void InitializeAnalyticsForm()

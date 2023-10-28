@@ -21,7 +21,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 		[StringLength(
 			maximumLength: 40,
 			MinimumLength = 4,
-			ErrorMessage = "Nhập họ tên chỉ từ 4-40 kí tự nhá ._."
+			ErrorMessage = "Nhập họ tên chỉ từ 4-40 kí tự"
 			)]
 		[DisplayName(
 			"Họ tên"

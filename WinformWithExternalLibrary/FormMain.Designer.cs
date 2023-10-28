@@ -35,9 +35,7 @@ namespace WinformWithExternalLibrary
 			this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
 			this.tabPageThongTin = new System.Windows.Forms.TabPage();
 			this.tabPageHoaDonBan = new System.Windows.Forms.TabPage();
-			this.materialButtonTest = new MaterialSkin.Controls.MaterialButton();
 			this.labelForFocus = new System.Windows.Forms.Label();
-			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
 			this.materialListView = new MaterialSkin.Controls.MaterialListView();
 			this.columnHeaderIndex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeaderIdentifier = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -86,6 +84,8 @@ namespace WinformWithExternalLibrary
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
+			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+			this.materialTextBox1 = new MaterialSkin.Controls.MaterialTextBox();
 			this.materialTabControl1.SuspendLayout();
 			this.tabPageHoaDonBan.SuspendLayout();
 			this.tabPagePhanTich.SuspendLayout();
@@ -132,7 +132,7 @@ namespace WinformWithExternalLibrary
 			// 
 			// tabPageHoaDonBan
 			// 
-			this.tabPageHoaDonBan.Controls.Add(this.materialButtonTest);
+			this.tabPageHoaDonBan.Controls.Add(this.materialTextBox1);
 			this.tabPageHoaDonBan.Controls.Add(this.labelForFocus);
 			this.tabPageHoaDonBan.Controls.Add(this.dateTimePicker1);
 			this.tabPageHoaDonBan.Controls.Add(this.materialListView);
@@ -146,25 +146,6 @@ namespace WinformWithExternalLibrary
 			this.tabPageHoaDonBan.Text = "Hóa Đơn Bán";
 			this.tabPageHoaDonBan.UseVisualStyleBackColor = true;
 			// 
-			// materialButtonTest
-			// 
-			this.materialButtonTest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButtonTest.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButtonTest.Depth = 0;
-			this.materialButtonTest.HighEmphasis = true;
-			this.materialButtonTest.Icon = null;
-			this.materialButtonTest.Location = new System.Drawing.Point(1401, 669);
-			this.materialButtonTest.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButtonTest.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButtonTest.Name = "materialButtonTest";
-			this.materialButtonTest.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButtonTest.Size = new System.Drawing.Size(64, 36);
-			this.materialButtonTest.TabIndex = 5;
-			this.materialButtonTest.Text = "Test";
-			this.materialButtonTest.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButtonTest.UseAccentColor = false;
-			this.materialButtonTest.UseVisualStyleBackColor = true;
-			// 
 			// labelForFocus
 			// 
 			this.labelForFocus.AutoSize = true;
@@ -173,15 +154,6 @@ namespace WinformWithExternalLibrary
 			this.labelForFocus.Size = new System.Drawing.Size(44, 16);
 			this.labelForFocus.TabIndex = 4;
 			this.labelForFocus.Text = "label2";
-			// 
-			// dateTimePicker1
-			// 
-			this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.dateTimePicker1.Location = new System.Drawing.Point(1106, 6);
-			this.dateTimePicker1.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-			this.dateTimePicker1.Name = "dateTimePicker1";
-			this.dateTimePicker1.Size = new System.Drawing.Size(360, 27);
-			this.dateTimePicker1.TabIndex = 2;
 			// 
 			// materialListView
 			// 
@@ -769,6 +741,32 @@ namespace WinformWithExternalLibrary
 			this.label1.TabIndex = 1;
 			this.label1.Text = "344";
 			// 
+			// dateTimePicker1
+			// 
+			this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.dateTimePicker1.Location = new System.Drawing.Point(1105, 6);
+			this.dateTimePicker1.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+			this.dateTimePicker1.Name = "dateTimePicker1";
+			this.dateTimePicker1.Size = new System.Drawing.Size(360, 27);
+			this.dateTimePicker1.TabIndex = 2;
+			// 
+			// materialTextBox1
+			// 
+			this.materialTextBox1.AnimateReadOnly = false;
+			this.materialTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.materialTextBox1.Depth = 0;
+			this.materialTextBox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.materialTextBox1.LeadingIcon = null;
+			this.materialTextBox1.Location = new System.Drawing.Point(1105, 48);
+			this.materialTextBox1.MaxLength = 50;
+			this.materialTextBox1.MouseState = MaterialSkin.MouseState.OUT;
+			this.materialTextBox1.Multiline = false;
+			this.materialTextBox1.Name = "materialTextBox1";
+			this.materialTextBox1.Size = new System.Drawing.Size(360, 50);
+			this.materialTextBox1.TabIndex = 5;
+			this.materialTextBox1.Text = "";
+			this.materialTextBox1.TrailingIcon = null;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -814,9 +812,7 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.ColumnHeader columnHeaderCount;
 		private System.Windows.Forms.ColumnHeader columnHeaderIndividualPrice;
 		private System.Windows.Forms.ColumnHeader columnHeaderPrice;
-		private System.Windows.Forms.DateTimePicker dateTimePicker1;
 		private System.Windows.Forms.Label labelForFocus;
-		private MaterialSkin.Controls.MaterialButton materialButtonTest;
 		private System.Windows.Forms.TabPage tabPageThongTin;
 		private System.Windows.Forms.TabPage tabPageHoaDonNhap;
 		private System.Windows.Forms.TabPage tabPageKhachHang;
@@ -857,5 +853,7 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.Label label1;
         private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart cartesianChart2;
         private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart cartesianChart1;
-    }
+		private System.Windows.Forms.DateTimePicker dateTimePicker1;
+		private MaterialSkin.Controls.MaterialTextBox materialTextBox1;
+	}
 }

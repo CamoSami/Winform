@@ -43,13 +43,16 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeHardCodedAttributes()
 		{
+			//		Label for Focus
+			this.LabelForFocus.Text = "";
+
 			//		Form
 			this.Font = FormLogin.Instance.GetFont();
 
 			//		Control
 			foreach (Control control in this.Controls)
 			{
-				if (control is Label)
+				if (control is Label && control.Name.Contains("Validation"))
 				{
 					//		Casting
 					Label tempLabel = control as Label;
@@ -57,13 +60,7 @@ namespace WinformWithExternalLibrary
 					//		Clear its Text
 					tempLabel.Text = "";
 
-					//		Hardcode if the Label only for Focusing
-					if (tempLabel == this.labelForFocus)
-					{
-						continue;
-					}
-
-					//		Label for Validation
+					//		For Validation
 					tempLabel.ForeColor = Color.Red;
 				}
 				else if (control is TextBoxBase)
@@ -89,14 +86,8 @@ namespace WinformWithExternalLibrary
 			//		Auto Event
 			foreach (Control control in this.Controls)
 			{
-				if (control is Label)
+				if (control is Label && control.Name.Contains("Validation"))
 				{
-					//		Hardcode if the Label only for Focusing
-					if (control == this.labelForFocus)
-					{
-						continue;
-					}
-
 					Label tempLabel = control as Label;
 
 					this.listOfLabels.Add(tempLabel);
@@ -150,7 +141,7 @@ namespace WinformWithExternalLibrary
 				if (KhachHangDAO.Instance.InsertKhachHang(this.GetInput() as KhachHangDTO))
 				{
 					MaterialMessageBox.Show(
-						text: "Dữ liệu khách hàng đã được nhập thành công O~O",
+						text: "Dữ liệu khách hàng đã được nhập",
 						caption: this.Text,
 						UseRichTextBox: false,
 						buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
@@ -206,7 +197,7 @@ namespace WinformWithExternalLibrary
 				if (ifDirtyData)
 				{
 					if (MaterialMessageBox.Show(
-							text: "Bạn còn thông tin nhập dở, bạn muốn rời hông?",
+							text: "Bạn còn thông tin nhập dở, bạn muốn rời không?",
 							caption: this.Text,
 							buttons: MessageBoxButtons.YesNo,
 							icon: MessageBoxIcon.Question,
@@ -241,7 +232,7 @@ namespace WinformWithExternalLibrary
 			//			Upon loading the Form => Textbox loses Focus
 			this.Load += (obj, e) =>
 			{
-				this.ActiveControl = this.labelForFocus;
+				this.ActiveControl = this.LabelForFocus;
 			};
 		}
 
@@ -284,11 +275,6 @@ namespace WinformWithExternalLibrary
 			this.TryValidation();
 		}
 
-		private void MaterialButtonSubmit_Click(object sender, EventArgs e)
-		{
-			
-		}
-
 
 
 		private bool TryValidation()
@@ -314,6 +300,8 @@ namespace WinformWithExternalLibrary
 							this.CheckIfTextboxInterracted(this.listOfTextboxes[i]))
 						{
 							this.SetStringLabelForTextbox(this.listOfTextboxes[i], result.ErrorMessage);
+
+							continue;
 						}
 					}
 				}
@@ -375,7 +363,17 @@ namespace WinformWithExternalLibrary
 
 		private void SetStringLabelForTextbox(TextBoxBase textBox, string text)
 		{
-			this.listOfLabels[this.listOfTextboxes.IndexOf(textBox)].Text = text;
+			string textBoxName = textBox.Name;
+
+			foreach (Label label in this.listOfLabels)
+			{
+				if (label.Name.Contains(textBoxName))
+				{
+					label.Text = text;
+
+					return;
+				}
+			}
 		}
 	}
 }

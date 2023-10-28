@@ -30,10 +30,10 @@
 		{
 			this.KhachHangDTO_TenKhachHang = new MaterialSkin.Controls.MaterialTextBox();
 			this.KhachHangDTO_DienThoai = new MaterialSkin.Controls.MaterialTextBox();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.labelForFocus = new System.Windows.Forms.Label();
+			this.KhachHangDTO_TenKhachHang_Validation = new System.Windows.Forms.Label();
+			this.labelKhachHangDTO_DienThoai_Validation = new System.Windows.Forms.Label();
+			this.KhachHangDTO_DiaChi_Validation = new System.Windows.Forms.Label();
+			this.LabelForFocus = new System.Windows.Forms.Label();
 			this.materialButtonSubmit = new MaterialSkin.Controls.MaterialButton();
 			this.KhachHangDTO_DiaChi = new MaterialSkin.Controls.MaterialMultiLineTextBox();
 			this.SuspendLayout();
@@ -72,41 +72,41 @@
 			this.KhachHangDTO_DienThoai.Text = "";
 			this.KhachHangDTO_DienThoai.TrailingIcon = null;
 			// 
-			// label1
+			// KhachHangDTO_TenKhachHang_Validation
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 130);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(44, 16);
-			this.label1.TabIndex = 3;
-			this.label1.Text = "label1";
+			this.KhachHangDTO_TenKhachHang_Validation.AutoSize = true;
+			this.KhachHangDTO_TenKhachHang_Validation.Location = new System.Drawing.Point(6, 130);
+			this.KhachHangDTO_TenKhachHang_Validation.Name = "KhachHangDTO_TenKhachHang_Validation";
+			this.KhachHangDTO_TenKhachHang_Validation.Size = new System.Drawing.Size(44, 16);
+			this.KhachHangDTO_TenKhachHang_Validation.TabIndex = 3;
+			this.KhachHangDTO_TenKhachHang_Validation.Text = "label1";
 			// 
-			// label2
+			// labelKhachHangDTO_DienThoai_Validation
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(6, 202);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(44, 16);
-			this.label2.TabIndex = 4;
-			this.label2.Text = "label2";
+			this.labelKhachHangDTO_DienThoai_Validation.AutoSize = true;
+			this.labelKhachHangDTO_DienThoai_Validation.Location = new System.Drawing.Point(6, 202);
+			this.labelKhachHangDTO_DienThoai_Validation.Name = "labelKhachHangDTO_DienThoai_Validation";
+			this.labelKhachHangDTO_DienThoai_Validation.Size = new System.Drawing.Size(44, 16);
+			this.labelKhachHangDTO_DienThoai_Validation.TabIndex = 4;
+			this.labelKhachHangDTO_DienThoai_Validation.Text = "label2";
 			// 
-			// label3
+			// KhachHangDTO_DiaChi_Validation
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(6, 322);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(44, 16);
-			this.label3.TabIndex = 5;
-			this.label3.Text = "label3";
+			this.KhachHangDTO_DiaChi_Validation.AutoSize = true;
+			this.KhachHangDTO_DiaChi_Validation.Location = new System.Drawing.Point(6, 322);
+			this.KhachHangDTO_DiaChi_Validation.Name = "KhachHangDTO_DiaChi_Validation";
+			this.KhachHangDTO_DiaChi_Validation.Size = new System.Drawing.Size(44, 16);
+			this.KhachHangDTO_DiaChi_Validation.TabIndex = 5;
+			this.KhachHangDTO_DiaChi_Validation.Text = "label3";
 			// 
-			// labelForFocus
+			// LabelForFocus
 			// 
-			this.labelForFocus.AutoSize = true;
-			this.labelForFocus.Location = new System.Drawing.Point(333, 371);
-			this.labelForFocus.Name = "labelForFocus";
-			this.labelForFocus.Size = new System.Drawing.Size(44, 16);
-			this.labelForFocus.TabIndex = 6;
-			this.labelForFocus.Text = "label4";
+			this.LabelForFocus.AutoSize = true;
+			this.LabelForFocus.Location = new System.Drawing.Point(333, 371);
+			this.LabelForFocus.Name = "LabelForFocus";
+			this.LabelForFocus.Size = new System.Drawing.Size(44, 16);
+			this.LabelForFocus.TabIndex = 6;
+			this.LabelForFocus.Text = "label4";
 			// 
 			// materialButtonSubmit
 			// 
@@ -147,10 +147,10 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(693, 390);
 			this.Controls.Add(this.materialButtonSubmit);
-			this.Controls.Add(this.labelForFocus);
-			this.Controls.Add(this.label3);
-			this.Controls.Add(this.label2);
-			this.Controls.Add(this.label1);
+			this.Controls.Add(this.LabelForFocus);
+			this.Controls.Add(this.KhachHangDTO_DiaChi_Validation);
+			this.Controls.Add(this.labelKhachHangDTO_DienThoai_Validation);
+			this.Controls.Add(this.KhachHangDTO_TenKhachHang_Validation);
 			this.Controls.Add(this.KhachHangDTO_DiaChi);
 			this.Controls.Add(this.KhachHangDTO_DienThoai);
 			this.Controls.Add(this.KhachHangDTO_TenKhachHang);
@@ -165,10 +165,10 @@
 
 		private MaterialSkin.Controls.MaterialTextBox KhachHangDTO_TenKhachHang;
 		private MaterialSkin.Controls.MaterialTextBox KhachHangDTO_DienThoai;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label labelForFocus;
+		private System.Windows.Forms.Label KhachHangDTO_TenKhachHang_Validation;
+		private System.Windows.Forms.Label labelKhachHangDTO_DienThoai_Validation;
+		private System.Windows.Forms.Label KhachHangDTO_DiaChi_Validation;
+		private System.Windows.Forms.Label LabelForFocus;
 		private MaterialSkin.Controls.MaterialButton materialButtonSubmit;
 		private MaterialSkin.Controls.MaterialMultiLineTextBox KhachHangDTO_DiaChi;
 	}
