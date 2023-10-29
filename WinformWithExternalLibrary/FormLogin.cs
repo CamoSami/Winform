@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ComponentModel.DataAnnotations;
 using WinformWithExternalLibrary.DataAccessObjects;
-using WinformWithExternalLibrary.DataTransferObjects;
+using WinformWithExternalLibrary.DataValidateObjects;
 using System.Windows.Forms.VisualStyles;
 using System.Diagnostics;
 
@@ -24,7 +24,7 @@ namespace WinformWithExternalLibrary
 		private readonly Font mainFont = new Font
 			(
 			familyName: "Microsoft Sans Serif",
-			emSize: 10F,
+			emSize: 10.2F,
 			style: FontStyle.Regular,
 			unit: GraphicsUnit.Point,
 			gdiCharSet: ((byte)(128))
@@ -50,11 +50,14 @@ namespace WinformWithExternalLibrary
 			this.InitializeSpecializedEvent();
 		}
 
-
+		#region Initialize
 
 		private void InitializeHardCodedAttributes()
 		{
-			//			Font for Material componenents
+			//		Label for Focus
+			this.labelForFocus.Text = "";
+				
+			//		Font for Material componenents
 			this.Font = mainFont;
 
 			//		Initiate MaterialSkinManager
@@ -70,23 +73,46 @@ namespace WinformWithExternalLibrary
 				accent: Accent.Pink100,
 				textShade: TextShade.WHITE
 				);
+
+			//		Control
+			foreach (Control control in this.Controls)
+			{
+				if (control is Label && control.Name.Contains("Validation"))
+				{
+					//		Casting
+					Label tempLabel = control as Label;
+
+					//		Clear its Text
+					tempLabel.Text = "";
+
+					//		For Validation
+					tempLabel.ForeColor = Color.Red;
+				}
+				else if (control is TextBoxBase)
+				{
+					//		Casting
+					TextBoxBase tempMaterialTextBox = control as TextBoxBase;
+
+					//		Check if Input enabled
+					if (tempMaterialTextBox.Enabled == true)
+					{
+						//		Debug
+						//Debug.WriteLine(tempMaterialTextBox.Name);
+
+						//		Get the DisplayName attribute
+						tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
+					}
+				}
+			}
 		}
 
 		private void InitializeAutomaticEvent()
 		{
 			foreach (Control control in this.Controls)
 			{
-				if (control is Label)
+				if (control is Label && control.Name.Contains("Validation"))
 				{
 					Label tempLabel = control as Label;
-
-					if (tempLabel == this.labelForFocus)
-					{
-						continue;
-					}
-
-					tempLabel.Text = "";
-					tempLabel.ForeColor = Color.Red;
 
 					this.listOfLabels.Add(tempLabel);
 				}
@@ -103,9 +129,6 @@ namespace WinformWithExternalLibrary
 
 						//Console.WriteLine(tempMaterialTextBox.Name);
 
-						//		Get the DisplayName attribute
-						tempTextBoxBase.Text = this.GetPlaceholder(tempTextBoxBase);
-
 						//		Assigning generalist Events
 						tempTextBoxBase.GotFocus += this.MaterialTextBox_GotFocus;
 						tempTextBoxBase.LostFocus += this.MaterialTextBox_LostFocus;
@@ -117,16 +140,16 @@ namespace WinformWithExternalLibrary
 		private void InitializeSpecializedEvent()
 		{
 			//		Textbox
-			this.LoginDTO_password.GotFocus += (obj, e) =>
+			this.LoginDTO_Password.GotFocus += (obj, e) =>
 			{
-				this.LoginDTO_password.Password = true;
+				this.LoginDTO_Password.Password = true;
 			};
 
-			this.LoginDTO_password.LostFocus += (obj, e) =>
+			this.LoginDTO_Password.LostFocus += (obj, e) =>
 			{
-				if (this.CheckIfTextboxEmptyOrPlaceholder(this.LoginDTO_password))
+				if (this.CheckIfTextboxEmptyOrPlaceholder(this.LoginDTO_Password))
 				{
-					this.LoginDTO_password.Password = false;
+					this.LoginDTO_Password.Password = false;
 				}
 			};
 
@@ -211,7 +234,9 @@ namespace WinformWithExternalLibrary
 			};
 		}
 
+		#endregion
 
+		#region Event
 
 		private void MaterialTextBox_GotFocus(object sender, EventArgs e)
 		{
@@ -259,8 +284,8 @@ namespace WinformWithExternalLibrary
 			}
 
 			//		[HARDCODE] Try comparing
-			else if (this.CheckTextboxTextEqualToString(this.LoginDTO_loginName, "123") &&
-				this.CheckTextboxTextEqualToString(this.LoginDTO_password, "123"))
+			else if (this.CheckTextboxTextEqualToString(this.LoginDTO_LoginName, "123") &&
+				this.CheckTextboxTextEqualToString(this.LoginDTO_Password, "123"))
 			{
 				//		[MAY NEED] Try Connecting => Login via Usernames and Password from DTB
 				if (!this.InitiateAndTestDataProvider())
@@ -305,6 +330,10 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
+		#endregion
+
+		#region Generalist Function
+
 		private bool InitiateAndTestDataProvider()
 		{
 			if (DataProvider.Instance == null)
@@ -317,8 +346,6 @@ namespace WinformWithExternalLibrary
 			//Console.WriteLine(DataProvider.Instance.TestConnection());
 		}
 
-
-
 		private bool TryValidation()
 		{
 			//		Reset Validation
@@ -328,9 +355,9 @@ namespace WinformWithExternalLibrary
 			}
 
 			//		New Object
-			LoginDTO tempLogin = new LoginDTO(
-				LoginDTO_loginName: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDTO_loginName),
-				LoginDTO_password: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDTO_password)
+			LoginDVO tempLogin = new LoginDVO(
+				LoginDTO_LoginName: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDTO_LoginName),
+				LoginDTO_Password: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDTO_Password)
 				);
 			List<ValidationResult> results = new List<ValidationResult>();
 
@@ -388,7 +415,7 @@ namespace WinformWithExternalLibrary
 
 		private string GetPlaceholder(TextBoxBase textBox)
 		{
-			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(typeof(LoginDTO))[textBox.Name];
+			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(typeof(LoginDVO))[textBox.Name];
 			DisplayNameAttribute displayNameAttribute = (DisplayNameAttribute)propertyDescriptor.Attributes[typeof(DisplayNameAttribute)];
 
 			return displayNameAttribute.DisplayName;
@@ -396,12 +423,24 @@ namespace WinformWithExternalLibrary
 
 		private void SetStringLabelForTextbox(TextBoxBase textBox, string text)
 		{
-			this.listOfLabels[this.listOfTextboxes.IndexOf(textBox)].Text = text;
+			string textBoxName = textBox.Name;
+
+			foreach (Label label in this.listOfLabels)
+			{
+				if (label.Name.Contains(textBoxName))
+				{
+					label.Text = text;
+
+					return;
+				}
+			}
 		}
 
 		public Font GetFont()
 		{
 			return this.mainFont;
 		}
+
+		#endregion
 	}
 }

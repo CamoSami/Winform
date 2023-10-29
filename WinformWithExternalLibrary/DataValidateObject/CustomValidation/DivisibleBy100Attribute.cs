@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinformWithExternalLibrary.DataTransferObjects.CustomValidation
+namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 {
 	public class DivisibleBy100Attribute : ValidationAttribute
 	{

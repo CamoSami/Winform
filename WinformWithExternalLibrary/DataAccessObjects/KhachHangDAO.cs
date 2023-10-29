@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
+using WinformWithExternalLibrary.DataValidateObjects;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -16,14 +17,14 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public KhachHangDAO() { }
 
-		public bool IfPhoneNumberTaken(string KhachHangDTO_DienThoai)
+		public bool IfPhoneNumberTaken(string KhachHangDVO_DienThoai)
 		{
-			string selectPhoneNumber = "SELECT * FROM " +
+			string selectDienThoai = "SELECT * FROM " +
 							DataProvider.KHACHHANG_TABLE +
 							" WHERE DienThoai = " +
-							"'" + KhachHangDTO_DienThoai + "'";
+							"'" + KhachHangDVO_DienThoai + "'";
 
-			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectPhoneNumber);
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectDienThoai);
 
 			//Debug.WriteLine(dataTable.Rows.Count);
 
@@ -32,14 +33,14 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public bool InsertKhachHang(dynamic baseDTO)
 		{
-			KhachHangDTO khachHangDTO = baseDTO as KhachHangDTO;
+			KhachHangDVO khachHangDVO = baseDTO as KhachHangDVO;
 
 			string insertKhachHang = "INSERT INTO " +
 							DataProvider.KHACHHANG_TABLE +
 							" (TenKhachHang, DiaChi, DienThoai) VALUES (" + 
-							"N'" + khachHangDTO.KhachHangDTO_TenKhachHang + "'," +
-							"N'" + khachHangDTO.KhachHangDTO_DiaChi + "'," +
-							"N'" + khachHangDTO.KhachHangDTO_DienThoai + "'" +
+							"N'" + khachHangDVO.KhachHangDVO_TenKhachHang + "'," +
+							"N'" + khachHangDVO.KhachHangDVO_DiaChi + "'," +
+							"N'" + khachHangDVO.KhachHangDVO_DienThoai + "'" +
 							")";
 
 			int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertKhachHang);

@@ -424,7 +424,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhaCungCap, f => f.PickRandom(tempMaNhaCungCap))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_NgayNhap, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_SoSanPham, f => f.Random.Number(min: 5, max: 20))
+				.RuleFor(DTO => DTO.HoaDonNhapDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_TongTien, f => f.Random.Number(min: 5000, max: 50000))
 				.FinishWith((f, DTO) =>

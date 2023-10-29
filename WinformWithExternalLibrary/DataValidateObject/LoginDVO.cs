@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace WinformWithExternalLibrary.DataTransferObjects
+namespace WinformWithExternalLibrary.DataValidateObjects
 {
-	public class LoginDTO
+	public class LoginDVO
 	{
 		[Required(
 			ErrorMessage = "Thiếu tên đăng nhập kìa!"
@@ -21,7 +21,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 		[DisplayName(
 			"Tên Đăng Nhập"
 			)]
-		public string LoginDTO_loginName { get; set; }
+		public string LoginDTO_LoginName { get; set; }
 
 
 
@@ -36,14 +36,14 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 		[DisplayName(
 			"Mật Khẩu"
 			)]
-		public string LoginDTO_password { get; set; }
+		public string LoginDTO_Password { get; set; }
 
-		public LoginDTO(string LoginDTO_loginName, string LoginDTO_password)
+		public LoginDVO(string LoginDTO_LoginName, string LoginDTO_Password)
 		{
-			this.LoginDTO_loginName = LoginDTO_loginName;
-			this.LoginDTO_password = LoginDTO_password;
+			this.LoginDTO_LoginName = LoginDTO_LoginName;
+			this.LoginDTO_Password = LoginDTO_Password;
 		}
 
-		public LoginDTO() { }
+		public LoginDVO() { }
 	}
 }

@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WinformWithExternalLibrary.DataTransferObjects.CustomValidation;
 
 namespace WinformWithExternalLibrary.DataTransferObjects
 {
@@ -14,67 +13,17 @@ namespace WinformWithExternalLibrary.DataTransferObjects
     {
 		public Guid DMSanPhamDTO_MaDMSanPham { get; set; }
 
-
-
-		[Required(
-            ErrorMessage = "Vui lòng nhập mã của sản phẩm"
-        )]
-        [DisplayName("Mã sản phẩm")]
         public string DMSanPhamDTO_MaSanPham { get; set; }
 
-
-
-        [Required(
-            ErrorMessage = "Vui lòng nhập tên sản phẩm"
-        )]
-        [StringLength(
-			maximumLength:  50, 
-			MinimumLength =  3, 
-			ErrorMessage = "Tên sản phẩm phải có độ dài từ 3 đến 50 ký tự"
-			)]
-        [DisplayName ("Tên sản phẩm")]
 		public string DMSanPhamDTO_TenSanPham { get; set; }
 
-
-
-        [Required(
-            ErrorMessage = "Vui lòng nhập đơn giá bán"
-        )]
-        [DivisibleBy100(ErrorMessage = "Đơn giá bán phải chia hết cho 100")]
-        [DisplayName("Đơn giá bán")]
 		public int DMSanPhamDTO_DonGiaBan { get; set; }
         
-
-
-        [Required(
-            ErrorMessage = "Vui lòng nhập đơn giá nhập"
-        )]
-        [DivisibleBy100(ErrorMessage = "Đơn giá nhập phải chia hết cho 100")]
-        [DisplayName("Đơn giá nhập")]
 		public int DMSanPhamDTO_DonGiaNhap { get; set; }
 
-
-
-		[Required(
-			ErrorMessage = "Vui lòng nhập số lượng tồn kho"
-			)]
-		[Range(
-			minimum: 1,
-			maximum: int.MaxValue,
-			ErrorMessage = "Số lượng tồn kho pải lớn hơn 0"
-			)]
-		[DisplayName("Số lượng tồn kho")]
 		public int DMSanPhamDTO_SoLuongTonKho { get; set; } 
 
-
-
-        [Required(
-            ErrorMessage = "Vui lòng nhập thời gian bảo hành"
-        )]
-        [DisplayName("Thời gian bảo hành")]
 		public DateTime DMSanPhamDTO_ThoiGianBaoHanh { get; set; }
-
-
 
         public DMSanPhamDTO(){}
         

@@ -12,9 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using WinformWithExternalLibrary.DataAccessObjects;
-using WinformWithExternalLibrary.DataTransferObjects;
-using System.Windows.Media;
-using Brushes = System.Windows.Media.Brushes;
+using WinformWithExternalLibrary.DataValidateObjects;
 using WinformWithExternalLibrary.CustomComponent;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView.Painting;
@@ -35,8 +33,8 @@ namespace WinformWithExternalLibrary
 		public FormMain()
 		{
 			//		GenerateData
-			//BogusAmogus bogusAmogus = new BogusAmogus();
-			//bogusAmogus.GenerateFakeData();
+			BogusAmogus bogusAmogus = new BogusAmogus();
+			bogusAmogus.GenerateFakeData();
 
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
@@ -72,6 +70,9 @@ namespace WinformWithExternalLibrary
 			//		Material Skin Manager
 			MaterialSkinManager.Instance.AddFormToManage(this);
 
+			//		Label(s) for Focus
+			this.labelForFocus.Text = "";
+
 			//		Font
 			this.Font = FormLogin.Instance.GetFont();
 
@@ -84,35 +85,16 @@ namespace WinformWithExternalLibrary
 				foreach (Control control in tabPage.Controls)
 				{
 					//		Label
-					if (control is Label)
+					if (control is Label && control.Name.Contains("Validation"))
 					{
 						//		Casting
 						Label tempLabel = control as Label;
-						
+
 						//		Clear its Text
 						tempLabel.Text = "";
 
-						//		Hardcode if the Label only for Focusing
-						if (tempLabel == this.labelForFocus)
-						{
-							continue;
-						}
-
-						//		Label for Validation
-						tempLabel.ForeColor = System.Drawing.Color.Red;
-					}
-					//		TextBoxBase (MaterialTextBox, ...)
-					else if (control is TextBoxBase)
-					{
-						//		Casting
-						TextBoxBase tempMaterialTextBox = control as TextBoxBase;
-
-						//		If the TextBoxBase requires validation
-						if (tempMaterialTextBox.Enabled == true)
-						{
-							//		Get the DisplayName attribute
-							tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
-						}
+						//		For Validation
+						tempLabel.ForeColor = Color.Red;
 					}
 					//		DateTimePicker
 					else if (control is DateTimePicker)
@@ -153,13 +135,10 @@ namespace WinformWithExternalLibrary
 				this.listOfLabels.Add(new List<Label>());
 				this.isInterracted.Add(new List<bool>());
 
-				//		TODO: Add DirtyData check when leaving tabPage
-				//		TODO: Add reset isInterracted when leaving/entering tabPage
-
 				foreach (Control control in this.materialTabControl1.TabPages[i].Controls)
 				{
 					//		Label
-					if (control is Label)
+					if (control is Label && control.Name.Contains("Validation"))
 					{
 						//		Casting
 						Label tempLabel = control as Label;
@@ -236,6 +215,14 @@ namespace WinformWithExternalLibrary
 				);
 
 				formCreateKhachHang.Show();
+			};
+
+			//		TODO: Add Insert Placeholder when entering tabPage
+			//		TODO: Add DirtyData check when leaving tabPage
+			//		TODO: Add reset isInterracted when entering tabPage
+			this.materialTabControl1.Selecting += (obj, e) => 
+			{
+				
 			};
 		}
 
@@ -434,7 +421,7 @@ namespace WinformWithExternalLibrary
 		{
 			//		Get Type + Attribute Name
 			//			NOTE: The name of the Textbox == Attribute Name
-			Type propertyType = this.GetBaseDTOFromTabPage().GetType();
+			Type propertyType = this.GetBaseDVOFromTabPage().GetType();
 			string propertyName = textBox.Name;
 
 			//		
@@ -447,11 +434,17 @@ namespace WinformWithExternalLibrary
 		private void SetStringLabelForTextbox(TextBoxBase textBox, string text)
 		{
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
+			string textBoxName = textBox.Name;
 
-			this.listOfLabels
-					[selectedIndex]
-					[this.listOfTextboxes[selectedIndex].IndexOf(textBox)]
-					.Text = text;
+			foreach (Label label in this.listOfLabels[selectedIndex])
+			{
+				if (label.Name.Contains(textBoxName))
+				{
+					label.Text = text;
+
+					return;
+				}
+			}
 		}
 
 		private dynamic GetInput()
@@ -477,12 +470,12 @@ namespace WinformWithExternalLibrary
 			return null;
 		}
 
-		private dynamic GetBaseDTOFromTabPage()
+		private dynamic GetBaseDVOFromTabPage()
 		{
-			if (this.materialTabControl1.SelectedTab == this.tabPageHoaDonBan)
-			{
-				return new HoaDonBanDTO();
-			}
+			//if (this.materialTabControl1.SelectedTab == this.tabPageHoaDonBan)
+			//{
+			//	return new HoaDonBanDTO();
+			//}
 
 			return null;
 		}

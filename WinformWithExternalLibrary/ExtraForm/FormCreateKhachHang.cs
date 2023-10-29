@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinformWithExternalLibrary.DataAccessObjects;
-using WinformWithExternalLibrary.DataTransferObjects;
+using WinformWithExternalLibrary.DataValidateObjects;
 
 namespace WinformWithExternalLibrary
 {
@@ -40,6 +40,8 @@ namespace WinformWithExternalLibrary
 			this.InitializeAutomaticEventAndList();
 			this.InitializeSpecializedEvent();
 		}
+
+		#region Initialize
 
 		private void InitializeHardCodedAttributes()
 		{
@@ -118,8 +120,9 @@ namespace WinformWithExternalLibrary
 		private void InitializeSpecializedEvent()
 		{
 			//		TextBox
-			this.KhachHangDTO_DienThoai.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
-			this.KhachHangDTO_TenKhachHang.KeyPress += this.TextBoxBase_KeyPress_AlphabetOnly;
+			this.KhachHangDVO_DienThoai.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+
+			this.KhachHangDVO_TenKhachHang.KeyPress += this.TextBoxBase_KeyPress_AlphabetOnly;
 
 			//		Button
 			//			Submit
@@ -138,7 +141,7 @@ namespace WinformWithExternalLibrary
 				}
 
 				//		Send Query
-				if (KhachHangDAO.Instance.InsertKhachHang(this.GetInput() as KhachHangDTO))
+				if (KhachHangDAO.Instance.InsertKhachHang(this.GetInput() as KhachHangDVO))
 				{
 					MaterialMessageBox.Show(
 						text: "Dữ liệu khách hàng đã được nhập",
@@ -236,7 +239,9 @@ namespace WinformWithExternalLibrary
 			};
 		}
 
+		#endregion
 
+		#region Event
 
 		private void TextBoxBase_KeyPress_AlphabetOnly(object sender, KeyPressEventArgs e)
 		{
@@ -275,7 +280,9 @@ namespace WinformWithExternalLibrary
 			this.TryValidation();
 		}
 
+		#endregion
 
+		#region Generalist Function
 
 		private bool TryValidation()
 		{
@@ -320,10 +327,10 @@ namespace WinformWithExternalLibrary
 
 		private dynamic GetInput()
 		{
-			return new KhachHangDTO(
-				khachHangDTO_TenKhachHang: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDTO_TenKhachHang),
-				khachHangDTO_DiaChi: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDTO_DiaChi),
-				khachHangDTO_DienThoai: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDTO_DienThoai)
+			return new KhachHangDVO(
+				khachHangDVO_TenKhachHang: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDVO_TenKhachHang),
+				khachHangDVO_DiaChi: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDVO_DiaChi),
+				khachHangDVO_DienThoai: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDVO_DienThoai)
 				);
 		}
 
@@ -355,7 +362,7 @@ namespace WinformWithExternalLibrary
 
 		private string GetPlaceholder(TextBoxBase textBox)
 		{
-			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(typeof(KhachHangDTO))[textBox.Name];
+			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(typeof(KhachHangDVO))[textBox.Name];
 			DisplayNameAttribute displayNameAttribute = (DisplayNameAttribute)propertyDescriptor.Attributes[typeof(DisplayNameAttribute)];
 
 			return displayNameAttribute.DisplayName;
@@ -375,5 +382,7 @@ namespace WinformWithExternalLibrary
 				}
 			}
 		}
+
+		#endregion
 	}
 }
