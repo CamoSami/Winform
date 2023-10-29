@@ -21,7 +21,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 		[DisplayName(
 			"Tên Đăng Nhập"
 			)]
-		public string LoginDTO_LoginName { get; set; }
+		public string LoginDVO_LoginName { get; set; }
 
 
 
@@ -36,12 +36,12 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 		[DisplayName(
 			"Mật Khẩu"
 			)]
-		public string LoginDTO_Password { get; set; }
+		public string LoginDVO_Password { get; set; }
 
-		public LoginDVO(string LoginDTO_LoginName, string LoginDTO_Password)
+		public LoginDVO(string LoginDVO_LoginName, string LoginDVO_Password)
 		{
-			this.LoginDTO_LoginName = LoginDTO_LoginName;
-			this.LoginDTO_Password = LoginDTO_Password;
+			this.LoginDVO_LoginName = LoginDVO_LoginName;
+			this.LoginDVO_Password = LoginDVO_Password;
 		}
 
 		public LoginDVO() { }

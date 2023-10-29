@@ -425,7 +425,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_NgayNhap, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000))
+				.RuleFor(DTO => DTO.HoaDonNhapDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000).OrDefault(f: f, defaultValue: 0, defaultWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_TongTien, f => f.Random.Number(min: 5000, max: 50000))
 				.FinishWith((f, DTO) =>
 				{
@@ -519,11 +519,11 @@ namespace WinformWithExternalLibrary.CustomComponent
 			DateTime dateTimeMin = new DateTime(year: 2010, month: 1, day: 1);
 
 			Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
-				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, f => f.PickRandom(tempMaKhachHang))
+				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, f => f.PickRandom(tempMaKhachHang).OrNull(f: f, nullWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_NgayBan, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
-				.RuleFor(DTO => DTO.HoaDonBanDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000))
+				.RuleFor(DTO => DTO.HoaDonBanDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000).OrDefault(f: f, defaultValue: 0, defaultWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_TongTien, f => f.Random.Number(min: 2000, max: 50000))
 				.FinishWith((f, DTO) =>
 				{
@@ -533,15 +533,31 @@ namespace WinformWithExternalLibrary.CustomComponent
 					//	$"\n{DTO.HoaDonNhapDTO_GiamGia * 1000}" +
 					//	$"\n{DTO.HoaDonNhapDTO_TongTien * 1000}");
 
-					string queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
-					$"(MaKhachHang, MaNhanVien, NgayBan, SoSanPham, GiamGia, TongTien) VALUES (" +
-					$"{this.GetString(DTO.HoaDonBanDTO_MaKhachHang)}," +
-					$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
-					$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
-					$"{DTO.HoaDonBanDTO_SoSanPham}," +
-					$"{DTO.HoaDonBanDTO_GiamGia * 100}," +
-					$"{DTO.HoaDonBanDTO_TongTien * 100}" +
-					$")";
+					string queryString;
+
+					if (DTO.HoaDonBanDTO_MaKhachHang != null)
+					{
+						queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
+							$"(MaKhachHang, MaNhanVien, NgayBan, SoSanPham, GiamGia, TongTien) VALUES (" +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaKhachHang)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
+							$"{DTO.HoaDonBanDTO_SoSanPham}," +
+							$"{DTO.HoaDonBanDTO_GiamGia * 100}," +
+							$"{DTO.HoaDonBanDTO_TongTien * 100}" +
+							$")";
+					}
+					else
+					{
+						queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
+							$"(MaNhanVien, NgayBan, SoSanPham, GiamGia, TongTien) VALUES (" +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
+							$"{DTO.HoaDonBanDTO_SoSanPham}," +
+							$"{DTO.HoaDonBanDTO_GiamGia * 100}," +
+							$"{DTO.HoaDonBanDTO_TongTien * 100}" +
+							$")";
+					}
 
 					DataProvider.Instance.ExecuteNonQuery(queryString);
 				});

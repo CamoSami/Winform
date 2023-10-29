@@ -76,9 +76,6 @@ namespace WinformWithExternalLibrary
 			//		Font
 			this.Font = FormLogin.Instance.GetFont();
 
-			//		Date Time Picker
-			this.dateTimePicker1.Enabled = false;
-
 			//		Generalist Attributes
 			foreach (TabPage tabPage in this.materialTabControl1.TabPages) 
 			{ 
@@ -137,6 +134,13 @@ namespace WinformWithExternalLibrary
 
 				foreach (Control control in this.materialTabControl1.TabPages[i].Controls)
 				{
+					if (control.Enabled == false)
+					{
+						continue;
+					}
+
+					
+
 					//		Label
 					if (control is Label && control.Name.Contains("Validation"))
 					{
@@ -147,22 +151,18 @@ namespace WinformWithExternalLibrary
 						this.listOfLabels[i].Add(tempLabel);
 					}
 					//		TextBoxBase (MaterialTextBox, ...)
-					else if (control is TextBoxBase)
+					else if (control is TextBoxBase && control.Name.Contains("DVO"))
 					{
 						//		Casting
 						TextBoxBase tempMaterialTextBox = control as TextBoxBase;
 
-						//		If the TextBoxBase requires validation
-						if (tempMaterialTextBox.Enabled == true)
-						{
-							//		Adding in the list
-							this.isInterracted[i].Add(false);
-							this.listOfTextboxes[i].Add(tempMaterialTextBox);
+						//		Adding in the list
+						this.isInterracted[i].Add(false);
+						this.listOfTextboxes[i].Add(tempMaterialTextBox);
 
-							//		Assigning generalist Events
-							tempMaterialTextBox.GotFocus += this.MaterialTextBox_GotFocus;
-							tempMaterialTextBox.LostFocus += this.MaterialTextBox_LostFocus;
-						}
+						//		Assigning generalist Events
+						tempMaterialTextBox.GotFocus += this.MaterialTextBox_GotFocus;
+						tempMaterialTextBox.LostFocus += this.MaterialTextBox_LostFocus;
 					}
 					//		DateTimePicker
 					else if (control is DateTimePicker)

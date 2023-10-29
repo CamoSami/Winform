@@ -77,6 +77,11 @@ namespace WinformWithExternalLibrary
 			//		Control
 			foreach (Control control in this.Controls)
 			{
+				if (control.Enabled == false)
+				{
+					continue;
+				}
+
 				if (control is Label && control.Name.Contains("Validation"))
 				{
 					//		Casting
@@ -88,20 +93,19 @@ namespace WinformWithExternalLibrary
 					//		For Validation
 					tempLabel.ForeColor = Color.Red;
 				}
-				else if (control is TextBoxBase)
+				else if (control is TextBoxBase && control.Name.Contains("DVO"))
 				{
 					//		Casting
 					TextBoxBase tempMaterialTextBox = control as TextBoxBase;
 
 					//		Check if Input enabled
-					if (tempMaterialTextBox.Enabled == true)
-					{
-						//		Debug
-						//Debug.WriteLine(tempMaterialTextBox.Name);
 
-						//		Get the DisplayName attribute
-						tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
-					}
+					//		Debug
+					//Debug.WriteLine(tempMaterialTextBox.Name);
+
+					//		Get the DisplayName attribute
+					tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
+
 				}
 			}
 		}
@@ -116,23 +120,22 @@ namespace WinformWithExternalLibrary
 
 					this.listOfLabels.Add(tempLabel);
 				}
-				else if (control is TextBoxBase)
+				else if (control is TextBoxBase && control.Name.Contains("DVO"))
 				{
 					//		
 					TextBoxBase tempTextBoxBase = control as TextBoxBase;
 
-					if (tempTextBoxBase.Enabled == true)
-					{
-						//		Adding in the list
-						this.isInterracted.Add(false);
-						this.listOfTextboxes.Add(tempTextBoxBase);
 
-						//Console.WriteLine(tempMaterialTextBox.Name);
+					//		Adding in the list
+					this.isInterracted.Add(false);
+					this.listOfTextboxes.Add(tempTextBoxBase);
 
-						//		Assigning generalist Events
-						tempTextBoxBase.GotFocus += this.MaterialTextBox_GotFocus;
-						tempTextBoxBase.LostFocus += this.MaterialTextBox_LostFocus;
-					}
+					//Console.WriteLine(tempMaterialTextBox.Name);
+
+					//		Assigning generalist Events
+					tempTextBoxBase.GotFocus += this.MaterialTextBox_GotFocus;
+					tempTextBoxBase.LostFocus += this.MaterialTextBox_LostFocus;
+
 				}
 			}
 		}
@@ -140,16 +143,16 @@ namespace WinformWithExternalLibrary
 		private void InitializeSpecializedEvent()
 		{
 			//		Textbox
-			this.LoginDTO_Password.GotFocus += (obj, e) =>
+			this.LoginDVO_Password.GotFocus += (obj, e) =>
 			{
-				this.LoginDTO_Password.Password = true;
+				this.LoginDVO_Password.Password = true;
 			};
 
-			this.LoginDTO_Password.LostFocus += (obj, e) =>
+			this.LoginDVO_Password.LostFocus += (obj, e) =>
 			{
-				if (this.CheckIfTextboxEmptyOrPlaceholder(this.LoginDTO_Password))
+				if (this.CheckIfTextboxEmptyOrPlaceholder(this.LoginDVO_Password))
 				{
-					this.LoginDTO_Password.Password = false;
+					this.LoginDVO_Password.Password = false;
 				}
 			};
 
@@ -284,8 +287,8 @@ namespace WinformWithExternalLibrary
 			}
 
 			//		[HARDCODE] Try comparing
-			else if (this.CheckTextboxTextEqualToString(this.LoginDTO_LoginName, "123") &&
-				this.CheckTextboxTextEqualToString(this.LoginDTO_Password, "123"))
+			else if (this.CheckTextboxTextEqualToString(this.LoginDVO_LoginName, "123") &&
+				this.CheckTextboxTextEqualToString(this.LoginDVO_Password, "123"))
 			{
 				//		[MAY NEED] Try Connecting => Login via Usernames and Password from DTB
 				if (!this.InitiateAndTestDataProvider())
@@ -356,8 +359,8 @@ namespace WinformWithExternalLibrary
 
 			//		New Object
 			LoginDVO tempLogin = new LoginDVO(
-				LoginDTO_LoginName: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDTO_LoginName),
-				LoginDTO_Password: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDTO_Password)
+				LoginDVO_LoginName: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDVO_LoginName),
+				LoginDVO_Password: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDVO_Password)
 				);
 			List<ValidationResult> results = new List<ValidationResult>();
 

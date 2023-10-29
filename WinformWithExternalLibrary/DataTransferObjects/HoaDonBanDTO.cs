@@ -13,7 +13,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 	{
 		public Guid HoaDonBanDTO_MaHDBan { get; set; }
 
-		public Guid HoaDonBanDTO_MaKhachHang { get; set; }
+		public Guid? HoaDonBanDTO_MaKhachHang { get; set; }
 
 		public Guid HoaDonBanDTO_MaNhanVien { get; set; }
 
