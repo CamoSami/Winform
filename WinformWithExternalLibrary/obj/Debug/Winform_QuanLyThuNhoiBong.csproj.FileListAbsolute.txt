@@ -35,22 +35,12 @@ E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.ComponentModel.An
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.AssemblyReference.cache
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormCreateKhachHang.resources
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormLogin.resources
-E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.Properties.Resources.resources
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.GenerateResource.cache
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CoreCompileInputs.cache
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CopyComplete
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.pdb
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.dll
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.dll
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.dll
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.pdb
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.xml
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.pdb
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.WinForms.xml
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.pdb
-E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveCharts.Wpf.xml
 D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe.config
 D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.exe
 D:\HOC_KI_V\LTTQ\Bài Tập Lớn\Winform\WinformWithExternalLibrary\bin\Debug\WinformWithExternalLibrary.pdb
@@ -201,3 +191,52 @@ D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\System.
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\System.Memory.xml
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\System.Numerics.Vectors.xml
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\libHarfBuzzSharp.dylib
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\x86\libHarfBuzzSharp.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\x64\libHarfBuzzSharp.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\arm64\libHarfBuzzSharp.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\libSkiaSharp.dylib
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\x86\libSkiaSharp.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\x64\libSkiaSharp.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\arm64\libSkiaSharp.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\Bogus.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\HarfBuzzSharp.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveChartsCore.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveChartsCore.SkiaSharpView.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveChartsCore.SkiaSharpView.WinForms.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\Newtonsoft.Json.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\OpenTK.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\OpenTK.GLControl.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.HarfBuzz.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.Views.Desktop.Common.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.Views.WindowsForms.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Buffers.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Drawing.Common.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Memory.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Numerics.Vectors.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\Bogus.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\HarfBuzzSharp.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\HarfBuzzSharp.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveChartsCore.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveChartsCore.SkiaSharpView.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\LiveChartsCore.SkiaSharpView.WinForms.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\Newtonsoft.Json.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\OpenTK.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\OpenTK.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\OpenTK.GLControl.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\OpenTK.GLControl.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.HarfBuzz.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.HarfBuzz.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.Views.Desktop.Common.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.Views.Desktop.Common.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.Views.WindowsForms.pdb
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\SkiaSharp.Views.WindowsForms.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Buffers.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Memory.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Numerics.Vectors.xml
+E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources

@@ -19,10 +19,12 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView;
 using SkiaSharp;
 using System.Collections.ObjectModel;
+using LiveChartsCore.SkiaSharpView.WinForms;
+using LiveChartsCore.Measure;
 
 namespace WinformWithExternalLibrary
 {
-	public partial class FormMain : MaterialForm
+    public partial class FormMain : MaterialForm
 	{
 		public static FormMain Instance { get; set; }
 
@@ -30,11 +32,13 @@ namespace WinformWithExternalLibrary
 		private readonly List<List<Label>> listOfLabels = new List<List<Label>>();
 		private readonly List<List<bool>> isInterracted = new List<List<bool>>();
 
-		public FormMain()
+		private readonly PhanTichDAO phanTichDAO = new PhanTichDAO();
+
+        public FormMain()
 		{
 			//		GenerateData
-			BogusAmogus bogusAmogus = new BogusAmogus();
-			bogusAmogus.GenerateFakeData();
+			//BogusAmogus bogusAmogus = new BogusAmogus();
+			//bogusAmogus.GenerateFakeData();
 
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
@@ -273,20 +277,81 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeChart2()
 		{
-            // Chart 2
+            // Days in a Month
+            List<string> daysInMonth = new List<string>();
+            int currentMonth = DateTime.Now.Month;
+			int lastMonth = DateTime.Now.Month - 1 != 0 ? DateTime.Now.Month - 1 : 12;
+			int year = DateTime.Now.Month - 1 != 0 ? DateTime.Now.Year : DateTime.Now.Year - 1;
+
+            int countDaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, currentMonth);
+			int countDaysInLastMonth = DateTime.DaysInMonth(year, lastMonth);
+
+            // Data queried from DB
+            List<RevenueResponse> revanueResponseCurrentMonth = phanTichDAO.GetDailyRevenueByThisMonth();
+			List<RevenueResponse> revanueResponseLastMonth = phanTichDAO.GetDailyRevenueByLastMonth();
+
+            List<long> revenuesCurrentMonth = new List<long>(countDaysInMonth);
+			List<long> revenuesLastMonth = new List<long>(countDaysInMonth);
+
+            // Fill all value 0
+            for (int i = 0; i < countDaysInMonth; i++)
+            {
+                revenuesCurrentMonth.Add(0);
+            }
+
+			for (int i = 0; i < countDaysInLastMonth; i++)
+            {
+                revenuesLastMonth.Add(0);
+            }
+
+			// Fill value get from DB
+            foreach (RevenueResponse revanue in revanueResponseCurrentMonth)
+			{
+                revenuesCurrentMonth[revanue.Ngay - 1] = revanue.DoanhThu;
+            }
+
+            foreach (RevenueResponse revanue in revanueResponseLastMonth)
+			{
+                revenuesLastMonth[revanue.Ngay - 1] = revanue.DoanhThu;
+            }
+
             cartesianChart2.Series = new ISeries[]
             {
-                new LineSeries<int>
+                new LineSeries<long>
+                {
+					Values = revenuesCurrentMonth,
+					GeometrySize = 20,
+                    Name = "Doanh thu tháng " + currentMonth,
+                },
+				new LineSeries<long>
 				{
-					Values = new [] { 4, 4, 7, 2, 8 },
-					GeometrySize = 10
-				},
-				new LineSeries<int>
+					Values = revenuesLastMonth,
+					GeometrySize = 10,
+                    Name = "Doanh thu tháng " + lastMonth,
+
+                },
+
+			};
+
+			// Legend custom
+			cartesianChart2.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
+
+            // Axis
+            for (int i = 1; i <= countDaysInMonth; i++)
+            {
+				daysInMonth.Add("Ngày " + i.ToString());
+            }
+
+            cartesianChart2.XAxes = new List<Axis>
+			{
+				new Axis
 				{
-					Values = new [] { 7, 5, 3, 2, 6 },
-					GeometrySize = 30
-				}
-            };
+					// Use the labels property to define named labels.
+					Labels = daysInMonth
+                }
+			};
+
+            cartesianChart2.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
         }
 
 		#endregion
@@ -485,6 +550,6 @@ namespace WinformWithExternalLibrary
 			return this.materialTabControl1.SelectedIndex;
 		}
 
-		#endregion
-	}
+        #endregion
+    }
 }
