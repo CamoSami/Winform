@@ -30,50 +30,50 @@ namespace WinformWithExternalLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.LoginDVO_LoginName = new MaterialSkin.Controls.MaterialTextBox();
-			this.LoginDVO_Password = new MaterialSkin.Controls.MaterialTextBox();
+			this.LoginDVO_Email = new MaterialSkin.Controls.MaterialTextBox();
+			this.LoginDVO_MatKhau = new MaterialSkin.Controls.MaterialTextBox();
 			this.materialButtonDangNhap = new MaterialSkin.Controls.MaterialButton();
 			this.materialButtonThoat = new MaterialSkin.Controls.MaterialButton();
-			this.LoginDVO_LoginName_Validation = new System.Windows.Forms.Label();
-			this.LoginDVO_Password_Validation = new System.Windows.Forms.Label();
+			this.LoginDVO_Email_Validation = new System.Windows.Forms.Label();
+			this.LoginDVO_MatKhau_Validation = new System.Windows.Forms.Label();
 			this.labelForFocus = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
-			// LoginDVO_LoginName
+			// LoginDVO_Email
 			// 
-			this.LoginDVO_LoginName.AnimateReadOnly = false;
-			this.LoginDVO_LoginName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.LoginDVO_LoginName.Depth = 0;
-			this.LoginDVO_LoginName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
-			this.LoginDVO_LoginName.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.LoginDVO_LoginName.LeadingIcon = null;
-			this.LoginDVO_LoginName.Location = new System.Drawing.Point(17, 77);
-			this.LoginDVO_LoginName.MaxLength = 50;
-			this.LoginDVO_LoginName.MouseState = MaterialSkin.MouseState.OUT;
-			this.LoginDVO_LoginName.Multiline = false;
-			this.LoginDVO_LoginName.Name = "LoginDVO_LoginName";
-			this.LoginDVO_LoginName.Size = new System.Drawing.Size(494, 50);
-			this.LoginDVO_LoginName.TabIndex = 0;
-			this.LoginDVO_LoginName.Text = "Tên Đăng Nhập";
-			this.LoginDVO_LoginName.TrailingIcon = null;
+			this.LoginDVO_Email.AnimateReadOnly = false;
+			this.LoginDVO_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.LoginDVO_Email.Depth = 0;
+			this.LoginDVO_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.LoginDVO_Email.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.LoginDVO_Email.LeadingIcon = null;
+			this.LoginDVO_Email.Location = new System.Drawing.Point(17, 77);
+			this.LoginDVO_Email.MaxLength = 50;
+			this.LoginDVO_Email.MouseState = MaterialSkin.MouseState.OUT;
+			this.LoginDVO_Email.Multiline = false;
+			this.LoginDVO_Email.Name = "LoginDVO_Email";
+			this.LoginDVO_Email.Size = new System.Drawing.Size(494, 50);
+			this.LoginDVO_Email.TabIndex = 0;
+			this.LoginDVO_Email.Text = "Tên Đăng Nhập";
+			this.LoginDVO_Email.TrailingIcon = null;
 			// 
-			// LoginDVO_Password
+			// LoginDVO_MatKhau
 			// 
-			this.LoginDVO_Password.AnimateReadOnly = false;
-			this.LoginDVO_Password.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.LoginDVO_Password.Depth = 0;
-			this.LoginDVO_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
-			this.LoginDVO_Password.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.LoginDVO_Password.LeadingIcon = null;
-			this.LoginDVO_Password.Location = new System.Drawing.Point(17, 153);
-			this.LoginDVO_Password.MaxLength = 50;
-			this.LoginDVO_Password.MouseState = MaterialSkin.MouseState.OUT;
-			this.LoginDVO_Password.Multiline = false;
-			this.LoginDVO_Password.Name = "LoginDVO_Password";
-			this.LoginDVO_Password.Size = new System.Drawing.Size(494, 50);
-			this.LoginDVO_Password.TabIndex = 1;
-			this.LoginDVO_Password.Text = "Mật Khẩu";
-			this.LoginDVO_Password.TrailingIcon = null;
+			this.LoginDVO_MatKhau.AnimateReadOnly = false;
+			this.LoginDVO_MatKhau.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.LoginDVO_MatKhau.Depth = 0;
+			this.LoginDVO_MatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.LoginDVO_MatKhau.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.LoginDVO_MatKhau.LeadingIcon = null;
+			this.LoginDVO_MatKhau.Location = new System.Drawing.Point(17, 153);
+			this.LoginDVO_MatKhau.MaxLength = 50;
+			this.LoginDVO_MatKhau.MouseState = MaterialSkin.MouseState.OUT;
+			this.LoginDVO_MatKhau.Multiline = false;
+			this.LoginDVO_MatKhau.Name = "LoginDVO_MatKhau";
+			this.LoginDVO_MatKhau.Size = new System.Drawing.Size(494, 50);
+			this.LoginDVO_MatKhau.TabIndex = 1;
+			this.LoginDVO_MatKhau.Text = "Mật Khẩu";
+			this.LoginDVO_MatKhau.TrailingIcon = null;
 			// 
 			// materialButtonDangNhap
 			// 
@@ -113,25 +113,25 @@ namespace WinformWithExternalLibrary
 			this.materialButtonThoat.UseAccentColor = false;
 			this.materialButtonThoat.UseVisualStyleBackColor = true;
 			// 
-			// LoginDVO_LoginName_Validation
+			// LoginDVO_Email_Validation
 			// 
-			this.LoginDVO_LoginName_Validation.AutoSize = true;
-			this.LoginDVO_LoginName_Validation.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.LoginDVO_LoginName_Validation.Location = new System.Drawing.Point(17, 134);
-			this.LoginDVO_LoginName_Validation.Name = "LoginDVO_LoginName_Validation";
-			this.LoginDVO_LoginName_Validation.Size = new System.Drawing.Size(44, 16);
-			this.LoginDVO_LoginName_Validation.TabIndex = 7;
-			this.LoginDVO_LoginName_Validation.Text = "label1";
+			this.LoginDVO_Email_Validation.AutoSize = true;
+			this.LoginDVO_Email_Validation.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.LoginDVO_Email_Validation.Location = new System.Drawing.Point(17, 134);
+			this.LoginDVO_Email_Validation.Name = "LoginDVO_Email_Validation";
+			this.LoginDVO_Email_Validation.Size = new System.Drawing.Size(44, 16);
+			this.LoginDVO_Email_Validation.TabIndex = 7;
+			this.LoginDVO_Email_Validation.Text = "label1";
 			// 
-			// LoginDVO_Password_Validation
+			// LoginDVO_MatKhau_Validation
 			// 
-			this.LoginDVO_Password_Validation.AutoSize = true;
-			this.LoginDVO_Password_Validation.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.LoginDVO_Password_Validation.Location = new System.Drawing.Point(17, 206);
-			this.LoginDVO_Password_Validation.Name = "LoginDVO_Password_Validation";
-			this.LoginDVO_Password_Validation.Size = new System.Drawing.Size(44, 16);
-			this.LoginDVO_Password_Validation.TabIndex = 8;
-			this.LoginDVO_Password_Validation.Text = "label2";
+			this.LoginDVO_MatKhau_Validation.AutoSize = true;
+			this.LoginDVO_MatKhau_Validation.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.LoginDVO_MatKhau_Validation.Location = new System.Drawing.Point(17, 206);
+			this.LoginDVO_MatKhau_Validation.Name = "LoginDVO_MatKhau_Validation";
+			this.LoginDVO_MatKhau_Validation.Size = new System.Drawing.Size(44, 16);
+			this.LoginDVO_MatKhau_Validation.TabIndex = 8;
+			this.LoginDVO_MatKhau_Validation.Text = "label2";
 			// 
 			// labelForFocus
 			// 
@@ -147,12 +147,12 @@ namespace WinformWithExternalLibrary
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(529, 283);
 			this.Controls.Add(this.labelForFocus);
-			this.Controls.Add(this.LoginDVO_Password_Validation);
-			this.Controls.Add(this.LoginDVO_LoginName_Validation);
+			this.Controls.Add(this.LoginDVO_MatKhau_Validation);
+			this.Controls.Add(this.LoginDVO_Email_Validation);
 			this.Controls.Add(this.materialButtonThoat);
 			this.Controls.Add(this.materialButtonDangNhap);
-			this.Controls.Add(this.LoginDVO_Password);
-			this.Controls.Add(this.LoginDVO_LoginName);
+			this.Controls.Add(this.LoginDVO_MatKhau);
+			this.Controls.Add(this.LoginDVO_Email);
 			this.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.Name = "FormLogin";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -164,12 +164,12 @@ namespace WinformWithExternalLibrary
 
 		#endregion
 
-		private MaterialSkin.Controls.MaterialTextBox LoginDVO_LoginName;
-		private MaterialSkin.Controls.MaterialTextBox LoginDVO_Password;
+		private MaterialSkin.Controls.MaterialTextBox LoginDVO_Email;
+		private MaterialSkin.Controls.MaterialTextBox LoginDVO_MatKhau;
 		private MaterialSkin.Controls.MaterialButton materialButtonDangNhap;
 		private MaterialSkin.Controls.MaterialButton materialButtonThoat;
-		private System.Windows.Forms.Label LoginDVO_LoginName_Validation;
-		private System.Windows.Forms.Label LoginDVO_Password_Validation;
+		private System.Windows.Forms.Label LoginDVO_Email_Validation;
+		private System.Windows.Forms.Label LoginDVO_MatKhau_Validation;
 		private System.Windows.Forms.Label labelForFocus;
 	}
 }

@@ -16,12 +16,16 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
         public string CongViecDTO_TenCongViec { get; set; }
 
-        public CongViecDTO(int congViecDTO_MucLuong, string congViecDTO_TenCongViec)
+        public CongViecDTO() 
+		{ 
+			this.CongViecDTO_MaCongViec = Guid.NewGuid();
+		}
+
+        public CongViecDTO(Guid congViecDTO_MaCongViec, int congViecDTO_MucLuong, string congViecDTO_TenCongViec)
         {
+			this.CongViecDTO_MaCongViec = congViecDTO_MaCongViec;
             this.CongViecDTO_MucLuong = congViecDTO_MucLuong;
             this.CongViecDTO_TenCongViec = congViecDTO_TenCongViec;
         }
-
-        public CongViecDTO() { }
     }
 }

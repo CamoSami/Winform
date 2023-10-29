@@ -33,8 +33,8 @@ namespace WinformWithExternalLibrary
 		public FormMain()
 		{
 			//		GenerateData
-			BogusAmogus bogusAmogus = new BogusAmogus();
-			bogusAmogus.GenerateFakeData();
+			//BogusAmogus bogusAmogus = new BogusAmogus();
+			//bogusAmogus.GenerateFakeData();
 
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
@@ -45,9 +45,6 @@ namespace WinformWithExternalLibrary
 			this.Initialize_NguyenHongSon();
 			this.Initialize_NguyenThanhTruc();
 			this.Initialize_VuHongHanh();
-
-			//		Data Access Objects
-			this.InitializeDAOs();
 
 			//		Attributes
 			this.InitializeHardCodedAttributes();
@@ -60,10 +57,6 @@ namespace WinformWithExternalLibrary
 		#region Initialize
 
 		//		Initializing
-		private void InitializeDAOs()
-		{
-			KhachHangDAO.Instance = new KhachHangDAO();
-		}
 
 		private void InitializeHardCodedAttributes()
 		{

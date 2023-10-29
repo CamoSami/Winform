@@ -11,37 +11,37 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 	public class LoginDVO
 	{
 		[Required(
-			ErrorMessage = "Thiếu tên đăng nhập kìa!"
+			ErrorMessage = "Thiếu tên đăng nhập"
 			)]
 		[StringLength(
-			maximumLength: 20,
+			maximumLength: 30,
 			MinimumLength = 3,
-			ErrorMessage = "Nhập tên đăng nhập từ 3-20 kí tự nhá ._."
+			ErrorMessage = "Nhập tên đăng nhập từ 3-30 kí tự"
 			)]
 		[DisplayName(
 			"Tên Đăng Nhập"
 			)]
-		public string LoginDVO_LoginName { get; set; }
+		public string LoginDVO_Email { get; set; }
 
 
 
 		[Required(
-			ErrorMessage = "Thiếu mật khẩu kìa!"
+			ErrorMessage = "Thiếu mật khẩu"
 			)]
 		[StringLength(
 			maximumLength: 20,
 			MinimumLength = 3,
-			ErrorMessage = "Nhập mật khẩu từ 3-20 kí tự nhá ._."
+			ErrorMessage = "Nhập mật khẩu từ 3-20 kí tự"
 			)]
 		[DisplayName(
 			"Mật Khẩu"
 			)]
-		public string LoginDVO_Password { get; set; }
+		public string LoginDVO_MatKhau { get; set; }
 
 		public LoginDVO(string LoginDVO_LoginName, string LoginDVO_Password)
 		{
-			this.LoginDVO_LoginName = LoginDVO_LoginName;
-			this.LoginDVO_Password = LoginDVO_Password;
+			this.LoginDVO_Email = LoginDVO_LoginName;
+			this.LoginDVO_MatKhau = LoginDVO_Password;
 		}
 
 		public LoginDVO() { }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using WinformWithExternalLibrary.DataValidateObjects;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -18,19 +19,34 @@ namespace WinformWithExternalLibrary.DataAccessObjects
         public static NhanVienDAO Instance { get; set; }
         public NhanVienDAO() { }
 
+		//		Add: Tìm xem có tài khoản nhân viên không
+		public bool CheckNhanVienLogin(LoginDVO loginDVO)
+		{
+			string queryTimNV = $"SELECT * FROM {DataProvider.NHANVIEN_TABLE} " +
+				$"WHERE Email = '{loginDVO.LoginDVO_Email}' AND MatKhau = '{loginDVO.LoginDVO_MatKhau}'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryTimNV);
+
+			return dataTable.Rows.Count > 0;
+		}
+
         //Có nút tạo mới Nhân viên
         public bool InsertNhanVien(dynamic baseDTO)
         {
             NhanVienDTO NhanVienDTO = baseDTO as NhanVienDTO;
             
+			//		Fix: Insert MaNhanVien, Email, MatKhau
 			string insertNhanVien = "Insert into " +
                                 DataProvider.NHANVIEN_TABLE +
-                                " (MaCongViec,TenNhanVien,NgaySinh,DiaChi,DienThoai,GioiTinh) VALUES (" +
-                                    "N'" + NhanVienDTO.NhanVienDTO_MaCongViec + "'" +
-                                    "N'" + NhanVienDTO.NhanVienDTO_TenNhanVien + "'" +
-                                    "N'" + NhanVienDTO.NhanVienDTO_NgaySinh + "'" +
-                                    "N'" + NhanVienDTO.NhanVienDTO_DiaChi + "'" +
-                                    "N'" + NhanVienDTO.NhanVienDTO_DienThoai + "'" +
+                                " (MaNhanVien, MaCongViec, TenNhanVien, Email, MatKhau, NgaySinh, DiaChi, DienThoai, GioiTinh) VALUES (" +
+                                    "N'" + NhanVienDTO.NhanVienDTO_MaNhanVien + "'," +
+									"N'" + NhanVienDTO.NhanVienDTO_MaCongViec + "'," +
+                                    "N'" + NhanVienDTO.NhanVienDTO_TenNhanVien + "'," +
+									"N'" + NhanVienDTO.NhanVienDTO_Email + "'," +
+									"N'" + NhanVienDTO.NhanVienDTO_MatKhau + "'," +
+									"N'" + NhanVienDTO.NhanVienDTO_NgaySinh + "'," +
+                                    "N'" + NhanVienDTO.NhanVienDTO_DiaChi + "'," +
+                                    "N'" + NhanVienDTO.NhanVienDTO_DienThoai + "'," +
                                     "N'" + NhanVienDTO.NhanVienDTO_GioiTinh + "'" +
                                     ")";
             

@@ -42,6 +42,9 @@ namespace WinformWithExternalLibrary
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
 
+			//		Data Access Objects
+			this.InitializeDataObjects();
+
 			//		Assigning Essential
 			this.InitializeHardCodedAttributes();
 
@@ -51,6 +54,14 @@ namespace WinformWithExternalLibrary
 		}
 
 		#region Initialize
+
+		private void InitializeDataObjects()
+		{
+			DataProvider.Instance = new DataProvider();
+
+			KhachHangDAO.Instance = new KhachHangDAO();
+			NhanVienDAO.Instance = new NhanVienDAO();
+		}
 
 		private void InitializeHardCodedAttributes()
 		{
@@ -122,9 +133,8 @@ namespace WinformWithExternalLibrary
 				}
 				else if (control is TextBoxBase && control.Name.Contains("DVO"))
 				{
-					//		
+					//		Casting
 					TextBoxBase tempTextBoxBase = control as TextBoxBase;
-
 
 					//		Adding in the list
 					this.isInterracted.Add(false);
@@ -143,16 +153,16 @@ namespace WinformWithExternalLibrary
 		private void InitializeSpecializedEvent()
 		{
 			//		Textbox
-			this.LoginDVO_Password.GotFocus += (obj, e) =>
+			this.LoginDVO_MatKhau.GotFocus += (obj, e) =>
 			{
-				this.LoginDVO_Password.Password = true;
+				this.LoginDVO_MatKhau.Password = true;
 			};
 
-			this.LoginDVO_Password.LostFocus += (obj, e) =>
+			this.LoginDVO_MatKhau.LostFocus += (obj, e) =>
 			{
-				if (this.CheckIfTextboxEmptyOrPlaceholder(this.LoginDVO_Password))
+				if (this.CheckIfTextboxEmptyOrPlaceholder(this.LoginDVO_MatKhau))
 				{
-					this.LoginDVO_Password.Password = false;
+					this.LoginDVO_MatKhau.Password = false;
 				}
 			};
 
@@ -282,27 +292,15 @@ namespace WinformWithExternalLibrary
 			//		Try validating
 			if (!this.TryValidation())
 			{
-
 				return;
 			}
 
-			//		[HARDCODE] Try comparing
-			else if (this.CheckTextboxTextEqualToString(this.LoginDVO_LoginName, "123") &&
-				this.CheckTextboxTextEqualToString(this.LoginDVO_Password, "123"))
+			LoginDVO loginDVO = this.GetInput();
+
+			if (NhanVienDAO.Instance.CheckNhanVienLogin(loginDVO) ||
+					(loginDVO.LoginDVO_Email.Equals("administrator") 
+					&& loginDVO.LoginDVO_MatKhau.Equals("CamoSami")))
 			{
-				//		[MAY NEED] Try Connecting => Login via Usernames and Password from DTB
-				if (!this.InitiateAndTestDataProvider())
-				{
-					return;
-				}
-
-				MaterialMessageBox.Show(
-					text: "Đăng nhập được rồi nè ~.~",
-					caption: "~^~",
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-					);
-
 				this.isLoggedIn = true;
 
 				//		Hide
@@ -337,18 +335,6 @@ namespace WinformWithExternalLibrary
 
 		#region Generalist Function
 
-		private bool InitiateAndTestDataProvider()
-		{
-			if (DataProvider.Instance == null)
-			{
-				DataProvider.Instance = new DataProvider();
-			}
-
-			return DataProvider.Instance.TestConnection();
-
-			//Console.WriteLine(DataProvider.Instance.TestConnection());
-		}
-
 		private bool TryValidation()
 		{
 			//		Reset Validation
@@ -358,10 +344,7 @@ namespace WinformWithExternalLibrary
 			}
 
 			//		New Object
-			LoginDVO tempLogin = new LoginDVO(
-				LoginDVO_LoginName: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDVO_LoginName),
-				LoginDVO_Password: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDVO_Password)
-				);
+			LoginDVO tempLogin = this.GetInput();
 			List<ValidationResult> results = new List<ValidationResult>();
 
 			//		Try Validating
@@ -437,6 +420,14 @@ namespace WinformWithExternalLibrary
 					return;
 				}
 			}
+		}
+
+		private LoginDVO GetInput()
+		{
+			return new LoginDVO(
+				LoginDVO_LoginName: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDVO_Email),
+				LoginDVO_Password: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDVO_MatKhau)
+				);
 		}
 
 		public Font GetFont()

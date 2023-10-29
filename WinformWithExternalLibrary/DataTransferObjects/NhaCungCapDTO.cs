@@ -18,10 +18,14 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
         public string NhaCungCapDTO_DiaChi { get; set; }
 
-		public NhaCungCapDTO() { }
-
-		public NhaCungCapDTO(string nhaCungCapDTO_TenNhaCungCap, string nhaCungCapDTO_DienThoai, string nhaCungCapDTO_DiaChi)
+		public NhaCungCapDTO() 
 		{
+			this.NhaCungCapDTO_MaNhaCungCap = Guid.NewGuid();
+		}
+
+		public NhaCungCapDTO(Guid nhaCungCapDTO_MaNhaCungCap, string nhaCungCapDTO_TenNhaCungCap, string nhaCungCapDTO_DienThoai, string nhaCungCapDTO_DiaChi)
+		{
+			this.NhaCungCapDTO_MaNhaCungCap = nhaCungCapDTO_MaNhaCungCap;
 			this.NhaCungCapDTO_TenNhaCungCap = nhaCungCapDTO_TenNhaCungCap;
 			this.NhaCungCapDTO_DienThoai = nhaCungCapDTO_DienThoai;
 			this.NhaCungCapDTO_DiaChi = nhaCungCapDTO_DiaChi;
