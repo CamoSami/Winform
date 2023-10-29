@@ -13,7 +13,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 	{
 		public Guid HoaDonBanDTO_MaHDBan { get; set; }
 
-		public Guid HoaDonBanDTO_MaKhachHang { get; set; }
+		public Guid? HoaDonBanDTO_MaKhachHang { get; set; }
 
 		public Guid HoaDonBanDTO_MaNhanVien { get; set; }
 
@@ -25,10 +25,14 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
 		public int HoaDonBanDTO_TongTien { get; set; }
 
-		public HoaDonBanDTO() { }
-
-		public HoaDonBanDTO(Guid hoaDonBanDTO_MaKhachHang, Guid hoaDonBanDTO_MaNhanVien, DateTime hoaDonBanDTO_NgayBan, int hoaDonBanDTO_SoSanPham, int hoaDonBanDTO_GiamGia, int hoaDonBanDTO_TongTien)
+		public HoaDonBanDTO() 
 		{
+			this.HoaDonBanDTO_MaHDBan = Guid.NewGuid();
+		}
+
+		public HoaDonBanDTO(Guid hoaDonBanDTO_MaHDBan, Guid hoaDonBanDTO_MaKhachHang, Guid hoaDonBanDTO_MaNhanVien, DateTime hoaDonBanDTO_NgayBan, int hoaDonBanDTO_SoSanPham, int hoaDonBanDTO_GiamGia, int hoaDonBanDTO_TongTien)
+		{
+			this.HoaDonBanDTO_MaHDBan = hoaDonBanDTO_MaHDBan;
 			this.HoaDonBanDTO_MaKhachHang = hoaDonBanDTO_MaKhachHang;
 			this.HoaDonBanDTO_MaNhanVien = hoaDonBanDTO_MaNhanVien;
 			this.HoaDonBanDTO_NgayBan = hoaDonBanDTO_NgayBan;

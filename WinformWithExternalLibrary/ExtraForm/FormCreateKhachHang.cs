@@ -65,20 +65,19 @@ namespace WinformWithExternalLibrary
 					//		For Validation
 					tempLabel.ForeColor = Color.Red;
 				}
-				else if (control is TextBoxBase)
+				else if (control is TextBoxBase && control.Name.Contains("DVO"))
 				{
 					//		Casting
 					TextBoxBase tempMaterialTextBox = control as TextBoxBase;
 
 					//		Check if Input enabled
-					if (tempMaterialTextBox.Enabled == true)
-					{
-						//		Debug
-						//Debug.WriteLine(tempMaterialTextBox.Name);
 
-						//		Get the DisplayName attribute
-						tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
-					}
+					//		Debug
+					//Debug.WriteLine(tempMaterialTextBox.Name);
+
+					//		Get the DisplayName attribute
+					tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
+
 				}
 			}
 		}
@@ -94,25 +93,24 @@ namespace WinformWithExternalLibrary
 
 					this.listOfLabels.Add(tempLabel);
 				}
-				else if (control is TextBoxBase)
+				else if (control is TextBoxBase && control.Name.Contains("DVO"))
 				{
 					//		Casting
 					TextBoxBase tempMaterialTextBox = control as TextBoxBase;
 
 					//		Check if Input enabled
-					if (tempMaterialTextBox.Enabled == true)
-					{
-						//		Adding in the list
-						this.isInterracted.Add(false);
-						this.listOfTextboxes.Add(tempMaterialTextBox);
 
-						//		Debug
-						//Debug.WriteLine(tempMaterialTextBox.Name);
+					//		Adding in the list
+					this.isInterracted.Add(false);
+					this.listOfTextboxes.Add(tempMaterialTextBox);
 
-						//		Assigning generalist Events
-						tempMaterialTextBox.GotFocus += this.MaterialTextBox_GotFocus;
-						tempMaterialTextBox.LostFocus += this.MaterialTextBox_LostFocus;
-					}
+					//		Debug
+					//Debug.WriteLine(tempMaterialTextBox.Name);
+
+					//		Assigning generalist Events
+					tempMaterialTextBox.GotFocus += this.MaterialTextBox_GotFocus;
+					tempMaterialTextBox.LostFocus += this.MaterialTextBox_LostFocus;
+
 				}
 			}
 		}

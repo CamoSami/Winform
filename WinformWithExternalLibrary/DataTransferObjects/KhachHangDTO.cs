@@ -18,13 +18,17 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
 		public string KhachHangDTO_DienThoai { get; set; }
 
-		public KhachHangDTO(string khachHangDTO_TenKhachHang, string khachHangDTO_DiaChi, string khachHangDTO_DienThoai)
+		public KhachHangDTO() 
+		{ 
+			this.KhachHangDTO_MaKhachHang = Guid.NewGuid();
+		}
+
+		public KhachHangDTO(Guid khachHangDTO_MaKhachHang, string khachHangDTO_TenKhachHang, string khachHangDTO_DiaChi, string khachHangDTO_DienThoai)
 		{
+			this.KhachHangDTO_MaKhachHang = khachHangDTO_MaKhachHang;
 			this.KhachHangDTO_TenKhachHang = khachHangDTO_TenKhachHang;
 			this.KhachHangDTO_DiaChi = khachHangDTO_DiaChi;
 			this.KhachHangDTO_DienThoai = khachHangDTO_DienThoai;
 		}
-
-		public KhachHangDTO() { }
 	}
 }

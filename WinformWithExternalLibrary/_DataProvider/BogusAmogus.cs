@@ -23,10 +23,15 @@ namespace WinformWithExternalLibrary.CustomComponent
 		public class ThuBongName
 		{
 			public string thuBong { get; set; }
+
 			public string thuBongCombineVerb { get; set; }
+			
 			public string thuBongAdj { get; set; }
+			
 			public string thuBongVerb { get; set; }
+			
 			public string thuBongExtra { get; set; }
+			
 			public string thuBongName { get; set; }
 		}
 
@@ -38,7 +43,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 		public void GenerateFakeData()
 		{
 			int soLuong_DMSanPhamDTO = 250;
-			int soLuong_NhanVienDTO = 25;
+			int soLuong_NhanVienDTO = 40;
 			int soLuong_NhaCungCapDTO = 40;
 			int soLuong_HoaDonNhapDTO = 200;
 			int soLuong_KhachHangDTO = 120;
@@ -235,6 +240,8 @@ namespace WinformWithExternalLibrary.CustomComponent
 				.RuleFor(name => name.thuBongName, (f, u) => (u.thuBong + u.thuBongCombineVerb + u.thuBongAdj + u.thuBongVerb + u.thuBongExtra));
 
 			Faker<DMSanPhamDTO> DTOfaker = new Faker<DMSanPhamDTO>(locale: "vi")
+				.StrictMode(true)
+				.RuleFor(DTO => DTO.DMSanPhamDTO_MaDMSanPham, (f, DTO) => DTO.DMSanPhamDTO_MaDMSanPham = Guid.NewGuid())
 				.RuleFor(DTO => DTO.DMSanPhamDTO_MaSanPham, f => f.Phone.PhoneNumber(format: "############"))
 				.RuleFor(DTO => DTO.DMSanPhamDTO_DonGiaNhap, f => f.Random.Number(min: 1000, max: 7990))
 				.RuleFor(DTO => DTO.DMSanPhamDTO_DonGiaBan, (f, DTO) => (DTO.DMSanPhamDTO_DonGiaNhap + f.Random.Number(min: 200, max: 500)))
@@ -244,9 +251,10 @@ namespace WinformWithExternalLibrary.CustomComponent
 				.FinishWith((f, DTO) =>
 				{
 					string queryString = $"INSERT INTO {DataProvider.DMSANPHAM_TABLE}" +
-					$" (MaSanPham, DonGiaNhap, DonGiaBan, SoLuongTonKho, TenHangHoa, ThoiGianBaoHanh)" +
-					$" VALUES" +
-					$" ({this.GetString(DTO.DMSanPhamDTO_MaSanPham)}," +
+					$" (MaDMSanPham, MaSanPham, DonGiaNhap, DonGiaBan, SoLuongTonKho, TenHangHoa, ThoiGianBaoHanh)" +
+					$" VALUES (" +
+					$" {this.GetString(DTO.DMSanPhamDTO_MaDMSanPham)}," +
+					$" {this.GetString(DTO.DMSanPhamDTO_MaSanPham)}," +
 					$" {DTO.DMSanPhamDTO_DonGiaNhap * 100}," +
 					$" {DTO.DMSanPhamDTO_DonGiaBan * 100}," +
 					$" {DTO.DMSanPhamDTO_SoLuongTonKho}," +
@@ -264,38 +272,47 @@ namespace WinformWithExternalLibrary.CustomComponent
 			CongViecDTO[] congViecDTOs = new CongViecDTO[]
 			{
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 65000,
 					congViecDTO_TenCongViec: "Nghiên cíu"
 				),
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 75000,
 					congViecDTO_TenCongViec: "Dịch vụ khách hàng"
 				),
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 70000,
 					congViecDTO_TenCongViec: "Quản lý kho"
 				),
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 65000,
 					congViecDTO_TenCongViec: "Quản lý quầy sản phẩm"
 				),
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 67500,
 					congViecDTO_TenCongViec: "Lau dọn và bảo quản"
 				),
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 75000,
 					congViecDTO_TenCongViec: "Thu ngân"
 				),
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 70000,
 					congViecDTO_TenCongViec: "Quản lý trang MXH"
 				),
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 70000,
 					congViecDTO_TenCongViec: "Phối hợp với nhà cung cấp"
 				),
 				new CongViecDTO(
+					Guid.NewGuid(),
 					congViecDTO_MucLuong: 100000,
 					congViecDTO_TenCongViec: "Quản lý"
 				),
@@ -304,10 +321,11 @@ namespace WinformWithExternalLibrary.CustomComponent
 			foreach (CongViecDTO congViecDTO in congViecDTOs)
 			{
 				string queryString = $"INSERT INTO {DataProvider.CONGVIEC_TABLE}" +
-					$" (MucLuong, TenCongViec)" +
-					$" VALUES" +
-					$" ({congViecDTO.CongViecDTO_MucLuong}," +
-					$" N'{congViecDTO.CongViecDTO_TenCongViec}')";
+					$" (MaCongViec, MucLuong, TenCongViec)" +
+					$" VALUES (" +
+					$"{this.GetString(congViecDTO.CongViecDTO_MaCongViec)}," +
+					$"{congViecDTO.CongViecDTO_MucLuong}," +
+					$"{this.GetString(congViecDTO.CongViecDTO_TenCongViec)})";
 
 				DataProvider.Instance.ExecuteNonQuery(queryString);
 			}
@@ -333,8 +351,12 @@ namespace WinformWithExternalLibrary.CustomComponent
 			DateTime dateTimeMax = new DateTime(year: 2005, month: 12, day: 31);
 
 			Faker<NhanVienDTO> faker = new Faker<NhanVienDTO>(locale: "vi")
+				.StrictMode(true)
+				.RuleFor(DTO => DTO.NhanVienDTO_MaNhanVien, (f, DTO) => DTO.NhanVienDTO_MaNhanVien = Guid.NewGuid())
 				.RuleFor(DTO => DTO.NhanVienDTO_MaCongViec, f => f.PickRandom(tempMaCongViecs))
 				.RuleFor(DTO => DTO.NhanVienDTO_TenNhanVien, f => f.Name.LastName() + " " + f.Name.FirstName())
+				.RuleFor(DTO => DTO.NhanVienDTO_Email, f => f.Internet.Email())
+				.RuleFor(DTO => DTO.NhanVienDTO_MatKhau, f => f.Internet.Password())
 				.RuleFor(DTO => DTO.NhanVienDTO_NgaySinh, f => f.Date.Between(start: dateTimeMin, end: dateTimeMax))
 				.RuleFor(DTO => DTO.NhanVienDTO_DiaChi, f => f.Address.StreetAddress())
 				.RuleFor(DTO => DTO.NhanVienDTO_DienThoai, f => f.Phone.PhoneNumber(format: "##########"))
@@ -342,9 +364,12 @@ namespace WinformWithExternalLibrary.CustomComponent
 				.FinishWith((f, DTO) =>
 				{
 					string queryString = $"INSERT INTO {DataProvider.NHANVIEN_TABLE}" +
-					$"(MaCongViec, TenNhanVien, NgaySinh, DiaChi, DienThoai, GioiTinh) VALUES (" +
+					$"(MaNhanVien, MaCongViec, TenNhanVien, Email, MatKhau, NgaySinh, DiaChi, DienThoai, GioiTinh) VALUES (" +
+					$"{this.GetString(DTO.NhanVienDTO_MaNhanVien)}," +
 					$"{this.GetString(DTO.NhanVienDTO_MaCongViec)}," +
 					$"{this.GetString(DTO.NhanVienDTO_TenNhanVien)}," +
+					$"{this.GetString(DTO.NhanVienDTO_Email)}," +
+					$"{this.GetString(DTO.NhanVienDTO_MatKhau)}," +
 					$"{this.GetString(DTO.NhanVienDTO_NgaySinh)}," +
 					$"{this.GetString(DTO.NhanVienDTO_DiaChi)}," +
 					$"{this.GetString(DTO.NhanVienDTO_DienThoai)}," +
@@ -360,6 +385,8 @@ namespace WinformWithExternalLibrary.CustomComponent
 		private void Generate_NhaCungCapDTO(int soLuong)
 		{
 			Faker<NhaCungCapDTO> faker = new Faker<NhaCungCapDTO>(locale: "vi")
+				.StrictMode(true)
+				.RuleFor(DTO => DTO.NhaCungCapDTO_MaNhaCungCap, (f, DTO) => DTO.NhaCungCapDTO_MaNhaCungCap = Guid.NewGuid())
 				.RuleFor(DTO => DTO.NhaCungCapDTO_TenNhaCungCap, f => f.Company.CompanyName())
 				.RuleFor(DTO => DTO.NhaCungCapDTO_DienThoai, f => f.Phone.PhoneNumber(format: "##########"))
 				.RuleFor(DTO => DTO.NhaCungCapDTO_DiaChi, f => f.Address.StreetAddress())
@@ -371,7 +398,8 @@ namespace WinformWithExternalLibrary.CustomComponent
 					//	$"\n");
 
 					string queryString = $"INSERT INTO {DataProvider.NHACUNGCAP_TABLE}" +
-					$"(TenNhaCungCap, DienThoai, DiaChi) VALUES (" +
+					$"(MaNhaCungCap, TenNhaCungCap, DienThoai, DiaChi) VALUES (" +
+					$"{this.GetString(DTO.NhaCungCapDTO_MaNhaCungCap)}," +
 					$"{this.GetString(DTO.NhaCungCapDTO_TenNhaCungCap)}," +
 					$"{this.GetString(DTO.NhaCungCapDTO_DienThoai)}," +
 					$"{this.GetString(DTO.NhaCungCapDTO_DiaChi)}" +
@@ -421,11 +449,13 @@ namespace WinformWithExternalLibrary.CustomComponent
 			DateTime dateTimeMin = new DateTime(year: 2010, month: 1, day: 1);
 
 			Faker<HoaDonNhapDTO> faker = new Faker<HoaDonNhapDTO>(locale: "vi")
+				.StrictMode(true)
+				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaHDNhap, (f, DTO) => DTO.HoaDonNhapDTO_MaHDNhap = Guid.NewGuid())
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhaCungCap, f => f.PickRandom(tempMaNhaCungCap))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_NgayNhap, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000))
+				.RuleFor(DTO => DTO.HoaDonNhapDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000).OrDefault(f: f, defaultValue: 0, defaultWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_TongTien, f => f.Random.Number(min: 5000, max: 50000))
 				.FinishWith((f, DTO) =>
 				{
@@ -436,7 +466,8 @@ namespace WinformWithExternalLibrary.CustomComponent
 					//	$"\n{DTO.HoaDonNhapDTO_TongTien * 1000}");
 
 					string queryString = $"INSERT INTO {DataProvider.HOADONNHAP_TABLE} " +
-					$"(MaNhaCungCap, MaNhanVien, NgayNhap, SoSanPham, GiamGia, TongTien) VALUES (" +
+					$"(MaHDNHap, MaNhaCungCap, MaNhanVien, NgayNhap, SoSanPham, GiamGia, TongTien) VALUES (" +
+					$"{this.GetString(DTO.HoaDonNhapDTO_MaHDNhap)}," +
 					$"{this.GetString(DTO.HoaDonNhapDTO_MaNhaCungCap)}," +
 					$"{this.GetString(DTO.HoaDonNhapDTO_MaNhanVien)}," +
 					$"{this.GetString(DTO.HoaDonNhapDTO_NgayNhap)}," +
@@ -454,13 +485,16 @@ namespace WinformWithExternalLibrary.CustomComponent
 		private void Generate_KhachHangDTO(int soLuong)
 		{
 			Faker<KhachHangDTO> faker = new Faker<KhachHangDTO>(locale: "vi")
+				.StrictMode(true)
+				.RuleFor(DTO => DTO.KhachHangDTO_MaKhachHang, (f, DTO) => DTO.KhachHangDTO_MaKhachHang = Guid.NewGuid())
 					.RuleFor(u => u.KhachHangDTO_TenKhachHang, f => f.Name.LastName() + " " + f.Name.FirstName())
 					.RuleFor(u => u.KhachHangDTO_DienThoai, f => f.Phone.PhoneNumber(format: "##########"))
 					.RuleFor(u => u.KhachHangDTO_DiaChi, f => f.Address.StreetAddress())
 					.FinishWith((f, DTO) =>
 					{
 						string queryString = $"INSERT INTO {DataProvider.KHACHHANG_TABLE} " +
-						$"(TenKhachHang, DienThoai, DiaChi) VALUES (" +
+						$"(MaKhachHang, TenKhachHang, DienThoai, DiaChi) VALUES (" +
+						$"{this.GetString(DTO.KhachHangDTO_MaKhachHang)}," +
 						$"{this.GetString(DTO.KhachHangDTO_TenKhachHang)}," +
 						$"{this.GetString(DTO.KhachHangDTO_DienThoai)}," +
 						$"{this.GetString(DTO.KhachHangDTO_DiaChi)}" +
@@ -471,14 +505,15 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 			faker.Generate(soLuong);
 
-			string queryStringLaTao = $"INSERT INTO {DataProvider.KHACHHANG_TABLE} " +
-						$"(TenKhachHang, DienThoai, DiaChi) VALUES (" +
+			string queryStringXd = $"INSERT INTO {DataProvider.KHACHHANG_TABLE} " +
+						$"(MaKhachHang, TenKhachHang, DienThoai, DiaChi) VALUES (" +
+						$"{this.GetString(Guid.NewGuid())}," +
 						$"{this.GetString("Ngô Sách Minh Hiếu")}," +
 						$"{this.GetString("0977255636")}," +
-						$"{this.GetString("Làng Vòng")}" +
+						$"{this.GetString("Làng Vòng, Cầu Giấy, Hà Nội")}" +
 						$")";
 
-			DataProvider.Instance.ExecuteNonQuery(queryStringLaTao);
+			DataProvider.Instance.ExecuteNonQuery(queryStringXd);
 		}
 
 		private void Generate_HoaDonBanDTO(int soLuong)
@@ -519,11 +554,13 @@ namespace WinformWithExternalLibrary.CustomComponent
 			DateTime dateTimeMin = new DateTime(year: 2010, month: 1, day: 1);
 
 			Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
-				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, f => f.PickRandom(tempMaKhachHang))
+				.StrictMode(true)
+				.RuleFor(DTO => DTO.HoaDonBanDTO_MaHDBan, (f, DTO) => DTO.HoaDonBanDTO_MaHDBan = Guid.NewGuid())
+				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, f => f.PickRandom(tempMaKhachHang).OrNull(f: f, nullWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_NgayBan, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
-				.RuleFor(DTO => DTO.HoaDonBanDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000))
+				.RuleFor(DTO => DTO.HoaDonBanDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000).OrDefault(f: f, defaultValue: 0, defaultWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_TongTien, f => f.Random.Number(min: 2000, max: 50000))
 				.FinishWith((f, DTO) =>
 				{
@@ -533,15 +570,33 @@ namespace WinformWithExternalLibrary.CustomComponent
 					//	$"\n{DTO.HoaDonNhapDTO_GiamGia * 1000}" +
 					//	$"\n{DTO.HoaDonNhapDTO_TongTien * 1000}");
 
-					string queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
-					$"(MaKhachHang, MaNhanVien, NgayBan, SoSanPham, GiamGia, TongTien) VALUES (" +
-					$"{this.GetString(DTO.HoaDonBanDTO_MaKhachHang)}," +
-					$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
-					$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
-					$"{DTO.HoaDonBanDTO_SoSanPham}," +
-					$"{DTO.HoaDonBanDTO_GiamGia * 100}," +
-					$"{DTO.HoaDonBanDTO_TongTien * 100}" +
-					$")";
+					string queryString;
+
+					if (DTO.HoaDonBanDTO_MaKhachHang != null)
+					{
+						queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
+							$"(MaHDBan, MaKhachHang, MaNhanVien, NgayBan, SoSanPham, GiamGia, TongTien) VALUES (" +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaHDBan)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaKhachHang)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
+							$"{DTO.HoaDonBanDTO_SoSanPham}," +
+							$"{DTO.HoaDonBanDTO_GiamGia * 100}," +
+							$"{DTO.HoaDonBanDTO_TongTien * 100}" +
+							$")";
+					}
+					else
+					{
+						queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
+							$"(MaHDBan, MaNhanVien, NgayBan, SoSanPham, GiamGia, TongTien) VALUES (" +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaHDBan)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
+							$"{DTO.HoaDonBanDTO_SoSanPham}," +
+							$"{DTO.HoaDonBanDTO_GiamGia * 100}," +
+							$"{DTO.HoaDonBanDTO_TongTien * 100}" +
+							$")";
+					}
 
 					DataProvider.Instance.ExecuteNonQuery(queryString);
 				});

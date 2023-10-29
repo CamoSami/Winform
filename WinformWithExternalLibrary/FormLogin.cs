@@ -42,6 +42,9 @@ namespace WinformWithExternalLibrary
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
 
+			//		Data Access Objects
+			this.InitializeDataObjects();
+
 			//		Assigning Essential
 			this.InitializeHardCodedAttributes();
 
@@ -51,6 +54,14 @@ namespace WinformWithExternalLibrary
 		}
 
 		#region Initialize
+
+		private void InitializeDataObjects()
+		{
+			DataProvider.Instance = new DataProvider();
+
+			KhachHangDAO.Instance = new KhachHangDAO();
+			NhanVienDAO.Instance = new NhanVienDAO();
+		}
 
 		private void InitializeHardCodedAttributes()
 		{
@@ -77,6 +88,11 @@ namespace WinformWithExternalLibrary
 			//		Control
 			foreach (Control control in this.Controls)
 			{
+				if (control.Enabled == false)
+				{
+					continue;
+				}
+
 				if (control is Label && control.Name.Contains("Validation"))
 				{
 					//		Casting
@@ -88,20 +104,19 @@ namespace WinformWithExternalLibrary
 					//		For Validation
 					tempLabel.ForeColor = Color.Red;
 				}
-				else if (control is TextBoxBase)
+				else if (control is TextBoxBase && control.Name.Contains("DVO"))
 				{
 					//		Casting
 					TextBoxBase tempMaterialTextBox = control as TextBoxBase;
 
 					//		Check if Input enabled
-					if (tempMaterialTextBox.Enabled == true)
-					{
-						//		Debug
-						//Debug.WriteLine(tempMaterialTextBox.Name);
 
-						//		Get the DisplayName attribute
-						tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
-					}
+					//		Debug
+					//Debug.WriteLine(tempMaterialTextBox.Name);
+
+					//		Get the DisplayName attribute
+					tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
+
 				}
 			}
 		}
@@ -116,23 +131,21 @@ namespace WinformWithExternalLibrary
 
 					this.listOfLabels.Add(tempLabel);
 				}
-				else if (control is TextBoxBase)
+				else if (control is TextBoxBase && control.Name.Contains("DVO"))
 				{
-					//		
+					//		Casting
 					TextBoxBase tempTextBoxBase = control as TextBoxBase;
 
-					if (tempTextBoxBase.Enabled == true)
-					{
-						//		Adding in the list
-						this.isInterracted.Add(false);
-						this.listOfTextboxes.Add(tempTextBoxBase);
+					//		Adding in the list
+					this.isInterracted.Add(false);
+					this.listOfTextboxes.Add(tempTextBoxBase);
 
-						//Console.WriteLine(tempMaterialTextBox.Name);
+					//Console.WriteLine(tempMaterialTextBox.Name);
 
-						//		Assigning generalist Events
-						tempTextBoxBase.GotFocus += this.MaterialTextBox_GotFocus;
-						tempTextBoxBase.LostFocus += this.MaterialTextBox_LostFocus;
-					}
+					//		Assigning generalist Events
+					tempTextBoxBase.GotFocus += this.MaterialTextBox_GotFocus;
+					tempTextBoxBase.LostFocus += this.MaterialTextBox_LostFocus;
+
 				}
 			}
 		}
@@ -140,16 +153,16 @@ namespace WinformWithExternalLibrary
 		private void InitializeSpecializedEvent()
 		{
 			//		Textbox
-			this.LoginDTO_Password.GotFocus += (obj, e) =>
+			this.LoginDVO_MatKhau.GotFocus += (obj, e) =>
 			{
-				this.LoginDTO_Password.Password = true;
+				this.LoginDVO_MatKhau.Password = true;
 			};
 
-			this.LoginDTO_Password.LostFocus += (obj, e) =>
+			this.LoginDVO_MatKhau.LostFocus += (obj, e) =>
 			{
-				if (this.CheckIfTextboxEmptyOrPlaceholder(this.LoginDTO_Password))
+				if (this.CheckIfTextboxEmptyOrPlaceholder(this.LoginDVO_MatKhau))
 				{
-					this.LoginDTO_Password.Password = false;
+					this.LoginDVO_MatKhau.Password = false;
 				}
 			};
 
@@ -279,27 +292,15 @@ namespace WinformWithExternalLibrary
 			//		Try validating
 			if (!this.TryValidation())
 			{
-
 				return;
 			}
 
-			//		[HARDCODE] Try comparing
-			else if (this.CheckTextboxTextEqualToString(this.LoginDTO_LoginName, "123") &&
-				this.CheckTextboxTextEqualToString(this.LoginDTO_Password, "123"))
+			LoginDVO loginDVO = this.GetInput();
+
+			if (NhanVienDAO.Instance.CheckNhanVienLogin(loginDVO) ||
+					(loginDVO.LoginDVO_Email.Equals("administrator") 
+					&& loginDVO.LoginDVO_MatKhau.Equals("CamoSami")))
 			{
-				//		[MAY NEED] Try Connecting => Login via Usernames and Password from DTB
-				if (!this.InitiateAndTestDataProvider())
-				{
-					return;
-				}
-
-				MaterialMessageBox.Show(
-					text: "Đăng nhập được rồi nè ~.~",
-					caption: "~^~",
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-					);
-
 				this.isLoggedIn = true;
 
 				//		Hide
@@ -334,18 +335,6 @@ namespace WinformWithExternalLibrary
 
 		#region Generalist Function
 
-		private bool InitiateAndTestDataProvider()
-		{
-			if (DataProvider.Instance == null)
-			{
-				DataProvider.Instance = new DataProvider();
-			}
-
-			return DataProvider.Instance.TestConnection();
-
-			//Console.WriteLine(DataProvider.Instance.TestConnection());
-		}
-
 		private bool TryValidation()
 		{
 			//		Reset Validation
@@ -355,10 +344,7 @@ namespace WinformWithExternalLibrary
 			}
 
 			//		New Object
-			LoginDVO tempLogin = new LoginDVO(
-				LoginDTO_LoginName: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDTO_LoginName),
-				LoginDTO_Password: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDTO_Password)
-				);
+			LoginDVO tempLogin = this.GetInput();
 			List<ValidationResult> results = new List<ValidationResult>();
 
 			//		Try Validating
@@ -434,6 +420,14 @@ namespace WinformWithExternalLibrary
 					return;
 				}
 			}
+		}
+
+		private LoginDVO GetInput()
+		{
+			return new LoginDVO(
+				LoginDVO_LoginName: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDVO_Email),
+				LoginDVO_Password: this.GetTextboxTextIfPlaceholderThenEmpty(this.LoginDVO_MatKhau)
+				);
 		}
 
 		public Font GetFont()
