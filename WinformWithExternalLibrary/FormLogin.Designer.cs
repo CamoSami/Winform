@@ -33,7 +33,6 @@ namespace WinformWithExternalLibrary
 			this.LoginDVO_Email = new MaterialSkin.Controls.MaterialTextBox();
 			this.LoginDVO_MatKhau = new MaterialSkin.Controls.MaterialTextBox();
 			this.materialButtonDangNhap = new MaterialSkin.Controls.MaterialButton();
-			this.materialButtonThoat = new MaterialSkin.Controls.MaterialButton();
 			this.LoginDVO_Email_Validation = new System.Windows.Forms.Label();
 			this.LoginDVO_MatKhau_Validation = new System.Windows.Forms.Label();
 			this.labelForFocus = new System.Windows.Forms.Label();
@@ -65,7 +64,7 @@ namespace WinformWithExternalLibrary
 			this.LoginDVO_MatKhau.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
 			this.LoginDVO_MatKhau.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.LoginDVO_MatKhau.LeadingIcon = null;
-			this.LoginDVO_MatKhau.Location = new System.Drawing.Point(17, 153);
+			this.LoginDVO_MatKhau.Location = new System.Drawing.Point(17, 149);
 			this.LoginDVO_MatKhau.MaxLength = 50;
 			this.LoginDVO_MatKhau.MouseState = MaterialSkin.MouseState.OUT;
 			this.LoginDVO_MatKhau.Multiline = false;
@@ -89,35 +88,17 @@ namespace WinformWithExternalLibrary
 			this.materialButtonDangNhap.NoAccentTextColor = System.Drawing.Color.Empty;
 			this.materialButtonDangNhap.Size = new System.Drawing.Size(105, 36);
 			this.materialButtonDangNhap.TabIndex = 4;
+			this.materialButtonDangNhap.TabStop = false;
 			this.materialButtonDangNhap.Text = "Đăng nhập";
 			this.materialButtonDangNhap.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
 			this.materialButtonDangNhap.UseAccentColor = false;
 			this.materialButtonDangNhap.UseVisualStyleBackColor = true;
 			// 
-			// materialButtonThoat
-			// 
-			this.materialButtonThoat.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButtonThoat.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButtonThoat.Depth = 0;
-			this.materialButtonThoat.HighEmphasis = true;
-			this.materialButtonThoat.Icon = null;
-			this.materialButtonThoat.Location = new System.Drawing.Point(17, 238);
-			this.materialButtonThoat.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButtonThoat.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButtonThoat.Name = "materialButtonThoat";
-			this.materialButtonThoat.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButtonThoat.Size = new System.Drawing.Size(69, 36);
-			this.materialButtonThoat.TabIndex = 5;
-			this.materialButtonThoat.Text = "Thoát";
-			this.materialButtonThoat.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButtonThoat.UseAccentColor = false;
-			this.materialButtonThoat.UseVisualStyleBackColor = true;
-			// 
 			// LoginDVO_Email_Validation
 			// 
 			this.LoginDVO_Email_Validation.AutoSize = true;
 			this.LoginDVO_Email_Validation.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.LoginDVO_Email_Validation.Location = new System.Drawing.Point(17, 134);
+			this.LoginDVO_Email_Validation.Location = new System.Drawing.Point(17, 130);
 			this.LoginDVO_Email_Validation.Name = "LoginDVO_Email_Validation";
 			this.LoginDVO_Email_Validation.Size = new System.Drawing.Size(44, 16);
 			this.LoginDVO_Email_Validation.TabIndex = 7;
@@ -127,7 +108,7 @@ namespace WinformWithExternalLibrary
 			// 
 			this.LoginDVO_MatKhau_Validation.AutoSize = true;
 			this.LoginDVO_MatKhau_Validation.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.LoginDVO_MatKhau_Validation.Location = new System.Drawing.Point(17, 206);
+			this.LoginDVO_MatKhau_Validation.Location = new System.Drawing.Point(17, 202);
 			this.LoginDVO_MatKhau_Validation.Name = "LoginDVO_MatKhau_Validation";
 			this.LoginDVO_MatKhau_Validation.Size = new System.Drawing.Size(44, 16);
 			this.LoginDVO_MatKhau_Validation.TabIndex = 8;
@@ -149,7 +130,6 @@ namespace WinformWithExternalLibrary
 			this.Controls.Add(this.labelForFocus);
 			this.Controls.Add(this.LoginDVO_MatKhau_Validation);
 			this.Controls.Add(this.LoginDVO_Email_Validation);
-			this.Controls.Add(this.materialButtonThoat);
 			this.Controls.Add(this.materialButtonDangNhap);
 			this.Controls.Add(this.LoginDVO_MatKhau);
 			this.Controls.Add(this.LoginDVO_Email);
@@ -167,7 +147,6 @@ namespace WinformWithExternalLibrary
 		private MaterialSkin.Controls.MaterialTextBox LoginDVO_Email;
 		private MaterialSkin.Controls.MaterialTextBox LoginDVO_MatKhau;
 		private MaterialSkin.Controls.MaterialButton materialButtonDangNhap;
-		private MaterialSkin.Controls.MaterialButton materialButtonThoat;
 		private System.Windows.Forms.Label LoginDVO_Email_Validation;
 		private System.Windows.Forms.Label LoginDVO_MatKhau_Validation;
 		private System.Windows.Forms.Label labelForFocus;

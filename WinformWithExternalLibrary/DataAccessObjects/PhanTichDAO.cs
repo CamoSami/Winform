@@ -10,10 +10,13 @@ using WinformWithExternalLibrary.DataTransferObjects;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
-    public class RevenueResponse
+	//		Bạn vẫn có thể cho cái này thành DTO:
+	//			+ Nó chỉ làm việc bên Database
+	//			+ Nó không xuất hiện ở Form, hay validate
+    public class RevenueResponseDTO
     {
-        public int Ngay { get; set; }
-        public long DoanhThu { get; set; }
+        public int RevenueResponseDTO_Ngay { get; set; }
+        public long RevenueResponseDTO_DoanhThu { get; set; }
     }
 
     internal class PhanTichDAO
@@ -22,9 +25,9 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public PhanTichDAO() { }
 
-        public List<RevenueResponse> GetDailyRevenueByThisMonth()
+        public List<RevenueResponseDTO> GetDailyRevenueByThisMonth()
         {
-            List<RevenueResponse> listRevenueThisMonth = new List<RevenueResponse>();
+            List<RevenueResponseDTO> listRevenueThisMonth = new List<RevenueResponseDTO>();
 
             string query = "SELECT DATEPART(DAY, tHoaDonBan.NgayBan) AS Ngay, SUM(TongTien - GiamGia) AS DoanhThu " +
                 "FROM tHoaDonBan " +
@@ -35,20 +38,20 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             foreach (DataRow row in dataTable.Rows)
             {
-                RevenueResponse revanueResponse = new RevenueResponse();
-                revanueResponse.Ngay = (int)row[0];
-                revanueResponse.DoanhThu = (long)row[1];
+                RevenueResponseDTO revanueResponseDTO = new RevenueResponseDTO();
+                revanueResponseDTO.RevenueResponseDTO_Ngay = (int)row[0];
+                revanueResponseDTO.RevenueResponseDTO_DoanhThu = (long)row[1];
 
-                listRevenueThisMonth.Add(revanueResponse);
+                listRevenueThisMonth.Add(revanueResponseDTO);
             }
 
             Debug.WriteLine(listRevenueThisMonth.Count());
             return listRevenueThisMonth;
         }
 
-        public List<RevenueResponse> GetDailyRevenueByLastMonth()
+        public List<RevenueResponseDTO> GetDailyRevenueByLastMonth()
         {
-            List<RevenueResponse> listRevenueLastMonth = new List<RevenueResponse>();
+            List<RevenueResponseDTO> listRevenueLastMonth = new List<RevenueResponseDTO>();
 
             int lastMonth = DateTime.Now.Month - 1;
             int year = DateTime.Now.Year;
@@ -68,11 +71,11 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             foreach (DataRow row in dataTable.Rows)
             {
-                RevenueResponse revenueResponse = new RevenueResponse();
-                revenueResponse.Ngay = (int)row[0];
-                revenueResponse.DoanhThu = (long)row[1];
+                RevenueResponseDTO revenueResponseDTO = new RevenueResponseDTO();
+                revenueResponseDTO.RevenueResponseDTO_Ngay = (int)row[0];
+                revenueResponseDTO.RevenueResponseDTO_DoanhThu = (long)row[1];
 
-                listRevenueLastMonth.Add(revenueResponse);
+                listRevenueLastMonth.Add(revenueResponseDTO);
             }
 
             Debug.WriteLine(listRevenueLastMonth.Count());

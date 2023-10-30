@@ -21,6 +21,7 @@ using SkiaSharp;
 using System.Collections.ObjectModel;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using LiveChartsCore.Measure;
+using WinformWithExternalLibrary.DataTransferObjects;
 
 namespace WinformWithExternalLibrary
 {
@@ -37,8 +38,7 @@ namespace WinformWithExternalLibrary
         public FormMain()
 		{
 			//		GenerateData
-			//BogusAmogus bogusAmogus = new BogusAmogus();
-			//bogusAmogus.GenerateFakeData();
+			//this.InitializeFakeData();
 
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
@@ -61,6 +61,12 @@ namespace WinformWithExternalLibrary
 		#region Initialize
 
 		//		Initializing
+
+		private void InitializeFakeData()
+		{
+			BogusAmogus bogusAmogus = new BogusAmogus();
+			bogusAmogus.GenerateFakeData();
+		}
 
 		private void InitializeHardCodedAttributes()
 		{
@@ -136,8 +142,6 @@ namespace WinformWithExternalLibrary
 						continue;
 					}
 
-					
-
 					//		Label
 					if (control is Label && control.Name.Contains("Validation"))
 					{
@@ -194,6 +198,9 @@ namespace WinformWithExternalLibrary
 				}
 			};
 
+			//		Set to FullScreen
+			//		Set MaximumSize and MinimumSize to FullScreen
+			//		Set ActiveControl to nothing
 			this.Load += (obj, e) =>
 			{
 				this.FormBorderStyle = FormBorderStyle.None;
@@ -201,6 +208,14 @@ namespace WinformWithExternalLibrary
 
 				this.MinimumSize = this.Size;
 				this.MaximumSize = this.Size;
+
+				this.ActiveControl = this.labelForFocus;
+			};
+
+			//		Set ActiveControl to nothing
+			this.Click += (obj, e) =>
+			{
+				this.ActiveControl = null;
 			};
 
 			//		Test 
@@ -208,7 +223,7 @@ namespace WinformWithExternalLibrary
 			{
 				FormCreateKhachHang formCreateKhachHang = new FormCreateKhachHang
 				(
-				onlyOnce: true
+					onlyOnce: true
 				);
 
 				formCreateKhachHang.Show();
@@ -229,7 +244,42 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_NgoSachMinhHieu()
 		{
+			this.materialListView.Scrollable = true;
 
+			this.comboBox1.DataSource = KhachHangDAO.Instance.GetPhoneNumbers();
+
+			this.comboBox1.DropDownStyle = ComboBoxStyle.DropDown;
+			this.comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+			this.comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			this.comboBox1.SelectedIndex = -1;
+			this.comboBox1.Text = "";
+
+			this.materialTextBox2.Enabled = false;
+
+			//		Auto Complete
+			this.comboBox1.KeyDown += (obj, e) =>
+			{
+				if (e.KeyValue == 13)
+				{
+					this.materialTextBox2.Text = KhachHangDAO.Instance.GetNameWithPhoneNumber(this.comboBox1.Text);
+				}
+			};
+
+			//		Numeric Only
+			this.comboBox1.KeyPress += (obj, e) =>
+			{
+				if (!char.IsControl(e.KeyChar) &&
+					!char.IsDigit(e.KeyChar))
+				{
+					e.Handled = true;
+				}
+			};
+
+			//		Auto Complete
+			this.comboBox1.LostFocus += (obj, e) =>
+			{
+				this.materialTextBox2.Text = KhachHangDAO.Instance.GetNameWithPhoneNumber(this.comboBox1.Text);
+			};
 		}
 
 		#endregion
@@ -280,8 +330,8 @@ namespace WinformWithExternalLibrary
 			int countDaysInLastMonth = DateTime.DaysInMonth(year, lastMonth);
 
             // Data queried from DB
-            List<RevenueResponse> revanueResponseCurrentMonth = phanTichDAO.GetDailyRevenueByThisMonth();
-			List<RevenueResponse> revanueResponseLastMonth = phanTichDAO.GetDailyRevenueByLastMonth();
+            List<RevenueResponseDTO> revanueResponseCurrentMonth = phanTichDAO.GetDailyRevenueByThisMonth();
+			List<RevenueResponseDTO> revanueResponseLastMonth = phanTichDAO.GetDailyRevenueByLastMonth();
 
             List<long> revenuesCurrentMonth = new List<long>(countDaysInMonth);
 			List<long> revenuesLastMonth = new List<long>(countDaysInMonth);
@@ -298,14 +348,14 @@ namespace WinformWithExternalLibrary
             }
 
 			// Fill value get from DB
-            foreach (RevenueResponse revanue in revanueResponseCurrentMonth)
+            foreach (RevenueResponseDTO revanue in revanueResponseCurrentMonth)
 			{
-                revenuesCurrentMonth[revanue.Ngay - 1] = revanue.DoanhThu;
+                revenuesCurrentMonth[revanue.RevenueResponseDTO_Ngay - 1] = revanue.RevenueResponseDTO_DoanhThu;
             }
 
-            foreach (RevenueResponse revanue in revanueResponseLastMonth)
+            foreach (RevenueResponseDTO revanue in revanueResponseLastMonth)
 			{
-                revenuesLastMonth[revanue.Ngay - 1] = revanue.DoanhThu;
+                revenuesLastMonth[revanue.RevenueResponseDTO_Ngay - 1] = revanue.RevenueResponseDTO_DoanhThu;
             }
 
             cartesianChart2.Series = new ISeries[]

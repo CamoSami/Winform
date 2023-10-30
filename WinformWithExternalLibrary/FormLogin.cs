@@ -53,6 +53,16 @@ namespace WinformWithExternalLibrary
 			this.InitializeSpecializedEvent();
 		}
 
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			if (keyData == Keys.Enter)
+			{
+				this.TryLoggingIn();
+			}
+
+			return base.ProcessCmdKey(ref msg, keyData);
+		}
+
 		#region Initialize
 
 		private void InitializeDataObjects()
@@ -169,8 +179,6 @@ namespace WinformWithExternalLibrary
 			//		Button
 			this.materialButtonDangNhap.Click += this.MaterialButtonDangNhap_Click;
 
-			this.materialButtonThoat.Click += this.MaterialButtonThoat_Click;
-
 			//		Form
 			//			DirtyData check before closing
 			this.FormClosing += (obj, e) =>
@@ -209,8 +217,12 @@ namespace WinformWithExternalLibrary
 							UseRichTextBox: false,
 							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
 							)
-						== DialogResult.No
+						== DialogResult.Yes
 						)
+					{
+						
+					}
+					else
 					{
 						e.Cancel = true;
 					}
@@ -269,19 +281,16 @@ namespace WinformWithExternalLibrary
 			this.TryValidation();
 		}
 
-		private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			
-		}
-
-		private void MaterialButtonThoat_Click(object sender, EventArgs e)
-		{
-			Instance = null;
-
-			this.Close();
-		}
-
 		private void MaterialButtonDangNhap_Click(object sender, EventArgs e)
+		{
+			this.TryLoggingIn();
+		}
+
+		#endregion
+
+		#region Generalist Function
+
+		private void TryLoggingIn()
 		{
 			//		Form is completed -> Interaction = true
 			for (int i = 0; i < this.isInterracted.Count; i++)
@@ -298,8 +307,8 @@ namespace WinformWithExternalLibrary
 			LoginDVO loginDVO = this.GetInput();
 
 			if (NhanVienDAO.Instance.CheckNhanVienLogin(loginDVO) ||
-					(loginDVO.LoginDVO_Email.Equals("administrator") 
-					&& loginDVO.LoginDVO_MatKhau.Equals("CamoSami")))
+					(loginDVO.LoginDVO_Email.Equals("123")
+					&& loginDVO.LoginDVO_MatKhau.Equals("123")))
 			{
 				this.isLoggedIn = true;
 
@@ -323,17 +332,13 @@ namespace WinformWithExternalLibrary
 			else
 			{
 				MaterialMessageBox.Show(
-					text: "Sai mật khẩu hay tên đăng nhập rồi ._.",
-					caption: ".-.",
+					text: "Sai mật khẩu hay tên đăng nhập",
+					caption: "xd",
 					UseRichTextBox: false,
 					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
 					);
 			}
 		}
-
-		#endregion
-
-		#region Generalist Function
 
 		private bool TryValidation()
 		{

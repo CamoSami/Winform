@@ -205,8 +205,12 @@ namespace WinformWithExternalLibrary
 							UseRichTextBox: false,
 							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
 							)
-						== DialogResult.No
+						== DialogResult.Yes
 						)
+					{
+						
+					}
+					else
 					{
 						e.Cancel = true;
 					}
