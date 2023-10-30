@@ -115,8 +115,10 @@
   <ItemGroup>
     <Compile Include="DataAccessObjects\CongViecDAO.cs" />
     <Compile Include="DataAccessObjects\HoaDonBanDAO.cs" />
+    <Compile Include="DataAccessObjects\NhaCungCapDAO.cs" />
     <Compile Include="DataAccessObjects\NhanVienDAO.cs" />
     <Compile Include="DataAccessObjects\PhanTichDAO.cs" />
+    <Compile Include="DataValidateObject\NhaCungCapDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\ChiTietHDBanDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\ChiTietHDNhapDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\CongViecDVO.cs" />

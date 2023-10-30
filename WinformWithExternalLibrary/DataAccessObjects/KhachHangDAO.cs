@@ -70,7 +70,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 							"N'" + khachHangDVO.KhachHangDVO_DiaChi + "'," +
 							"N'" + khachHangDVO.KhachHangDVO_DienThoai + "'" +
 							")";
-
+			
 			int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertKhachHang);
 
 			return rowChanged > 0;
