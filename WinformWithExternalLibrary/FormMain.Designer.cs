@@ -30,163 +30,182 @@ namespace WinformWithExternalLibrary
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
-            this.tabPageThongTin = new System.Windows.Forms.TabPage();
-            this.tabPageHoaDonBan = new System.Windows.Forms.TabPage();
-            this.materialTextBox1 = new MaterialSkin.Controls.MaterialTextBox();
-            this.labelForFocus = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.materialListView = new MaterialSkin.Controls.MaterialListView();
-            this.columnHeaderIndex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderIdentifier = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderIndividualPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.materialButtonTaoMoiKhachHang = new MaterialSkin.Controls.MaterialButton();
-            this.tabPageHoaDonNhap = new System.Windows.Forms.TabPage();
-            this.tabPageKhachHang = new System.Windows.Forms.TabPage();
-            this.tabPageNhaCungCap = new System.Windows.Forms.TabPage();
-            this.tabPageHangHoa = new System.Windows.Forms.TabPage();
-            this.tabPagePhanTich = new System.Windows.Forms.TabPage();
-            this.materialCard7 = new MaterialSkin.Controls.MaterialCard();
-            this.label16 = new System.Windows.Forms.Label();
-            this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
-            this.label14 = new System.Windows.Forms.Label();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialFloatingActionButton3 = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.materialCard3 = new MaterialSkin.Controls.MaterialCard();
-            this.label13 = new System.Windows.Forms.Label();
-            this.materialProgressBar3 = new MaterialSkin.Controls.MaterialProgressBar();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.materialFloatingActionButton2 = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
-            this.label7 = new System.Windows.Forms.Label();
-            this.materialProgressBar2 = new MaterialSkin.Controls.MaterialProgressBar();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
-            this.cartesianChart2 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
-            this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
-            this.cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
-            this.materialFloatingActionButton1 = new MaterialSkin.Controls.MaterialFloatingActionButton();
-            this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            this.label6 = new System.Windows.Forms.Label();
-            this.materialProgressBar1 = new MaterialSkin.Controls.MaterialProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.materialTabControl1.SuspendLayout();
-            this.tabPageHoaDonBan.SuspendLayout();
-            this.tabPagePhanTich.SuspendLayout();
-            this.materialCard7.SuspendLayout();
-            this.materialCard6.SuspendLayout();
-            this.materialCard3.SuspendLayout();
-            this.materialCard2.SuspendLayout();
-            this.materialCard5.SuspendLayout();
-            this.materialCard4.SuspendLayout();
-            this.materialCard1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // materialTabControl1
-            // 
-            this.materialTabControl1.Controls.Add(this.tabPageThongTin);
-            this.materialTabControl1.Controls.Add(this.tabPageHoaDonBan);
-            this.materialTabControl1.Controls.Add(this.tabPageHoaDonNhap);
-            this.materialTabControl1.Controls.Add(this.tabPageKhachHang);
-            this.materialTabControl1.Controls.Add(this.tabPageNhaCungCap);
-            this.materialTabControl1.Controls.Add(this.tabPageHangHoa);
-            this.materialTabControl1.Controls.Add(this.tabPagePhanTich);
-            this.materialTabControl1.Depth = 0;
-            this.materialTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.materialTabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialTabControl1.ImageList = this.imageList1;
-            this.materialTabControl1.Location = new System.Drawing.Point(3, 64);
-            this.materialTabControl1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialTabControl1.Multiline = true;
-            this.materialTabControl1.Name = "materialTabControl1";
-            this.materialTabControl1.SelectedIndex = 0;
-            this.materialTabControl1.Size = new System.Drawing.Size(1481, 803);
-            this.materialTabControl1.TabIndex = 0;
-            // 
-            // tabPageThongTin
-            // 
-            this.tabPageThongTin.ImageKey = "icons8-male-user-32.png";
-            this.tabPageThongTin.Location = new System.Drawing.Point(4, 39);
-            this.tabPageThongTin.Name = "tabPageThongTin";
-            this.tabPageThongTin.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageThongTin.Size = new System.Drawing.Size(1473, 760);
-            this.tabPageThongTin.TabIndex = 2;
-            this.tabPageThongTin.Text = "Thông Tin";
-            this.tabPageThongTin.UseVisualStyleBackColor = true;
-            // 
-            // tabPageHoaDonBan
-            // 
-            this.tabPageHoaDonBan.Controls.Add(this.materialTextBox1);
-            this.tabPageHoaDonBan.Controls.Add(this.labelForFocus);
-            this.tabPageHoaDonBan.Controls.Add(this.dateTimePicker1);
-            this.tabPageHoaDonBan.Controls.Add(this.materialListView);
-            this.tabPageHoaDonBan.Controls.Add(this.materialButtonTaoMoiKhachHang);
-            this.tabPageHoaDonBan.ImageKey = "icons8-create-order-32.png";
-            this.tabPageHoaDonBan.Location = new System.Drawing.Point(4, 39);
-            this.tabPageHoaDonBan.Name = "tabPageHoaDonBan";
-            this.tabPageHoaDonBan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageHoaDonBan.Size = new System.Drawing.Size(1473, 760);
-            this.tabPageHoaDonBan.TabIndex = 1;
-            this.tabPageHoaDonBan.Text = "Hóa Đơn Bán";
-            this.tabPageHoaDonBan.UseVisualStyleBackColor = true;
-            // 
-            // materialTextBox1
-            // 
-            this.materialTextBox1.AnimateReadOnly = false;
-            this.materialTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.materialTextBox1.Depth = 0;
-            this.materialTextBox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialTextBox1.LeadingIcon = null;
-            this.materialTextBox1.Location = new System.Drawing.Point(1105, 48);
-            this.materialTextBox1.MaxLength = 50;
-            this.materialTextBox1.MouseState = MaterialSkin.MouseState.OUT;
-            this.materialTextBox1.Multiline = false;
-            this.materialTextBox1.Name = "materialTextBox1";
-            this.materialTextBox1.Size = new System.Drawing.Size(360, 50);
-            this.materialTextBox1.TabIndex = 5;
-            this.materialTextBox1.Text = "";
-            this.materialTextBox1.TrailingIcon = null;
-            // 
-            // labelForFocus
-            // 
-            this.labelForFocus.AutoSize = true;
-            this.labelForFocus.Location = new System.Drawing.Point(1211, 743);
-            this.labelForFocus.Name = "labelForFocus";
-            this.labelForFocus.Size = new System.Drawing.Size(44, 16);
-            this.labelForFocus.TabIndex = 4;
-            this.labelForFocus.Text = "label2";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(1105, 6);
-            this.dateTimePicker1.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(360, 27);
-            this.dateTimePicker1.TabIndex = 2;
-            // 
-            // materialListView
-            // 
-            this.materialListView.AutoSizeTable = false;
-            this.materialListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.materialListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+			this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
+			this.tabPageThongTin = new System.Windows.Forms.TabPage();
+			this.tabPageHoaDonBan = new System.Windows.Forms.TabPage();
+			this.label19 = new System.Windows.Forms.Label();
+			this.materialTextBox1 = new MaterialSkin.Controls.MaterialTextBox();
+			this.labelForFocus = new System.Windows.Forms.Label();
+			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+			this.materialListView = new MaterialSkin.Controls.MaterialListView();
+			this.columnHeaderIndex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeaderIdentifier = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeaderCount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeaderIndividualPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeaderPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.materialButtonTaoMoiKhachHang = new MaterialSkin.Controls.MaterialButton();
+			this.tabPageHoaDonNhap = new System.Windows.Forms.TabPage();
+			this.tabPageKhachHang = new System.Windows.Forms.TabPage();
+			this.tabPageNhaCungCap = new System.Windows.Forms.TabPage();
+			this.tabPageHangHoa = new System.Windows.Forms.TabPage();
+			this.tabPagePhanTich = new System.Windows.Forms.TabPage();
+			this.materialCard7 = new MaterialSkin.Controls.MaterialCard();
+			this.label16 = new System.Windows.Forms.Label();
+			this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
+			this.label14 = new System.Windows.Forms.Label();
+			this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+			this.materialFloatingActionButton3 = new MaterialSkin.Controls.MaterialFloatingActionButton();
+			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+			this.materialCard3 = new MaterialSkin.Controls.MaterialCard();
+			this.label13 = new System.Windows.Forms.Label();
+			this.materialProgressBar3 = new MaterialSkin.Controls.MaterialProgressBar();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label17 = new System.Windows.Forms.Label();
+			this.label18 = new System.Windows.Forms.Label();
+			this.materialFloatingActionButton2 = new MaterialSkin.Controls.MaterialFloatingActionButton();
+			this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+			this.label7 = new System.Windows.Forms.Label();
+			this.materialProgressBar2 = new MaterialSkin.Controls.MaterialProgressBar();
+			this.label8 = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label11 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
+			this.cartesianChart2 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
+			this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
+			this.cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
+			this.materialFloatingActionButton1 = new MaterialSkin.Controls.MaterialFloatingActionButton();
+			this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+			this.label6 = new System.Windows.Forms.Label();
+			this.materialProgressBar1 = new MaterialSkin.Controls.MaterialProgressBar();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.label20 = new System.Windows.Forms.Label();
+			this.label21 = new System.Windows.Forms.Label();
+			this.materialTextBox2 = new MaterialSkin.Controls.MaterialTextBox();
+			this.materialTabControl1.SuspendLayout();
+			this.tabPageHoaDonBan.SuspendLayout();
+			this.tabPagePhanTich.SuspendLayout();
+			this.materialCard7.SuspendLayout();
+			this.materialCard6.SuspendLayout();
+			this.materialCard3.SuspendLayout();
+			this.materialCard2.SuspendLayout();
+			this.materialCard5.SuspendLayout();
+			this.materialCard4.SuspendLayout();
+			this.materialCard1.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// materialTabControl1
+			// 
+			this.materialTabControl1.Controls.Add(this.tabPageThongTin);
+			this.materialTabControl1.Controls.Add(this.tabPageHoaDonBan);
+			this.materialTabControl1.Controls.Add(this.tabPageHoaDonNhap);
+			this.materialTabControl1.Controls.Add(this.tabPageKhachHang);
+			this.materialTabControl1.Controls.Add(this.tabPageNhaCungCap);
+			this.materialTabControl1.Controls.Add(this.tabPageHangHoa);
+			this.materialTabControl1.Controls.Add(this.tabPagePhanTich);
+			this.materialTabControl1.Depth = 0;
+			this.materialTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.materialTabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.materialTabControl1.ImageList = this.imageList1;
+			this.materialTabControl1.Location = new System.Drawing.Point(3, 64);
+			this.materialTabControl1.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialTabControl1.Multiline = true;
+			this.materialTabControl1.Name = "materialTabControl1";
+			this.materialTabControl1.SelectedIndex = 0;
+			this.materialTabControl1.Size = new System.Drawing.Size(1481, 803);
+			this.materialTabControl1.TabIndex = 0;
+			// 
+			// tabPageThongTin
+			// 
+			this.tabPageThongTin.ImageKey = "icons8-male-user-32.png";
+			this.tabPageThongTin.Location = new System.Drawing.Point(4, 39);
+			this.tabPageThongTin.Name = "tabPageThongTin";
+			this.tabPageThongTin.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageThongTin.Size = new System.Drawing.Size(1473, 760);
+			this.tabPageThongTin.TabIndex = 2;
+			this.tabPageThongTin.Text = "Thông Tin";
+			this.tabPageThongTin.UseVisualStyleBackColor = true;
+			// 
+			// tabPageHoaDonBan
+			// 
+			this.tabPageHoaDonBan.Controls.Add(this.label21);
+			this.tabPageHoaDonBan.Controls.Add(this.materialTextBox2);
+			this.tabPageHoaDonBan.Controls.Add(this.label20);
+			this.tabPageHoaDonBan.Controls.Add(this.comboBox1);
+			this.tabPageHoaDonBan.Controls.Add(this.label19);
+			this.tabPageHoaDonBan.Controls.Add(this.materialTextBox1);
+			this.tabPageHoaDonBan.Controls.Add(this.labelForFocus);
+			this.tabPageHoaDonBan.Controls.Add(this.dateTimePicker1);
+			this.tabPageHoaDonBan.Controls.Add(this.materialListView);
+			this.tabPageHoaDonBan.Controls.Add(this.materialButtonTaoMoiKhachHang);
+			this.tabPageHoaDonBan.ImageKey = "icons8-create-order-32.png";
+			this.tabPageHoaDonBan.Location = new System.Drawing.Point(4, 39);
+			this.tabPageHoaDonBan.Name = "tabPageHoaDonBan";
+			this.tabPageHoaDonBan.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageHoaDonBan.Size = new System.Drawing.Size(1473, 760);
+			this.tabPageHoaDonBan.TabIndex = 1;
+			this.tabPageHoaDonBan.Text = "Hóa Đơn Bán";
+			this.tabPageHoaDonBan.UseVisualStyleBackColor = true;
+			// 
+			// label19
+			// 
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(1105, 101);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(51, 16);
+			this.label19.TabIndex = 6;
+			this.label19.Text = "label19";
+			// 
+			// materialTextBox1
+			// 
+			this.materialTextBox1.AnimateReadOnly = false;
+			this.materialTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.materialTextBox1.Depth = 0;
+			this.materialTextBox1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.materialTextBox1.LeadingIcon = null;
+			this.materialTextBox1.Location = new System.Drawing.Point(1105, 48);
+			this.materialTextBox1.MaxLength = 50;
+			this.materialTextBox1.MouseState = MaterialSkin.MouseState.OUT;
+			this.materialTextBox1.Multiline = false;
+			this.materialTextBox1.Name = "materialTextBox1";
+			this.materialTextBox1.Size = new System.Drawing.Size(360, 50);
+			this.materialTextBox1.TabIndex = 5;
+			this.materialTextBox1.Text = "";
+			this.materialTextBox1.TrailingIcon = null;
+			// 
+			// labelForFocus
+			// 
+			this.labelForFocus.AutoSize = true;
+			this.labelForFocus.Location = new System.Drawing.Point(1211, 843);
+			this.labelForFocus.Name = "labelForFocus";
+			this.labelForFocus.Size = new System.Drawing.Size(44, 16);
+			this.labelForFocus.TabIndex = 4;
+			this.labelForFocus.Text = "label2";
+			// 
+			// dateTimePicker1
+			// 
+			this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.dateTimePicker1.Location = new System.Drawing.Point(1105, 6);
+			this.dateTimePicker1.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
+			this.dateTimePicker1.Name = "dateTimePicker1";
+			this.dateTimePicker1.Size = new System.Drawing.Size(360, 27);
+			this.dateTimePicker1.TabIndex = 2;
+			// 
+			// materialListView
+			// 
+			this.materialListView.AutoSizeTable = false;
+			this.materialListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.materialListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderIndex,
             this.columnHeaderIdentifier,
             this.columnHeaderName,
@@ -858,5 +877,10 @@ namespace WinformWithExternalLibrary
         private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart cartesianChart1;
 		private System.Windows.Forms.DateTimePicker dateTimePicker1;
 		private MaterialSkin.Controls.MaterialTextBox materialTextBox1;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.Label label20;
+		private System.Windows.Forms.Label label21;
+		private MaterialSkin.Controls.MaterialTextBox materialTextBox2;
 	}
 }

@@ -17,6 +17,34 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public KhachHangDAO() { }
 
+		public string GetNameWithPhoneNumber(string dienThoai)
+		{
+			string selectTenKhachHang = $"SELECT TenKhachHang FROM " +
+				$"{DataProvider.KHACHHANG_TABLE} " +
+				$"WHERE DienThoai = '{dienThoai}'";
+
+			object temp = DataProvider.Instance.ExecuteScalar(selectTenKhachHang);
+
+			return temp != null ? temp.ToString().Trim() : "";
+		}
+
+		public List<string> GetPhoneNumbers()
+		{
+			string selectDienThoai = $"SELECT DienThoai FROM " +
+				$"{DataProvider.KHACHHANG_TABLE}";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectDienThoai);
+
+			List<string> dienThoais = new List<string>();
+
+			foreach (DataRow row in dataTable.Rows)
+			{
+				dienThoais.Add(row[0].ToString().Trim());
+			}
+
+			return dienThoais;
+		}
+
 		public bool IfPhoneNumberTaken(string KhachHangDVO_DienThoai)
 		{
 			string selectDienThoai = "SELECT * FROM " +

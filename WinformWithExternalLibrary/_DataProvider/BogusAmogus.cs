@@ -446,7 +446,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 				//Debug.WriteLine(tempGuid);
 			}
 
-			DateTime dateTimeMin = new DateTime(year: 2010, month: 1, day: 1);
+			DateTime dateTimeMin = new DateTime(year: 2023, month: 9, day: 1);
 
 			Faker<HoaDonNhapDTO> faker = new Faker<HoaDonNhapDTO>(locale: "vi")
 				.StrictMode(true)
@@ -551,7 +551,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 				//Debug.WriteLine(tempGuid);
 			}
 
-			DateTime dateTimeMin = new DateTime(year: 2010, month: 1, day: 1);
+			DateTime dateTimeMin = new DateTime(year: 2023, month: 9, day: 1);
 
 			Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
 				.StrictMode(true)
