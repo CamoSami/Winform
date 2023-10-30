@@ -248,24 +248,49 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeChart1()
 		{
-			// Chart 1
 			cartesianChart1.Series = new ISeries[]
 			{
                 new ColumnSeries<double>
 				{
-					Values = new ObservableCollection<double> { 10, 10, 10, 10, 10, 10, 10 },
-					Stroke = null,
-					Fill = new SolidColorPaint(new SKColor(30, 30, 30, 30)),
-					IgnoresBarPosition = true
+					Values = new double[] { 2, 5, 4, 5, 7, 9, 10, 12, 10, 4, 6,8 },
+					GroupPadding = 8,
+					Name = "Sản phẩm top 1"
 				},
 				new ColumnSeries<double>
 				{
-					Values = new ObservableCollection<double> { 3, 10, 5, 3, 7, 3, 8 },
-					Stroke = null,
-					Fill = new SolidColorPaint(SKColors.CornflowerBlue),
-					IgnoresBarPosition = true
-				}
+					Values = new double[] { 2, 5, 4, 5, 7, 9, 10, 12, 10, 4, 6,8 },
+                    GroupPadding = 8,
+					Name = "Sản phẩm top 2"
+                },
+                new ColumnSeries<double>
+                {
+                    Values = new double[] { 2, 5, 4, 5, 7, 9, 10, 12, 10, 4, 6,8 },
+                    GroupPadding = 8,
+					Name = "Sản phẩm top 3"
+                }
             };
+
+            // Axis
+			List<string> year = new List<string>();
+            for (int i = 1; i <= 12; i++)
+            {
+                year.Add("" + i.ToString());
+            }
+
+			cartesianChart1.XAxes = new List<Axis>
+			{
+				new Axis
+				{
+					// Use the labels property to define named labels.
+					Labels = year
+                }
+            };
+
+            // Legend custom
+            cartesianChart1.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
+
+            //cartesianChart1.
+            cartesianChart1.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
         }
 
 		private void InitializeChart2()
@@ -343,7 +368,7 @@ namespace WinformWithExternalLibrary
 					Labels = daysInMonth
                 }
 			};
-
+			
             cartesianChart2.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
         }
 

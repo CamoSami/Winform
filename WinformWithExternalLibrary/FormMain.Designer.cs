@@ -51,8 +51,8 @@ namespace WinformWithExternalLibrary
             this.tabPageNhaCungCap = new System.Windows.Forms.TabPage();
             this.tabPageHangHoa = new System.Windows.Forms.TabPage();
             this.tabPagePhanTich = new System.Windows.Forms.TabPage();
-            this.label16 = new System.Windows.Forms.Label();
             this.materialCard7 = new MaterialSkin.Controls.MaterialCard();
+            this.label16 = new System.Windows.Forms.Label();
             this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
             this.label14 = new System.Windows.Forms.Label();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
@@ -168,7 +168,7 @@ namespace WinformWithExternalLibrary
             this.labelForFocus.AutoSize = true;
             this.labelForFocus.Location = new System.Drawing.Point(1211, 743);
             this.labelForFocus.Name = "labelForFocus";
-            this.labelForFocus.Size = new System.Drawing.Size(35, 13);
+            this.labelForFocus.Size = new System.Drawing.Size(44, 16);
             this.labelForFocus.TabIndex = 4;
             this.labelForFocus.Text = "label2";
             // 
@@ -178,7 +178,7 @@ namespace WinformWithExternalLibrary
             this.dateTimePicker1.Location = new System.Drawing.Point(1105, 6);
             this.dateTimePicker1.MinDate = new System.DateTime(2010, 1, 1, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(360, 23);
+            this.dateTimePicker1.Size = new System.Drawing.Size(360, 27);
             this.dateTimePicker1.TabIndex = 2;
             // 
             // materialListView
@@ -323,19 +323,6 @@ namespace WinformWithExternalLibrary
             this.tabPagePhanTich.Text = "Phân Tích";
             this.tabPagePhanTich.UseVisualStyleBackColor = true;
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(2, 14);
-            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(129, 30);
-            this.label16.TabIndex = 0;
-            this.label16.Text = "Biểu đồ doanh thu \n  các ngày trong tháng";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label16.UseMnemonic = false;
-            // 
             // materialCard7
             // 
             this.materialCard7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -350,6 +337,19 @@ namespace WinformWithExternalLibrary
             this.materialCard7.Size = new System.Drawing.Size(165, 59);
             this.materialCard7.TabIndex = 17;
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(2, 14);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(165, 40);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "Biểu đồ doanh thu \n  các ngày trong tháng";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label16.UseMnemonic = false;
+            // 
             // materialCard6
             // 
             this.materialCard6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -361,19 +361,20 @@ namespace WinformWithExternalLibrary
             this.materialCard6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard6.Name = "materialCard6";
             this.materialCard6.Padding = new System.Windows.Forms.Padding(18);
-            this.materialCard6.Size = new System.Drawing.Size(142, 44);
+            this.materialCard6.Size = new System.Drawing.Size(178, 59);
             this.materialCard6.TabIndex = 16;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(21, 14);
+            this.label14.Location = new System.Drawing.Point(6, 14);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(63, 15);
+            this.label14.Size = new System.Drawing.Size(169, 40);
             this.label14.TabIndex = 0;
-            this.label14.Text = "Biểu đồ ??";
+            this.label14.Text = "Các sản phẩm đẫn đầu \n các tháng";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // materialLabel1
             // 
@@ -449,7 +450,7 @@ namespace WinformWithExternalLibrary
             this.label13.Location = new System.Drawing.Point(22, 129);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(99, 15);
+            this.label13.Size = new System.Drawing.Size(124, 20);
             this.label13.TabIndex = 7;
             this.label13.Text = "Mục tiêu đạt 48%";
             // 
@@ -471,7 +472,7 @@ namespace WinformWithExternalLibrary
             this.label15.Location = new System.Drawing.Point(19, 15);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(115, 25);
+            this.label15.Size = new System.Drawing.Size(147, 32);
             this.label15.TabIndex = 4;
             this.label15.Text = "Khách hàng";
             // 
@@ -482,7 +483,7 @@ namespace WinformWithExternalLibrary
             this.label17.Location = new System.Drawing.Point(21, 50);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(64, 17);
+            this.label17.Size = new System.Drawing.Size(83, 23);
             this.label17.TabIndex = 2;
             this.label17.Text = "Số lượng";
             // 
@@ -493,7 +494,7 @@ namespace WinformWithExternalLibrary
             this.label18.Location = new System.Drawing.Point(131, 46);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(43, 24);
+            this.label18.Size = new System.Drawing.Size(55, 29);
             this.label18.TabIndex = 1;
             this.label18.Text = "344";
             // 
@@ -541,7 +542,7 @@ namespace WinformWithExternalLibrary
             this.label7.Location = new System.Drawing.Point(22, 129);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(99, 15);
+            this.label7.Size = new System.Drawing.Size(124, 20);
             this.label7.TabIndex = 7;
             this.label7.Text = "Mục tiêu đạt 48%";
             // 
@@ -563,7 +564,7 @@ namespace WinformWithExternalLibrary
             this.label8.Location = new System.Drawing.Point(131, 76);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 24);
+            this.label8.Size = new System.Drawing.Size(126, 29);
             this.label8.TabIndex = 5;
             this.label8.Text = "150.000 đ";
             // 
@@ -574,7 +575,7 @@ namespace WinformWithExternalLibrary
             this.label9.Location = new System.Drawing.Point(19, 15);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(140, 25);
+            this.label9.Size = new System.Drawing.Size(176, 32);
             this.label9.TabIndex = 4;
             this.label9.Text = "Hóa đơn nhập";
             // 
@@ -585,7 +586,7 @@ namespace WinformWithExternalLibrary
             this.label10.Location = new System.Drawing.Point(21, 82);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 19);
+            this.label10.Size = new System.Drawing.Size(87, 23);
             this.label10.TabIndex = 3;
             this.label10.Text = "Tổng tiền";
             // 
@@ -596,7 +597,7 @@ namespace WinformWithExternalLibrary
             this.label11.Location = new System.Drawing.Point(21, 50);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 17);
+            this.label11.Size = new System.Drawing.Size(83, 23);
             this.label11.TabIndex = 2;
             this.label11.Text = "Số lượng";
             // 
@@ -607,7 +608,7 @@ namespace WinformWithExternalLibrary
             this.label12.Location = new System.Drawing.Point(131, 46);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(43, 24);
+            this.label12.Size = new System.Drawing.Size(55, 29);
             this.label12.TabIndex = 1;
             this.label12.Text = "344";
             // 
@@ -699,7 +700,7 @@ namespace WinformWithExternalLibrary
             this.label6.Location = new System.Drawing.Point(22, 129);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 15);
+            this.label6.Size = new System.Drawing.Size(124, 20);
             this.label6.TabIndex = 7;
             this.label6.Text = "Mục tiêu đạt 48%";
             // 
@@ -721,7 +722,7 @@ namespace WinformWithExternalLibrary
             this.label5.Location = new System.Drawing.Point(131, 76);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(101, 24);
+            this.label5.Size = new System.Drawing.Size(126, 29);
             this.label5.TabIndex = 5;
             this.label5.Text = "150.000 đ";
             // 
@@ -732,7 +733,7 @@ namespace WinformWithExternalLibrary
             this.label4.Location = new System.Drawing.Point(20, 15);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 25);
+            this.label4.Size = new System.Drawing.Size(162, 32);
             this.label4.TabIndex = 4;
             this.label4.Text = "Hóa đơn bán";
             // 
@@ -743,7 +744,7 @@ namespace WinformWithExternalLibrary
             this.label3.Location = new System.Drawing.Point(21, 82);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 19);
+            this.label3.Size = new System.Drawing.Size(87, 23);
             this.label3.TabIndex = 3;
             this.label3.Text = "Tổng tiền";
             // 
@@ -754,7 +755,7 @@ namespace WinformWithExternalLibrary
             this.label2.Location = new System.Drawing.Point(21, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 17);
+            this.label2.Size = new System.Drawing.Size(83, 23);
             this.label2.TabIndex = 2;
             this.label2.Text = "Số lượng";
             // 
@@ -765,7 +766,7 @@ namespace WinformWithExternalLibrary
             this.label1.Location = new System.Drawing.Point(131, 46);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 24);
+            this.label1.Size = new System.Drawing.Size(55, 29);
             this.label1.TabIndex = 1;
             this.label1.Text = "344";
             // 

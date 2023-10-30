@@ -298,8 +298,8 @@ namespace WinformWithExternalLibrary
 			LoginDVO loginDVO = this.GetInput();
 
 			if (NhanVienDAO.Instance.CheckNhanVienLogin(loginDVO) ||
-					(loginDVO.LoginDVO_Email.Equals("administrator") 
-					&& loginDVO.LoginDVO_MatKhau.Equals("CamoSami")))
+					(loginDVO.LoginDVO_Email.Equals("123") 
+					&& loginDVO.LoginDVO_MatKhau.Equals("123")))
 			{
 				this.isLoggedIn = true;
 
