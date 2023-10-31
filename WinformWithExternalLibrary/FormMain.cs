@@ -26,6 +26,7 @@ using System.Diagnostics;
 using WinformWithExternalLibrary.DataValidateObject;
 using System.Windows.Controls.Primitives;
 using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
+using WinformWithExternalLibrary.Utils;
 
 namespace WinformWithExternalLibrary
 {
@@ -38,6 +39,8 @@ namespace WinformWithExternalLibrary
 		private readonly List<List<bool>> isInterracted = new List<List<bool>>();
 
 		private readonly PhanTichDAO phanTichDAO = new PhanTichDAO();
+
+		private readonly FormatValues formatValues = new FormatValues();
 
         public FormMain()
 		{
@@ -304,11 +307,24 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeAnalyticsForm()
 		{
+			this.InitializeBillOfSell();
+
 			this.InitializeChart1();
 			this.InitializeChart2();
         }
 
-		private void InitializeChart1()
+		private void InitializeBillOfSell()
+		{
+            // Data queried from DB
+            int countBillOfCellCurrentMonth = phanTichDAO.CountBillOfSellCurrentMonth();
+			long revenueCurrentMonth = phanTichDAO.GetRevenueCurrentMonth();
+
+            // Render data
+            SoHoaDonBanLB.Text = countBillOfCellCurrentMonth.ToString();
+            DoanhThuHoaDonBanLB.Text = this.formatValues.FormatPriceToView(revenueCurrentMonth.ToString(), 3) + " đ";
+        }
+
+        private void InitializeChart1()
 		{
             // Data queried from DB
 			List<ProductsBestSellerResponseDTO> productsTop1BestSeller = phanTichDAO.GetRankProductsByMonth(1);

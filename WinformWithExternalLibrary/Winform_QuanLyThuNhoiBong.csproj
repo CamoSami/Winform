@@ -133,6 +133,7 @@
     <Compile Include="DataValidateObject\LoginDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\NhaCungCapDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\NhanVienDVO.cs" />
+    <Compile Include="Utils\FormatValues.cs" />
     <Compile Include="_DataProvider\BogusAmogus.cs" />
     <Compile Include="DataAccessObjects\KhachHangDAO.cs" />
     <Compile Include="_DataProvider\DataProvider.cs" />

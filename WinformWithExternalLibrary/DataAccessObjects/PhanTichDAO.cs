@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiveChartsCore.Themes;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -38,7 +39,6 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 listRevenueThisMonth.Add(revanueResponseDTO);
             }
 
-            Debug.WriteLine(listRevenueThisMonth.Count());
             return listRevenueThisMonth;
         }
 
@@ -71,7 +71,6 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 listRevenueLastMonth.Add(revenueResponseDTO);
             }
 
-            Debug.WriteLine(listRevenueLastMonth.Count());
             return listRevenueLastMonth;
         }
 
@@ -103,6 +102,43 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             }
 
             return productsBestSeller;
+        }
+
+        public int CountBillOfSellCurrentMonth()
+        {
+            string query = "SELECT COUNT(*) from tHoaDonBan " +
+                "WHERE YEAR(NgayBan) = YEAR(GETDATE()) AND MONTH(NgayBan) = MONTH(GETDATE());";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            int countBillOfSellCurrentMonth = (int)dataTable.Rows[0][0];
+
+            return countBillOfSellCurrentMonth;
+        }
+
+        public long GetRevenueCurrentMonth()
+        {
+            string query = "WITH RevenueOneDays AS (" +
+                "SELECT SUM(TongTien - GiamGia) AS DoanhThuNgay " +
+                "FROM tHoaDonBan " +
+                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE())" +
+                ")" +
+                "SELECT SUM(DoanhThuNgay) AS DoanhThuThangNay " +
+                "FROM RevenueOneDays;";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            long revenueCurrentMonth = 0;
+
+            if (dataTable.Rows[0][0] != null)
+            {
+                if (long.TryParse(dataTable.Rows[0][0].ToString(), out long result))
+                {
+                    revenueCurrentMonth = result;
+                }
+            }
+
+            return revenueCurrentMonth;
         }
     }
 }
