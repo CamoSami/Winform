@@ -19,6 +19,34 @@ namespace WinformWithExternalLibrary.DataAccessObjects
         public static NhanVienDAO Instance { get; set; }
         public NhanVienDAO() { }
 
+		//		Add: Lấy danh sách TenNhanVien và NgaySinh nhân viên
+		public List<string> GetTenNhanVienAndNgaySinhList()
+		{
+			string queryListNV = $"SELECT TenNhanVien, NgaySinh FROM {DataProvider.NHANVIEN_TABLE}";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryListNV);
+
+			List<string> listNV = new List<string>();
+
+			foreach (DataRow dataRow in dataTable.Rows)
+			{
+				listNV.Add(dataRow[0].ToString() + " | " + dataRow[1].ToString());
+			}
+
+			return listNV;
+		}
+
+		//		Add: Tìm nhân viên theo TenNhanVien và NgaySinh
+		public bool CheckNhanVienByTenNhanVienAndNgaySinh(string tenNhanVien, string ngaySinh)
+		{
+			string queryTimNV = $"SELECT * FROM {DataProvider.NHANVIEN_TABLE} " +
+				$"WHERE TenNhanVien = N'{tenNhanVien}' AND NgaySinh = 'dob'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryTimNV);
+
+			return dataTable.Rows.Count > 0;
+		}
+
 		//		Add: Tìm xem có tài khoản nhân viên không
 		public bool CheckNhanVienLogin(LoginDVO loginDVO)
 		{

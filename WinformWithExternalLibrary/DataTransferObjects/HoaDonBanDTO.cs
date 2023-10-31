@@ -23,7 +23,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
 		public int HoaDonBanDTO_GiamGia { get; set; }
 
-		public int HoaDonBanDTO_TongTien { get; set; }
+		public long HoaDonBanDTO_TongTien { get; set; }
 
 		public HoaDonBanDTO() 
 		{

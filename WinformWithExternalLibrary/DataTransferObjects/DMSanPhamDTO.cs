@@ -17,9 +17,9 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
 		public string DMSanPhamDTO_TenSanPham { get; set; }
 
-		public int DMSanPhamDTO_DonGiaBan { get; set; }
+		public long DMSanPhamDTO_DonGiaBan { get; set; }
         
-		public int DMSanPhamDTO_DonGiaNhap { get; set; }
+		public long DMSanPhamDTO_DonGiaNhap { get; set; }
 
 		public int DMSanPhamDTO_SoLuongTonKho { get; set; } 
 

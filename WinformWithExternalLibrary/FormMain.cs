@@ -23,6 +23,8 @@ using LiveChartsCore.SkiaSharpView.WinForms;
 using LiveChartsCore.Measure;
 using WinformWithExternalLibrary.DataTransferObjects;
 using System.Diagnostics;
+using WinformWithExternalLibrary.DataValidateObject;
+using System.Windows.Controls.Primitives;
 
 namespace WinformWithExternalLibrary
 {
@@ -30,8 +32,8 @@ namespace WinformWithExternalLibrary
 	{
 		public static FormMain Instance { get; set; }
 
-		private readonly List<List<TextBoxBase>> listOfTextboxes = new List<List<TextBoxBase>>();
-		private readonly List<List<Label>> listOfLabels = new List<List<Label>>();
+		private readonly List<List<Control>> listOfControlsDVO = new List<List<Control>>();
+		private readonly List<List<Label>> listOfLabelsDVO = new List<List<Label>>();
 		private readonly List<List<bool>> isInterracted = new List<List<bool>>();
 
 		private readonly PhanTichDAO phanTichDAO = new PhanTichDAO();
@@ -81,21 +83,41 @@ namespace WinformWithExternalLibrary
 			this.Font = FormLogin.Instance.GetFont();
 
 			//		Generalist Attributes
-			foreach (TabPage tabPage in this.materialTabControl1.TabPages) 
+			foreach (TabPage tabPage in this.materialTabControl.TabPages) 
 			{ 
+				if (tabPage != this.HoaDonBanDVO)
+				{
+					continue;
+				}
+
 				foreach (Control control in tabPage.Controls)
 				{
+					//Debug.WriteLine(control.Name);
+
 					//		Label
 					if (control is Label && control.Name.Contains("Validation"))
 					{
 						//		Casting
 						Label tempLabel = control as Label;
 
-						//		Clear its Text
+						//		Reset
 						tempLabel.Text = "";
 
 						//		For Validation
 						tempLabel.ForeColor = Color.Red;
+					}
+					//		ComboBox
+					else if (control is ComboBox)
+					{
+						//		Casting
+						ComboBox comboBox = control as ComboBox;
+
+						//		Hardcode
+						comboBox.DropDownStyle = ComboBoxStyle.DropDown;
+						comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+						comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+						comboBox.SelectedIndex = -1;
+						comboBox.Text = "";
 					}
 					//		DateTimePicker
 					else if (control is DateTimePicker)
@@ -129,20 +151,21 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeAutomaticEventAndList()
 		{
-			for (int i = 0; i < this.materialTabControl1.TabPages.Count; i++)
+			for (int i = 0; i < this.materialTabControl.TabPages.Count; i++)
 			{
 				//		Add new Lists for the TabPage to manage
-				this.listOfTextboxes.Add(new List<TextBoxBase>());
-				this.listOfLabels.Add(new List<Label>());
+				this.listOfControlsDVO.Add(new List<Control>());
+				this.listOfLabelsDVO.Add(new List<Label>());
 				this.isInterracted.Add(new List<bool>());
 
-				foreach (Control control in this.materialTabControl1.TabPages[i].Controls)
+				//		TEST: only for HoaDonBan
+				if (this.materialTabControl.TabPages[i] != this.HoaDonBanDVO)
 				{
-					if (control.Enabled == false)
-					{
-						continue;
-					}
+					continue;
+				}
 
+				foreach (Control control in this.materialTabControl.TabPages[i].Controls)
+				{
 					//		Label
 					if (control is Label && control.Name.Contains("Validation"))
 					{
@@ -150,21 +173,21 @@ namespace WinformWithExternalLibrary
 						Label tempLabel = control as Label;
 
 						//		Add to List
-						this.listOfLabels[i].Add(tempLabel);
+						this.listOfLabelsDVO[i].Add(tempLabel);
 					}
 					//		TextBoxBase (MaterialTextBox, ...)
-					else if (control is TextBoxBase && control.Name.Contains("DVO"))
+					else if (control.Name.Contains("DVO"))
 					{
-						//		Casting
-						TextBoxBase tempMaterialTextBox = control as TextBoxBase;
+						//		Get Placeholder
+						control.Text = this.GetPlaceholderForControl(control);
 
 						//		Adding in the list
 						this.isInterracted[i].Add(false);
-						this.listOfTextboxes[i].Add(tempMaterialTextBox);
+						this.listOfControlsDVO[i].Add(control);
 
 						//		Assigning generalist Events
-						tempMaterialTextBox.GotFocus += this.MaterialTextBox_GotFocus;
-						tempMaterialTextBox.LostFocus += this.MaterialTextBox_LostFocus;
+						control.GotFocus += this.ControlForInput_GotFocus;
+						control.LostFocus += this.ControlForInput_LostFocus;
 					}
 					//		DateTimePicker
 					else if (control is DateTimePicker)
@@ -230,10 +253,9 @@ namespace WinformWithExternalLibrary
 				formCreateKhachHang.Show();
 			};
 
-			//		TODO: Add Insert Placeholder when entering tabPage
 			//		TODO: Add DirtyData check when leaving tabPage
-			//		TODO: Add reset isInterracted when entering tabPage
-			this.materialTabControl1.Selecting += (obj, e) => 
+			//		TODO: Add Reset (PlaceHolder) when entering tabPage
+			this.materialTabControl.Selecting += (obj, e) => 
 			{
 				
 			};
@@ -248,32 +270,26 @@ namespace WinformWithExternalLibrary
 			//		TODO: set up an Event for 
 			this.materialListView.Scrollable = true;
 
-			this.comboBox1.DataSource = KhachHangDAO.Instance.GetPhoneNumbers();
+			this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumbers();
 
-			this.comboBox1.DropDownStyle = ComboBoxStyle.DropDown;
-			this.comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-			this.comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			this.comboBox1.SelectedIndex = -1;
-			this.comboBox1.Text = "";
-
-			this.materialTextBox2.Enabled = false;
+			
 
 			//		Auto Complete
-			this.comboBox1.KeyDown += (obj, e) =>
+			this.HoaDonBanDVO_DienThoaiKhachHang.KeyDown += (obj, e) =>
 			{
 				if (e.KeyValue == 13)
 				{
-					this.materialTextBox2.Text = KhachHangDAO.Instance.GetNameWithPhoneNumber(this.comboBox1.Text);
+					this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetNameWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
 				}
 			};
 
 			//		Numeric Only
-			this.comboBox1.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+			this.HoaDonBanDVO_DienThoaiKhachHang.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
 
 			//		Auto Complete
-			this.comboBox1.LostFocus += (obj, e) =>
+			this.HoaDonBanDVO_DienThoaiKhachHang.LostFocus += (obj, e) =>
 			{
-				this.materialTextBox2.Text = KhachHangDAO.Instance.GetNameWithPhoneNumber(this.comboBox1.Text);
+				this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetNameWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
 			};
 		}
 
@@ -448,23 +464,23 @@ namespace WinformWithExternalLibrary
 
 		#region Event
 
-		private void MaterialTextBox_GotFocus(object sender, EventArgs e)
+		private void ControlForInput_GotFocus(object sender, EventArgs e)
 		{
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
-			TextBoxBase textboxTemp = sender as TextBoxBase;
+			Control textboxTemp = sender as Control;
 
 			this.isInterracted
 					[selectedIndex]
-					[this.listOfTextboxes[selectedIndex].IndexOf(textboxTemp)] = true;
+					[this.listOfControlsDVO[selectedIndex].IndexOf(textboxTemp)] = true;
 
-			textboxTemp.Text = this.GetTextboxTextIfPlaceholderThenEmpty(textboxTemp);
+			textboxTemp.Text = this.GetControlTextIfPlaceholderThenEmpty(textboxTemp);
 		}
 
-		private void MaterialTextBox_LostFocus(object sender, EventArgs e)
+		private void ControlForInput_LostFocus(object sender, EventArgs e)
 		{
-			TextBoxBase textboxTemp = sender as TextBoxBase;
+			Control textboxTemp = sender as Control;
 
-			textboxTemp.Text = this.GetTextboxTextIfEmptyThenPlaceholder(textboxTemp);
+			textboxTemp.Text = this.GetControlTextIfEmptyThenPlaceholder(textboxTemp);
 
 			this.TryValidation();
 		}
@@ -498,7 +514,7 @@ namespace WinformWithExternalLibrary
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
 
 			//		Reset Validation
-			foreach (Label label in this.listOfLabels[selectedIndex])
+			foreach (Label label in this.listOfLabelsDVO[selectedIndex])
 			{
 				label.Text = "";
 			}
@@ -513,12 +529,12 @@ namespace WinformWithExternalLibrary
 			{
 				foreach (ValidationResult result in results)
 				{
-					for (int i = 0; i < this.listOfTextboxes.Count; i++)
+					for (int i = 0; i < this.listOfControlsDVO.Count; i++)
 					{
-						if (result.MemberNames.Contains(this.listOfTextboxes[selectedIndex][i].Name) &&
-							this.CheckIfTextboxInterracted(this.listOfTextboxes[selectedIndex][i]))
+						if (result.MemberNames.Contains(this.listOfControlsDVO[selectedIndex][i].Name) &&
+							this.CheckIfTextboxInterracted(this.listOfControlsDVO[selectedIndex][i]))
 						{
-							this.SetStringLabelForTextbox(this.listOfTextboxes[selectedIndex][i], result.ErrorMessage);
+							this.SetStringLabelForControl(this.listOfControlsDVO[selectedIndex][i], result.ErrorMessage);
 						}
 					}
 				}
@@ -534,58 +550,58 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		private bool CheckIfTextboxInterracted(TextBoxBase textBox)
+		private bool CheckIfTextboxInterracted(Control control)
 		{
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
 
 			return this.isInterracted
 					[selectedIndex]
-					[this.listOfTextboxes[selectedIndex].IndexOf(textBox)];
+					[this.listOfControlsDVO[selectedIndex].IndexOf(control)];
 		}
 
-		private bool CheckIfTextboxEmptyOrPlaceholder(TextBoxBase textBox)
+		private bool CheckIfTextboxEmptyOrPlaceholder(Control control)
 		{
-			return this.CheckTextboxTextEqualToString(textBox: textBox, text: "") ||
-					this.CheckTextboxTextEqualToString(textBox: textBox, text: this.GetPlaceholder(textBox));
+			return this.CheckTextboxTextEqualToString(control: control, text: "") ||
+					this.CheckTextboxTextEqualToString(control: control, text: this.GetPlaceholderForControl(control));
 		}
 
-		private bool CheckTextboxTextEqualToString(TextBoxBase textBox, string text)
+		private bool CheckTextboxTextEqualToString(Control control, string text)
 		{
-			return textBox.Text.Trim().Equals(text);
+			return control.Text.Trim().Equals(text);
 		}
 
-		private string GetTextboxTextIfPlaceholderThenEmpty(TextBoxBase textBox)
+		private string GetControlTextIfPlaceholderThenEmpty(Control control)
 		{
-			return textBox.Text == this.GetPlaceholder(textBox) ? "" : textBox.Text;
+			return control.Text == this.GetPlaceholderForControl(control) ? "" : control.Text;
 		}
 
-		private string GetTextboxTextIfEmptyThenPlaceholder(TextBoxBase textBox)
+		private string GetControlTextIfEmptyThenPlaceholder(Control control)
 		{
-			return textBox.Text == "" ? this.GetPlaceholder(textBox) : textBox.Text;
+			return control.Text == "" ? this.GetPlaceholderForControl(control) : control.Text;
 		}
 
-		private string GetPlaceholder(TextBoxBase textBox)
+		private string GetPlaceholderForControl(Control control)
 		{
 			//		Get Type + Attribute Name
 			//			NOTE: The name of the Textbox == Attribute Name
-			Type propertyType = this.GetBaseDVOFromTabPage().GetType();
-			string propertyName = textBox.Name;
+			Type propertyType = this.GetBaseDVOFromControl(control).GetType();
+			string propertyName = control.Name;
 
-			//		
+			//		Get DisplayName
 			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(propertyType)[propertyName];
 			DisplayNameAttribute displayNameAttribute = (DisplayNameAttribute)propertyDescriptor.Attributes[typeof(DisplayNameAttribute)];
 
 			return displayNameAttribute.DisplayName;
 		}
 
-		private void SetStringLabelForTextbox(TextBoxBase textBox, string text)
+		private void SetStringLabelForControl(Control control, string text)
 		{
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
-			string textBoxName = textBox.Name;
+			string controlName = control.Name;
 
-			foreach (Label label in this.listOfLabels[selectedIndex])
+			foreach (Label label in this.listOfLabelsDVO[selectedIndex])
 			{
-				if (label.Name.Contains(textBoxName))
+				if (label.Name.Contains(controlName))
 				{
 					label.Text = text;
 
@@ -596,40 +612,65 @@ namespace WinformWithExternalLibrary
 
 		private dynamic GetInput()
 		{
-			//		TODO: If Else XD
-
-			//return new KhachHangDTO(
-			//	khachHangDTO_Name: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDTO_Name),
-			//	khachHangDTO_Address: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDTO_Address),
-			//	khachHangDTO_PhoneNumber: this.GetTextboxTextIfPlaceholderThenEmpty(this.KhachHangDTO_PhoneNumber)
-			//	);
-
-			//		TESTING
-			if (this.materialTabControl1.SelectedTab == this.tabPageHoaDonBan)
+			//		TODO: Find a better way
+			if (this.GetTabPageControlSelectedTabPage() == this.HoaDonBanDVO)
 			{
-				//return new HoaDonBanDTO(
-				//	hoaDonBanDTO_MaNhanVien: Guid.NewGuid(),
-				//	hoaDonBanDTO_NgayBan: this.dateTimePicker1.Value,
-				//	hoaDonBanDTO_TongTien: 0
-				//	);
+				int tempSoluong;
+				long tempTongTien;
+
+				if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_SoLuong), out tempSoluong))
+				{
+					tempSoluong = 0;
+				}
+				if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien), out tempTongTien)) 
+				{
+					tempTongTien = 0;
+				}
+
+				return new HoaDonBanDVO(
+					hoaDonBanDVO_NhanVien: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_NhanVien),
+					hoaDonBanDVO_MaSanPham: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_MaSanPham),
+					hoaDonBanDVO_TenSanPham: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenSanPham),
+					hoaDonBanDVO_SoLuong: tempSoluong,
+					hoaDonBanDVO_DienThoaiKhachHang: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_DienThoaiKhachHang),
+					hoaDonBanDVO_TenKhachHang: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenKhachHang),
+					hoaDonBanDVO_GiamGia: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_GiamGia),
+					hoaDonBanDVO_TongTien: tempTongTien
+					);
 			}
+
+			Debug.WriteLine(this.materialTabControl.SelectedTab.ToString());
 
 			return null;
 		}
 
-		private dynamic GetBaseDVOFromTabPage()
+		private dynamic GetBaseDVOFromControl(Control control)
 		{
-			//if (this.materialTabControl1.SelectedTab == this.tabPageHoaDonBan)
-			//{
-			//	return new HoaDonBanDTO();
-			//}
+			//		TODO: Find a better way
+			foreach (TabPage tabPage in this.materialTabControl.TabPages)
+			{
+				if (control.Name.Contains(tabPage.Name))
+				{
+					if (tabPage.Name.Equals("HoaDonBanDVO"))
+					{
+						return new HoaDonBanDVO();
+					}
+				}
+			}
+
+			Debug.WriteLine(this.materialTabControl.SelectedTab.ToString());
 
 			return null;
 		}
 
 		private int GetTabPageControlSelectedIndex()
 		{
-			return this.materialTabControl1.SelectedIndex;
+			return this.materialTabControl.SelectedIndex;
+		}
+
+		private TabPage GetTabPageControlSelectedTabPage()
+		{
+			return this.materialTabControl.SelectedTab;
 		}
 
 		#endregion

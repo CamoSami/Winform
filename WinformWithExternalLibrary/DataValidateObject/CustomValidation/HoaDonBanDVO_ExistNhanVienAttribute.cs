@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataAccessObjects;
 
-namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
+namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 {
-	public class KhachHangDVO_UniqueDienThoaiAttribute : ValidationAttribute
+	public class HoaDonBanDVO_ExistNhanVienAttribute : ValidationAttribute
 	{
 		protected override ValidationResult IsValid(object value, ValidationContext validationContext)
 		{
@@ -17,7 +17,12 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 			{
 				//Debug.WriteLine(value.ToString());
 
-				if (!KhachHangDAO.Instance.IfPhoneNumberTaken(value.ToString())) 
+				string[] dividedString = value.ToString().Split('|');
+
+				string tenNhanVien = dividedString[0].Trim();
+				string ngaySinh = dividedString[1].Trim();
+
+				if (!NhanVienDAO.Instance.CheckNhanVienByTenNhanVienAndNgaySinh(tenNhanVien, ngaySinh))
 				{
 					//Debug.WriteLine("Success!");
 
@@ -26,8 +31,8 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 			}
 
 			return new ValidationResult(
-				this.ErrorMessage, 
-				new List<string>() {"KhachHangDVO_DienThoai"}
+				this.ErrorMessage,
+				new List<string>() {"HoaDonBanDVO_NhanVien"}
 				);
 		}
 	}

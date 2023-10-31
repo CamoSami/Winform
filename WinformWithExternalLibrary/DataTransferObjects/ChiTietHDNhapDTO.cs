@@ -16,7 +16,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
 		public int ChiTietHDNhapDTO_SoLuong { get; set; }
 
-		public int ChiTietHDNhapDTO_ThanhTien { get; set; }
+		public long ChiTietHDNhapDTO_ThanhTien { get; set; }
 
 		public ChiTietHDNhapDTO() { }
 
