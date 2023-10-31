@@ -22,6 +22,7 @@ using System.Collections.ObjectModel;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using LiveChartsCore.Measure;
 using WinformWithExternalLibrary.DataTransferObjects;
+using System.Diagnostics;
 
 namespace WinformWithExternalLibrary
 {
@@ -244,6 +245,7 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_NgoSachMinhHieu()
 		{
+			//		TODO: set up an Event for 
 			this.materialListView.Scrollable = true;
 
 			this.comboBox1.DataSource = KhachHangDAO.Instance.GetPhoneNumbers();
@@ -266,14 +268,7 @@ namespace WinformWithExternalLibrary
 			};
 
 			//		Numeric Only
-			this.comboBox1.KeyPress += (obj, e) =>
-			{
-				if (!char.IsControl(e.KeyChar) &&
-					!char.IsDigit(e.KeyChar))
-				{
-					e.Handled = true;
-				}
-			};
+			this.comboBox1.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
 
 			//		Auto Complete
 			this.comboBox1.LostFocus += (obj, e) =>
@@ -446,7 +441,7 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_VuHongHanh()
 		{
-
+			Debug.WriteLine(DMSanPhamDAO.Instance.UpdateCongSoLuongTon("469075421580", 2));
 		}
 
 		#endregion
@@ -472,6 +467,25 @@ namespace WinformWithExternalLibrary
 			textboxTemp.Text = this.GetTextboxTextIfEmptyThenPlaceholder(textboxTemp);
 
 			this.TryValidation();
+		}
+
+		private void TextBoxBase_KeyPress_AlphabetOnly(object sender, KeyPressEventArgs e)
+		{
+			if (!char.IsLetter(e.KeyChar) &&
+				!char.IsWhiteSpace(e.KeyChar) &&
+				!char.IsControl(e.KeyChar))
+			{
+				e.Handled = true;
+			}
+		}
+
+		private void TextBoxBase_KeyPress_NumericOnly(object sender, KeyPressEventArgs e)
+		{
+			if (!char.IsDigit(e.KeyChar) &&
+				!char.IsControl(e.KeyChar))
+			{
+				e.Handled = true;
+			}
 		}
 
 		#endregion
@@ -618,6 +632,6 @@ namespace WinformWithExternalLibrary
 			return this.materialTabControl1.SelectedIndex;
 		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

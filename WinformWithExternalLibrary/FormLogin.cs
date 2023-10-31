@@ -71,6 +71,7 @@ namespace WinformWithExternalLibrary
 
 			KhachHangDAO.Instance = new KhachHangDAO();
 			NhanVienDAO.Instance = new NhanVienDAO();
+			DMSanPhamDAO.Instance = new DMSanPhamDAO();
 		}
 
 		private void InitializeHardCodedAttributes()

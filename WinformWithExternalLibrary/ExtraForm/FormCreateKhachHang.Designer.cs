@@ -77,27 +77,27 @@
 			this.KhachHangDVO_TenKhachHang_Validation.AutoSize = true;
 			this.KhachHangDVO_TenKhachHang_Validation.Location = new System.Drawing.Point(6, 130);
 			this.KhachHangDVO_TenKhachHang_Validation.Name = "KhachHangDVO_TenKhachHang_Validation";
-			this.KhachHangDVO_TenKhachHang_Validation.Size = new System.Drawing.Size(44, 16);
+			this.KhachHangDVO_TenKhachHang_Validation.Size = new System.Drawing.Size(274, 16);
 			this.KhachHangDVO_TenKhachHang_Validation.TabIndex = 3;
-			this.KhachHangDVO_TenKhachHang_Validation.Text = "label1";
+			this.KhachHangDVO_TenKhachHang_Validation.Text = "KhachHangDVO_TenKhachHang_Validation";
 			// 
 			// KhachHangDVO_DienThoai_Validation
 			// 
 			this.KhachHangDVO_DienThoai_Validation.AutoSize = true;
 			this.KhachHangDVO_DienThoai_Validation.Location = new System.Drawing.Point(6, 202);
 			this.KhachHangDVO_DienThoai_Validation.Name = "KhachHangDVO_DienThoai_Validation";
-			this.KhachHangDVO_DienThoai_Validation.Size = new System.Drawing.Size(44, 16);
+			this.KhachHangDVO_DienThoai_Validation.Size = new System.Drawing.Size(243, 16);
 			this.KhachHangDVO_DienThoai_Validation.TabIndex = 4;
-			this.KhachHangDVO_DienThoai_Validation.Text = "label2";
+			this.KhachHangDVO_DienThoai_Validation.Text = "KhachHangDVO_DienThoai_Validation";
 			// 
 			// KhachHangDVO_DiaChi_Validation
 			// 
 			this.KhachHangDVO_DiaChi_Validation.AutoSize = true;
 			this.KhachHangDVO_DiaChi_Validation.Location = new System.Drawing.Point(6, 322);
 			this.KhachHangDVO_DiaChi_Validation.Name = "KhachHangDVO_DiaChi_Validation";
-			this.KhachHangDVO_DiaChi_Validation.Size = new System.Drawing.Size(44, 16);
+			this.KhachHangDVO_DiaChi_Validation.Size = new System.Drawing.Size(220, 16);
 			this.KhachHangDVO_DiaChi_Validation.TabIndex = 5;
-			this.KhachHangDVO_DiaChi_Validation.Text = "label3";
+			this.KhachHangDVO_DiaChi_Validation.Text = "KhachHangDVO_DiaChi_Validation";
 			// 
 			// LabelForFocus
 			// 
