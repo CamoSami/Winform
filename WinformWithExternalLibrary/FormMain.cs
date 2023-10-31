@@ -25,6 +25,7 @@ using WinformWithExternalLibrary.DataTransferObjects;
 using System.Diagnostics;
 using WinformWithExternalLibrary.DataValidateObject;
 using System.Windows.Controls.Primitives;
+using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
 
 namespace WinformWithExternalLibrary
 {
@@ -309,25 +310,88 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeChart1()
 		{
-			cartesianChart1.Series = new ISeries[]
+            // Data queried from DB
+			List<ProductsBestSellerResponseDTO> productsTop1BestSeller = phanTichDAO.GetRankProductsByMonth(1);
+            List<ProductsBestSellerResponseDTO> productsTop2BestSeller = phanTichDAO.GetRankProductsByMonth(2);
+            List<ProductsBestSellerResponseDTO> productsTop3BestSeller = phanTichDAO.GetRankProductsByMonth(3);
+
+            // Fill all default value each month
+            List<ProductsBestSellerResponseDTO> productsValueFirstColumn = new List<ProductsBestSellerResponseDTO>();
+			List<ProductsBestSellerResponseDTO> productsValueSecondColumn = new List<ProductsBestSellerResponseDTO>();
+			List<ProductsBestSellerResponseDTO> productsValueThirdColumn = new List<ProductsBestSellerResponseDTO>();
+            for (int i = 0; i < 12; i++)
+            {
+                productsValueFirstColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1});
+                productsValueSecondColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1});
+                productsValueThirdColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1});
+            }
+
+            // Fill data from DB
+			foreach (ProductsBestSellerResponseDTO product in productsTop1BestSeller)
+            {
+                productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan 
+					= product.ProductsBestSellerResponseDTO_SoLuongBan;
+                productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenHangHoa
+					= product.ProductsBestSellerResponseDTO_TenHangHoa;
+            }
+            foreach (ProductsBestSellerResponseDTO product in productsTop2BestSeller)
+            {
+                productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan 
+					= product.ProductsBestSellerResponseDTO_SoLuongBan;
+                productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenHangHoa
+					= product.ProductsBestSellerResponseDTO_TenHangHoa;
+            }
+            foreach (ProductsBestSellerResponseDTO product in productsTop3BestSeller)
+            {
+                productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan
+					= product.ProductsBestSellerResponseDTO_SoLuongBan;
+                productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenHangHoa
+					= product.ProductsBestSellerResponseDTO_TenHangHoa;
+            }
+
+            cartesianChart1.Series = new ISeries[]
 			{
-                new ColumnSeries<double>
+				new ColumnSeries<ProductsBestSellerResponseDTO>
 				{
-					Values = new double[] { 2, 5, 4, 5, 7, 9, 10, 12, 10, 4, 6,8 },
+					Values = productsValueFirstColumn,
 					GroupPadding = 8,
-					Name = "Sản phẩm top 1"
-				},
-				new ColumnSeries<double>
-				{
-					Values = new double[] { 2, 5, 4, 5, 7, 9, 10, 12, 10, 4, 6,8 },
-                    GroupPadding = 8,
-					Name = "Sản phẩm top 2"
+                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsPosition = DataLabelsPosition.End,
+                    Mapping = (product, point) =>
+                    {
+                        point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
+                        point.SecondaryValue = point.Context.Index;
+
+                    },
                 },
-                new ColumnSeries<double>
-                {
-                    Values = new double[] { 2, 5, 4, 5, 7, 9, 10, 12, 10, 4, 6,8 },
+				new ColumnSeries<ProductsBestSellerResponseDTO>
+				{
+					Values = productsValueSecondColumn,
                     GroupPadding = 8,
-					Name = "Sản phẩm top 3"
+                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsPosition = DataLabelsPosition.End,
+                    Mapping = (product, point) =>
+                    {
+                        point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
+                        point.SecondaryValue = point.Context.Index;
+
+                    },
+                },
+                new ColumnSeries<ProductsBestSellerResponseDTO>
+                {
+                    Values = productsValueThirdColumn,
+                    GroupPadding = 8,
+                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsPosition = DataLabelsPosition.End,
+                    Mapping = (product, point) =>
+                    {
+                        point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
+                        point.SecondaryValue = point.Context.Index;
+
+                    },
                 }
             };
 
@@ -335,7 +399,7 @@ namespace WinformWithExternalLibrary
 			List<string> year = new List<string>();
             for (int i = 1; i <= 12; i++)
             {
-                year.Add("" + i.ToString());
+                year.Add("Tháng " + i.ToString());
             }
 
 			cartesianChart1.XAxes = new List<Axis>
@@ -348,7 +412,7 @@ namespace WinformWithExternalLibrary
             };
 
             // Legend custom
-            cartesianChart1.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
+            //cartesianChart1.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
 
             //cartesianChart1.
             cartesianChart1.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
