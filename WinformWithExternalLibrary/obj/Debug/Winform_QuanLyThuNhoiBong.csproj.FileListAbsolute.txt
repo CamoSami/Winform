@@ -240,3 +240,4 @@ E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Memory.xml
 E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Numerics.Vectors.xml
 E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
+E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBan.resources

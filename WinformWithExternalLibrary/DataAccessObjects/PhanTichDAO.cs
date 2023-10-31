@@ -7,18 +7,11 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
+using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
-	//		Bạn vẫn có thể cho cái này thành DTO:
-	//			+ Nó chỉ làm việc bên Database
-	//			+ Nó không xuất hiện ở Form, hay validate
-    public class RevenueResponseDTO
-    {
-        public int RevenueResponseDTO_Ngay { get; set; }
-        public long RevenueResponseDTO_DoanhThu { get; set; }
-    }
-
+ 
     internal class PhanTichDAO
     {
         public static PhanTichDAO Instance { get; set; }
@@ -80,6 +73,36 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             Debug.WriteLine(listRevenueLastMonth.Count());
             return listRevenueLastMonth;
+        }
+
+        public List<ProductsBestSellerResponseDTO> GetRankProductsByMonth(int rank)
+        {
+            List<ProductsBestSellerResponseDTO> productsBestSeller = new List<ProductsBestSellerResponseDTO>();
+
+            string query = "WITH RankedProducts AS (" +
+                "SELECT MaSanPham, TenHangHoa, SUM(SoLuong) AS SoLuongBan, MONTH(NgayBan) AS Thang, ROW_NUMBER() OVER (PARTITION BY MONTH(NgayBan) ORDER BY SUM(SoLuong) DESC) AS RowNum" +
+                " FROM tDMSanPham" +
+                " INNER JOIN tChiTietHDBan ON tDMSanPham.MaDMSanPham = tChiTietHDBan.MaDMSanPham" +
+                " INNER JOIN tHoaDonBan ON tChiTietHDBan.MaHDBan = tHoaDonBan.MaHDBan" +
+                " WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE())" +
+                " GROUP BY" +
+                " MaSanPham, TenHangHoa, MONTH(NgayBan))" +
+                $"SELECT MaSanPham, TenHangHoa, Thang, SoLuongBan FROM RankedProducts WHERE RowNum = {rank};";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                ProductsBestSellerResponseDTO productBestSeller = new ProductsBestSellerResponseDTO();
+                productBestSeller.ProductsBestSellerResponseDTO_MaSanPham = (string)row[0];
+                productBestSeller.ProductsBestSellerResponseDTO_TenHangHoa = (string)row[1];
+                productBestSeller.ProductsBestSellerResponseDTO_Thang = (int)row[2];
+                productBestSeller.ProductsBestSellerResponseDTO_SoLuongBan = (int)row[3];
+
+                productsBestSeller.Add(productBestSeller);
+            }
+
+            return productsBestSeller;
         }
     }
 }

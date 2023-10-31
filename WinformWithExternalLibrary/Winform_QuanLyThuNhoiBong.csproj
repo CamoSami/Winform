@@ -117,6 +117,7 @@
     <Compile Include="DataAccessObjects\HoaDonBanDAO.cs" />
     <Compile Include="DataAccessObjects\NhanVienDAO.cs" />
     <Compile Include="DataAccessObjects\PhanTichDAO.cs" />
+    <Compile Include="DataTransferObjects\CustomDTO\PhanTichDTO.cs" />
     <Compile Include="DataValidateObject\_Reference\ChiTietHDBanDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\ChiTietHDNhapDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\CongViecDVO.cs" />
