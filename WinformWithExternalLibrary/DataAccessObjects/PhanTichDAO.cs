@@ -182,5 +182,42 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             return priceTotalCurrentMonth;
         }
+
+        public DataTable GetBillsOfSellerInformationDataTable()
+        {
+            string query = "SELECT MaHDBan, TenNhanVien, tNhanVien.DienThoai AS DienThoaiNV, TenKhachHang, tKhachHang.DienThoai AS DienThoaiKH, SoSanPham, GiamGia, TongTien, NgayBan " +
+                "FROM tHoaDonBan " +
+                "INNER JOIN tKhachHang " +
+                "ON tHoaDonBan.MaKhachHang = tKhachHang.MaKhachHang " +
+                "INNER JOIN tNhanVien " +
+                "ON tHoaDonBan.MaNhanVien = tNhanVien.MaNhanVien;";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            return dataTable;
+        }
+
+        public List<BillsOfSellerInfoResponseDTO> GetBillsOfSellerInformation()
+        {
+            DataTable dataTable = this.GetBillsOfSellerInformationDataTable();
+
+            List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = new List<BillsOfSellerInfoResponseDTO>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                BillsOfSellerInfoResponseDTO billsOfSellerInfoResponseDTO = new BillsOfSellerInfoResponseDTO();
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_MaHDBan = row[0].ToString();
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenNhanVien = row[1].ToString();
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiNV = row[2].ToString();
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenKhachHang = row[3].ToString();
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiKH = row[4].ToString();
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_SoSanPham = (int)row[5];
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia = (long)row[6];
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TongTien = (long)row[7];
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_NgayBan = (DateTime)row[8];
+
+                billsOfSellerInfoResponseDTOs.Add(billsOfSellerInfoResponseDTO);
+            }
+            return billsOfSellerInfoResponseDTOs;
+        }
     }
 }

@@ -27,6 +27,7 @@ using WinformWithExternalLibrary.DataValidateObject;
 using System.Windows.Controls.Primitives;
 using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
 using WinformWithExternalLibrary.Utils;
+using WinformWithExternalLibrary.ExtraForm;
 
 namespace WinformWithExternalLibrary
 {
@@ -322,6 +323,15 @@ namespace WinformWithExternalLibrary
             DoanhThuHoaDonBanLB.Text = this.formatValues.FormatPriceToView(revenueCurrentMonth.ToString(), 3) + " đ";
 			GiamGiaPB.Value = percentDiscount;
 			SoTienGiamGiaLB.Text = $"Tiền giảm giá tháng này: {this.formatValues.FormatPriceToView(discountTotalCurrentMonth.ToString(), 3)} đ ({percentDiscount}%)";
+
+
+			// Event
+			ShowHoaDonBanBtn.Click += (obj, e) =>
+			{
+				FormChiTietHoaDonBan formChiTietHoaDonBan = new FormChiTietHoaDonBan();
+
+				formChiTietHoaDonBan.Show();
+            };
         }
 
         private void InitializeChart1()
