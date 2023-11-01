@@ -302,15 +302,10 @@ namespace WinformWithExternalLibrary
 		#region Trần Hồng Thái
 		private void Initialize_TranHongThai()
 		{
-			this.InitializeAnalyticsForm();
-		}
+            this.InitializeBillOfSell();
 
-		private void InitializeAnalyticsForm()
-		{
-			this.InitializeBillOfSell();
-
-			this.InitializeChart1();
-			this.InitializeChart2();
+            this.InitializeChart1();
+            this.InitializeChart2();
         }
 
 		private void InitializeBillOfSell()
@@ -318,10 +313,15 @@ namespace WinformWithExternalLibrary
             // Data queried from DB
             int countBillOfCellCurrentMonth = phanTichDAO.CountBillOfSellCurrentMonth();
 			long revenueCurrentMonth = phanTichDAO.GetRevenueCurrentMonth();
+			long discountTotalCurrentMonth = phanTichDAO.GetDiscountTotalCurrentMonth();
+			long priceTotalCurrentMonth = phanTichDAO.GetPriceTotalCurrentMonth();
+            int percentDiscount = (int)Math.Ceiling((double)discountTotalCurrentMonth / priceTotalCurrentMonth * 100);
 
             // Render data
             SoHoaDonBanLB.Text = countBillOfCellCurrentMonth.ToString();
             DoanhThuHoaDonBanLB.Text = this.formatValues.FormatPriceToView(revenueCurrentMonth.ToString(), 3) + " đ";
+			GiamGiaPB.Value = percentDiscount;
+			SoTienGiamGiaLB.Text = $"Tiền giảm giá tháng này: {this.formatValues.FormatPriceToView(discountTotalCurrentMonth.ToString(), 3)} đ ({percentDiscount}%)";
         }
 
         private void InitializeChart1()
@@ -753,6 +753,6 @@ namespace WinformWithExternalLibrary
 			return this.materialTabControl.SelectedTab;
 		}
 
-		#endregion
-	}
+        #endregion
+    }
 }

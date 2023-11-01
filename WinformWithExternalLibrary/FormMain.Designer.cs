@@ -96,10 +96,10 @@ namespace WinformWithExternalLibrary
             this.cartesianChart2 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
             this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
             this.cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
-            this.materialFloatingActionButton1 = new MaterialSkin.Controls.MaterialFloatingActionButton();
+            this.ShowHoaDonBanBtn = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            this.label6 = new System.Windows.Forms.Label();
-            this.materialProgressBar1 = new MaterialSkin.Controls.MaterialProgressBar();
+            this.SoTienGiamGiaLB = new System.Windows.Forms.Label();
+            this.GiamGiaPB = new MaterialSkin.Controls.MaterialProgressBar();
             this.DoanhThuHoaDonBanLB = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -604,7 +604,7 @@ namespace WinformWithExternalLibrary
             this.tabPagePhanTich.Controls.Add(this.materialCard2);
             this.tabPagePhanTich.Controls.Add(this.materialCard5);
             this.tabPagePhanTich.Controls.Add(this.materialCard4);
-            this.tabPagePhanTich.Controls.Add(this.materialFloatingActionButton1);
+            this.tabPagePhanTich.Controls.Add(this.ShowHoaDonBanBtn);
             this.tabPagePhanTich.Controls.Add(this.materialCard1);
             this.tabPagePhanTich.ImageKey = "icons8-intelligence-32.png";
             this.tabPagePhanTich.Location = new System.Drawing.Point(4, 39);
@@ -853,7 +853,7 @@ namespace WinformWithExternalLibrary
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(131, 76);
+            this.label8.Location = new System.Drawing.Point(131, 82);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(101, 24);
@@ -897,7 +897,7 @@ namespace WinformWithExternalLibrary
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(131, 46);
+            this.label12.Location = new System.Drawing.Point(131, 50);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(43, 24);
@@ -948,28 +948,30 @@ namespace WinformWithExternalLibrary
             this.cartesianChart1.Size = new System.Drawing.Size(648, 280);
             this.cartesianChart1.TabIndex = 0;
             // 
-            // materialFloatingActionButton1
+            // ShowHoaDonBanBtn
             // 
-            this.materialFloatingActionButton1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.materialFloatingActionButton1.Depth = 0;
-            this.materialFloatingActionButton1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.materialFloatingActionButton1.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
-            this.materialFloatingActionButton1.ImageKey = "icons8-download-48.png";
-            this.materialFloatingActionButton1.ImageList = this.imageList1;
-            this.materialFloatingActionButton1.Location = new System.Drawing.Point(394, 82);
-            this.materialFloatingActionButton1.Margin = new System.Windows.Forms.Padding(4);
-            this.materialFloatingActionButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFloatingActionButton1.Name = "materialFloatingActionButton1";
-            this.materialFloatingActionButton1.Size = new System.Drawing.Size(70, 70);
-            this.materialFloatingActionButton1.TabIndex = 1;
-            this.materialFloatingActionButton1.Text = "materialFloatingActionButton1";
-            this.materialFloatingActionButton1.UseVisualStyleBackColor = false;
+            this.ShowHoaDonBanBtn.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.ShowHoaDonBanBtn.Depth = 0;
+            this.ShowHoaDonBanBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ShowHoaDonBanBtn.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
+            this.ShowHoaDonBanBtn.ImageKey = "icons8-download-48.png";
+            this.ShowHoaDonBanBtn.ImageList = this.imageList1;
+            this.ShowHoaDonBanBtn.Location = new System.Drawing.Point(394, 82);
+            this.ShowHoaDonBanBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.ShowHoaDonBanBtn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ShowHoaDonBanBtn.Name = "ShowHoaDonBanBtn";
+            this.ShowHoaDonBanBtn.Size = new System.Drawing.Size(70, 70);
+            this.ShowHoaDonBanBtn.TabIndex = 1;
+            this.ShowHoaDonBanBtn.Text = "materialFloatingActionButton1";
+            this.ShowHoaDonBanBtn.UseMnemonic = false;
+            this.ShowHoaDonBanBtn.UseVisualStyleBackColor = false;
+            this.ShowHoaDonBanBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             // 
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard1.Controls.Add(this.label6);
-            this.materialCard1.Controls.Add(this.materialProgressBar1);
+            this.materialCard1.Controls.Add(this.SoTienGiamGiaLB);
+            this.materialCard1.Controls.Add(this.GiamGiaPB);
             this.materialCard1.Controls.Add(this.DoanhThuHoaDonBanLB);
             this.materialCard1.Controls.Add(this.label4);
             this.materialCard1.Controls.Add(this.label3);
@@ -985,33 +987,33 @@ namespace WinformWithExternalLibrary
             this.materialCard1.Size = new System.Drawing.Size(370, 165);
             this.materialCard1.TabIndex = 0;
             // 
-            // label6
+            // SoTienGiamGiaLB
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(22, 129);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 15);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "Mục tiêu đạt 48%";
+            this.SoTienGiamGiaLB.AutoSize = true;
+            this.SoTienGiamGiaLB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SoTienGiamGiaLB.Location = new System.Drawing.Point(22, 129);
+            this.SoTienGiamGiaLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SoTienGiamGiaLB.Name = "SoTienGiamGiaLB";
+            this.SoTienGiamGiaLB.Size = new System.Drawing.Size(92, 15);
+            this.SoTienGiamGiaLB.TabIndex = 7;
+            this.SoTienGiamGiaLB.Text = "Số tiền giảm giá";
             // 
-            // materialProgressBar1
+            // GiamGiaPB
             // 
-            this.materialProgressBar1.Depth = 0;
-            this.materialProgressBar1.Location = new System.Drawing.Point(26, 119);
-            this.materialProgressBar1.Margin = new System.Windows.Forms.Padding(4);
-            this.materialProgressBar1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialProgressBar1.Name = "materialProgressBar1";
-            this.materialProgressBar1.Size = new System.Drawing.Size(269, 5);
-            this.materialProgressBar1.TabIndex = 6;
-            this.materialProgressBar1.Value = 48;
+            this.GiamGiaPB.Depth = 0;
+            this.GiamGiaPB.Location = new System.Drawing.Point(26, 119);
+            this.GiamGiaPB.Margin = new System.Windows.Forms.Padding(4);
+            this.GiamGiaPB.MouseState = MaterialSkin.MouseState.HOVER;
+            this.GiamGiaPB.Name = "GiamGiaPB";
+            this.GiamGiaPB.Size = new System.Drawing.Size(269, 5);
+            this.GiamGiaPB.TabIndex = 6;
+            this.GiamGiaPB.Value = 48;
             // 
             // DoanhThuHoaDonBanLB
             // 
             this.DoanhThuHoaDonBanLB.AutoSize = true;
             this.DoanhThuHoaDonBanLB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DoanhThuHoaDonBanLB.Location = new System.Drawing.Point(131, 76);
+            this.DoanhThuHoaDonBanLB.Location = new System.Drawing.Point(131, 82);
             this.DoanhThuHoaDonBanLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DoanhThuHoaDonBanLB.Name = "DoanhThuHoaDonBanLB";
             this.DoanhThuHoaDonBanLB.Size = new System.Drawing.Size(101, 24);
@@ -1055,7 +1057,7 @@ namespace WinformWithExternalLibrary
             // 
             this.SoHoaDonBanLB.AutoSize = true;
             this.SoHoaDonBanLB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SoHoaDonBanLB.Location = new System.Drawing.Point(131, 46);
+            this.SoHoaDonBanLB.Location = new System.Drawing.Point(131, 50);
             this.SoHoaDonBanLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SoHoaDonBanLB.Name = "SoHoaDonBanLB";
             this.SoHoaDonBanLB.Size = new System.Drawing.Size(43, 24);
@@ -1137,10 +1139,10 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.Label label12;
 		private MaterialSkin.Controls.MaterialCard materialCard5;
 		private MaterialSkin.Controls.MaterialCard materialCard4;
-		private MaterialSkin.Controls.MaterialFloatingActionButton materialFloatingActionButton1;
+		private MaterialSkin.Controls.MaterialFloatingActionButton ShowHoaDonBanBtn;
 		private MaterialSkin.Controls.MaterialCard materialCard1;
-		private System.Windows.Forms.Label label6;
-		private MaterialSkin.Controls.MaterialProgressBar materialProgressBar1;
+		private System.Windows.Forms.Label SoTienGiamGiaLB;
+		private MaterialSkin.Controls.MaterialProgressBar GiamGiaPB;
 		private System.Windows.Forms.Label DoanhThuHoaDonBanLB;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Label label3;

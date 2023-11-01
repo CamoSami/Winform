@@ -140,5 +140,47 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             return revenueCurrentMonth;
         }
+
+        public long GetDiscountTotalCurrentMonth()
+        {
+            string query = "SELECT SUM(tHoaDonBan.GiamGia) AS TongTienGiamGiaThangNay " +
+                "FROM tHoaDonBan " +
+                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE());";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            long discountTotalCurrentMonth = 0;
+
+            if (dataTable.Rows[0][0] != null)
+            {
+                if (long.TryParse(dataTable.Rows[0][0].ToString(), out long result))
+                {
+                    discountTotalCurrentMonth = result; 
+                }
+            }
+
+            return discountTotalCurrentMonth;
+        }
+
+        public long GetPriceTotalCurrentMonth()
+        {
+            string query = "SELECT SUM(tHoaDonBan.TongTien) AS TongTienThang " +
+                "FROM tHoaDonBan " +
+                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE());";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            long priceTotalCurrentMonth = 0;
+
+            if (dataTable.Rows[0][0] != null)
+            {
+                if (long.TryParse(dataTable.Rows[0][0].ToString(), out long result))
+                {
+                    priceTotalCurrentMonth = result;
+                }
+            }
+
+            return priceTotalCurrentMonth;
+        }
     }
 }
