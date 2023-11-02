@@ -212,7 +212,7 @@ namespace WinformWithExternalLibrary
             // 
             this.HoaDonBanDVO_NhanVien.Location = new System.Drawing.Point(1111, 6);
             this.HoaDonBanDVO_NhanVien.Name = "HoaDonBanDVO_NhanVien";
-            this.HoaDonBanDVO_NhanVien.Size = new System.Drawing.Size(356, 21);
+            this.HoaDonBanDVO_NhanVien.Size = new System.Drawing.Size(356, 24);
             this.HoaDonBanDVO_NhanVien.TabIndex = 3;
             // 
             // HoaDonBanDVO_TenKhachHang_Validation
@@ -378,7 +378,7 @@ namespace WinformWithExternalLibrary
             // 
             this.HoaDonBanDVO_DienThoaiKhachHang.Location = new System.Drawing.Point(1111, 387);
             this.HoaDonBanDVO_DienThoaiKhachHang.Name = "HoaDonBanDVO_DienThoaiKhachHang";
-            this.HoaDonBanDVO_DienThoaiKhachHang.Size = new System.Drawing.Size(235, 21);
+            this.HoaDonBanDVO_DienThoaiKhachHang.Size = new System.Drawing.Size(235, 24);
             this.HoaDonBanDVO_DienThoaiKhachHang.TabIndex = 3;
             // 
             // HoaDonBanDVO_TenKhachHang
@@ -404,7 +404,7 @@ namespace WinformWithExternalLibrary
             this.labelForFocus.AutoSize = true;
             this.labelForFocus.Location = new System.Drawing.Point(1211, 843);
             this.labelForFocus.Name = "labelForFocus";
-            this.labelForFocus.Size = new System.Drawing.Size(35, 13);
+            this.labelForFocus.Size = new System.Drawing.Size(44, 16);
             this.labelForFocus.TabIndex = 4;
             this.labelForFocus.Text = "label2";
             // 
@@ -528,7 +528,7 @@ namespace WinformWithExternalLibrary
             // 
             this.HoaDonBanDVO_MaSanPham.Location = new System.Drawing.Point(1111, 65);
             this.HoaDonBanDVO_MaSanPham.Name = "HoaDonBanDVO_MaSanPham";
-            this.HoaDonBanDVO_MaSanPham.Size = new System.Drawing.Size(235, 21);
+            this.HoaDonBanDVO_MaSanPham.Size = new System.Drawing.Size(235, 24);
             this.HoaDonBanDVO_MaSanPham.TabIndex = 3;
             // 
             // HoaDonBanDVO_TenSanPham
@@ -636,7 +636,7 @@ namespace WinformWithExternalLibrary
             this.label16.Location = new System.Drawing.Point(2, 14);
             this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(129, 30);
+            this.label16.Size = new System.Drawing.Size(165, 40);
             this.label16.TabIndex = 0;
             this.label16.Text = "Biểu đồ doanh thu \n  các ngày trong tháng";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -663,7 +663,7 @@ namespace WinformWithExternalLibrary
             this.label14.Location = new System.Drawing.Point(6, 14);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(132, 30);
+            this.label14.Size = new System.Drawing.Size(169, 40);
             this.label14.TabIndex = 0;
             this.label14.Text = "Các sản phẩm đẫn đầu \n các tháng";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -688,7 +688,7 @@ namespace WinformWithExternalLibrary
             this.materialFloatingActionButton3.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
             this.materialFloatingActionButton3.ImageKey = "icons8-download-48.png";
             this.materialFloatingActionButton3.ImageList = this.imageList1;
-            this.materialFloatingActionButton3.Location = new System.Drawing.Point(1369, 82);
+            this.materialFloatingActionButton3.Location = new System.Drawing.Point(1365, 114);
             this.materialFloatingActionButton3.Margin = new System.Windows.Forms.Padding(4);
             this.materialFloatingActionButton3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFloatingActionButton3.Name = "materialFloatingActionButton3";
@@ -727,7 +727,7 @@ namespace WinformWithExternalLibrary
             this.materialCard3.Controls.Add(this.label18);
             this.materialCard3.Depth = 0;
             this.materialCard3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard3.Location = new System.Drawing.Point(1026, 32);
+            this.materialCard3.Location = new System.Drawing.Point(1022, 64);
             this.materialCard3.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard3.Name = "materialCard3";
@@ -742,7 +742,7 @@ namespace WinformWithExternalLibrary
             this.label13.Location = new System.Drawing.Point(22, 129);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(99, 15);
+            this.label13.Size = new System.Drawing.Size(124, 20);
             this.label13.TabIndex = 7;
             this.label13.Text = "Mục tiêu đạt 48%";
             // 
@@ -764,7 +764,7 @@ namespace WinformWithExternalLibrary
             this.label15.Location = new System.Drawing.Point(19, 15);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(115, 25);
+            this.label15.Size = new System.Drawing.Size(147, 32);
             this.label15.TabIndex = 4;
             this.label15.Text = "Khách hàng";
             // 
@@ -775,7 +775,7 @@ namespace WinformWithExternalLibrary
             this.label17.Location = new System.Drawing.Point(21, 50);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(64, 17);
+            this.label17.Size = new System.Drawing.Size(83, 23);
             this.label17.TabIndex = 2;
             this.label17.Text = "Số lượng";
             // 
@@ -786,7 +786,7 @@ namespace WinformWithExternalLibrary
             this.label18.Location = new System.Drawing.Point(131, 46);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(43, 24);
+            this.label18.Size = new System.Drawing.Size(55, 29);
             this.label18.TabIndex = 1;
             this.label18.Text = "344";
             // 
@@ -798,7 +798,7 @@ namespace WinformWithExternalLibrary
             this.materialFloatingActionButton2.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
             this.materialFloatingActionButton2.ImageKey = "icons8-download-48.png";
             this.materialFloatingActionButton2.ImageList = this.imageList1;
-            this.materialFloatingActionButton2.Location = new System.Drawing.Point(888, 82);
+            this.materialFloatingActionButton2.Location = new System.Drawing.Point(884, 114);
             this.materialFloatingActionButton2.Margin = new System.Windows.Forms.Padding(4);
             this.materialFloatingActionButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFloatingActionButton2.Name = "materialFloatingActionButton2";
@@ -819,7 +819,7 @@ namespace WinformWithExternalLibrary
             this.materialCard2.Controls.Add(this.label12);
             this.materialCard2.Depth = 0;
             this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard2.Location = new System.Drawing.Point(546, 32);
+            this.materialCard2.Location = new System.Drawing.Point(542, 64);
             this.materialCard2.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard2.Name = "materialCard2";
@@ -834,7 +834,7 @@ namespace WinformWithExternalLibrary
             this.label7.Location = new System.Drawing.Point(22, 129);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(99, 15);
+            this.label7.Size = new System.Drawing.Size(124, 20);
             this.label7.TabIndex = 7;
             this.label7.Text = "Mục tiêu đạt 48%";
             // 
@@ -856,7 +856,7 @@ namespace WinformWithExternalLibrary
             this.label8.Location = new System.Drawing.Point(131, 82);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 24);
+            this.label8.Size = new System.Drawing.Size(126, 29);
             this.label8.TabIndex = 5;
             this.label8.Text = "150.000 đ";
             // 
@@ -867,7 +867,7 @@ namespace WinformWithExternalLibrary
             this.label9.Location = new System.Drawing.Point(19, 15);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(140, 25);
+            this.label9.Size = new System.Drawing.Size(176, 32);
             this.label9.TabIndex = 4;
             this.label9.Text = "Hóa đơn nhập";
             // 
@@ -878,7 +878,7 @@ namespace WinformWithExternalLibrary
             this.label10.Location = new System.Drawing.Point(21, 82);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 19);
+            this.label10.Size = new System.Drawing.Size(87, 23);
             this.label10.TabIndex = 3;
             this.label10.Text = "Tổng tiền";
             // 
@@ -889,7 +889,7 @@ namespace WinformWithExternalLibrary
             this.label11.Location = new System.Drawing.Point(21, 50);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(64, 17);
+            this.label11.Size = new System.Drawing.Size(83, 23);
             this.label11.TabIndex = 2;
             this.label11.Text = "Số lượng";
             // 
@@ -900,7 +900,7 @@ namespace WinformWithExternalLibrary
             this.label12.Location = new System.Drawing.Point(131, 50);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(43, 24);
+            this.label12.Size = new System.Drawing.Size(55, 29);
             this.label12.TabIndex = 1;
             this.label12.Text = "344";
             // 
@@ -951,12 +951,13 @@ namespace WinformWithExternalLibrary
             // ShowHoaDonBanBtn
             // 
             this.ShowHoaDonBanBtn.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.ShowHoaDonBanBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ShowHoaDonBanBtn.Depth = 0;
             this.ShowHoaDonBanBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.ShowHoaDonBanBtn.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
             this.ShowHoaDonBanBtn.ImageKey = "icons8-download-48.png";
             this.ShowHoaDonBanBtn.ImageList = this.imageList1;
-            this.ShowHoaDonBanBtn.Location = new System.Drawing.Point(394, 82);
+            this.ShowHoaDonBanBtn.Location = new System.Drawing.Point(390, 114);
             this.ShowHoaDonBanBtn.Margin = new System.Windows.Forms.Padding(4);
             this.ShowHoaDonBanBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.ShowHoaDonBanBtn.Name = "ShowHoaDonBanBtn";
@@ -965,7 +966,6 @@ namespace WinformWithExternalLibrary
             this.ShowHoaDonBanBtn.Text = "materialFloatingActionButton1";
             this.ShowHoaDonBanBtn.UseMnemonic = false;
             this.ShowHoaDonBanBtn.UseVisualStyleBackColor = false;
-            this.ShowHoaDonBanBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             // 
             // materialCard1
             // 
@@ -979,7 +979,7 @@ namespace WinformWithExternalLibrary
             this.materialCard1.Controls.Add(this.SoHoaDonBanLB);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(52, 32);
+            this.materialCard1.Location = new System.Drawing.Point(48, 64);
             this.materialCard1.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
@@ -994,7 +994,7 @@ namespace WinformWithExternalLibrary
             this.SoTienGiamGiaLB.Location = new System.Drawing.Point(22, 129);
             this.SoTienGiamGiaLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SoTienGiamGiaLB.Name = "SoTienGiamGiaLB";
-            this.SoTienGiamGiaLB.Size = new System.Drawing.Size(92, 15);
+            this.SoTienGiamGiaLB.Size = new System.Drawing.Size(118, 20);
             this.SoTienGiamGiaLB.TabIndex = 7;
             this.SoTienGiamGiaLB.Text = "Số tiền giảm giá";
             // 
@@ -1016,7 +1016,7 @@ namespace WinformWithExternalLibrary
             this.DoanhThuHoaDonBanLB.Location = new System.Drawing.Point(131, 82);
             this.DoanhThuHoaDonBanLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DoanhThuHoaDonBanLB.Name = "DoanhThuHoaDonBanLB";
-            this.DoanhThuHoaDonBanLB.Size = new System.Drawing.Size(101, 24);
+            this.DoanhThuHoaDonBanLB.Size = new System.Drawing.Size(126, 29);
             this.DoanhThuHoaDonBanLB.TabIndex = 5;
             this.DoanhThuHoaDonBanLB.Text = "150.000 đ";
             // 
@@ -1027,7 +1027,7 @@ namespace WinformWithExternalLibrary
             this.label4.Location = new System.Drawing.Point(20, 15);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 25);
+            this.label4.Size = new System.Drawing.Size(162, 32);
             this.label4.TabIndex = 4;
             this.label4.Text = "Hóa đơn bán";
             // 
@@ -1038,7 +1038,7 @@ namespace WinformWithExternalLibrary
             this.label3.Location = new System.Drawing.Point(21, 82);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 19);
+            this.label3.Size = new System.Drawing.Size(94, 23);
             this.label3.TabIndex = 3;
             this.label3.Text = "Doanh thu";
             // 
@@ -1049,7 +1049,7 @@ namespace WinformWithExternalLibrary
             this.label2.Location = new System.Drawing.Point(21, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 17);
+            this.label2.Size = new System.Drawing.Size(83, 23);
             this.label2.TabIndex = 2;
             this.label2.Text = "Số lượng";
             // 
@@ -1060,7 +1060,7 @@ namespace WinformWithExternalLibrary
             this.SoHoaDonBanLB.Location = new System.Drawing.Point(131, 50);
             this.SoHoaDonBanLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SoHoaDonBanLB.Name = "SoHoaDonBanLB";
-            this.SoHoaDonBanLB.Size = new System.Drawing.Size(43, 24);
+            this.SoHoaDonBanLB.Size = new System.Drawing.Size(55, 29);
             this.SoHoaDonBanLB.TabIndex = 1;
             this.SoHoaDonBanLB.Text = "344";
             // 

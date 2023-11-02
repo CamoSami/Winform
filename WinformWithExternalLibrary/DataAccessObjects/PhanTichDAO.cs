@@ -219,5 +219,30 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             }
             return billsOfSellerInfoResponseDTOs;
         }
+
+        public List<BillDetailInfomationDTO> GetBillsDetailInformation(string MaHoaDon)
+        {
+            string query = "SELECT tChiTietHDBan.MaDMSanPham AS MaDMSanPham, TenHangHoa, SoLuong, ThanhTien FROM " +
+                "tChiTietHDBan " +
+                "INNER JOIN tDMSanPham " +
+                $"ON tDMSanPham.MaDMSanPham = tChiTietHDBan.MaDMSanPham AND tChiTietHDBan.MaHDBan = '{MaHoaDon}'";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            List<BillDetailInfomationDTO> billDetailInfoResponseDTOs = new List<BillDetailInfomationDTO>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                BillDetailInfomationDTO billDetailInfomationDTO = new BillDetailInfomationDTO();
+
+                billDetailInfomationDTO.BillDetailInfomationDTO_MaDMSanPham = row[0].ToString();
+                billDetailInfomationDTO.BillDetailInfomationDTO_TenHangHoa = row[1].ToString();
+                billDetailInfomationDTO.BillDetailInfomationDTO_SoLuong = (int)row[2];
+                billDetailInfomationDTO.BillDetailInfomationDTO_ThanhTien = (long)row[3];
+
+                billDetailInfoResponseDTOs.Add(billDetailInfomationDTO);
+            }
+
+            return billDetailInfoResponseDTOs;
+        }
     }
 }

@@ -65,13 +65,14 @@
             this.ChiTietHoaDonBanLV.FullRowSelect = true;
             this.ChiTietHoaDonBanLV.HideSelection = false;
             this.ChiTietHoaDonBanLV.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.ChiTietHoaDonBanLV.Location = new System.Drawing.Point(6, 67);
-            this.ChiTietHoaDonBanLV.MinimumSize = new System.Drawing.Size(200, 100);
+            this.ChiTietHoaDonBanLV.Location = new System.Drawing.Point(8, 82);
+            this.ChiTietHoaDonBanLV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ChiTietHoaDonBanLV.MinimumSize = new System.Drawing.Size(267, 123);
             this.ChiTietHoaDonBanLV.MouseLocation = new System.Drawing.Point(-1, -1);
             this.ChiTietHoaDonBanLV.MouseState = MaterialSkin.MouseState.OUT;
             this.ChiTietHoaDonBanLV.Name = "ChiTietHoaDonBanLV";
             this.ChiTietHoaDonBanLV.OwnerDraw = true;
-            this.ChiTietHoaDonBanLV.Size = new System.Drawing.Size(919, 405);
+            this.ChiTietHoaDonBanLV.Size = new System.Drawing.Size(1225, 498);
             this.ChiTietHoaDonBanLV.TabIndex = 0;
             this.ChiTietHoaDonBanLV.UseCompatibleStateImageBehavior = false;
             this.ChiTietHoaDonBanLV.View = System.Windows.Forms.View.Details;
@@ -134,8 +135,8 @@
             this.ChiTietHoaDonExelBtn.Depth = 0;
             this.ChiTietHoaDonExelBtn.HighEmphasis = true;
             this.ChiTietHoaDonExelBtn.Icon = null;
-            this.ChiTietHoaDonExelBtn.Location = new System.Drawing.Point(766, 6);
-            this.ChiTietHoaDonExelBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.ChiTietHoaDonExelBtn.Location = new System.Drawing.Point(1021, 7);
+            this.ChiTietHoaDonExelBtn.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.ChiTietHoaDonExelBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.ChiTietHoaDonExelBtn.Name = "ChiTietHoaDonExelBtn";
             this.ChiTietHoaDonExelBtn.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -152,22 +153,25 @@
             this.materialCard1.Controls.Add(this.ChiTietHoaDonExelBtn);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(7, 473);
-            this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard1.Location = new System.Drawing.Point(9, 582);
+            this.materialCard1.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
-            this.materialCard1.Size = new System.Drawing.Size(918, 114);
+            this.materialCard1.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.materialCard1.Size = new System.Drawing.Size(1224, 140);
             this.materialCard1.TabIndex = 2;
             // 
             // FormChiTietHoaDonBan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 592);
+            this.ClientSize = new System.Drawing.Size(1241, 729);
             this.Controls.Add(this.materialCard1);
             this.Controls.Add(this.ChiTietHoaDonBanLV);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormChiTietHoaDonBan";
-            this.Text = "FormChiTietHoaDonBan";
+            this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
+            this.Text = "Danh sách hóa đơn bán";
             this.materialCard1.ResumeLayout(false);
             this.materialCard1.PerformLayout();
             this.ResumeLayout(false);

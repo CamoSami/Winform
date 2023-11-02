@@ -553,7 +553,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 			DateTime dateTimeMin = new DateTime(year: 2023, month: 9, day: 1);
 
-			Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
+            Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
 				.StrictMode(true)
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaHDBan, (f, DTO) => DTO.HoaDonBanDTO_MaHDBan = Guid.NewGuid())
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, f => f.PickRandom(tempMaKhachHang).OrNull(f: f, nullWeight: 0.9f))

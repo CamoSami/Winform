@@ -200,6 +200,12 @@
     <Compile Include="ExtraForm\FormChiTietHoaDonBan.Designer.cs">
       <DependentUpon>FormChiTietHoaDonBan.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExtraForm\FormChiTietHoaDonBanFormInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormChiTietHoaDonBanFormInfo.Designer.cs">
+      <DependentUpon>FormChiTietHoaDonBanFormInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ExportTableData.cs" />
     <Compile Include="Utils\FormatValues.cs" />
     <Compile Include="_DataProvider\BogusAmogus.cs" />
@@ -236,6 +242,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ExtraForm\FormChiTietHoaDonBan.resx">
       <DependentUpon>FormChiTietHoaDonBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormChiTietHoaDonBanFormInfo.resx">
+      <DependentUpon>FormChiTietHoaDonBanFormInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateKhachHang.resx">
       <DependentUpon>FormCreateKhachHang.cs</DependentUpon>

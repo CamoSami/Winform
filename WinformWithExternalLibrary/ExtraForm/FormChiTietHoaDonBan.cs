@@ -31,6 +31,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 
             // Event
             this.HandleClickExportBtn();
+            this.HandleOpenExtraForm();
         }
 
         private void FormChiTietHoaDonBan_ListView()
@@ -79,6 +80,18 @@ namespace WinformWithExternalLibrary.ExtraForm
                 {
                     MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error");
                 }
+            };
+        }
+
+        private void HandleOpenExtraForm()
+        {
+            ChiTietHoaDonBanLV.DoubleClick += (object sender, EventArgs e) =>
+            {
+                var firstSelectedItem = ChiTietHoaDonBanLV.SelectedItems[0];
+
+                FormChiTietHoaDonBanFormInfo formChiTietHoaDonBanFormInfo 
+                = new FormChiTietHoaDonBanFormInfo(firstSelectedItem.SubItems[1].Text);
+                formChiTietHoaDonBanFormInfo.Show();
             };
         }
     }
