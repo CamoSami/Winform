@@ -80,14 +80,14 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             List<ProductsBestSellerResponseDTO> productsBestSeller = new List<ProductsBestSellerResponseDTO>();
 
             string query = "WITH RankedProducts AS (" +
-                "SELECT MaSanPham, TenHangHoa, SUM(SoLuong) AS SoLuongBan, MONTH(NgayBan) AS Thang, ROW_NUMBER() OVER (PARTITION BY MONTH(NgayBan) ORDER BY SUM(SoLuong) DESC) AS RowNum" +
+                "SELECT MaSanPham, TenSanPham, SUM(SoLuong) AS SoLuongBan, MONTH(NgayBan) AS Thang, ROW_NUMBER() OVER (PARTITION BY MONTH(NgayBan) ORDER BY SUM(SoLuong) DESC) AS RowNum" +
                 " FROM tDMSanPham" +
                 " INNER JOIN tChiTietHDBan ON tDMSanPham.MaDMSanPham = tChiTietHDBan.MaDMSanPham" +
                 " INNER JOIN tHoaDonBan ON tChiTietHDBan.MaHDBan = tHoaDonBan.MaHDBan" +
                 " WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE())" +
                 " GROUP BY" +
-                " MaSanPham, TenHangHoa, MONTH(NgayBan))" +
-                $"SELECT MaSanPham, TenHangHoa, Thang, SoLuongBan FROM RankedProducts WHERE RowNum = {rank};";
+				" MaSanPham, TenSanPham, MONTH(NgayBan))" +
+                $"SELECT MaSanPham, TenSanPham, Thang, SoLuongBan FROM RankedProducts WHERE RowNum = {rank};";
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
@@ -95,7 +95,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             {
                 ProductsBestSellerResponseDTO productBestSeller = new ProductsBestSellerResponseDTO();
                 productBestSeller.ProductsBestSellerResponseDTO_MaSanPham = (string)row[0];
-                productBestSeller.ProductsBestSellerResponseDTO_TenHangHoa = (string)row[1];
+                productBestSeller.ProductsBestSellerResponseDTO_TenSanPham = (string)row[1];
                 productBestSeller.ProductsBestSellerResponseDTO_Thang = (int)row[2];
                 productBestSeller.ProductsBestSellerResponseDTO_SoLuongBan = (int)row[3];
 

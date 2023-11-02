@@ -17,7 +17,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects.CustomDTO
         public class ProductsBestSellerResponseDTO
         {
             public string ProductsBestSellerResponseDTO_MaSanPham { get; set; }
-            public string ProductsBestSellerResponseDTO_TenHangHoa { get; set; } = "";
+            public string ProductsBestSellerResponseDTO_TenSanPham { get; set; } = "";
             public int ProductsBestSellerResponseDTO_Thang { get; set; }
             public int ProductsBestSellerResponseDTO_SoLuongBan { get; set; } = 0;
         }

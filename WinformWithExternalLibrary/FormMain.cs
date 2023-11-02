@@ -26,6 +26,10 @@ using System.Diagnostics;
 using WinformWithExternalLibrary.DataValidateObject;
 using System.Windows.Controls.Primitives;
 using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.InteropServices;
+using System.Drawing.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WinformWithExternalLibrary
 {
@@ -37,22 +41,13 @@ namespace WinformWithExternalLibrary
 		private readonly List<List<Label>> listOfLabelsDVO = new List<List<Label>>();
 		private readonly List<List<bool>> isInterracted = new List<List<bool>>();
 
-		private readonly PhanTichDAO phanTichDAO = new PhanTichDAO();
-
         public FormMain()
 		{
 			//		GenerateData
-			//this.InitializeFakeData();
+			this.InitializeFakeData();
 
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
-
-			//		Specific
-			this.Initialize_NgoSachMinhHieu();
-			this.Initialize_TranHongThai();
-			this.Initialize_NguyenHongSon();
-			this.Initialize_NguyenThanhTruc();
-			this.Initialize_VuHongHanh();
 
 			//		Attributes
 			this.InitializeHardCodedAttributes();
@@ -60,6 +55,13 @@ namespace WinformWithExternalLibrary
 			//		Events
 			this.InitializeAutomaticEventAndList();
 			this.InitializeSpecializedEvent();
+
+			//		Specific
+			this.Initialize_NgoSachMinhHieu();
+			//this.Initialize_TranHongThai();
+			this.Initialize_NguyenHongSon();
+			this.Initialize_NguyenThanhTruc();
+			this.Initialize_VuHongHanh();
 		}
 
 		#region Initialize
@@ -96,11 +98,8 @@ namespace WinformWithExternalLibrary
 					//Debug.WriteLine(control.Name);
 
 					//		Label
-					if (control is Label && control.Name.Contains("Validation"))
+					if (control is Label tempLabel && control.Name.Contains("Validation"))
 					{
-						//		Casting
-						Label tempLabel = control as Label;
-
 						//		Reset
 						tempLabel.Text = "";
 
@@ -108,11 +107,8 @@ namespace WinformWithExternalLibrary
 						tempLabel.ForeColor = Color.Red;
 					}
 					//		ComboBox
-					else if (control is ComboBox)
+					else if (control is ComboBox comboBox)
 					{
-						//		Casting
-						ComboBox comboBox = control as ComboBox;
-
 						//		Hardcode
 						comboBox.DropDownStyle = ComboBoxStyle.DropDown;
 						comboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -121,11 +117,8 @@ namespace WinformWithExternalLibrary
 						comboBox.Text = "";
 					}
 					//		DateTimePicker
-					else if (control is DateTimePicker)
+					else if (control is DateTimePicker tempDateTimePicker)
 					{
-						//		Casting
-						DateTimePicker tempDateTimePicker = control as DateTimePicker;
-
 						//		Current Day = Now
 						tempDateTimePicker.Value = DateTime.Now;
 
@@ -133,11 +126,8 @@ namespace WinformWithExternalLibrary
 						tempDateTimePicker.MaxDate = DateTime.Now;
 					}
 					//		MaterialListView
-					else if (control is MaterialListView)
+					else if (control is MaterialListView tempMaterialListView)
 					{
-						//		Casting
-						MaterialListView tempMaterialListView = control as MaterialListView;
-
 						//		Selectable
 						tempMaterialListView.FullRowSelect = true;
 						tempMaterialListView.MultiSelect = true;
@@ -159,6 +149,12 @@ namespace WinformWithExternalLibrary
 				this.listOfLabelsDVO.Add(new List<Label>());
 				this.isInterracted.Add(new List<bool>());
 
+				//		Reset ActiveControl
+				this.materialTabControl.TabPages[i].Click += (obj, e) =>
+				{
+					this.ActiveControl = null;
+				};
+
 				//		TEST: only for HoaDonBan
 				if (this.materialTabControl.TabPages[i] != this.HoaDonBanDVO)
 				{
@@ -168,15 +164,18 @@ namespace WinformWithExternalLibrary
 				foreach (Control control in this.materialTabControl.TabPages[i].Controls)
 				{
 					//		Label
-					if (control is Label && control.Name.Contains("Validation"))
+					if (control is Label tempLabel && control.Name.Contains("Validation"))
 					{
-						//		Casting
-						Label tempLabel = control as Label;
+						//		Reset ActiveControl
+						tempLabel.Click += (obj, e) =>
+						{
+							this.ActiveControl = null;
+						};
 
 						//		Add to List
 						this.listOfLabelsDVO[i].Add(tempLabel);
 					}
-					//		TextBoxBase (MaterialTextBox, ...)
+					//		Validate Control
 					else if (control.Name.Contains("DVO"))
 					{
 						//		Get Placeholder
@@ -191,20 +190,21 @@ namespace WinformWithExternalLibrary
 						control.LostFocus += this.ControlForInput_LostFocus;
 					}
 					//		DateTimePicker
-					else if (control is DateTimePicker)
+					else if (control is DateTimePicker tempDateTimePicker)
 					{
-						//		Casting
-						DateTimePicker tempDateTimePicker = control as DateTimePicker;
-
 						//		Event
-						tempDateTimePicker.ValueChanged += (obj, e) =>
-						{
-							this.TryValidation();
-						};
+						//tempDateTimePicker.ValueChanged += (obj, e) =>
+						//{
+						//	this.TryValidationFromControl(tempDateTimePicker);
+						//};
 					}
 				}
 			}
 		}
+
+		#endregion
+
+		#region Event
 
 		private void InitializeSpecializedEvent()
 		{
@@ -243,8 +243,177 @@ namespace WinformWithExternalLibrary
 				this.ActiveControl = null;
 			};
 
-			//		Test 
-			this.materialButtonTaoMoiKhachHang.Click += (obj, e) =>
+			//		TODO: Add DirtyData check when leaving tabPage
+			//		TODO: Add Reset (PlaceHolder) when entering tabPage
+			this.materialTabControl.Selecting += (obj, e) =>
+			{
+
+			};
+		}
+
+		private void ControlForInput_GotFocus(object sender, EventArgs e)
+		{
+			int selectedIndex = this.GetTabPageControlSelectedIndex();
+			Control controlTemp = sender as Control;
+
+			this.isInterracted
+					[selectedIndex]
+					[this.listOfControlsDVO[selectedIndex].IndexOf(controlTemp)] = true;
+
+			controlTemp.Text = this.GetControlTextIfPlaceholderThenEmpty(controlTemp);
+		}
+
+		private void ControlForInput_LostFocus(object sender, EventArgs e)
+		{
+			Control control = sender as Control;
+
+			control.Text = this.GetControlTextIfEmptyThenPlaceholder(control);
+
+			if (this.TryValidationFromControl(
+						control: control, 
+						onlyOneControl: false, 
+						out dynamic baseDVO))
+			{
+				//		TODO: Succeeded btw, do whatever
+			}
+		}
+
+		private void TextBoxBase_KeyPress_AlphabetOnly(object sender, KeyPressEventArgs e)
+		{
+			if (!char.IsLetter(e.KeyChar) &&
+				!char.IsWhiteSpace(e.KeyChar) &&
+				!char.IsControl(e.KeyChar))
+			{
+				e.Handled = true;
+			}
+		}
+
+		private void TextBoxBase_KeyPress_NumericOnly(object sender, KeyPressEventArgs e)
+		{
+			if (!char.IsDigit(e.KeyChar) &&
+				!char.IsControl(e.KeyChar))
+			{
+				e.Handled = true;
+			}
+		}
+
+		#endregion
+
+		#region Ngô Sách Minh Hiếu
+
+		private void Initialize_NgoSachMinhHieu()
+		{
+			//		TODO: set up Event system for DAOs to update DataSource
+			this.TabPageHoaDonBan_materialListView.Scrollable = true;
+
+			this.NhanVienThuNganDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
+			this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
+			this.ChiTietHDBanDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
+
+			this.NhanVienThuNganDVO_NhanVien.SelectedIndex = -1;
+			this.HoaDonBanDVO_DienThoaiKhachHang.SelectedIndex = -1;
+			this.ChiTietHDBanDVO_MaSanPham.SelectedIndex = -1;
+
+			//		Event For Validate Controls
+			//			TabPageHoaDonBan_materialListView
+			this.TabPageHoaDonBan_materialListView.SelectedIndexChanged += (obj, e) =>
+			{
+				//		Nothing
+				if (this.TabPageHoaDonBan_materialListView.SelectedIndices.Count <= 0)
+				{
+					return;
+				}
+
+				//		Update Controls
+				int index = this.TabPageHoaDonBan_materialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageHoaDonBan_materialListView.Items[index];
+
+					this.ChiTietHDBanDVO_MaSanPham.Text = listViewItem.SubItems[1].Text;
+					this.ChiTietHDBanDVO_TenSanPham.Text = listViewItem.SubItems[2].Text;
+					this.ChiTietHDBanDVO_SoLuong.Text = listViewItem.SubItems[3].Text;
+				}
+
+				//		Update Focus
+				this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+			};
+
+			//			HoaDonBanDVO_DienThoaiKhachHang
+			this.HoaDonBanDVO_DienThoaiKhachHang.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+			this.HoaDonBanDVO_DienThoaiKhachHang.LostFocus += this.DienThoaiKhachHang_AutoComplete;
+			this.HoaDonBanDVO_DienThoaiKhachHang.SelectedIndexChanged += this.DienThoaiKhachHang_AutoComplete;
+
+			//			ChiTietHDBanDVO_MaSanPham
+			this.ChiTietHDBanDVO_MaSanPham.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+			this.ChiTietHDBanDVO_MaSanPham.LostFocus += this.TenSanPham_AutoComplete;
+			this.ChiTietHDBanDVO_MaSanPham.SelectedIndexChanged += this.TenSanPham_AutoComplete;
+
+			//			HoaDonBanDVO_NhanVien
+			this.NhanVienThuNganDVO_NhanVien.LostFocus += this.NhanVien_AutoComplete;
+			this.NhanVienThuNganDVO_NhanVien.SelectedIndexChanged += this.NhanVien_AutoComplete;
+
+			//			ChiTietHDBanDVO_SoLuong
+			this.ChiTietHDBanDVO_SoLuong.KeyDown += (obj, e) =>
+			{
+				//		If Enter
+				if (e.KeyCode == Keys.Enter)
+				{
+					this.NewChiTietHDBan(obj as Control);
+				}
+			};
+
+			//		Event For Buttons
+			//			TabPageHoaDonBan_ButtonTaoMoiSanPham
+			//				TODO:	Finish
+			this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Click += (obj, e) =>
+			{
+				
+			};
+
+			//			TabPageHoaDonBan_ButtonNhapChiTiet
+			this.TabPageHoaDonBan_ButtonNhapChiTiet.Click += (obj, e) =>
+			{
+				this.NewChiTietHDBan(this.ChiTietHDBanDVO_MaSanPham);
+			};
+
+			//			TabPageHoaDonBan_ButtonXoaSanPham
+			this.TabPageHoaDonBan_ButtonXoaSanPham.Click += (obj, e) =>
+			{
+				//		Nothing is picked isn't it
+				if (this.TabPageHoaDonBan_materialListView.SelectedIndices.Count <= 0)
+				{
+					return;
+				}
+				//		Else, delete the ones highlighted
+				else
+				{
+					ListView.SelectedListViewItemCollection selectedItems = this.TabPageHoaDonBan_materialListView.SelectedItems;
+
+					foreach (ListViewItem item in selectedItems)
+					{
+						this.UpdateTongTienHDBan(
+								tien: long.Parse(item.SubItems[5].Text),
+								biTru: true);
+
+						this.TabPageHoaDonBan_materialListView.Items.Remove(item);
+					}
+
+					this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
+
+					this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+				}
+			};
+
+			//			TabPageHoaDonBan_ButtonTaoMoiSanPham
+			this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Click += (obj, e) =>
+			{
+				this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
+			};
+
+			//			TabPageHoaDonBan_ButtonTaoKhachHang
+			this.TabPageHoaDonBan_ButtonTaoKhachHang.Click += (obj, e) =>
 			{
 				FormCreateKhachHang formCreateKhachHang = new FormCreateKhachHang
 				(
@@ -254,44 +423,283 @@ namespace WinformWithExternalLibrary
 				formCreateKhachHang.Show();
 			};
 
-			//		TODO: Add DirtyData check when leaving tabPage
-			//		TODO: Add Reset (PlaceHolder) when entering tabPage
-			this.materialTabControl.Selecting += (obj, e) => 
+			//			TabPageHoaDonBan_ButtonNhapHoaDon
+			this.TabPageHoaDonBan_ButtonNhapHoaDon.Click += (obj, e) =>
 			{
-				
-			};
-		}
-
-		#endregion
-
-		#region Ngô Sách Minh Hiếu
-
-		private void Initialize_NgoSachMinhHieu()
-		{
-			//		TODO: set up an Event for 
-			this.materialListView.Scrollable = true;
-
-			this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumbers();
-
-			
-
-			//		Auto Complete
-			this.HoaDonBanDVO_DienThoaiKhachHang.KeyDown += (obj, e) =>
-			{
-				if (e.KeyValue == 13)
+				//		...Nothing?
+				if (this.TabPageHoaDonBan_materialListView.Items.Count <= 0)
 				{
-					this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetNameWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
+					MaterialMessageBox.Show(
+						text: "Hóa đơn chưa có đủ dữ liệu",
+						caption: this.Text,
+						UseRichTextBox: false,
+						buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+						);
+				}
+
+				if (this.TryValidationFromControl(this.HoaDonBanDVO_TongTien, onlyOneControl: false, out dynamic baseHoaDonBan) &&
+					this.TryValidationFromControl(this.NhanVienThuNganDVO_NhanVien, onlyOneControl: false, out dynamic baseNhanVienThuNgan))
+				{
+					//		Validated!
+
+					//		TODO: Show another Confirmation Form
+
+					//		Casting
+					NhanVienThuNganDVO nhanVienThuNganDVO = baseNhanVienThuNgan as NhanVienThuNganDVO;
+					HoaDonBanDVO hoaDonBanDVO = baseHoaDonBan as HoaDonBanDVO;
+
+					if (int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDTO_MaGiamGia), out int giamGiaTemp))
+					{
+						giamGiaTemp = 0;
+					}
+
+					//		TODO: FIX THIS
+					HoaDonBanDTO hoaDonBanDTO = new HoaDonBanDTO(
+						hoaDonBanDTO_MaHDBan: Guid.NewGuid(),
+						hoaDonBanDTO_MaKhachHang: KhachHangDAO.Instance.GetMaKhachHangWithPhoneNumbers(hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang),
+						hoaDonBanDTO_MaNhanVien: NhanVienDAO.Instance.GetMaNhanVienByTenNhanVienAndNgaySinh(nhanVienThuNganDVO.NhanVienThuNganDVO_NhanVien),
+						hoaDonBanDTO_NgayBan: DateTime.Now,
+						hoaDonBanDTO_SoSanPham: this.TabPageHoaDonBan_materialListView.Items.Count,
+						hoaDonBanDTO_MaGiamGia: Guid.Empty,
+						hoaDonBanDTO_TongTien: long.Parse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien)),
+						hoaDonBanDTO_TongTienKhachTra: 0
+						);
+
+					if (!HoaDonBanDAO.Instance.InsertHoaDonBan(hoaDonBanDTO))
+					{
+						MaterialMessageBox.Show(
+							text: "Có lỗi gì đó vừa xảy ra",
+							caption: "!HoaDonBanDAO",
+							UseRichTextBox: false,
+							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+						);
+
+						return;
+					}
+
+					foreach (ListViewItem listViewItem in this.TabPageHoaDonBan_materialListView.Items)
+					{
+						Guid maDMSanPhamTemp = DMSanPhamDAO.Instance.GetMaDMSanPhamFromMaSanPham(listViewItem.SubItems[1].Text);
+
+						if (maDMSanPhamTemp == Guid.Empty)
+						{
+							MaterialMessageBox.Show(
+							text: "Có lỗi gì đó vừa xảy ra",
+							caption: "maDMSanPhamTemp == Guid.Empty",
+							UseRichTextBox: false,
+							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+							);
+
+							return;
+						}
+
+						ChiTietHDBanDTO chiTietHDBanDTO = new ChiTietHDBanDTO(
+							chiTietHDBanDTO_MaHDBan: hoaDonBanDTO.HoaDonBanDTO_MaHDBan,
+							chiTietHDBanDTO_MaDMSanPham: maDMSanPhamTemp,
+							chiTietHDBanDTO_SoLuong: int.Parse(listViewItem.SubItems[3].Text),
+							chiTietHDBanDTO_ThanhTien: long.Parse(listViewItem.SubItems[5].Text)
+							);
+
+						if (!ChiTietHDBanDAO.Instance.InsertChiTietHDBan(chiTietHDBanDTO))
+						{
+							MaterialMessageBox.Show(
+							text: "Có lỗi gì đó vừa xảy ra",
+							caption: "!ChiTietHDBanDAO",
+							UseRichTextBox: false,
+							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+							);
+
+							return;
+						}
+					}
+
+					//		Reset Input
+					this.ResetHoaDonBanAndChiTietHDBan();
 				}
 			};
 
-			//		Numeric Only
-			this.HoaDonBanDVO_DienThoaiKhachHang.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
-
-			//		Auto Complete
-			this.HoaDonBanDVO_DienThoaiKhachHang.LostFocus += (obj, e) =>
+			//			TabPageHoaDonBan_ButtonTaoMoiHoaDon
+			this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.Click += (obj, e) =>
 			{
-				this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetNameWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
+				if (MaterialMessageBox.Show(
+							text: "Bạn có chắc muốn nhập mới Hóa Đơn không?",
+							caption: this.Text,
+							buttons: MessageBoxButtons.YesNo,
+							icon: MessageBoxIcon.Question,
+							UseRichTextBox: false,
+							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+							)
+						== DialogResult.Yes)
+				{
+					this.ResetHoaDonBanAndChiTietHDBan();
+				}
 			};
+		}
+
+		//		Event
+		private void UpdateTongTienHDBan(long tien, bool biTru)
+		{
+			long tongTien = this.CheckIfTextboxEmptyOrPlaceholder(this.HoaDonBanDVO_TongTien) ? 0 : long.Parse(this.HoaDonBanDVO_TongTien.Text);
+
+			if (biTru)
+			{
+				this.HoaDonBanDVO_TongTien.Text = (tongTien - tien).ToString();
+			}
+			else
+			{
+				this.HoaDonBanDVO_TongTien.Text = (tongTien + tien).ToString();
+			}
+		}
+
+		private void NhanVien_AutoComplete(object obj, EventArgs e)
+		{
+			if (this.TryValidationFromControl(
+							control: obj as Control,
+							onlyOneControl: true,
+							baseDVO: out _))
+			{
+				this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+			}
+		}
+
+		private void DienThoaiKhachHang_AutoComplete(object obj, EventArgs e)
+		{ 
+			if (this.TryValidationFromControl(
+						control: obj as Control, 
+						onlyOneControl: true, 
+						baseDVO: out _))
+			{
+				this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetTenKhachHangWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
+
+				this.ActiveControl = this.HoaDonBanDTO_MaGiamGia;
+			}
+		}
+
+		private void TenSanPham_AutoComplete(object obj, EventArgs e)
+		{
+			if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+			{
+				this.ChiTietHDBanDVO_TenSanPham.Text = DMSanPhamDAO.Instance.GetTenSanPhamWithMaSanPham(this.ChiTietHDBanDVO_MaSanPham.Text);
+
+				this.ActiveControl = this.ChiTietHDBanDVO_SoLuong;
+
+				if (this.CheckIfTextboxEmptyOrPlaceholder(this.ChiTietHDBanDVO_SoLuong))
+				{
+					this.ChiTietHDBanDVO_SoLuong.Text = 1.ToString();
+				}
+				this.ChiTietHDBanDVO_SoLuong.SelectionStart = this.ChiTietHDBanDVO_SoLuong.Text.Length;
+			}
+		}
+
+		//		Function
+		private void ResetHoaDonBanAndChiTietHDBan()
+		{
+			//		Clear ListView
+			this.TabPageHoaDonBan_materialListView.Items.Clear();
+
+			//		Reset Controls
+			this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
+
+			this.ResetInputForControl(this.HoaDonBanDVO_DienThoaiKhachHang);
+
+			//		Set Focus
+			this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+		}
+
+		private void NewChiTietHDBan(Control control)
+		{
+			if (this.TryValidationFromControl(control, onlyOneControl: false, out dynamic baseDVO))
+			{
+				//		Casting
+				ChiTietHDBanDVO chiTietHDBanDVO = baseDVO as ChiTietHDBanDVO;
+
+				//		Get DonGiaBan
+				long tempDonGiaBan = DMSanPhamDAO.Instance.GetDonGiaBanWithMaSanPham(chiTietHDBanDVO.ChiTietHDBanDVO_MaSanPham);
+
+				//		If already Existed AND not Selected => Update
+				if (this.TabPageHoaDonBan_materialListView.SelectedIndices.Count <= 0)
+				{
+					foreach (ListViewItem listViewItem1 in this.TabPageHoaDonBan_materialListView.Items)
+					{
+						if (listViewItem1.SubItems[1].Text.Equals(this.ChiTietHDBanDVO_MaSanPham.Text))
+						{
+							//		Reset TongTien
+							this.UpdateTongTienHDBan(
+								tien: long.Parse(listViewItem1.SubItems[5].Text),
+								biTru: true);
+
+							//		Update
+							int soLuongTemp = int.Parse(listViewItem1.SubItems[3].Text) + chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong;
+
+							listViewItem1.SubItems[3].Text = soLuongTemp.ToString();
+							listViewItem1.SubItems[5].Text = (soLuongTemp * tempDonGiaBan).ToString();
+
+							//		Update TongTien
+							this.UpdateTongTienHDBan(
+								tien: long.Parse(listViewItem1.SubItems[5].Text),
+								biTru: false);
+
+							//		Grant Control
+							this.ResetInputForControl(control);
+
+							this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+
+							return;
+						}
+					}
+				}
+
+				//		If not Existed => Add new
+				ListViewItem listViewItem = new ListViewItem();
+
+				listViewItem.SubItems[0].Text = ((this.TabPageHoaDonBan_materialListView.Items.Count + 1).ToString());
+				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_MaSanPham);
+				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_TenSanPham);
+				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong.ToString());
+				listViewItem.SubItems.Add(tempDonGiaBan.ToString());
+				listViewItem.SubItems.Add((tempDonGiaBan * chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong).ToString());
+
+				//		Remove Selected Indexes
+				if (this.TabPageHoaDonBan_materialListView.SelectedIndices.Count > 0)
+				{
+					ListView.SelectedListViewItemCollection selectedItems = this.TabPageHoaDonBan_materialListView.SelectedItems;
+
+					foreach (ListViewItem item in selectedItems)
+					{
+						this.UpdateTongTienHDBan(
+							tien: long.Parse(item.SubItems[5].Text),
+							biTru: true);
+
+						this.TabPageHoaDonBan_materialListView.Items.Remove(item);
+					}
+				}
+
+				//		Add new
+				this.TabPageHoaDonBan_materialListView.Items.Add(listViewItem);
+
+				//		Update TongTien
+				this.UpdateTongTienHDBan(
+					tien: long.Parse(listViewItem.SubItems[5].Text),
+					biTru: false);
+
+				//		Reset Input
+				this.ResetInputForControl(control);
+
+				//		Reset Focus
+				this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+			}
+		}
+
+		//		Functions Use from another form
+
+		public void SetDienThoaiKhachHang(string dienThoai)
+		{
+			this.HoaDonBanDVO_DienThoaiKhachHang.Text = dienThoai;
+
+			this.ActiveControl = this.HoaDonBanDVO_DienThoaiKhachHang;
 		}
 
 		#endregion
@@ -311,9 +719,9 @@ namespace WinformWithExternalLibrary
 		private void InitializeChart1()
 		{
             // Data queried from DB
-			List<ProductsBestSellerResponseDTO> productsTop1BestSeller = phanTichDAO.GetRankProductsByMonth(1);
-            List<ProductsBestSellerResponseDTO> productsTop2BestSeller = phanTichDAO.GetRankProductsByMonth(2);
-            List<ProductsBestSellerResponseDTO> productsTop3BestSeller = phanTichDAO.GetRankProductsByMonth(3);
+			List<ProductsBestSellerResponseDTO> productsTop1BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(1);
+            List<ProductsBestSellerResponseDTO> productsTop2BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(2);
+            List<ProductsBestSellerResponseDTO> productsTop3BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(3);
 
             // Fill all default value each month
             List<ProductsBestSellerResponseDTO> productsValueFirstColumn = new List<ProductsBestSellerResponseDTO>();
@@ -331,22 +739,22 @@ namespace WinformWithExternalLibrary
             {
                 productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan 
 					= product.ProductsBestSellerResponseDTO_SoLuongBan;
-                productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenHangHoa
-					= product.ProductsBestSellerResponseDTO_TenHangHoa;
+                productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
+					= product.ProductsBestSellerResponseDTO_TenSanPham;
             }
             foreach (ProductsBestSellerResponseDTO product in productsTop2BestSeller)
             {
                 productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan 
 					= product.ProductsBestSellerResponseDTO_SoLuongBan;
-                productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenHangHoa
-					= product.ProductsBestSellerResponseDTO_TenHangHoa;
+                productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
+					= product.ProductsBestSellerResponseDTO_TenSanPham;
             }
             foreach (ProductsBestSellerResponseDTO product in productsTop3BestSeller)
             {
                 productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan
 					= product.ProductsBestSellerResponseDTO_SoLuongBan;
-                productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenHangHoa
-					= product.ProductsBestSellerResponseDTO_TenHangHoa;
+                productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
+					= product.ProductsBestSellerResponseDTO_TenSanPham;
             }
 
             cartesianChart1.Series = new ISeries[]
@@ -355,8 +763,8 @@ namespace WinformWithExternalLibrary
 				{
 					Values = productsValueFirstColumn,
 					GroupPadding = 8,
-                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
                     DataLabelsPosition = DataLabelsPosition.End,
                     Mapping = (product, point) =>
                     {
@@ -369,8 +777,8 @@ namespace WinformWithExternalLibrary
 				{
 					Values = productsValueSecondColumn,
                     GroupPadding = 8,
-                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
                     DataLabelsPosition = DataLabelsPosition.End,
                     Mapping = (product, point) =>
                     {
@@ -383,8 +791,8 @@ namespace WinformWithExternalLibrary
                 {
                     Values = productsValueThirdColumn,
                     GroupPadding = 8,
-                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenHangHoa}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
                     DataLabelsPosition = DataLabelsPosition.End,
                     Mapping = (product, point) =>
                     {
@@ -429,11 +837,11 @@ namespace WinformWithExternalLibrary
             int countDaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, currentMonth);
 			int countDaysInLastMonth = DateTime.DaysInMonth(year, lastMonth);
 
-            // Data queried from DB
-            List<RevenueResponseDTO> revanueResponseCurrentMonth = phanTichDAO.GetDailyRevenueByThisMonth();
-			List<RevenueResponseDTO> revanueResponseLastMonth = phanTichDAO.GetDailyRevenueByLastMonth();
+			// Data queried from DB
+			List<RevenueResponseDTO> revanueResponseCurrentMonth = PhanTichDAO.Instance.GetDailyRevenueByThisMonth();
+			List<RevenueResponseDTO> revanueResponseLastMonth = PhanTichDAO.Instance.GetDailyRevenueByLastMonth();
 
-            List<long> revenuesCurrentMonth = new List<long>(countDaysInMonth);
+			List<long> revenuesCurrentMonth = new List<long>(countDaysInMonth);
 			List<long> revenuesLastMonth = new List<long>(countDaysInMonth);
 
             // Fill all value 0
@@ -526,92 +934,55 @@ namespace WinformWithExternalLibrary
 
 		#endregion
 
-		#region Event
-
-		private void ControlForInput_GotFocus(object sender, EventArgs e)
-		{
-			int selectedIndex = this.GetTabPageControlSelectedIndex();
-			Control textboxTemp = sender as Control;
-
-			this.isInterracted
-					[selectedIndex]
-					[this.listOfControlsDVO[selectedIndex].IndexOf(textboxTemp)] = true;
-
-			textboxTemp.Text = this.GetControlTextIfPlaceholderThenEmpty(textboxTemp);
-		}
-
-		private void ControlForInput_LostFocus(object sender, EventArgs e)
-		{
-			Control textboxTemp = sender as Control;
-
-			textboxTemp.Text = this.GetControlTextIfEmptyThenPlaceholder(textboxTemp);
-
-			this.TryValidation();
-		}
-
-		private void TextBoxBase_KeyPress_AlphabetOnly(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsLetter(e.KeyChar) &&
-				!char.IsWhiteSpace(e.KeyChar) &&
-				!char.IsControl(e.KeyChar))
-			{
-				e.Handled = true;
-			}
-		}
-
-		private void TextBoxBase_KeyPress_NumericOnly(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) &&
-				!char.IsControl(e.KeyChar))
-			{
-				e.Handled = true;
-			}
-		}
-
-		#endregion
-
 		#region Generalist Function
 
-		private bool TryValidation()
+		private bool TryValidationFromControl(Control control, bool onlyOneControl, out dynamic baseDVO)
 		{
-			//		Selected TabPage
-			int selectedIndex = this.GetTabPageControlSelectedIndex();
-
 			//		Reset Validation
-			foreach (Label label in this.listOfLabelsDVO[selectedIndex])
-			{
-				label.Text = "";
-			}
+			this.ResetValidationForControl(control);
 
 			//		New Object
-			dynamic tempObject = this.GetInput();
+			baseDVO = this.GetInputFromControl(control);
 
 			List<ValidationResult> results = new List<ValidationResult>();
 
 			//		Try Validating
-			if (!Validator.TryValidateObject(tempObject, new ValidationContext(tempObject), results, true))
-			{
-				foreach (ValidationResult result in results)
+			if (!Validator.TryValidateObject(baseDVO, new ValidationContext(baseDVO), results, true)) {
+				if (onlyOneControl)
 				{
-					for (int i = 0; i < this.listOfControlsDVO.Count; i++)
+					foreach (ValidationResult result in results)
 					{
-						if (result.MemberNames.Contains(this.listOfControlsDVO[selectedIndex][i].Name) &&
-							this.CheckIfTextboxInterracted(this.listOfControlsDVO[selectedIndex][i]))
+						if (result.MemberNames.Contains(control.Name))
 						{
-							this.SetStringLabelForControl(this.listOfControlsDVO[selectedIndex][i], result.ErrorMessage);
+							this.SetStringLabelForControl(control, result.ErrorMessage);
+
+							return false;
+						}
+					}
+
+					return true;
+				}
+				else
+				{
+					int selectedIndex = this.GetTabPageControlSelectedIndex();
+
+					foreach (ValidationResult result in results)
+					{
+						for (int i = 0; i < this.listOfControlsDVO.Count; i++)
+						{
+							if (result.MemberNames.Contains(this.listOfControlsDVO[selectedIndex][i].Name) &&
+								this.CheckIfTextboxInterracted(this.listOfControlsDVO[selectedIndex][i]))
+							{
+								this.SetStringLabelForControl(this.listOfControlsDVO[selectedIndex][i], result.ErrorMessage);
+							}
 						}
 					}
 				}
-			}
 
-			if (results.Count > 0)
-			{
 				return false;
 			}
-			else
-			{
-				return true;
-			}
+				
+			return true;
 		}
 
 		private bool CheckIfTextboxInterracted(Control control)
@@ -648,7 +1019,7 @@ namespace WinformWithExternalLibrary
 		{
 			//		Get Type + Attribute Name
 			//			NOTE: The name of the Textbox == Attribute Name
-			Type propertyType = this.GetBaseDVOFromControl(control).GetType();
+			Type propertyType = this.GetBaseDVOFromControl(control);
 			string propertyName = control.Name;
 
 			//		Get DisplayName
@@ -674,61 +1045,120 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		private dynamic GetInput()
+		private void ResetValidationForControl(Control control)
 		{
-			//		TODO: Find a better way
-			if (this.GetTabPageControlSelectedTabPage() == this.HoaDonBanDVO)
+			string getClassName = control.Name.Split('_')[0];
+			int tabPageIndex = this.GetTabPageControlSelectedIndex();
+
+			for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
 			{
-				int tempSoluong;
-				long tempTongTien;
-
-				if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_SoLuong), out tempSoluong))
+				if (this.listOfLabelsDVO[tabPageIndex][i].Name.Contains(getClassName))
 				{
-					tempSoluong = 0;
-				}
-				if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien), out tempTongTien)) 
-				{
-					tempTongTien = 0;
-				}
+					this.listOfLabelsDVO[tabPageIndex][i].Text = "";
 
-				return new HoaDonBanDVO(
-					hoaDonBanDVO_NhanVien: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_NhanVien),
-					hoaDonBanDVO_MaSanPham: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_MaSanPham),
-					hoaDonBanDVO_TenSanPham: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenSanPham),
-					hoaDonBanDVO_SoLuong: tempSoluong,
-					hoaDonBanDVO_DienThoaiKhachHang: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_DienThoaiKhachHang),
-					hoaDonBanDVO_TenKhachHang: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenKhachHang),
-					hoaDonBanDVO_GiamGia: this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_GiamGia),
-					hoaDonBanDVO_TongTien: tempTongTien
-					);
+					this.isInterracted[tabPageIndex][i] = false;
+				}
 			}
-
-			Debug.WriteLine(this.materialTabControl.SelectedTab.ToString());
-
-			return null;
 		}
 
-		private dynamic GetBaseDVOFromControl(Control control)
+		private void ResetInputForControl(Control control)
 		{
-			//		TODO: Find a better way
-			foreach (TabPage tabPage in this.materialTabControl.TabPages)
+			string getClassName = control.Name.Split('_')[0];
+			int tabPageIndex = this.GetTabPageControlSelectedIndex();
+
+			foreach (Control controlTemp in this.listOfControlsDVO[tabPageIndex])
 			{
-				if (control.Name.Contains(tabPage.Name))
+				if (controlTemp.Name.Contains(getClassName))
 				{
-					if (tabPage.Name.Equals("HoaDonBanDVO"))
-					{
-						return new HoaDonBanDVO();
-					}
+					controlTemp.Text = "";
 				}
 			}
+		}
 
-			Debug.WriteLine(this.materialTabControl.SelectedTab.ToString());
+		private dynamic GetInputFromControl(Control control)
+		{
+			string getClassName = "WinformWithExternalLibrary.DataValidateObject." + control.Name.Split('_')[0];
 
-			return null;
+			Type type = Type.GetType(getClassName);
+
+			if (type != null)
+			{
+				object obj = Activator.CreateInstance(type);
+
+				if (obj is NhanVienThuNganDVO nhanVienThuNganDVO)
+				{
+					nhanVienThuNganDVO.NhanVienThuNganDVO_NhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienThuNganDVO_NhanVien);
+
+					return nhanVienThuNganDVO;
+				}
+
+				if (obj is HoaDonBanDVO hoaDonBanDVO)
+				{
+					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien), out long tempTongTien))
+					{
+						tempTongTien = 0;
+					}
+					if (!Guid.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDTO_MaGiamGia), out Guid tempMaGiamGia))
+					{
+						tempMaGiamGia = Guid.Empty;
+					}
+
+					hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_DienThoaiKhachHang);
+					hoaDonBanDVO.HoaDonBanDVO_MaGiamGia = tempMaGiamGia;
+					hoaDonBanDVO.HoaDonBanDVO_TenKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenKhachHang);
+					hoaDonBanDVO.HoaDonBanDVO_TongTien = tempTongTien;
+
+					return hoaDonBanDVO;
+				}
+				else if (obj is ChiTietHDBanDVO chiTietHDBanDVO)
+				{
+					if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_SoLuong), out int tempSoLuong))
+					{
+						tempSoLuong = 0;
+					}
+
+					chiTietHDBanDVO.ChiTietHDBanDVO_MaSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_MaSanPham);
+					chiTietHDBanDVO.ChiTietHDBanDVO_TenSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_TenSanPham);
+					chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong = tempSoLuong;
+
+					return chiTietHDBanDVO;
+				}
+
+				return obj;
+			}
+			else
+			{
+				Debug.WriteLine(getClassName);
+
+				return null;
+			}
+		}
+
+		//		Get DataValidateObject from Control
+		private Type GetBaseDVOFromControl(Control control)
+		{
+			string getClassName = "WinformWithExternalLibrary.DataValidateObject." + control.Name.Split('_')[0];
+
+			Type type = Type.GetType(getClassName);
+
+			if (type != null)
+			{
+				Debug.WriteLine(type);
+
+				return type;
+			}
+			else
+			{
+				Debug.WriteLine(getClassName);
+
+				return null;
+			}
 		}
 
 		private int GetTabPageControlSelectedIndex()
 		{
+			Debug.WriteLine(materialTabControl.SelectedIndex);
+
 			return this.materialTabControl.SelectedIndex;
 		}
 

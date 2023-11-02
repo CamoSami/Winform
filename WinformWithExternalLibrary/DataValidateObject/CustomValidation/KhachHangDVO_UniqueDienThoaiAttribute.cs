@@ -17,7 +17,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 			{
 				//Debug.WriteLine(value.ToString());
 
-				if (!KhachHangDAO.Instance.IfPhoneNumberTaken(value.ToString())) 
+				if (!KhachHangDAO.Instance.IfPhoneNumberExist(value.ToString())) 
 				{
 					//Debug.WriteLine("Success!");
 

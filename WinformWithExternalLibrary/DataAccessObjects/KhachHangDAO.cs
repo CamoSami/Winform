@@ -17,7 +17,18 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public KhachHangDAO() { }
 
-		public string GetNameWithPhoneNumber(string dienThoai)
+		public Guid GetMaKhachHangWithPhoneNumbers(string dienThoai)
+		{
+			string selectMaKhachHang = $"SELECT MaKhachHang FROM " +
+				$"{DataProvider.KHACHHANG_TABLE} " +
+				$"WHERE DienThoai = '{dienThoai}'";
+
+			object temp = DataProvider.Instance.ExecuteScalar(selectMaKhachHang);
+
+			return temp != null ? Guid.Parse(temp.ToString()) : Guid.Empty;
+		}
+
+		public string GetTenKhachHangWithPhoneNumber(string dienThoai)
 		{
 			string selectTenKhachHang = $"SELECT TenKhachHang FROM " +
 				$"{DataProvider.KHACHHANG_TABLE} " +
@@ -28,7 +39,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return temp != null ? temp.ToString().Trim() : "";
 		}
 
-		public List<string> GetPhoneNumbers()
+		public List<string> GetPhoneNumberList()
 		{
 			string selectDienThoai = $"SELECT DienThoai FROM " +
 				$"{DataProvider.KHACHHANG_TABLE}";
@@ -45,7 +56,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return dienThoais;
 		}
 
-		public bool IfPhoneNumberTaken(string KhachHangDVO_DienThoai)
+		public bool IfPhoneNumberExist(string KhachHangDVO_DienThoai)
 		{
 			string selectDienThoai = "SELECT * FROM " +
 							DataProvider.KHACHHANG_TABLE +
@@ -65,7 +76,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			string insertKhachHang = "INSERT INTO " +
 							DataProvider.KHACHHANG_TABLE +
-							" (TenKhachHang, DiaChi, DienThoai) VALUES (" + 
+							" (MaKhachHang, TenKhachHang, DiaChi, DienThoai) VALUES (" +
+							"N'" + Guid.NewGuid() + "'," + 
 							"N'" + khachHangDVO.KhachHangDVO_TenKhachHang + "'," +
 							"N'" + khachHangDVO.KhachHangDVO_DiaChi + "'," +
 							"N'" + khachHangDVO.KhachHangDVO_DienThoai + "'" +

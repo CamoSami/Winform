@@ -22,12 +22,12 @@ namespace WinformWithExternalLibrary
 		private readonly List<bool> isInterracted = new List<bool>();
 
 		private bool hasDone = false;
-		private bool onlyOnce;
+		private bool onlyOnceFromFormMain;
 
 		public FormCreateKhachHang(bool onlyOnce)
 		{
 			//		Assigning value
-			this.onlyOnce = onlyOnce;
+			this.onlyOnceFromFormMain = onlyOnce;
 
 
 			//		Componenets
@@ -150,9 +150,10 @@ namespace WinformWithExternalLibrary
 
 					this.hasDone = true;
 
-					//		TODO: Send PhoneNumbers back to HoaDonBan or something
-					if (this.onlyOnce)
+					if (this.onlyOnceFromFormMain)
 					{
+						FormMain.Instance.SetDienThoaiKhachHang(this.KhachHangDVO_DienThoai.Text);
+
 						this.Close();
 					}
 				}
@@ -171,7 +172,7 @@ namespace WinformWithExternalLibrary
 			//			DirtyData check before closing
 			this.FormClosing += (obj, e) => 
 			{
-				if (this.hasDone && this.onlyOnce)
+				if (this.hasDone && this.onlyOnceFromFormMain)
 				{
 					return;
 				}

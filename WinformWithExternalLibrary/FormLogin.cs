@@ -53,6 +53,8 @@ namespace WinformWithExternalLibrary
 			this.InitializeSpecializedEvent();
 		}
 
+		#region Initialize
+
 		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
 		{
 			if (keyData == Keys.Enter)
@@ -63,15 +65,16 @@ namespace WinformWithExternalLibrary
 			return base.ProcessCmdKey(ref msg, keyData);
 		}
 
-		#region Initialize
-
 		private void InitializeDataObjects()
 		{
 			DataProvider.Instance = new DataProvider();
 
-			KhachHangDAO.Instance = new KhachHangDAO();
 			NhanVienDAO.Instance = new NhanVienDAO();
 			DMSanPhamDAO.Instance = new DMSanPhamDAO();
+			KhachHangDAO.Instance = new KhachHangDAO();
+			HoaDonBanDAO.Instance = new HoaDonBanDAO();
+			ChiTietHDBanDAO.Instance = new ChiTietHDBanDAO();
+			PhanTichDAO.Instance = new PhanTichDAO();
 		}
 
 		private void InitializeHardCodedAttributes()
@@ -131,6 +134,10 @@ namespace WinformWithExternalLibrary
 				}
 			}
 		}
+
+		#endregion
+
+		#region Event
 
 		private void InitializeAutomaticEvent()
 		{
@@ -221,7 +228,7 @@ namespace WinformWithExternalLibrary
 						== DialogResult.Yes
 						)
 					{
-						
+
 					}
 					else
 					{
@@ -254,15 +261,11 @@ namespace WinformWithExternalLibrary
 			};
 
 			//			Upon loading the Form => Textbox loses Focus
-			this.Load += (obj, e) => 
+			this.Load += (obj, e) =>
 			{
 				this.ActiveControl = this.labelForFocus;
 			};
 		}
-
-		#endregion
-
-		#region Event
 
 		private void MaterialTextBox_GotFocus(object sender, EventArgs e)
 		{

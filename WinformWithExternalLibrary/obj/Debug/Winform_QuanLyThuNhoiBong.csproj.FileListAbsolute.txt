@@ -241,3 +241,4 @@ E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Numerics.Vectors.
 E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBan.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonBan.resources

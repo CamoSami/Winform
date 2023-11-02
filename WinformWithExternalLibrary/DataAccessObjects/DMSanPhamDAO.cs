@@ -15,6 +15,56 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public DMSanPhamDAO() { }
 
+		//		MinhHieu Add: Lấy List MaSanPham
+		public List<string> GetMaSanPhamList()
+		{
+			string getMaSanPhams = $"SELECT MaSanPham FROM {DataProvider.DMSANPHAM_TABLE}";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(getMaSanPhams);
+
+			List<string> list = new List<string>();
+
+			foreach (DataRow dataRow in dataTable.Rows)
+			{
+				list.Add(dataRow[0].ToString());
+			}
+
+			return list;
+		}
+
+		//		MinhHieu Add: Lấy MaDMSanPham từ MaSanPham
+		public Guid GetMaDMSanPhamFromMaSanPham(string maSanPham)
+		{
+			string getSanPham = $"SELECT MaDMSanPham FROM {DataProvider.DMSANPHAM_TABLE} " +
+				$"WHERE MaSanPham = '{maSanPham}'";
+
+			object maDMSanPham = DataProvider.Instance.ExecuteScalar(getSanPham);
+
+			return maDMSanPham != null ? Guid.Parse(maDMSanPham.ToString()) : Guid.Empty;
+		}
+
+		//		MinhHieu Add: Xem MaSanPham có tồn tại hay không
+		public bool CheckMaSanPhamExist(string maSanPham)
+		{
+			string getSanPham = $"SELECT * FROM {DataProvider.DMSANPHAM_TABLE} " +
+				$"WHERE MaSanPham = '{maSanPham}'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(getSanPham);
+
+			return dataTable.Rows.Count > 0;
+		}
+
+		//		MinhHieu Add: Tìm TenSanPham theo MaSanPham
+		public string GetTenSanPhamWithMaSanPham(string maSanPham)
+		{
+			string getTenSanPham = $"SELECT TenSanPham FROM {DataProvider.DMSANPHAM_TABLE} " +
+				$"WHERE MaSanPham = '{maSanPham}'";
+
+			object tenSanPham = DataProvider.Instance.ExecuteScalar(getTenSanPham);
+
+			return tenSanPham != null ? tenSanPham.ToString() : "";
+		}
+
         public bool InsertSanPham(dynamic baseDTO)
         {
             DMSanPhamDTO dMSanPhamDTO = baseDTO as DMSanPhamDTO;
@@ -69,8 +119,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
         
         public long GetDonGiaBanWithMaSanPham(string maSanPham)
         {
-			string stringDonGiaBan = $"SELECT DonGiaBan" +
-                     $"FROM {DataProvider.DMSANPHAM_TABLE}" +
+			string stringDonGiaBan = $"SELECT DonGiaBan " +
+                     $"FROM {DataProvider.DMSANPHAM_TABLE} " +
                      $"WHERE MaSanPham = {this.GetString(maSanPham)}";
 
             object tempDonGiaBan = DataProvider.Instance.ExecuteScalar(stringDonGiaBan);
@@ -90,8 +140,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public long GetDonGiaNhapWithMaSanPham(string maSanPham)
 		{
-			string stringDonGiaNhap = $"SELECT DonGiaNhap" +
-					 $"FROM {DataProvider.DMSANPHAM_TABLE}" +
+			string stringDonGiaNhap = $"SELECT DonGiaNhap " +
+					 $"FROM {DataProvider.DMSANPHAM_TABLE} " +
 					 $"WHERE MaSanPham = {this.GetString(maSanPham)}";
 
 			object tempDonGiaNhap = DataProvider.Instance.ExecuteScalar(stringDonGiaNhap);
@@ -111,8 +161,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public int GetSoLuongTonKhoByMaSanPham(string maSanPham)
         {
-			string stringSoLuongTonKho = $"SELECT SoLuongTonKho" +
-                     $"FROM {DataProvider.DMSANPHAM_TABLE}" +
+			string stringSoLuongTonKho = $"SELECT SoLuongTonKho " +
+                     $"FROM {DataProvider.DMSANPHAM_TABLE} " +
                      $"WHERE MaSanPham = {this.GetString(maSanPham)}";
 
 			object tempSoLuongTonKho = DataProvider.Instance.ExecuteScalar(stringSoLuongTonKho);

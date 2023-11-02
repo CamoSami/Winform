@@ -42,16 +42,17 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 		public void GenerateFakeData()
 		{
-			int soLuong_DMSanPhamDTO = 250;
+			int soLuong_DMSanPhamDTO = 500;
 			int soLuong_NhanVienDTO = 40;
-			int soLuong_NhaCungCapDTO = 40;
-			int soLuong_HoaDonNhapDTO = 200;
-			int soLuong_KhachHangDTO = 120;
-			int soLuong_HoaDonBanDTO = 600;
+			int soLuong_NhaCungCapDTO = 60;
+			int soLuong_HoaDonNhapDTO = 600;
+			int soLuong_KhachHangDTO = 200;
+			int soLuong_HoaDonBanDTO = 2000;
 
 			this.Generate_CongViecDTO();
 			this.Generate_DMSanPhamDTO(soLuong_DMSanPhamDTO);
 			this.Generate_NhanVienDTO(soLuong_NhanVienDTO);
+			this.Generate_GiamGiaDTO();
 			this.Generate_NhaCungCapDTO(soLuong_NhaCungCapDTO);
 			this.Generate_HoaDonNhapDTO(soLuong_HoaDonNhapDTO);
 			this.Generate_KhachHangDTO(soLuong_KhachHangDTO);
@@ -251,7 +252,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 				.FinishWith((f, DTO) =>
 				{
 					string queryString = $"INSERT INTO {DataProvider.DMSANPHAM_TABLE}" +
-					$" (MaDMSanPham, MaSanPham, DonGiaNhap, DonGiaBan, SoLuongTonKho, TenHangHoa, ThoiGianBaoHanh)" +
+					$" (MaDMSanPham, MaSanPham, DonGiaNhap, DonGiaBan, SoLuongTonKho, TenSanPham, ThoiGianBaoHanh)" +
 					$" VALUES (" +
 					$" {this.GetString(DTO.DMSanPhamDTO_MaDMSanPham)}," +
 					$" {this.GetString(DTO.DMSanPhamDTO_MaSanPham)}," +
@@ -382,6 +383,44 @@ namespace WinformWithExternalLibrary.CustomComponent
 			faker.Generate(soLuong);
 		}
 
+		private void Generate_GiamGiaDTO()
+		{
+			GiamGiaDTO[] giamGiaDTOs = new GiamGiaDTO[]
+			{
+				new GiamGiaDTO(
+					giamGiaDTO_MaGiamGia: Guid.NewGuid(),
+					giamGiaDTO_TenGiamGia: "Giảm giá ngày 20/10",
+					giamGiaDTO_PhanTramGiamGia: 0.15f,
+					giamGiaDTO_MaxGiamGia: 150000,
+					giamGiaDTO_NgayBatDau: new DateTime(day: 1, month: 10, year: 2023),
+					giamGiaDTO_NgayKetThuc: new DateTime(day: 1, month: 11, year: 2023)
+					),
+				new GiamGiaDTO(
+					giamGiaDTO_MaGiamGia: Guid.NewGuid(),
+					giamGiaDTO_TenGiamGia: "Giảm giá ngày 1/6",
+					giamGiaDTO_PhanTramGiamGia: 0.25f,
+					giamGiaDTO_MaxGiamGia: 250000,
+					giamGiaDTO_NgayBatDau: new DateTime(day: 20, month: 5, year: 2023),
+					giamGiaDTO_NgayKetThuc: new DateTime(day: 10, month: 6, year: 2023)
+					)
+			};
+
+			foreach (GiamGiaDTO giamGiaDTO in giamGiaDTOs)
+			{
+				string queryString = $"INSERT INTO {DataProvider.GIAMGIA_TABLE} " +
+					$"(MaGiamGia, TenGiamGia, PhanTramGiamGia, MaxGiamGia, NgayBatDau, NgayKetThuc) VALUES (" +
+					$"{this.GetString(giamGiaDTO.GiamGiaDTO_MaGiamGia)}," +
+					$"{this.GetString(giamGiaDTO.GiamGiaDTO_TenGiamGia)}," +
+					$"{this.GetString(giamGiaDTO.GiamGiaDTO_PhanTramGiamGia)}," +
+					$"{this.GetString(giamGiaDTO.GiamGiaDTO_MaxGiamGia)}," +
+					$"{this.GetString(giamGiaDTO.GiamGiaDTO_NgayBatDau)}," +
+					$"{this.GetString(giamGiaDTO.GiamGiaDTO_NgayKetThuc)}" +
+					$")";
+
+				DataProvider.Instance.ExecuteNonQuery(queryString);
+			}
+		}
+
 		private void Generate_NhaCungCapDTO(int soLuong)
 		{
 			Faker<NhaCungCapDTO> faker = new Faker<NhaCungCapDTO>(locale: "vi")
@@ -455,7 +494,6 @@ namespace WinformWithExternalLibrary.CustomComponent
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_NgayNhap, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000).OrDefault(f: f, defaultValue: 0, defaultWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonNhapDTO_TongTien, f => f.Random.Number(min: 5000, max: 50000))
 				.FinishWith((f, DTO) =>
 				{
@@ -466,13 +504,12 @@ namespace WinformWithExternalLibrary.CustomComponent
 					//	$"\n{DTO.HoaDonNhapDTO_TongTien * 1000}");
 
 					string queryString = $"INSERT INTO {DataProvider.HOADONNHAP_TABLE} " +
-					$"(MaHDNHap, MaNhaCungCap, MaNhanVien, NgayNhap, SoSanPham, GiamGia, TongTien) VALUES (" +
+					$"(MaHDNHap, MaNhaCungCap, MaNhanVien, NgayNhap, SoSanPham, TongTien) VALUES (" +
 					$"{this.GetString(DTO.HoaDonNhapDTO_MaHDNhap)}," +
 					$"{this.GetString(DTO.HoaDonNhapDTO_MaNhaCungCap)}," +
 					$"{this.GetString(DTO.HoaDonNhapDTO_MaNhanVien)}," +
 					$"{this.GetString(DTO.HoaDonNhapDTO_NgayNhap)}," +
 					$"{DTO.HoaDonNhapDTO_SoSanPham}," +
-					$"{DTO.HoaDonNhapDTO_GiamGia * 100}," +
 					$"{DTO.HoaDonNhapDTO_TongTien * 100}" +
 					$")";
 
@@ -518,9 +555,21 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 		private void Generate_HoaDonBanDTO(int soLuong)
 		{
-			string queryStringKhachHang = $"SELECT MaKhachHang FROM {DataProvider.KHACHHANG_TABLE}";
+			string queryStringMaGiamGia = $"SELECT MaGiamGia FROM {DataProvider.GIAMGIA_TABLE}";
 
-			DataTable dataTableMaKhachHang = DataProvider.Instance.ExecuteQuery(queryStringKhachHang);
+			DataTable dataTableMaGiamGia = DataProvider.Instance.ExecuteQuery(queryStringMaGiamGia);
+			List<Guid> tempMaGiamGia = new List<Guid>();
+
+			foreach (DataRow dataRow in dataTableMaGiamGia.Rows)
+			{
+				Guid.TryParse(dataRow[0].ToString(), out Guid tempGuid);
+
+				tempMaGiamGia.Add(tempGuid);
+			}
+
+			string queryStringMaKhachHang = $"SELECT MaKhachHang FROM {DataProvider.KHACHHANG_TABLE}";
+
+			DataTable dataTableMaKhachHang = DataProvider.Instance.ExecuteQuery(queryStringMaKhachHang);
 			List<Guid> tempMaKhachHang = new List<Guid>();
 
 			foreach (DataRow dataRow in dataTableMaKhachHang.Rows)
@@ -553,14 +602,25 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 			DateTime dateTimeMin = new DateTime(year: 2023, month: 9, day: 1);
 
+			int[] tempChiaTongTien = new int[]
+			{
+				10,
+				20,
+				50,
+				100,
+				200,
+				500,
+				1000,
+				2000,
+				5000
+			};
+
 			Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
-				.StrictMode(true)
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaHDBan, (f, DTO) => DTO.HoaDonBanDTO_MaHDBan = Guid.NewGuid())
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, f => f.PickRandom(tempMaKhachHang).OrNull(f: f, nullWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_NgayBan, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
-				.RuleFor(DTO => DTO.HoaDonBanDTO_GiamGia, f => f.Random.Number(min: 200, max: 5000).OrDefault(f: f, defaultValue: 0, defaultWeight: 0.9f))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_TongTien, f => f.Random.Number(min: 2000, max: 50000))
 				.FinishWith((f, DTO) =>
 				{
@@ -570,34 +630,37 @@ namespace WinformWithExternalLibrary.CustomComponent
 					//	$"\n{DTO.HoaDonNhapDTO_GiamGia * 1000}" +
 					//	$"\n{DTO.HoaDonNhapDTO_TongTien * 1000}");
 
-					string queryString;
+					int intPickRandom = f.PickRandom(tempChiaTongTien);
 
-					if (DTO.HoaDonBanDTO_MaKhachHang != null)
+					DTO.HoaDonBanDTO_TongTienKhachTra = (long)Math.Ceiling(DTO.HoaDonBanDTO_TongTien / (1.0f * intPickRandom)) * intPickRandom;
+					//Debug.WriteLine("\n\n" + DTO.HoaDonBanDTO_TongTienKhachTra);
+
+					DateTime minGiamGia1 = new DateTime(day: 20, month: 5, year: 2023);
+					DateTime maxGiamGia1 = new DateTime(day: 10, month: 6, year: 2023); 
+					DateTime minGiamGia2 = new DateTime(day: 1, month: 10, year: 2023);
+					DateTime maxGiamGia2 = new DateTime(day: 1, month: 11, year: 2023);
+
+					if (DTO.HoaDonBanDTO_NgayBan > minGiamGia1 && DTO.HoaDonBanDTO_NgayBan < maxGiamGia1)
 					{
-						queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
-							$"(MaHDBan, MaKhachHang, MaNhanVien, NgayBan, SoSanPham, GiamGia, TongTien) VALUES (" +
+						DTO.HoaDonBanDTO_MaGiamGia = tempMaGiamGia[0];
+					}
+					else if (DTO.HoaDonBanDTO_NgayBan > minGiamGia2 && DTO.HoaDonBanDTO_NgayBan < maxGiamGia2)
+					{
+						DTO.HoaDonBanDTO_MaGiamGia = tempMaGiamGia[1];
+					}
+
+					string queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
+							$"(MaHDBan, MaKhachHang, MaNhanVien, MaGiamGia, NgayBan, SoSanPham, TongTien, TongTienKhachTra) VALUES (" +
 							$"{this.GetString(DTO.HoaDonBanDTO_MaHDBan)}," +
 							$"{this.GetString(DTO.HoaDonBanDTO_MaKhachHang)}," +
 							$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaGiamGia)}," +
 							$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
 							$"{DTO.HoaDonBanDTO_SoSanPham}," +
-							$"{DTO.HoaDonBanDTO_GiamGia * 100}," +
-							$"{DTO.HoaDonBanDTO_TongTien * 100}" +
+							$"{DTO.HoaDonBanDTO_TongTien * 100}," +
+							$"{DTO.HoaDonBanDTO_TongTienKhachTra}" +
 							$")";
-					}
-					else
-					{
-						queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
-							$"(MaHDBan, MaNhanVien, NgayBan, SoSanPham, GiamGia, TongTien) VALUES (" +
-							$"{this.GetString(DTO.HoaDonBanDTO_MaHDBan)}," +
-							$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
-							$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
-							$"{DTO.HoaDonBanDTO_SoSanPham}," +
-							$"{DTO.HoaDonBanDTO_GiamGia * 100}," +
-							$"{DTO.HoaDonBanDTO_TongTien * 100}" +
-							$")";
-					}
-
+		
 					DataProvider.Instance.ExecuteNonQuery(queryString);
 				});
 
@@ -723,7 +786,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 			for (int i = 0; i < tempMaHDBan.Count; i++)
 			{
 				List<Guid> usedMaSanPham = new List<Guid>();
-				int triGiaHDBan = 0;
+				long triGiaHDBan = 0;
 
 				for (int j = 0; j < tempSoSanPham[i]; j++)
 				{
@@ -750,8 +813,10 @@ namespace WinformWithExternalLibrary.CustomComponent
 					usedMaSanPham.Add(maSanPham);
 				}
 
+				long tongTienKhachTra = (long)Math.Ceiling(triGiaHDBan / 10000.0) * 10000;
+
 				string queryStringUpdate = $"UPDATE {DataProvider.HOADONBAN_TABLE} " +
-					$"SET TongTien = {triGiaHDBan} " +
+					$"SET TongTien = {triGiaHDBan}, TongTienKhachTra = {tongTienKhachTra}" +
 					$"WHERE MaHDBan = {this.GetString(tempMaHDBan[i])}";
 
 				DataProvider.Instance.ExecuteQuery(queryStringUpdate);
@@ -762,7 +827,14 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 		private string GetString(dynamic obj)
 		{
-			return "N'" + obj.ToString() + "'";
+			if (obj == null)
+			{
+				return "NULL";
+			}
+			else
+			{
+				return "N'" + obj.ToString() + "'";
+			}
 		}
 	}
 }

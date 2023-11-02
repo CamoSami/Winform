@@ -20,7 +20,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
 		public ChiTietHDBanDTO() { }
 
-		public ChiTietHDBanDTO(Guid chiTietHDBanDTO_MaHDBan, Guid chiTietHDBanDTO_MaDMSanPham, int chiTietHDBanDTO_SoLuong, int chiTietHDBanDTO_ThanhTien)
+		public ChiTietHDBanDTO(Guid chiTietHDBanDTO_MaHDBan, Guid chiTietHDBanDTO_MaDMSanPham, int chiTietHDBanDTO_SoLuong, long chiTietHDBanDTO_ThanhTien)
 		{
 			this.ChiTietHDBanDTO_MaHDBan = chiTietHDBanDTO_MaHDBan;
 			this.ChiTietHDBanDTO_MaDMSanPham = chiTietHDBanDTO_MaDMSanPham;
