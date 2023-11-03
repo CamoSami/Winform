@@ -24,27 +24,34 @@ namespace WinformWithExternalLibrary.DataValidateObject
 
 
 
-		//		TODO: Validate If Exist
-		//		TODO: Validate If Eligible
-		[DisplayName("Mã Giảm giá")]
-		public Guid HoaDonBanDVO_MaGiamGia { get; set; }
-
-
-
-		[Required(
-			ErrorMessage = "Hãy nhập tổng tiền"
+		[HoaDonBanDVO_ExistedTenGiamGia(
+			ErrorMessage = "Tên giảm giá không tồn tại"
 			)]
+		[HoaDonBanDVO_EligibleTenGiamGia(
+			ErrorMessage = "Tên giảm giá không áp dụng được"
+			)]
+		[DisplayName("Tên giảm giá")]
+		public string HoaDonBanDVO_TenGiamGia { get; set; }
+
+
+
 		[DisplayName("Tổng tiền")]
 		public long HoaDonBanDVO_TongTien { get; set; }
 
+
+
+		[DisplayName("Thanh toán")]
+		public long HoaDonBanDVO_ThanhToan { get; set; }
+
 		public HoaDonBanDVO() { }
 
-		public HoaDonBanDVO(string hoaDonBanDVO_DienThoaiKhachHang, string hoaDonBanDVO_TenKhachHang, Guid hoaDonBanDVO_MaGiamGia, long hoaDonBanDVO_TongTien)
+		public HoaDonBanDVO(string hoaDonBanDVO_DienThoaiKhachHang, string hoaDonBanDVO_TenKhachHang, string hoaDonBanDVO_TenGiamGia, long hoaDonBanDVO_TongTien, long hoaDonBanDVO_ThanhToan)
 		{
 			this.HoaDonBanDVO_DienThoaiKhachHang = hoaDonBanDVO_DienThoaiKhachHang;
 			this.HoaDonBanDVO_TenKhachHang = hoaDonBanDVO_TenKhachHang;
-			this.HoaDonBanDVO_MaGiamGia = hoaDonBanDVO_MaGiamGia;
+			this.HoaDonBanDVO_TenGiamGia = hoaDonBanDVO_TenGiamGia;
 			this.HoaDonBanDVO_TongTien = hoaDonBanDVO_TongTien;
+			this.HoaDonBanDVO_ThanhToan = hoaDonBanDVO_ThanhToan;
 		}
 	}
 }

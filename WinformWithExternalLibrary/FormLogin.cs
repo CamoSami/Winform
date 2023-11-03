@@ -59,7 +59,7 @@ namespace WinformWithExternalLibrary
 		{
 			if (keyData == Keys.Enter)
 			{
-				this.TryLoggingIn();
+				this.TrySubmittingInput();
 			}
 
 			return base.ProcessCmdKey(ref msg, keyData);
@@ -69,11 +69,14 @@ namespace WinformWithExternalLibrary
 		{
 			DataProvider.Instance = new DataProvider();
 
-			NhanVienDAO.Instance = new NhanVienDAO();
-			DMSanPhamDAO.Instance = new DMSanPhamDAO();
-			KhachHangDAO.Instance = new KhachHangDAO();
-			HoaDonBanDAO.Instance = new HoaDonBanDAO();
 			ChiTietHDBanDAO.Instance = new ChiTietHDBanDAO();
+			CongViecDAO.Instance = new CongViecDAO();
+			DMSanPhamDAO.Instance = new DMSanPhamDAO();
+			GiamGiaDAO.Instance = new GiamGiaDAO();
+			HoaDonBanDAO.Instance = new HoaDonBanDAO();
+			KhachHangDAO.Instance = new KhachHangDAO();
+			NhaCungCapDAO.Instance = new NhaCungCapDAO();
+			NhanVienDAO.Instance = new NhanVienDAO();
 			PhanTichDAO.Instance = new PhanTichDAO();
 		}
 
@@ -287,14 +290,14 @@ namespace WinformWithExternalLibrary
 
 		private void MaterialButtonDangNhap_Click(object sender, EventArgs e)
 		{
-			this.TryLoggingIn();
+			this.TrySubmittingInput();
 		}
 
 		#endregion
 
 		#region Generalist Function
 
-		private void TryLoggingIn()
+		private void TrySubmittingInput()
 		{
 			//		Form is completed -> Interaction = true
 			for (int i = 0; i < this.isInterracted.Count; i++)

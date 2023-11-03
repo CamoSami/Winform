@@ -65,8 +65,13 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		//		Add: Tìm nhân viên theo TenNhanVien và NgaySinh
 		public bool CheckNhanVienByTenNhanVienAndNgaySinh(string tenNhanVien, string ngaySinh)
 		{
+			if (!DateTime.TryParse(ngaySinh, out DateTime ngaySinhNhanVien))
+			{
+				return false;
+			}
+
 			string queryTimNV = $"SELECT * FROM {DataProvider.NHANVIEN_TABLE} " +
-				$"WHERE TenNhanVien = N'{tenNhanVien}' AND NgaySinh = '{ngaySinh}'";
+				$"WHERE TenNhanVien = N'{tenNhanVien}' AND NgaySinh = '{ngaySinhNhanVien}'";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryTimNV);
 

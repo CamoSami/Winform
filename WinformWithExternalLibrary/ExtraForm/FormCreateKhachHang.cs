@@ -180,18 +180,13 @@ namespace WinformWithExternalLibrary
 				//		Check if unsaved data
 				bool ifDirtyData = false;
 
-				foreach (Control temp in this.Controls)
+				foreach (TextBoxBase tempTextBox in this.listOfTextboxes)
 				{
-					if (temp is TextBoxBase)
+					if (!this.CheckIfTextboxEmptyOrPlaceholder(tempTextBox))
 					{
-						TextBoxBase tempTextBox = temp as TextBoxBase;
+						ifDirtyData = true;
 
-						if (!this.CheckIfTextboxEmptyOrPlaceholder(tempTextBox))
-						{
-							ifDirtyData = true;
-
-							break;
-						}
+						break;
 					}
 					//Debug.WriteLine(temp);
 				}

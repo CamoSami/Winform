@@ -28,15 +28,15 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 
 			string stringQuery = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
-					$"(MaHDBan, MaNhanVien, MaKhachHang, MaGiamGia, SoSanPham, NgayBan, TongTien) VALUES (" +
+					$"(MaHDBan, MaNhanVien, MaKhachHang, MaGiamGia, SoSanPham, NgayBan, TongTien, TongTienKhachTra) VALUES (" +
 					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_MaHDBan)}," +
 					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_MaNhanVien)}," +
 					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_MaKhachHang)}," +
 					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_MaGiamGia)}," +
 					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_SoSanPham)}," +
 					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_NgayBan)}," +
-					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_MaGiamGia)}," +
-					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_TongTien)}" +
+					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_TongTien)}," +
+					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_TongTienKhachTra)}" +
 					$")";
 
 			int temp = DataProvider.Instance.ExecuteNonQuery(stringQuery);
@@ -48,7 +48,14 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		private string GetString(dynamic obj)
 		{
-			return "N'" + obj.ToString() + "'";
+			if (obj == null)
+			{
+				return "NULL";
+			}
+			else
+			{
+				return "N'" + obj.ToString() + "'";
+			}
 		}
 	}
 }
