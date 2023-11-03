@@ -11,6 +11,8 @@ using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using WinformWithExternalLibrary.DataValidateObjects;
+using MaterialSkin.Controls;
+using WinformWithExternalLibrary.DataValidateObject;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -36,11 +38,35 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return listNV;
 		}
 
+		//		Add: Tìm MaNhanVien theo TenNhanVien và NgaySinh
+		public Guid GetMaNhanVienByTenNhanVienAndNgaySinh(string nhanVien)
+		{
+			string tenNhanVien = nhanVien.Split('|')[0].Trim();
+			string ngaySinh = nhanVien.Split('|')[1].Trim();
+
+			string queryTimNV = $"SELECT MaNhanVien FROM {DataProvider.NHANVIEN_TABLE} " +
+				$"WHERE TenNhanVien = N'{tenNhanVien}' AND NgaySinh = '{ngaySinh}'";
+
+			object obj = DataProvider.Instance.ExecuteScalar(queryTimNV);
+
+			if (obj == null)
+			{
+				MaterialMessageBox.Show(
+					text: "Tên nhân viên đã nhập không tồn tại",
+					caption: this.GetType().ToString(),
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+			}
+
+			return Guid.Parse(obj.ToString());
+		}
+
 		//		Add: Tìm nhân viên theo TenNhanVien và NgaySinh
 		public bool CheckNhanVienByTenNhanVienAndNgaySinh(string tenNhanVien, string ngaySinh)
 		{
 			string queryTimNV = $"SELECT * FROM {DataProvider.NHANVIEN_TABLE} " +
-				$"WHERE TenNhanVien = N'{tenNhanVien}' AND NgaySinh = 'dob'";
+				$"WHERE TenNhanVien = N'{tenNhanVien}' AND NgaySinh = '{ngaySinh}'";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryTimNV);
 

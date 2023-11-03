@@ -155,6 +155,7 @@
 			this.Controls.Add(this.KhachHangDVO_DienThoai);
 			this.Controls.Add(this.KhachHangDVO_TenKhachHang);
 			this.Name = "FormCreateKhachHang";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FormCreateKhachHang";
 			this.TopMost = true;
 			this.ResumeLayout(false);
