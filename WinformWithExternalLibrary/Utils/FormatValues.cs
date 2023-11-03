@@ -35,5 +35,10 @@ namespace WinformWithExternalLibrary.Utils
 
             return unformattedString;
         }
+
+        public string NumberToPercentString(double number)
+        {
+            return (number * 100).ToString() + "%";
+        }
     }
 }

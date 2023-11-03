@@ -27,17 +27,18 @@ namespace WinformWithExternalLibrary.ExtraForm
             InitializeComponent();
 
             // Bill of seller information List View
-            this.FormChiTietHoaDonBan_ListView();
+            this.FormChiTietHoaDonBan_ListView(search: "");
 
             // Event
             this.HandleClickExportBtn();
             this.HandleOpenExtraForm();
+            this.HandleSearch();
         }
 
-        private void FormChiTietHoaDonBan_ListView()
+        private void FormChiTietHoaDonBan_ListView(string search)
         {
             // Get data
-            List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = this.phanTichDAO.GetBillsOfSellerInformation();
+            List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = this.phanTichDAO.GetBillsOfSellerInformation(searchValue: search);
 
             // Render
             int stt = 0;
@@ -53,7 +54,7 @@ namespace WinformWithExternalLibrary.ExtraForm
                 item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenKhachHang);
                 item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiKH);
                 item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_SoSanPham.ToString());
-                item.SubItems.Add(formatValues.FormatPriceToView(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia.ToString(), 3));
+                item.SubItems.Add(formatValues.NumberToPercentString(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia));
                 item.SubItems.Add(formatValues.FormatPriceToView(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TongTien.ToString(), 3));
                 item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_NgayBan.ToShortDateString());
 
@@ -67,18 +68,18 @@ namespace WinformWithExternalLibrary.ExtraForm
             {
                 try
                 {
-                    DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable();
+                    DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable(searchValue: "");
                     this.exportTableData.ExportToExcel(
                         dataTable: dataTable,
                         workSheetName: "Chi tiết hóa đơn",
                         filePath: ""
                     );
 
-                    MaterialMessageBox.Show("Xuất dữ liệu thành công", "Message");
+                    MaterialMessageBox.Show("Xuất dữ liệu thành công", "Message", UseRichTextBox: false);
                 }
                 catch(Exception)
                 {
-                    MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error");
+                    MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error", UseRichTextBox: false);
                 }
             };
         }
@@ -92,6 +93,18 @@ namespace WinformWithExternalLibrary.ExtraForm
                 FormChiTietHoaDonBanFormInfo formChiTietHoaDonBanFormInfo 
                 = new FormChiTietHoaDonBanFormInfo(firstSelectedItem.SubItems[1].Text);
                 formChiTietHoaDonBanFormInfo.Show();
+            };
+        }
+
+        private void HandleSearch()
+        {
+            PhanTichDVO_HDB_TimKiemBtn.Click += (object sender, EventArgs e) =>
+            {
+                string search = PhanTichDVO_HDB_TimKiemIP.Text;
+                // Delete all old items
+                ChiTietHoaDonBanLV.Items.Clear();
+                // Render new items
+                this.FormChiTietHoaDonBan_ListView(search: search);
             };
         }
     }

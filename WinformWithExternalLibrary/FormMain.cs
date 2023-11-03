@@ -64,7 +64,7 @@ namespace WinformWithExternalLibrary
 
 			//		Specific
 			this.Initialize_NgoSachMinhHieu();
-			//this.Initialize_TranHongThai();
+			this.Initialize_TranHongThai();
 			this.Initialize_NguyenHongSon();
 			this.Initialize_NguyenThanhTruc();
 			this.Initialize_VuHongHanh();
@@ -721,28 +721,28 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeBillOfSell()
 		{
-            // Data queried from DB
-            int countBillOfCellCurrentMonth = phanTichDAO.CountBillOfSellCurrentMonth();
+			// Data queried from DB
+			int countBillOfCellCurrentMonth = phanTichDAO.CountBillOfSellCurrentMonth();
 			long revenueCurrentMonth = phanTichDAO.GetRevenueCurrentMonth();
-			long discountTotalCurrentMonth = phanTichDAO.GetDiscountTotalCurrentMonth();
-			long priceTotalCurrentMonth = phanTichDAO.GetPriceTotalCurrentMonth();
-            int percentDiscount = (int)Math.Ceiling((double)discountTotalCurrentMonth / priceTotalCurrentMonth * 100);
+			double discountTotalCurrentMonth = phanTichDAO.GetDiscountTotalCurrentMonth();
+			double priceTotalCurrentMonth = phanTichDAO.GetPriceTotalCurrentMonth();
+			int percentDiscount = (int)Math.Ceiling((double)discountTotalCurrentMonth / priceTotalCurrentMonth * 100);
 
             // Render data
-            SoHoaDonBanLB.Text = countBillOfCellCurrentMonth.ToString();
-            DoanhThuHoaDonBanLB.Text = this.formatValues.FormatPriceToView(revenueCurrentMonth.ToString(), 3) + " đ";
-			GiamGiaPB.Value = percentDiscount;
-			SoTienGiamGiaLB.Text = $"Tiền giảm giá tháng này: {this.formatValues.FormatPriceToView(discountTotalCurrentMonth.ToString(), 3)} đ ({percentDiscount}%)";
+            TabPagePhanTich_HoaDonBan_SoLuong_LB.Text = countBillOfCellCurrentMonth.ToString();
+            TabPagePhanTich_HoaDonBan_DoanhThu_LB.Text = this.formatValues.FormatPriceToView(revenueCurrentMonth.ToString(), 3) + " đ";
+            TabPagePhanTich_HoaDonBan_GiamGiaPB.Value = percentDiscount;
+            TabPagePhanTich_HoaDonBan_GiamGiaLB.Text = $"Tiền giảm giá tháng này: {this.formatValues.FormatPriceToView(discountTotalCurrentMonth.ToString(), 3)} đ ({percentDiscount}%)";
 
 
 			// Event
-			ShowHoaDonBanBtn.Click += (obj, e) =>
+            TabPagePhanTich_HoaDonBan_ShowBTN.Click += (obj, e) =>
 			{
 				FormChiTietHoaDonBan formChiTietHoaDonBan = new FormChiTietHoaDonBan();
 
 				formChiTietHoaDonBan.Show();
-            };
-        }
+			};
+		}
 
         private void InitializeChart1()
 		{

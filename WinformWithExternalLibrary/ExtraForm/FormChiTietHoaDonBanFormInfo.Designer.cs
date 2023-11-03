@@ -50,13 +50,14 @@
             this.ChiTietHoaDonBanInfoLV.Depth = 0;
             this.ChiTietHoaDonBanInfoLV.FullRowSelect = true;
             this.ChiTietHoaDonBanInfoLV.HideSelection = false;
-            this.ChiTietHoaDonBanInfoLV.Location = new System.Drawing.Point(6, 86);
-            this.ChiTietHoaDonBanInfoLV.MinimumSize = new System.Drawing.Size(200, 100);
+            this.ChiTietHoaDonBanInfoLV.Location = new System.Drawing.Point(4, 70);
+            this.ChiTietHoaDonBanInfoLV.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ChiTietHoaDonBanInfoLV.MinimumSize = new System.Drawing.Size(150, 81);
             this.ChiTietHoaDonBanInfoLV.MouseLocation = new System.Drawing.Point(-1, -1);
             this.ChiTietHoaDonBanInfoLV.MouseState = MaterialSkin.MouseState.OUT;
             this.ChiTietHoaDonBanInfoLV.Name = "ChiTietHoaDonBanInfoLV";
             this.ChiTietHoaDonBanInfoLV.OwnerDraw = true;
-            this.ChiTietHoaDonBanInfoLV.Size = new System.Drawing.Size(816, 303);
+            this.ChiTietHoaDonBanInfoLV.Size = new System.Drawing.Size(720, 246);
             this.ChiTietHoaDonBanInfoLV.TabIndex = 0;
             this.ChiTietHoaDonBanInfoLV.UseCompatibleStateImageBehavior = false;
             this.ChiTietHoaDonBanInfoLV.View = System.Windows.Forms.View.Details;
@@ -73,7 +74,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Tên sản phẩm";
-            this.columnHeader3.Width = 150;
+            this.columnHeader3.Width = 210;
             // 
             // columnHeader4
             // 
@@ -87,11 +88,13 @@
             // 
             // FormChiTietHoaDonBanFormInfo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(840, 409);
+            this.ClientSize = new System.Drawing.Size(743, 332);
             this.Controls.Add(this.ChiTietHoaDonBanInfoLV);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormChiTietHoaDonBanFormInfo";
+            this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);
             this.Text = "Danh sách các sản phẩm";
             this.ResumeLayout(false);
 

@@ -23,7 +23,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
         {
             List<RevenueResponseDTO> listRevenueThisMonth = new List<RevenueResponseDTO>();
 
-            string query = "SELECT DATEPART(DAY, tHoaDonBan.NgayBan) AS Ngay, SUM(TongTien - GiamGia) AS DoanhThu " +
+            string query = "SELECT DATEPART(DAY, tHoaDonBan.NgayBan) AS Ngay, SUM(TongTien) AS DoanhThu " +
                 "FROM tHoaDonBan " +
                 "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE()) " +
                 "GROUP BY DATEPART(DAY, tHoaDonBan.NgayBan)";
@@ -55,7 +55,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 year--;
             }
 
-            string query = "SELECT DATEPART(DAY, tHoaDonBan.NgayBan) AS Ngay, SUM(TongTien - GiamGia) AS DoanhThu " +
+            string query = "SELECT DATEPART(DAY, tHoaDonBan.NgayBan) AS Ngay, SUM(TongTien) AS DoanhThu " +
                 "FROM tHoaDonBan " +
                 $"WHERE YEAR(tHoaDonBan.NgayBan) = {year} AND MONTH(tHoaDonBan.NgayBan) = {lastMonth} " +
                 "GROUP BY DATEPART(DAY, tHoaDonBan.NgayBan)";
@@ -118,13 +118,9 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public long GetRevenueCurrentMonth()
         {
-            string query = "WITH RevenueOneDays AS (" +
-                "SELECT SUM(TongTien - GiamGia) AS DoanhThuNgay " +
+            string query = "SELECT SUM(TongTien) AS DoanhThuThangNay " +
                 "FROM tHoaDonBan " +
-                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE())" +
-                ")" +
-                "SELECT SUM(DoanhThuNgay) AS DoanhThuThangNay " +
-                "FROM RevenueOneDays;";
+                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE())";
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
@@ -141,65 +137,74 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             return revenueCurrentMonth;
         }
 
-        public long GetDiscountTotalCurrentMonth()
+        public double GetDiscountTotalCurrentMonth()
         {
-            string query = "SELECT SUM(tHoaDonBan.GiamGia) AS TongTienGiamGiaThangNay " +
+            string query = "SELECT SUM((tHoaDonBan.TongTien / (1 - tGiamGia.PhanTramGiamGia )) * tGiamGia.PhanTramGiamGia) " +
                 "FROM tHoaDonBan " +
-                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE());";
+                "INNER JOIN tGiamGia " +
+                "ON tHoaDonBan.MaGiamGia = tGiamGia.MaGiamGia " +
+                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE()) AND GETDATE() >= NgayBatDau AND GETDATE() <= NgayKetThuc;";
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
-            long discountTotalCurrentMonth = 0;
+            double discountTotalCurrentMonth = 0;
 
             if (dataTable.Rows[0][0] != null)
             {
-                if (long.TryParse(dataTable.Rows[0][0].ToString(), out long result))
+                if (double.TryParse(dataTable.Rows[0][0].ToString(), out double result))
                 {
                     discountTotalCurrentMonth = result; 
                 }
             }
 
-            return discountTotalCurrentMonth;
+            return Math.Round(discountTotalCurrentMonth);
         }
 
-        public long GetPriceTotalCurrentMonth()
+        public double GetPriceTotalCurrentMonth()
         {
-            string query = "SELECT SUM(tHoaDonBan.TongTien) AS TongTienThang " +
+            string query = "SELECT SUM(tHoaDonBan.TongTien / (1 - tGiamGia.PhanTramGiamGia )) AS TongTienThang " +
                 "FROM tHoaDonBan " +
-                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE());";
+                "INNER JOIN tGiamGia " +
+                "ON tHoaDonBan.MaGiamGia = tGiamGia.MaGiamGia " +
+                "WHERE YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE()) AND GETDATE() >= NgayBatDau AND GETDATE() <= NgayKetThuc;";
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
-            long priceTotalCurrentMonth = 0;
+            double priceTotalCurrentMonth = 0;
 
             if (dataTable.Rows[0][0] != null)
             {
-                if (long.TryParse(dataTable.Rows[0][0].ToString(), out long result))
+                if (double.TryParse(dataTable.Rows[0][0].ToString(), out double result))
                 {
                     priceTotalCurrentMonth = result;
                 }
             }
 
-            return priceTotalCurrentMonth;
+            return Math.Round(priceTotalCurrentMonth);
         }
 
-        public DataTable GetBillsOfSellerInformationDataTable()
+        public DataTable GetBillsOfSellerInformationDataTable(string searchValue)
         {
-            string query = "SELECT MaHDBan, TenNhanVien, tNhanVien.DienThoai AS DienThoaiNV, TenKhachHang, tKhachHang.DienThoai AS DienThoaiKH, SoSanPham, GiamGia, TongTien, NgayBan " +
-                "FROM tHoaDonBan " +
-                "INNER JOIN tKhachHang " +
-                "ON tHoaDonBan.MaKhachHang = tKhachHang.MaKhachHang " +
-                "INNER JOIN tNhanVien " +
-                "ON tHoaDonBan.MaNhanVien = tNhanVien.MaNhanVien;";
+            string query = "SELECT MaHDBan, TenNhanVien, tNhanVien.DienThoai AS DienThoaiNV, TenKhachHang, tKhachHang.DienThoai AS DienThoaiKH, SoSanPham, PhanTramGiamGia, TongTien, NgayBan " +
+            "FROM tHoaDonBan " +
+            "INNER JOIN tKhachHang " +
+            "ON tHoaDonBan.MaKhachHang = tKhachHang.MaKhachHang " +
+            "INNER JOIN tNhanVien " +
+            "ON tHoaDonBan.MaNhanVien = tNhanVien.MaNhanVien " +
+            "LEFT JOIN tGiamGia " +
+            "ON tHoaDonBan.MaGiamGia = tGiamGia.MaGiamGia" +
+            (searchValue == "" ? " ;" :
+            $" WHERE MaHDBan LIKE '{searchValue}%' OR TenNhanVien LIKE N'%{searchValue}%' OR TenKhachHang LIKE N'%{searchValue}%' OR tKhachHang.DienThoai LIKE '{searchValue}%';");
+
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
             return dataTable;
         }
 
-        public List<BillsOfSellerInfoResponseDTO> GetBillsOfSellerInformation()
+        public List<BillsOfSellerInfoResponseDTO> GetBillsOfSellerInformation(string searchValue)
         {
-            DataTable dataTable = this.GetBillsOfSellerInformationDataTable();
+            DataTable dataTable = this.GetBillsOfSellerInformationDataTable(searchValue);
 
             List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = new List<BillsOfSellerInfoResponseDTO>();
             foreach (DataRow row in dataTable.Rows)
@@ -211,9 +216,17 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenKhachHang = row[3].ToString();
                 billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiKH = row[4].ToString();
                 billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_SoSanPham = (int)row[5];
-                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia = (long)row[6];
                 billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TongTien = (long)row[7];
                 billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_NgayBan = (DateTime)row[8];
+                // Handle null value
+                billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia = 0;
+                if(row[6] != null)
+                {
+                    if (double.TryParse(row[6].ToString(), out double result))
+                    {
+                        billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia = result;
+                    }
+                }
 
                 billsOfSellerInfoResponseDTOs.Add(billsOfSellerInfoResponseDTO);
             }
@@ -226,22 +239,17 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 "tChiTietHDBan " +
                 "INNER JOIN tDMSanPham " +
                 $"ON tDMSanPham.MaDMSanPham = tChiTietHDBan.MaDMSanPham AND tChiTietHDBan.MaHDBan = '{MaHoaDon}'";
-
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
-
             List<BillDetailInfomationDTO> billDetailInfoResponseDTOs = new List<BillDetailInfomationDTO>();
             foreach (DataRow row in dataTable.Rows)
             {
                 BillDetailInfomationDTO billDetailInfomationDTO = new BillDetailInfomationDTO();
-
                 billDetailInfomationDTO.BillDetailInfomationDTO_MaDMSanPham = row[0].ToString();
                 billDetailInfomationDTO.BillDetailInfomationDTO_TenHangHoa = row[1].ToString();
                 billDetailInfomationDTO.BillDetailInfomationDTO_SoLuong = (int)row[2];
                 billDetailInfomationDTO.BillDetailInfomationDTO_ThanhTien = (long)row[3];
-
                 billDetailInfoResponseDTOs.Add(billDetailInfomationDTO);
             }
-
             return billDetailInfoResponseDTOs;
         }
     }

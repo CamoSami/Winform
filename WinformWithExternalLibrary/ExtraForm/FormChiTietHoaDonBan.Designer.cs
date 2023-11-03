@@ -41,6 +41,8 @@
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ChiTietHoaDonExelBtn = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.PhanTichDVO_HDB_TimKiemBtn = new MaterialSkin.Controls.MaterialButton();
+            this.PhanTichDVO_HDB_TimKiemIP = new MaterialSkin.Controls.MaterialTextBox();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,14 +67,13 @@
             this.ChiTietHoaDonBanLV.FullRowSelect = true;
             this.ChiTietHoaDonBanLV.HideSelection = false;
             this.ChiTietHoaDonBanLV.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.ChiTietHoaDonBanLV.Location = new System.Drawing.Point(8, 82);
-            this.ChiTietHoaDonBanLV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.ChiTietHoaDonBanLV.MinimumSize = new System.Drawing.Size(267, 123);
+            this.ChiTietHoaDonBanLV.Location = new System.Drawing.Point(6, 67);
+            this.ChiTietHoaDonBanLV.MinimumSize = new System.Drawing.Size(200, 100);
             this.ChiTietHoaDonBanLV.MouseLocation = new System.Drawing.Point(-1, -1);
             this.ChiTietHoaDonBanLV.MouseState = MaterialSkin.MouseState.OUT;
             this.ChiTietHoaDonBanLV.Name = "ChiTietHoaDonBanLV";
             this.ChiTietHoaDonBanLV.OwnerDraw = true;
-            this.ChiTietHoaDonBanLV.Size = new System.Drawing.Size(1225, 498);
+            this.ChiTietHoaDonBanLV.Size = new System.Drawing.Size(919, 405);
             this.ChiTietHoaDonBanLV.TabIndex = 0;
             this.ChiTietHoaDonBanLV.UseCompatibleStateImageBehavior = false;
             this.ChiTietHoaDonBanLV.View = System.Windows.Forms.View.Details;
@@ -135,8 +136,8 @@
             this.ChiTietHoaDonExelBtn.Depth = 0;
             this.ChiTietHoaDonExelBtn.HighEmphasis = true;
             this.ChiTietHoaDonExelBtn.Icon = null;
-            this.ChiTietHoaDonExelBtn.Location = new System.Drawing.Point(1021, 7);
-            this.ChiTietHoaDonExelBtn.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.ChiTietHoaDonExelBtn.Location = new System.Drawing.Point(766, 6);
+            this.ChiTietHoaDonExelBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ChiTietHoaDonExelBtn.MouseState = MaterialSkin.MouseState.HOVER;
             this.ChiTietHoaDonExelBtn.Name = "ChiTietHoaDonExelBtn";
             this.ChiTietHoaDonExelBtn.NoAccentTextColor = System.Drawing.Color.Empty;
@@ -150,27 +151,68 @@
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.PhanTichDVO_HDB_TimKiemIP);
+            this.materialCard1.Controls.Add(this.PhanTichDVO_HDB_TimKiemBtn);
             this.materialCard1.Controls.Add(this.ChiTietHoaDonExelBtn);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(9, 582);
-            this.materialCard1.Margin = new System.Windows.Forms.Padding(19, 17, 19, 17);
+            this.materialCard1.Location = new System.Drawing.Point(7, 473);
+            this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
-            this.materialCard1.Padding = new System.Windows.Forms.Padding(19, 17, 19, 17);
-            this.materialCard1.Size = new System.Drawing.Size(1224, 140);
+            this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard1.Size = new System.Drawing.Size(918, 114);
             this.materialCard1.TabIndex = 2;
+            // 
+            // PhanTichDVO_HDB_TimKiemBtn
+            // 
+            this.PhanTichDVO_HDB_TimKiemBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.PhanTichDVO_HDB_TimKiemBtn.CharacterCasing = MaterialSkin.Controls.MaterialButton.CharacterCasingEnum.Normal;
+            this.PhanTichDVO_HDB_TimKiemBtn.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.PhanTichDVO_HDB_TimKiemBtn.Depth = 0;
+            this.PhanTichDVO_HDB_TimKiemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.PhanTichDVO_HDB_TimKiemBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PhanTichDVO_HDB_TimKiemBtn.HighEmphasis = true;
+            this.PhanTichDVO_HDB_TimKiemBtn.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
+            this.PhanTichDVO_HDB_TimKiemBtn.Image = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
+            this.PhanTichDVO_HDB_TimKiemBtn.Location = new System.Drawing.Point(346, 28);
+            this.PhanTichDVO_HDB_TimKiemBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.PhanTichDVO_HDB_TimKiemBtn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.PhanTichDVO_HDB_TimKiemBtn.Name = "PhanTichDVO_HDB_TimKiemBtn";
+            this.PhanTichDVO_HDB_TimKiemBtn.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.PhanTichDVO_HDB_TimKiemBtn.Size = new System.Drawing.Size(114, 36);
+            this.PhanTichDVO_HDB_TimKiemBtn.TabIndex = 7;
+            this.PhanTichDVO_HDB_TimKiemBtn.Text = "Tìm kiếm";
+            this.PhanTichDVO_HDB_TimKiemBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.PhanTichDVO_HDB_TimKiemBtn.UseAccentColor = false;
+            this.PhanTichDVO_HDB_TimKiemBtn.UseVisualStyleBackColor = true;
+            // 
+            // PhanTichDVO_HDB_TimKiemIP
+            // 
+            this.PhanTichDVO_HDB_TimKiemIP.AnimateReadOnly = false;
+            this.PhanTichDVO_HDB_TimKiemIP.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.PhanTichDVO_HDB_TimKiemIP.Depth = 0;
+            this.PhanTichDVO_HDB_TimKiemIP.DetectUrls = false;
+            this.PhanTichDVO_HDB_TimKiemIP.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.PhanTichDVO_HDB_TimKiemIP.LeadingIcon = null;
+            this.PhanTichDVO_HDB_TimKiemIP.Location = new System.Drawing.Point(32, 14);
+            this.PhanTichDVO_HDB_TimKiemIP.MaxLength = 50;
+            this.PhanTichDVO_HDB_TimKiemIP.MouseState = MaterialSkin.MouseState.OUT;
+            this.PhanTichDVO_HDB_TimKiemIP.Multiline = false;
+            this.PhanTichDVO_HDB_TimKiemIP.Name = "PhanTichDVO_HDB_TimKiemIP";
+            this.PhanTichDVO_HDB_TimKiemIP.Size = new System.Drawing.Size(300, 50);
+            this.PhanTichDVO_HDB_TimKiemIP.TabIndex = 8;
+            this.PhanTichDVO_HDB_TimKiemIP.Text = "";
+            this.PhanTichDVO_HDB_TimKiemIP.TrailingIcon = null;
             // 
             // FormChiTietHoaDonBan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1241, 729);
+            this.ClientSize = new System.Drawing.Size(931, 592);
             this.Controls.Add(this.materialCard1);
             this.Controls.Add(this.ChiTietHoaDonBanLV);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormChiTietHoaDonBan";
-            this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
             this.Text = "Danh sách hóa đơn bán";
             this.materialCard1.ResumeLayout(false);
             this.materialCard1.PerformLayout();
@@ -193,5 +235,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private MaterialSkin.Controls.MaterialButton ChiTietHoaDonExelBtn;
         private MaterialSkin.Controls.MaterialCard materialCard1;
+        private MaterialSkin.Controls.MaterialButton PhanTichDVO_HDB_TimKiemBtn;
+        private MaterialSkin.Controls.MaterialTextBox PhanTichDVO_HDB_TimKiemIP;
     }
 }

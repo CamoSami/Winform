@@ -30,7 +30,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects.CustomDTO
             public string BillOfSellerInfoResponseDTO_TenKhachHang { get; set; }
             public string BillOfSellerInfoResponseDTO_DienThoaiKH { get; set; }
             public int BillOfSellerInfoResponseDTO_SoSanPham { get; set; }
-            public long BillOfSellerInfoResponseDTO_GiamGia { get; set; }
+            public double BillOfSellerInfoResponseDTO_GiamGia { get; set; }
             public long BillOfSellerInfoResponseDTO_TongTien { get; set; }
             public DateTime BillOfSellerInfoResponseDTO_NgayBan { get; set; }
         }

@@ -389,11 +389,11 @@ namespace WinformWithExternalLibrary.CustomComponent
 			{
 				new GiamGiaDTO(
 					giamGiaDTO_MaGiamGia: Guid.NewGuid(),
-					giamGiaDTO_TenGiamGia: "Giảm giá ngày 20/10",
+					giamGiaDTO_TenGiamGia: "Giảm giá ngày 20/11",
 					giamGiaDTO_PhanTramGiamGia: 0.15f,
 					giamGiaDTO_MaxGiamGia: 150000,
-					giamGiaDTO_NgayBatDau: new DateTime(day: 1, month: 10, year: 2023),
-					giamGiaDTO_NgayKetThuc: new DateTime(day: 1, month: 11, year: 2023)
+					giamGiaDTO_NgayBatDau: new DateTime(day: 1, month: 11, year: 2023),
+					giamGiaDTO_NgayKetThuc: new DateTime(day: 30, month: 11, year: 2023)
 					),
 				new GiamGiaDTO(
 					giamGiaDTO_MaGiamGia: Guid.NewGuid(),
@@ -403,7 +403,7 @@ namespace WinformWithExternalLibrary.CustomComponent
 					giamGiaDTO_NgayBatDau: new DateTime(day: 20, month: 5, year: 2023),
 					giamGiaDTO_NgayKetThuc: new DateTime(day: 10, month: 6, year: 2023)
 					)
-			};
+            };
 
 			foreach (GiamGiaDTO giamGiaDTO in giamGiaDTOs)
 			{
@@ -637,8 +637,8 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 					DateTime minGiamGia1 = new DateTime(day: 20, month: 5, year: 2023);
 					DateTime maxGiamGia1 = new DateTime(day: 10, month: 6, year: 2023); 
-					DateTime minGiamGia2 = new DateTime(day: 1, month: 10, year: 2023);
-					DateTime maxGiamGia2 = new DateTime(day: 1, month: 11, year: 2023);
+					DateTime minGiamGia2 = new DateTime(day: 1, month: 11, year: 2023);
+					DateTime maxGiamGia2 = new DateTime(day: 30, month: 11, year: 2023);
 
 					if (DTO.HoaDonBanDTO_NgayBan > minGiamGia1 && DTO.HoaDonBanDTO_NgayBan < maxGiamGia1)
 					{
