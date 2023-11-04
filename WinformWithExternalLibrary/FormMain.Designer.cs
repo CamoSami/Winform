@@ -35,10 +35,12 @@ namespace WinformWithExternalLibrary
             this.materialTabControl = new MaterialSkin.Controls.MaterialTabControl();
             this.TabPageThongTin = new System.Windows.Forms.TabPage();
             this.HoaDonBanDVO = new System.Windows.Forms.TabPage();
+            this.HoaDonBanDVO_ThanhToan_Validation = new System.Windows.Forms.Label();
+            this.HoaDonBanDVO_ThanhToan = new MaterialSkin.Controls.MaterialTextBox();
             this.TabPageHoaDonBan_ButtonXoaSanPham = new MaterialSkin.Controls.MaterialButton();
             this.HoaDonBanDVO_TongTien_Validation = new System.Windows.Forms.Label();
             this.ChiTietHDBanDVO_SoLuong_Validation = new System.Windows.Forms.Label();
-            this.HoaDonBanDTO_MaGiamGia_Validation = new System.Windows.Forms.Label();
+            this.HoaDonBanDVO_TenGiamGia_Validation = new System.Windows.Forms.Label();
             this.NhanVienThuNganDVO_NhanVien = new System.Windows.Forms.ComboBox();
             this.HoaDonBanDVO_TenKhachHang_Validation = new System.Windows.Forms.Label();
             this.ChiTietHDBanDVO_TenSanPham_Validation = new System.Windows.Forms.Label();
@@ -49,7 +51,7 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonTaoMoiHoaDon = new MaterialSkin.Controls.MaterialButton();
             this.HoaDonBanDVO_TongTien = new MaterialSkin.Controls.MaterialTextBox();
             this.TabPageHoaDonBan_ButtonNhapChiTiet = new MaterialSkin.Controls.MaterialButton();
-            this.HoaDonBanDTO_MaGiamGia = new MaterialSkin.Controls.MaterialTextBox();
+            this.HoaDonBanDVO_TenGiamGia = new MaterialSkin.Controls.MaterialTextBox();
             this.TabPageHoaDonBan_ButtonTaoMoiSanPham = new MaterialSkin.Controls.MaterialButton();
             this.HoaDonBanDVO_DienThoaiKhachHang = new System.Windows.Forms.ComboBox();
             this.HoaDonBanDVO_TenKhachHang = new MaterialSkin.Controls.MaterialTextBox();
@@ -98,6 +100,7 @@ namespace WinformWithExternalLibrary
             this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
             this.cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.TabPagePhanTich_HoaDonBan_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.TabPagePhanTich_HoaDonBan_GiamGiaLB = new System.Windows.Forms.Label();
             this.TabPagePhanTich_HoaDonBan_GiamGiaPB = new MaterialSkin.Controls.MaterialProgressBar();
             this.TabPagePhanTich_HoaDonBan_DoanhThu_LB = new System.Windows.Forms.Label();
@@ -105,7 +108,6 @@ namespace WinformWithExternalLibrary
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.TabPagePhanTich_HoaDonBan_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.materialTabControl.SuspendLayout();
             this.HoaDonBanDVO.SuspendLayout();
             this.TabPagePhanTich.SuspendLayout();
@@ -152,10 +154,12 @@ namespace WinformWithExternalLibrary
             // 
             // HoaDonBanDVO
             // 
+            this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_ThanhToan_Validation);
+            this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_ThanhToan);
             this.HoaDonBanDVO.Controls.Add(this.TabPageHoaDonBan_ButtonXoaSanPham);
             this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_TongTien_Validation);
             this.HoaDonBanDVO.Controls.Add(this.ChiTietHDBanDVO_SoLuong_Validation);
-            this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDTO_MaGiamGia_Validation);
+            this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_TenGiamGia_Validation);
             this.HoaDonBanDVO.Controls.Add(this.NhanVienThuNganDVO_NhanVien);
             this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_TenKhachHang_Validation);
             this.HoaDonBanDVO.Controls.Add(this.ChiTietHDBanDVO_TenSanPham_Validation);
@@ -166,7 +170,7 @@ namespace WinformWithExternalLibrary
             this.HoaDonBanDVO.Controls.Add(this.TabPageHoaDonBan_ButtonTaoMoiHoaDon);
             this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_TongTien);
             this.HoaDonBanDVO.Controls.Add(this.TabPageHoaDonBan_ButtonNhapChiTiet);
-            this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDTO_MaGiamGia);
+            this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_TenGiamGia);
             this.HoaDonBanDVO.Controls.Add(this.TabPageHoaDonBan_ButtonTaoMoiSanPham);
             this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_DienThoaiKhachHang);
             this.HoaDonBanDVO.Controls.Add(this.HoaDonBanDVO_TenKhachHang);
@@ -186,6 +190,32 @@ namespace WinformWithExternalLibrary
             this.HoaDonBanDVO.Text = "Hóa Đơn Bán";
             this.HoaDonBanDVO.UseVisualStyleBackColor = true;
             // 
+            // HoaDonBanDVO_ThanhToan_Validation
+            // 
+            this.HoaDonBanDVO_ThanhToan_Validation.Location = new System.Drawing.Point(1112, 681);
+            this.HoaDonBanDVO_ThanhToan_Validation.Name = "HoaDonBanDVO_ThanhToan_Validation";
+            this.HoaDonBanDVO_ThanhToan_Validation.Size = new System.Drawing.Size(356, 23);
+            this.HoaDonBanDVO_ThanhToan_Validation.TabIndex = 31;
+            this.HoaDonBanDVO_ThanhToan_Validation.Text = "HoaDonBanDVO_ThanhToan_Validation";
+            // 
+            // HoaDonBanDVO_ThanhToan
+            // 
+            this.HoaDonBanDVO_ThanhToan.AnimateReadOnly = false;
+            this.HoaDonBanDVO_ThanhToan.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.HoaDonBanDVO_ThanhToan.Depth = 0;
+            this.HoaDonBanDVO_ThanhToan.Enabled = false;
+            this.HoaDonBanDVO_ThanhToan.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.HoaDonBanDVO_ThanhToan.LeadingIcon = null;
+            this.HoaDonBanDVO_ThanhToan.Location = new System.Drawing.Point(1112, 628);
+            this.HoaDonBanDVO_ThanhToan.MaxLength = 50;
+            this.HoaDonBanDVO_ThanhToan.MouseState = MaterialSkin.MouseState.OUT;
+            this.HoaDonBanDVO_ThanhToan.Multiline = false;
+            this.HoaDonBanDVO_ThanhToan.Name = "HoaDonBanDVO_ThanhToan";
+            this.HoaDonBanDVO_ThanhToan.Size = new System.Drawing.Size(354, 50);
+            this.HoaDonBanDVO_ThanhToan.TabIndex = 30;
+            this.HoaDonBanDVO_ThanhToan.Text = "";
+            this.HoaDonBanDVO_ThanhToan.TrailingIcon = null;
+            // 
             // TabPageHoaDonBan_ButtonXoaSanPham
             // 
             this.TabPageHoaDonBan_ButtonXoaSanPham.AutoSize = false;
@@ -194,7 +224,7 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonXoaSanPham.Depth = 0;
             this.TabPageHoaDonBan_ButtonXoaSanPham.HighEmphasis = true;
             this.TabPageHoaDonBan_ButtonXoaSanPham.Icon = null;
-            this.TabPageHoaDonBan_ButtonXoaSanPham.Location = new System.Drawing.Point(1233, 280);
+            this.TabPageHoaDonBan_ButtonXoaSanPham.Location = new System.Drawing.Point(1232, 280);
             this.TabPageHoaDonBan_ButtonXoaSanPham.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.TabPageHoaDonBan_ButtonXoaSanPham.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPageHoaDonBan_ButtonXoaSanPham.Name = "TabPageHoaDonBan_ButtonXoaSanPham";
@@ -209,7 +239,7 @@ namespace WinformWithExternalLibrary
             // 
             // HoaDonBanDVO_TongTien_Validation
             // 
-            this.HoaDonBanDVO_TongTien_Validation.Location = new System.Drawing.Point(1113, 602);
+            this.HoaDonBanDVO_TongTien_Validation.Location = new System.Drawing.Point(1112, 602);
             this.HoaDonBanDVO_TongTien_Validation.Name = "HoaDonBanDVO_TongTien_Validation";
             this.HoaDonBanDVO_TongTien_Validation.Size = new System.Drawing.Size(356, 23);
             this.HoaDonBanDVO_TongTien_Validation.TabIndex = 28;
@@ -223,13 +253,13 @@ namespace WinformWithExternalLibrary
             this.ChiTietHDBanDVO_SoLuong_Validation.TabIndex = 25;
             this.ChiTietHDBanDVO_SoLuong_Validation.Text = "ChiTietHDBanDVO_SoLuong_Validation";
             // 
-            // HoaDonBanDTO_MaGiamGia_Validation
+            // HoaDonBanDVO_TenGiamGia_Validation
             // 
-            this.HoaDonBanDTO_MaGiamGia_Validation.Location = new System.Drawing.Point(1113, 523);
-            this.HoaDonBanDTO_MaGiamGia_Validation.Name = "HoaDonBanDTO_MaGiamGia_Validation";
-            this.HoaDonBanDTO_MaGiamGia_Validation.Size = new System.Drawing.Size(356, 23);
-            this.HoaDonBanDTO_MaGiamGia_Validation.TabIndex = 27;
-            this.HoaDonBanDTO_MaGiamGia_Validation.Text = "HoaDonBanDTO_MaGiamGia_Validation";
+            this.HoaDonBanDVO_TenGiamGia_Validation.Location = new System.Drawing.Point(1112, 523);
+            this.HoaDonBanDVO_TenGiamGia_Validation.Name = "HoaDonBanDVO_TenGiamGia_Validation";
+            this.HoaDonBanDVO_TenGiamGia_Validation.Size = new System.Drawing.Size(356, 23);
+            this.HoaDonBanDVO_TenGiamGia_Validation.TabIndex = 27;
+            this.HoaDonBanDVO_TenGiamGia_Validation.Text = "HoaDonBanDVO_TenGiamGia_Validation";
             // 
             // NhanVienThuNganDVO_NhanVien
             // 
@@ -240,7 +270,7 @@ namespace WinformWithExternalLibrary
             // 
             // HoaDonBanDVO_TenKhachHang_Validation
             // 
-            this.HoaDonBanDVO_TenKhachHang_Validation.Location = new System.Drawing.Point(1111, 444);
+            this.HoaDonBanDVO_TenKhachHang_Validation.Location = new System.Drawing.Point(1112, 444);
             this.HoaDonBanDVO_TenKhachHang_Validation.Name = "HoaDonBanDVO_TenKhachHang_Validation";
             this.HoaDonBanDVO_TenKhachHang_Validation.Size = new System.Drawing.Size(356, 23);
             this.HoaDonBanDVO_TenKhachHang_Validation.TabIndex = 26;
@@ -278,7 +308,7 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonNhapHoaDon.Depth = 0;
             this.TabPageHoaDonBan_ButtonNhapHoaDon.HighEmphasis = true;
             this.TabPageHoaDonBan_ButtonNhapHoaDon.Icon = null;
-            this.TabPageHoaDonBan_ButtonNhapHoaDon.Location = new System.Drawing.Point(1353, 718);
+            this.TabPageHoaDonBan_ButtonNhapHoaDon.Location = new System.Drawing.Point(1353, 715);
             this.TabPageHoaDonBan_ButtonNhapHoaDon.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.TabPageHoaDonBan_ButtonNhapHoaDon.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPageHoaDonBan_ButtonNhapHoaDon.Name = "TabPageHoaDonBan_ButtonNhapHoaDon";
@@ -307,7 +337,7 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.Depth = 0;
             this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.HighEmphasis = true;
             this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.Icon = null;
-            this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.Location = new System.Drawing.Point(1111, 718);
+            this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.Location = new System.Drawing.Point(1110, 715);
             this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.Name = "TabPageHoaDonBan_ButtonTaoMoiHoaDon";
@@ -328,7 +358,7 @@ namespace WinformWithExternalLibrary
             this.HoaDonBanDVO_TongTien.Enabled = false;
             this.HoaDonBanDVO_TongTien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.HoaDonBanDVO_TongTien.LeadingIcon = null;
-            this.HoaDonBanDVO_TongTien.Location = new System.Drawing.Point(1113, 549);
+            this.HoaDonBanDVO_TongTien.Location = new System.Drawing.Point(1112, 549);
             this.HoaDonBanDVO_TongTien.MaxLength = 50;
             this.HoaDonBanDVO_TongTien.MouseState = MaterialSkin.MouseState.OUT;
             this.HoaDonBanDVO_TongTien.Multiline = false;
@@ -346,7 +376,7 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonNhapChiTiet.Depth = 0;
             this.TabPageHoaDonBan_ButtonNhapChiTiet.HighEmphasis = true;
             this.TabPageHoaDonBan_ButtonNhapChiTiet.Icon = null;
-            this.TabPageHoaDonBan_ButtonNhapChiTiet.Location = new System.Drawing.Point(1354, 280);
+            this.TabPageHoaDonBan_ButtonNhapChiTiet.Location = new System.Drawing.Point(1353, 280);
             this.TabPageHoaDonBan_ButtonNhapChiTiet.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.TabPageHoaDonBan_ButtonNhapChiTiet.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPageHoaDonBan_ButtonNhapChiTiet.Name = "TabPageHoaDonBan_ButtonNhapChiTiet";
@@ -359,22 +389,22 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonNhapChiTiet.UseAccentColor = false;
             this.TabPageHoaDonBan_ButtonNhapChiTiet.UseVisualStyleBackColor = true;
             // 
-            // HoaDonBanDTO_MaGiamGia
+            // HoaDonBanDVO_TenGiamGia
             // 
-            this.HoaDonBanDTO_MaGiamGia.AnimateReadOnly = false;
-            this.HoaDonBanDTO_MaGiamGia.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.HoaDonBanDTO_MaGiamGia.Depth = 0;
-            this.HoaDonBanDTO_MaGiamGia.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.HoaDonBanDTO_MaGiamGia.LeadingIcon = null;
-            this.HoaDonBanDTO_MaGiamGia.Location = new System.Drawing.Point(1113, 470);
-            this.HoaDonBanDTO_MaGiamGia.MaxLength = 50;
-            this.HoaDonBanDTO_MaGiamGia.MouseState = MaterialSkin.MouseState.OUT;
-            this.HoaDonBanDTO_MaGiamGia.Multiline = false;
-            this.HoaDonBanDTO_MaGiamGia.Name = "HoaDonBanDTO_MaGiamGia";
-            this.HoaDonBanDTO_MaGiamGia.Size = new System.Drawing.Size(354, 50);
-            this.HoaDonBanDTO_MaGiamGia.TabIndex = 6;
-            this.HoaDonBanDTO_MaGiamGia.Text = "";
-            this.HoaDonBanDTO_MaGiamGia.TrailingIcon = null;
+            this.HoaDonBanDVO_TenGiamGia.AnimateReadOnly = false;
+            this.HoaDonBanDVO_TenGiamGia.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.HoaDonBanDVO_TenGiamGia.Depth = 0;
+            this.HoaDonBanDVO_TenGiamGia.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.HoaDonBanDVO_TenGiamGia.LeadingIcon = null;
+            this.HoaDonBanDVO_TenGiamGia.Location = new System.Drawing.Point(1112, 470);
+            this.HoaDonBanDVO_TenGiamGia.MaxLength = 50;
+            this.HoaDonBanDVO_TenGiamGia.MouseState = MaterialSkin.MouseState.OUT;
+            this.HoaDonBanDVO_TenGiamGia.Multiline = false;
+            this.HoaDonBanDVO_TenGiamGia.Name = "HoaDonBanDVO_TenGiamGia";
+            this.HoaDonBanDVO_TenGiamGia.Size = new System.Drawing.Size(354, 50);
+            this.HoaDonBanDVO_TenGiamGia.TabIndex = 6;
+            this.HoaDonBanDVO_TenGiamGia.Text = "";
+            this.HoaDonBanDVO_TenGiamGia.TrailingIcon = null;
             // 
             // TabPageHoaDonBan_ButtonTaoMoiSanPham
             // 
@@ -384,7 +414,7 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Depth = 0;
             this.TabPageHoaDonBan_ButtonTaoMoiSanPham.HighEmphasis = true;
             this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Icon = null;
-            this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Location = new System.Drawing.Point(1112, 280);
+            this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Location = new System.Drawing.Point(1111, 280);
             this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.TabPageHoaDonBan_ButtonTaoMoiSanPham.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Name = "TabPageHoaDonBan_ButtonTaoMoiSanPham";
@@ -399,7 +429,7 @@ namespace WinformWithExternalLibrary
             // 
             // HoaDonBanDVO_DienThoaiKhachHang
             // 
-            this.HoaDonBanDVO_DienThoaiKhachHang.Location = new System.Drawing.Point(1113, 335);
+            this.HoaDonBanDVO_DienThoaiKhachHang.Location = new System.Drawing.Point(1112, 335);
             this.HoaDonBanDVO_DienThoaiKhachHang.Name = "HoaDonBanDVO_DienThoaiKhachHang";
             this.HoaDonBanDVO_DienThoaiKhachHang.Size = new System.Drawing.Size(235, 21);
             this.HoaDonBanDVO_DienThoaiKhachHang.TabIndex = 4;
@@ -412,7 +442,7 @@ namespace WinformWithExternalLibrary
             this.HoaDonBanDVO_TenKhachHang.Enabled = false;
             this.HoaDonBanDVO_TenKhachHang.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.HoaDonBanDVO_TenKhachHang.LeadingIcon = null;
-            this.HoaDonBanDVO_TenKhachHang.Location = new System.Drawing.Point(1113, 391);
+            this.HoaDonBanDVO_TenKhachHang.Location = new System.Drawing.Point(1112, 391);
             this.HoaDonBanDVO_TenKhachHang.MaxLength = 50;
             this.HoaDonBanDVO_TenKhachHang.MouseState = MaterialSkin.MouseState.OUT;
             this.HoaDonBanDVO_TenKhachHang.Multiline = false;
@@ -439,7 +469,7 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonTaoKhachHang.Depth = 0;
             this.TabPageHoaDonBan_ButtonTaoKhachHang.HighEmphasis = true;
             this.TabPageHoaDonBan_ButtonTaoKhachHang.Icon = null;
-            this.TabPageHoaDonBan_ButtonTaoKhachHang.Location = new System.Drawing.Point(1355, 328);
+            this.TabPageHoaDonBan_ButtonTaoKhachHang.Location = new System.Drawing.Point(1354, 328);
             this.TabPageHoaDonBan_ButtonTaoKhachHang.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.TabPageHoaDonBan_ButtonTaoKhachHang.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPageHoaDonBan_ButtonTaoKhachHang.Name = "TabPageHoaDonBan_ButtonTaoKhachHang";
@@ -460,7 +490,7 @@ namespace WinformWithExternalLibrary
             this.TabPageHoaDonBan_ButtonTaoSanPham.Depth = 0;
             this.TabPageHoaDonBan_ButtonTaoSanPham.HighEmphasis = true;
             this.TabPageHoaDonBan_ButtonTaoSanPham.Icon = null;
-            this.TabPageHoaDonBan_ButtonTaoSanPham.Location = new System.Drawing.Point(1354, 62);
+            this.TabPageHoaDonBan_ButtonTaoSanPham.Location = new System.Drawing.Point(1354, 57);
             this.TabPageHoaDonBan_ButtonTaoSanPham.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.TabPageHoaDonBan_ButtonTaoSanPham.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPageHoaDonBan_ButtonTaoSanPham.Name = "TabPageHoaDonBan_ButtonTaoSanPham";
@@ -549,7 +579,7 @@ namespace WinformWithExternalLibrary
             // 
             // ChiTietHDBanDVO_MaSanPham
             // 
-            this.ChiTietHDBanDVO_MaSanPham.Location = new System.Drawing.Point(1112, 69);
+            this.ChiTietHDBanDVO_MaSanPham.Location = new System.Drawing.Point(1111, 64);
             this.ChiTietHDBanDVO_MaSanPham.Name = "ChiTietHDBanDVO_MaSanPham";
             this.ChiTietHDBanDVO_MaSanPham.Size = new System.Drawing.Size(235, 21);
             this.ChiTietHDBanDVO_MaSanPham.TabIndex = 2;
@@ -711,7 +741,7 @@ namespace WinformWithExternalLibrary
             this.materialFloatingActionButton3.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
             this.materialFloatingActionButton3.ImageKey = "icons8-download-48.png";
             this.materialFloatingActionButton3.ImageList = this.imageList1;
-            this.materialFloatingActionButton3.Location = new System.Drawing.Point(1365, 108);
+            this.materialFloatingActionButton3.Location = new System.Drawing.Point(1369, 82);
             this.materialFloatingActionButton3.Margin = new System.Windows.Forms.Padding(4);
             this.materialFloatingActionButton3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFloatingActionButton3.Name = "materialFloatingActionButton3";
@@ -750,7 +780,7 @@ namespace WinformWithExternalLibrary
             this.materialCard3.Controls.Add(this.label18);
             this.materialCard3.Depth = 0;
             this.materialCard3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard3.Location = new System.Drawing.Point(1022, 58);
+            this.materialCard3.Location = new System.Drawing.Point(1026, 32);
             this.materialCard3.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard3.Name = "materialCard3";
@@ -821,7 +851,7 @@ namespace WinformWithExternalLibrary
             this.materialFloatingActionButton2.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
             this.materialFloatingActionButton2.ImageKey = "icons8-download-48.png";
             this.materialFloatingActionButton2.ImageList = this.imageList1;
-            this.materialFloatingActionButton2.Location = new System.Drawing.Point(884, 108);
+            this.materialFloatingActionButton2.Location = new System.Drawing.Point(888, 82);
             this.materialFloatingActionButton2.Margin = new System.Windows.Forms.Padding(4);
             this.materialFloatingActionButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialFloatingActionButton2.Name = "materialFloatingActionButton2";
@@ -842,7 +872,7 @@ namespace WinformWithExternalLibrary
             this.materialCard2.Controls.Add(this.label12);
             this.materialCard2.Depth = 0;
             this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard2.Location = new System.Drawing.Point(542, 58);
+            this.materialCard2.Location = new System.Drawing.Point(546, 32);
             this.materialCard2.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard2.Name = "materialCard2";
@@ -876,7 +906,7 @@ namespace WinformWithExternalLibrary
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(120, 82);
+            this.label8.Location = new System.Drawing.Point(131, 76);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(101, 24);
@@ -920,7 +950,7 @@ namespace WinformWithExternalLibrary
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(125, 50);
+            this.label12.Location = new System.Drawing.Point(131, 46);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(43, 24);
@@ -983,13 +1013,31 @@ namespace WinformWithExternalLibrary
             this.materialCard1.Controls.Add(this.label2);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(48, 58);
+            this.materialCard1.Location = new System.Drawing.Point(52, 32);
             this.materialCard1.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
             this.materialCard1.Padding = new System.Windows.Forms.Padding(18);
             this.materialCard1.Size = new System.Drawing.Size(370, 165);
             this.materialCard1.TabIndex = 0;
+            // 
+            // TabPagePhanTich_HoaDonBan_ShowBTN
+            // 
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Depth = 0;
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageKey = "icons8-download-48.png";
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageList = this.imageList1;
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Location = new System.Drawing.Point(399, 82);
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Name = "TabPagePhanTich_HoaDonBan_ShowBTN";
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Size = new System.Drawing.Size(70, 70);
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.TabIndex = 10;
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Text = "materialFloatingActionButton1";
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.UseVisualStyleBackColor = false;
             // 
             // TabPagePhanTich_HoaDonBan_GiamGiaLB
             // 
@@ -1053,9 +1101,9 @@ namespace WinformWithExternalLibrary
             this.label3.Location = new System.Drawing.Point(21, 82);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 19);
+            this.label3.Size = new System.Drawing.Size(72, 19);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Doanh thu";
+            this.label3.Text = "Tổng tiền";
             // 
             // label2
             // 
@@ -1067,24 +1115,6 @@ namespace WinformWithExternalLibrary
             this.label2.Size = new System.Drawing.Size(64, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Số lượng";
-            // 
-            // TabPagePhanTich_HoaDonBan_ShowBTN
-            // 
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Depth = 0;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageKey = "icons8-download-48.png";
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageList = this.imageList1;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Location = new System.Drawing.Point(390, 108);
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Name = "TabPagePhanTich_HoaDonBan_ShowBTN";
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Size = new System.Drawing.Size(70, 70);
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.TabIndex = 10;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Text = "materialFloatingActionButton1";
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.UseVisualStyleBackColor = false;
             // 
             // FormMain
             // 
@@ -1172,7 +1202,7 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.Label SoHoaDonBanLB;
         private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart cartesianChart2;
         private LiveChartsCore.SkiaSharpView.WinForms.CartesianChart cartesianChart1;
-		private MaterialSkin.Controls.MaterialTextBox HoaDonBanDTO_MaGiamGia;
+		private MaterialSkin.Controls.MaterialTextBox HoaDonBanDVO_TenGiamGia;
 		private System.Windows.Forms.ComboBox HoaDonBanDVO_DienThoaiKhachHang;
 		private MaterialSkin.Controls.MaterialTextBox HoaDonBanDVO_TenKhachHang;
 		private MaterialSkin.Controls.MaterialTextBox ChiTietHDBanDVO_SoLuong;
@@ -1185,7 +1215,7 @@ namespace WinformWithExternalLibrary
 		private MaterialSkin.Controls.MaterialButton TabPageHoaDonBan_ButtonTaoMoiSanPham;
 		private MaterialSkin.Controls.MaterialTextBox HoaDonBanDVO_TongTien;
 		private System.Windows.Forms.Label HoaDonBanDVO_TongTien_Validation;
-		private System.Windows.Forms.Label HoaDonBanDTO_MaGiamGia_Validation;
+		private System.Windows.Forms.Label HoaDonBanDVO_TenGiamGia_Validation;
 		private System.Windows.Forms.Label HoaDonBanDVO_TenKhachHang_Validation;
 		private System.Windows.Forms.Label HoaDonBanDVO_DienThoaiKhachHang_Validation;
 		private System.Windows.Forms.Label ChiTietHDBanDVO_TenSanPham_Validation;
@@ -1199,5 +1229,7 @@ namespace WinformWithExternalLibrary
         private MaterialSkin.Controls.MaterialProgressBar TabPagePhanTich_HoaDonBan_GiamGiaPB;
         private System.Windows.Forms.Label TabPagePhanTich_HoaDonBan_GiamGiaLB;
         private MaterialSkin.Controls.MaterialFloatingActionButton TabPagePhanTich_HoaDonBan_ShowBTN;
+		private System.Windows.Forms.Label HoaDonBanDVO_ThanhToan_Validation;
+		private MaterialSkin.Controls.MaterialTextBox HoaDonBanDVO_ThanhToan;
     }
 }

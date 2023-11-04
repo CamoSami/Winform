@@ -157,7 +157,6 @@
 			this.Name = "FormCreateKhachHang";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FormCreateKhachHang";
-			this.TopMost = true;
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

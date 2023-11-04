@@ -432,95 +432,31 @@ namespace WinformWithExternalLibrary
 			//			TabPageHoaDonBan_ButtonNhapHoaDon
 			this.TabPageHoaDonBan_ButtonNhapHoaDon.Click += (obj, e) =>
 			{
-				//		...Nothing?
-				if (this.TabPageHoaDonBan_materialListView.Items.Count <= 0)
-				{
-					MaterialMessageBox.Show(
-						text: "Hóa đơn chưa có đủ dữ liệu",
-						caption: this.Text,
-						UseRichTextBox: false,
-						buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-						);
-				}
-
 				if (this.TryValidationFromControl(this.HoaDonBanDVO_TongTien, onlyOneControl: false, out dynamic baseHoaDonBan) &&
 					this.TryValidationFromControl(this.NhanVienThuNganDVO_NhanVien, onlyOneControl: false, out dynamic baseNhanVienThuNgan))
 				{
 					//		Validated!
+					
+					//		...Nothing?
+					if (this.TabPageHoaDonBan_materialListView.Items.Count <= 0)
+					{
+						MaterialMessageBox.Show(
+							text: "Hóa đơn chưa có đủ dữ liệu",
+							caption: this.Text,
+							UseRichTextBox: false,
+							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+							);
 
-					//		TODO: Show another Confirmation Form
+						return;
+					}
 
 					//		Casting
 					NhanVienThuNganDVO nhanVienThuNganDVO = baseNhanVienThuNgan as NhanVienThuNganDVO;
 					HoaDonBanDVO hoaDonBanDVO = baseHoaDonBan as HoaDonBanDVO;
 
-					if (int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDTO_MaGiamGia), out int giamGiaTemp))
-					{
-						giamGiaTemp = 0;
-					}
-
-					//		TODO: FIX THIS
-					HoaDonBanDTO hoaDonBanDTO = new HoaDonBanDTO(
-						hoaDonBanDTO_MaHDBan: Guid.NewGuid(),
-						hoaDonBanDTO_MaKhachHang: KhachHangDAO.Instance.GetMaKhachHangWithPhoneNumbers(hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang),
-						hoaDonBanDTO_MaNhanVien: NhanVienDAO.Instance.GetMaNhanVienByTenNhanVienAndNgaySinh(nhanVienThuNganDVO.NhanVienThuNganDVO_NhanVien),
-						hoaDonBanDTO_NgayBan: DateTime.Now,
-						hoaDonBanDTO_SoSanPham: this.TabPageHoaDonBan_materialListView.Items.Count,
-						hoaDonBanDTO_MaGiamGia: Guid.Empty,
-						hoaDonBanDTO_TongTien: long.Parse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien)),
-						hoaDonBanDTO_TongTienKhachTra: 0
-						);
-
-					if (!HoaDonBanDAO.Instance.InsertHoaDonBan(hoaDonBanDTO))
-					{
-						MaterialMessageBox.Show(
-							text: "Có lỗi gì đó vừa xảy ra",
-							caption: "!HoaDonBanDAO",
-							UseRichTextBox: false,
-							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-						);
-
-						return;
-					}
-
-					foreach (ListViewItem listViewItem in this.TabPageHoaDonBan_materialListView.Items)
-					{
-						Guid maDMSanPhamTemp = DMSanPhamDAO.Instance.GetMaDMSanPhamFromMaSanPham(listViewItem.SubItems[1].Text);
-
-						if (maDMSanPhamTemp == Guid.Empty)
-						{
-							MaterialMessageBox.Show(
-							text: "Có lỗi gì đó vừa xảy ra",
-							caption: "maDMSanPhamTemp == Guid.Empty",
-							UseRichTextBox: false,
-							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-							);
-
-							return;
-						}
-
-						ChiTietHDBanDTO chiTietHDBanDTO = new ChiTietHDBanDTO(
-							chiTietHDBanDTO_MaHDBan: hoaDonBanDTO.HoaDonBanDTO_MaHDBan,
-							chiTietHDBanDTO_MaDMSanPham: maDMSanPhamTemp,
-							chiTietHDBanDTO_SoLuong: int.Parse(listViewItem.SubItems[3].Text),
-							chiTietHDBanDTO_ThanhTien: long.Parse(listViewItem.SubItems[5].Text)
-							);
-
-						if (!ChiTietHDBanDAO.Instance.InsertChiTietHDBan(chiTietHDBanDTO))
-						{
-							MaterialMessageBox.Show(
-							text: "Có lỗi gì đó vừa xảy ra",
-							caption: "!ChiTietHDBanDAO",
-							UseRichTextBox: false,
-							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-							);
-
-							return;
-						}
-					}
-
-					//		Reset Input
-					this.ResetHoaDonBanAndChiTietHDBan();
+					//		Show another Confirmation Form
+					FormConfirmHoaDonBan formConfirmHoaDonBan = new FormConfirmHoaDonBan(hoaDonBanDVO, nhanVienThuNganDVO);
+					formConfirmHoaDonBan.Show();
 				}
 			};
 
@@ -577,7 +513,7 @@ namespace WinformWithExternalLibrary
 			{
 				this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetTenKhachHangWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
 
-				this.ActiveControl = this.HoaDonBanDTO_MaGiamGia;
+				this.ActiveControl = this.HoaDonBanDVO_TenGiamGia;
 			}
 		}
 
@@ -601,6 +537,76 @@ namespace WinformWithExternalLibrary
 		}
 
 		//		Function
+		public void NhapHoaDonBan(HoaDonBanDVO hoaDonBanDVO, NhanVienThuNganDVO nhanVienThuNganDVO, TongTienKhachTraDVO tongTienKhachTraDVO)
+		{
+			if (int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenGiamGia), out int giamGiaTemp))
+			{
+				giamGiaTemp = 0;
+			}
+
+			HoaDonBanDTO hoaDonBanDTO = new HoaDonBanDTO(
+				hoaDonBanDTO_MaHDBan: Guid.NewGuid(),
+				hoaDonBanDTO_MaKhachHang: KhachHangDAO.Instance.GetMaKhachHangWithPhoneNumbers(hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang),
+				hoaDonBanDTO_MaNhanVien: NhanVienDAO.Instance.GetMaNhanVienByTenNhanVienAndNgaySinh(nhanVienThuNganDVO.NhanVienThuNganDVO_NhanVien),
+				hoaDonBanDTO_NgayBan: DateTime.Now,
+				hoaDonBanDTO_SoSanPham: this.TabPageHoaDonBan_materialListView.Items.Count,
+				hoaDonBanDTO_MaGiamGia: GiamGiaDAO.Instance.GetMaGiamGia(hoaDonBanDVO.HoaDonBanDVO_TenGiamGia),
+				hoaDonBanDTO_TongTien: hoaDonBanDVO.HoaDonBanDVO_ThanhToan,
+				hoaDonBanDTO_TongTienKhachTra: tongTienKhachTraDVO.TongTienKhachTraDVO_TongTienKhachTra
+				);
+
+			if (!HoaDonBanDAO.Instance.InsertHoaDonBan(hoaDonBanDTO))
+			{
+				MaterialMessageBox.Show(
+					text: "Có lỗi gì đó vừa xảy ra",
+					caption: "!HoaDonBanDAO",
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+				);
+
+				return;
+			}
+
+			foreach (ListViewItem listViewItem in this.TabPageHoaDonBan_materialListView.Items)
+			{
+				Guid maDMSanPhamTemp = DMSanPhamDAO.Instance.GetMaDMSanPhamFromMaSanPham(listViewItem.SubItems[1].Text);
+
+				if (maDMSanPhamTemp == Guid.Empty)
+				{
+					MaterialMessageBox.Show(
+					text: "Có lỗi gì đó vừa xảy ra",
+					caption: "maDMSanPhamTemp == Guid.Empty",
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+
+					return;
+				}
+
+				ChiTietHDBanDTO chiTietHDBanDTO = new ChiTietHDBanDTO(
+					chiTietHDBanDTO_MaHDBan: hoaDonBanDTO.HoaDonBanDTO_MaHDBan,
+					chiTietHDBanDTO_MaDMSanPham: maDMSanPhamTemp,
+					chiTietHDBanDTO_SoLuong: int.Parse(listViewItem.SubItems[3].Text),
+					chiTietHDBanDTO_ThanhTien: long.Parse(listViewItem.SubItems[5].Text)
+					);
+
+				if (!ChiTietHDBanDAO.Instance.InsertChiTietHDBan(chiTietHDBanDTO))
+				{
+					MaterialMessageBox.Show(
+					text: "Có lỗi gì đó vừa xảy ra",
+					caption: "!ChiTietHDBanDAO",
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+
+					return;
+				}
+			}
+
+			//		Reset Input
+			this.ResetHoaDonBanAndChiTietHDBan();
+		}
+
 		private void ResetHoaDonBanAndChiTietHDBan()
 		{
 			//		Clear ListView
@@ -608,8 +614,11 @@ namespace WinformWithExternalLibrary
 
 			//		Reset Controls
 			this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
-
 			this.ResetInputForControl(this.HoaDonBanDVO_DienThoaiKhachHang);
+
+			//		Set Interracted
+			this.SetInterractedForControl(this.ChiTietHDBanDVO_MaSanPham, false);
+			this.SetInterractedForControl(this.HoaDonBanDVO_DienThoaiKhachHang, false);
 
 			//		Set Focus
 			this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
@@ -968,6 +977,7 @@ namespace WinformWithExternalLibrary
 		{
 			//		Reset Validation
 			this.ResetValidationForControl(control);
+			this.SetInterractedForControl(control, true);
 
 			//		New Object
 			baseDVO = this.GetInputFromControl(control);
@@ -1073,6 +1083,20 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
+		private void SetInterractedForControl(Control control, bool value)
+		{
+			string getClassName = control.Name.Split('_')[0];
+			int tabPageIndex = this.GetTabPageControlSelectedIndex();
+
+			for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
+			{
+				if (this.listOfLabelsDVO[tabPageIndex][i].Name.Contains(getClassName))
+				{
+					this.isInterracted[tabPageIndex][i] = value;
+				}
+			}
+		}
+
 		private void ResetValidationForControl(Control control)
 		{
 			string getClassName = control.Name.Split('_')[0];
@@ -1126,15 +1150,16 @@ namespace WinformWithExternalLibrary
 					{
 						tempTongTien = 0;
 					}
-					if (!Guid.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDTO_MaGiamGia), out Guid tempMaGiamGia))
+					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien), out long tempThanhToan))
 					{
-						tempMaGiamGia = Guid.Empty;
+						tempThanhToan = 0;
 					}
 
 					hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_DienThoaiKhachHang);
-					hoaDonBanDVO.HoaDonBanDVO_MaGiamGia = tempMaGiamGia;
+					hoaDonBanDVO.HoaDonBanDVO_TenGiamGia = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenGiamGia);
 					hoaDonBanDVO.HoaDonBanDVO_TenKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenKhachHang);
 					hoaDonBanDVO.HoaDonBanDVO_TongTien = tempTongTien;
+					hoaDonBanDVO.HoaDonBanDVO_ThanhToan = tempThanhToan;
 
 					return hoaDonBanDVO;
 				}

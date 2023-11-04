@@ -241,7 +241,6 @@ E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Numerics.Vectors.
 E:\Winform\Winform\WinformWithExternalLibrary\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
 E:\Winform\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBan.resources
-D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonBan.resources
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.AssemblyReference.cache
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.SuggestedBindingRedirects.cache
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe.config
@@ -321,3 +320,21 @@ E:\Winform\Winform-BTL\WinformWithExternalLibrary\bin\Debug\System.Memory.xml
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\bin\Debug\System.Numerics.Vectors.xml
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.CopyComplete
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\ClosedXML.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\DocumentFormat.OpenXml.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\ExcelNumberFormat.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\Irony.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\SixLabors.Fonts.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\System.IO.Packaging.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\XLParser.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\ClosedXML.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\DocumentFormat.OpenXml.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\ExcelNumberFormat.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\SixLabors.Fonts.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\System.IO.Packaging.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.SuggestedBindingRedirects.cache
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe.config
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBan.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBanFormInfo.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonBan.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonBan.resources

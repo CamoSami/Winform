@@ -22,9 +22,15 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private bool hasDone = false;
 
-		public FormConfirmHoaDonBan()
+		private HoaDonBanDVO hoaDonBanDVO;
+		private NhanVienThuNganDVO nhanVienThuNganDVO;
+
+		public FormConfirmHoaDonBan(HoaDonBanDVO hoaDonBanDVO, NhanVienThuNganDVO nhanVienThuNganDVO)
 		{
 			this.InitializeComponent();
+
+			this.hoaDonBanDVO = hoaDonBanDVO;
+			this.nhanVienThuNganDVO = nhanVienThuNganDVO;
 
 			//		Attributes
 			this.InitializeHardCodedAttributes();
@@ -36,10 +42,26 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		#region Initialize
 
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			if (keyData == Keys.Enter)
+			{
+				this.TrySubmittingInput();
+			}
+
+			return base.ProcessCmdKey(ref msg, keyData);
+		}
+
 		private void InitializeHardCodedAttributes()
 		{
 			//		Label for Focus
 			this.LabelForFocus.Text = "";
+
+			//		Text
+			this.FormConfirmHoaDonBan_NhanVien.Text = "Nhân viên: " + nhanVienThuNganDVO.NhanVienThuNganDVO_NhanVien;
+			this.FormConfirmHoaDonBan_KhachHang.Text = "Khách hàng: " + hoaDonBanDVO.HoaDonBanDVO_TenKhachHang;
+			this.FormConfirmHoaDonBan_TongTien.Text = "Tồng tiền: " + hoaDonBanDVO.HoaDonBanDVO_TongTien.ToString();
+			this.FormConfirmHoaDonBan_ThanhToan.Text = "Thanh toán: " + hoaDonBanDVO.HoaDonBanDVO_ThanhToan.ToString();
 
 			//		Form
 			this.Font = FormLogin.Instance.GetFont();
@@ -110,60 +132,46 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private void InitializeSpecializedEvent()
 		{
+			//		Form
+			this.KeyPress += (obj, e) =>
+			{
+				if (char.IsDigit(e.KeyChar))
+				{
+					this.TongTienKhachTraDVO_TongTienKhachTra.Text = e.KeyChar.ToString();
+
+					this.ActiveControl = this.TongTienKhachTraDVO_TongTienKhachTra;
+					this.TongTienKhachTraDVO_TongTienKhachTra.SelectionStart = this.TongTienKhachTraDVO_TongTienKhachTra.Text.Length;
+				}
+			};
+
 			//		TextBox
 
 			//		Button
 			//			Submit
 			this.materialButtonSubmit.Click += (obj, e) =>
 			{
-				//		Form is completed -> Interaction = true
-				for (int i = 0; i < this.isInterracted.Count; i++)
-				{
-					this.isInterracted[i] = true;
-				}
-
-				//		Try validating
-				if (!this.TryValidation())
-				{
-					return;
-				}
-
-				//		Send Query
-				//			TODO: Nhập HoaDonban
-				//if ()
-				//{
-					
-				//}
-				//else
-				//{
-				//	MaterialMessageBox.Show(
-				//		text: "Có vấn đề j đó vừa xảy ra ._.",
-				//		caption: this.Text,
-				//		UseRichTextBox: false,
-				//		buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-				//		);
-				//}
+				this.TrySubmittingInput();
 			};
 
 			//		Form
 			//			DirtyData check before closing
 			this.FormClosing += (obj, e) =>
 			{
+				if (this.hasDone)
+				{
+					return;
+				}
+
 				//		Check if unsaved data
 				bool ifDirtyData = false;
 
-				foreach (Control temp in this.Controls)
+				foreach (TextBoxBase tempTextBox in this.listOfTextboxes)
 				{
-					if (temp is TextBoxBase)
+					if (!this.CheckIfTextboxEmptyOrPlaceholder(tempTextBox))
 					{
-						TextBoxBase tempTextBox = temp as TextBoxBase;
+						ifDirtyData = true;
 
-						if (!this.CheckIfTextboxEmptyOrPlaceholder(tempTextBox))
-						{
-							ifDirtyData = true;
-
-							break;
-						}
+						break;
 					}
 					//Debug.WriteLine(temp);
 				}
@@ -211,6 +219,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 			this.Load += (obj, e) =>
 			{
 				this.ActiveControl = this.LabelForFocus;
+
+				this.Activate();
 			};
 		}
 
@@ -252,14 +262,37 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 			textboxTemp.Text = this.GetTextboxTextIfEmptyThenPlaceholder(textboxTemp);
 
-			this.TryValidation();
+			this.TryValidation(out _);
 		}
 
 		#endregion
 
 		#region Generalist Function
 
-		private bool TryValidation()
+		private void TrySubmittingInput()
+		{
+			//		Form is completed -> Interaction = true
+			for (int i = 0; i < this.isInterracted.Count; i++)
+			{
+				this.isInterracted[i] = true;
+			}
+
+			//		Try validating
+			if (!this.TryValidation(out dynamic baseDVO))
+			{
+				return;
+			}
+
+			//		Send Query
+			//			TODO: Nhập HoaDonban
+			FormMain.Instance.NhapHoaDonBan(this.hoaDonBanDVO, this.nhanVienThuNganDVO, baseDVO as TongTienKhachTraDVO);
+
+			this.hasDone = true;
+
+			this.Close();
+		}
+
+		private bool TryValidation(out dynamic baseDVO)
 		{
 			//		Reset Validation
 			foreach (Label label in this.listOfLabels)
@@ -292,19 +325,26 @@ namespace WinformWithExternalLibrary.ExtraForm
 			//		Validated or not
 			if (results.Count > 0)
 			{
+				baseDVO = null;
+
 				return false;
 			}
 			else
 			{
+				baseDVO = temp;
+
 				return true;
 			}
 		}
 
 		private dynamic GetInput()
 		{
-			//		TODO: Complete
-			return new TongTienKhachTraDVO(
+			if (!long.TryParse(this.GetTextboxTextIfPlaceholderThenEmpty(this.TongTienKhachTraDVO_TongTienKhachTra), out long tempTongTienKhachTra)) {
+				tempTongTienKhachTra = 0;
+			}
 
+			return new TongTienKhachTraDVO(
+				tongTienKhachTraDVO_TongTienKhachTra: tempTongTienKhachTra
 				);
 		}
 
@@ -336,7 +376,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private string GetPlaceholder(TextBoxBase textBox)
 		{
-			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(typeof(KhachHangDVO))[textBox.Name];
+			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(typeof(TongTienKhachTraDVO))[textBox.Name];
 			DisplayNameAttribute displayNameAttribute = (DisplayNameAttribute)propertyDescriptor.Attributes[typeof(DisplayNameAttribute)];
 
 			return displayNameAttribute.DisplayName;
