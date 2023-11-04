@@ -1,6 +1,7 @@
 ﻿using LiveChartsCore.Themes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
@@ -183,8 +184,26 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             return Math.Round(priceTotalCurrentMonth);
         }
 
-        public DataTable GetBillsOfSellerInformationDataTable(string searchValue)
+        public DataTable GetBillsOfSellerInformationDataTable(string searchValue, string dateTimeConverted)
         {
+            string searchQuery = "";
+            string dateQuery = "";
+
+            if (searchValue != "")
+            {
+                searchQuery = $" WHERE (MaHDBan LIKE '{searchValue}%' OR TenNhanVien LIKE N'%{searchValue}%' OR TenKhachHang LIKE N'%{searchValue}%' OR tKhachHang.DienThoai LIKE '{searchValue}%')";
+            }
+
+            if (searchValue != "" && dateTimeConverted != "")
+            {
+                dateQuery = $" AND CONVERT(DATE, NgayBan) = '{dateTimeConverted}';";
+            }
+            else if(searchValue == "" && dateTimeConverted != "")
+            {
+                Debug.WriteLine(dateTimeConverted);
+                dateQuery = $" WHERE CONVERT(DATE, NgayBan) = '{dateTimeConverted}';";
+            }
+
             string query = "SELECT MaHDBan, TenNhanVien, tNhanVien.DienThoai AS DienThoaiNV, TenKhachHang, tKhachHang.DienThoai AS DienThoaiKH, SoSanPham, PhanTramGiamGia, TongTien, NgayBan " +
             "FROM tHoaDonBan " +
             "INNER JOIN tKhachHang " +
@@ -193,18 +212,19 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             "ON tHoaDonBan.MaNhanVien = tNhanVien.MaNhanVien " +
             "LEFT JOIN tGiamGia " +
             "ON tHoaDonBan.MaGiamGia = tGiamGia.MaGiamGia" +
-            (searchValue == "" ? " ;" :
-            $" WHERE MaHDBan LIKE '{searchValue}%' OR TenNhanVien LIKE N'%{searchValue}%' OR TenKhachHang LIKE N'%{searchValue}%' OR tKhachHang.DienThoai LIKE '{searchValue}%';");
-
+            (searchValue == "" && dateTimeConverted == "" ? ";" :
+                searchQuery
+                + dateQuery
+            );
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
             return dataTable;
         }
 
-        public List<BillsOfSellerInfoResponseDTO> GetBillsOfSellerInformation(string searchValue)
+        public List<BillsOfSellerInfoResponseDTO> GetBillsOfSellerInformation(string searchValue, string dateTimeConverted)
         {
-            DataTable dataTable = this.GetBillsOfSellerInformationDataTable(searchValue);
+            DataTable dataTable = this.GetBillsOfSellerInformationDataTable(searchValue, dateTimeConverted);
 
             List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = new List<BillsOfSellerInfoResponseDTO>();
             foreach (DataRow row in dataTable.Rows)

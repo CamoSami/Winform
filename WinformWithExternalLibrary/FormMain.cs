@@ -735,7 +735,7 @@ namespace WinformWithExternalLibrary
 			long revenueCurrentMonth = phanTichDAO.GetRevenueCurrentMonth();
 			double discountTotalCurrentMonth = phanTichDAO.GetDiscountTotalCurrentMonth();
 			double priceTotalCurrentMonth = phanTichDAO.GetPriceTotalCurrentMonth();
-			int percentDiscount = (int)Math.Ceiling((double)discountTotalCurrentMonth / priceTotalCurrentMonth * 100);
+			int percentDiscount = priceTotalCurrentMonth == 0 ? 0 : (int)Math.Ceiling((double)discountTotalCurrentMonth / priceTotalCurrentMonth * 100);
 
             // Render data
             TabPagePhanTich_HoaDonBan_SoLuong_LB.Text = countBillOfCellCurrentMonth.ToString();

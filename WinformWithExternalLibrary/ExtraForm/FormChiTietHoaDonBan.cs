@@ -18,6 +18,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 {
     public partial class FormChiTietHoaDonBan : MaterialForm
     {
+        private string search { get; set; } = "";
+        private string dateConverted { get; set; } = "";
+
         PhanTichDAO phanTichDAO = new PhanTichDAO();
         FormatValues formatValues = new FormatValues();
         ExportTableData exportTableData = new ExportTableData();
@@ -27,18 +30,19 @@ namespace WinformWithExternalLibrary.ExtraForm
             InitializeComponent();
 
             // Bill of seller information List View
-            this.FormChiTietHoaDonBan_ListView(search: "");
+            this.FormChiTietHoaDonBan_ListView(search: this.search, dateTimeConverted: this.dateConverted);
 
             // Event
             this.HandleClickExportBtn();
             this.HandleOpenExtraForm();
             this.HandleSearch();
+            this.HandleFilterByDateTime();
         }
 
-        private void FormChiTietHoaDonBan_ListView(string search)
+        private void FormChiTietHoaDonBan_ListView(string search, string dateTimeConverted)
         {
             // Get data
-            List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = this.phanTichDAO.GetBillsOfSellerInformation(searchValue: search);
+            List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = this.phanTichDAO.GetBillsOfSellerInformation(searchValue: search, dateTimeConverted: dateTimeConverted);
 
             // Render
             int stt = 0;
@@ -56,7 +60,7 @@ namespace WinformWithExternalLibrary.ExtraForm
                 item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_SoSanPham.ToString());
                 item.SubItems.Add(formatValues.NumberToPercentString(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia));
                 item.SubItems.Add(formatValues.FormatPriceToView(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TongTien.ToString(), 3));
-                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_NgayBan.ToShortDateString());
+                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_NgayBan.ToString("dd/MM/yyyy"));
 
                 ChiTietHoaDonBanLV.Items.Add(item);
             }
@@ -68,7 +72,7 @@ namespace WinformWithExternalLibrary.ExtraForm
             {
                 try
                 {
-                    DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable(searchValue: "");
+                    DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
                     this.exportTableData.ExportToExcel(
                         dataTable: dataTable,
                         workSheetName: "Chi tiết hóa đơn",
@@ -104,7 +108,24 @@ namespace WinformWithExternalLibrary.ExtraForm
                 // Delete all old items
                 ChiTietHoaDonBanLV.Items.Clear();
                 // Render new items
-                this.FormChiTietHoaDonBan_ListView(search: search);
+                this.FormChiTietHoaDonBan_ListView(search: search, dateTimeConverted: "");
+                // Clear search on UI and save search value
+                this.search = search;
+                PhanTichDVO_HDB_TimKiemIP.Text = "";
+            };
+        }
+
+        private void HandleFilterByDateTime()
+        {
+            PhanTichDVO_HDB_DP.ValueChanged += (object sender, EventArgs e) =>
+            {
+                string dateTimeConverted = PhanTichDVO_HDB_DP.Value.ToString("MM/dd/yyyy");
+                string search = PhanTichDVO_HDB_TimKiemIP.Text; // Remain search value
+                this.dateConverted = dateTimeConverted; // Save date
+                // Delete all old items
+                ChiTietHoaDonBanLV.Items.Clear();
+                // Render new items
+                this.FormChiTietHoaDonBan_ListView(search: this.search, dateTimeConverted: dateTimeConverted);
             };
         }
     }
