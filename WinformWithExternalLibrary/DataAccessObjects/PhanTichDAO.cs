@@ -235,7 +235,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public List<BillDetailInfomationDTO> GetBillsDetailInformation(string MaHoaDon)
         {
-            string query = "SELECT tChiTietHDBan.MaDMSanPham AS MaDMSanPham, TenHangHoa, SoLuong, ThanhTien FROM " +
+            string query = "SELECT tChiTietHDBan.MaDMSanPham AS MaDMSanPham, TenSanPham, SoLuong, ThanhTien FROM " +
                 "tChiTietHDBan " +
                 "INNER JOIN tDMSanPham " +
                 $"ON tDMSanPham.MaDMSanPham = tChiTietHDBan.MaDMSanPham AND tChiTietHDBan.MaHDBan = '{MaHoaDon}'";
