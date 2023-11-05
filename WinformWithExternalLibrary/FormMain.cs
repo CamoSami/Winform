@@ -367,6 +367,11 @@ namespace WinformWithExternalLibrary
 			{
 				if (this.TryValidationFromControl(this.HoaDonBanDVO_TenGiamGia, onlyOneControl: true, out dynamic baseDVO))
 				{
+					if (this.CheckIfTextboxEmptyOrPlaceholder(HoaDonBanDVO_TenGiamGia))
+					{
+						return;
+					}
+
 					HoaDonBanDVO hoaDonBanDVO = baseDVO as HoaDonBanDVO;
 
 					DataTable dataTable = GiamGiaDAO.Instance.GetDetailGiamGia(hoaDonBanDVO.HoaDonBanDVO_TenGiamGia);

@@ -16,6 +16,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public DataTable GetDetailGiamGia(string tenGiamGia)
 		{
+
+
 			string queryString = $"SELECT MaxGiamGia, PhanTramGiamGia FROM {DataProvider.GIAMGIA_TABLE} WHERE TenGiamGia = {this.GetString(tenGiamGia)}";
 
 			return DataProvider.Instance.ExecuteQuery(queryString);
