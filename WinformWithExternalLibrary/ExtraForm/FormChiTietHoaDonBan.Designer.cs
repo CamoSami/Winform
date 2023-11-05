@@ -41,9 +41,9 @@
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ChiTietHoaDonExelBtn = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+            this.PhanTichDVO_HDB_DP = new System.Windows.Forms.DateTimePicker();
             this.PhanTichDVO_HDB_TimKiemIP = new MaterialSkin.Controls.MaterialTextBox();
             this.PhanTichDVO_HDB_TimKiemBtn = new MaterialSkin.Controls.MaterialButton();
-            this.PhanTichDVO_HDB_DP = new System.Windows.Forms.DateTimePicker();
             this.materialCard1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,13 +166,20 @@
             this.materialCard1.Size = new System.Drawing.Size(918, 114);
             this.materialCard1.TabIndex = 2;
             // 
+            // PhanTichDVO_HDB_DP
+            // 
+            this.PhanTichDVO_HDB_DP.Location = new System.Drawing.Point(463, 12);
+            this.PhanTichDVO_HDB_DP.Name = "PhanTichDVO_HDB_DP";
+            this.PhanTichDVO_HDB_DP.Size = new System.Drawing.Size(200, 20);
+            this.PhanTichDVO_HDB_DP.TabIndex = 9;
+            // 
             // PhanTichDVO_HDB_TimKiemIP
             // 
             this.PhanTichDVO_HDB_TimKiemIP.AnimateReadOnly = false;
             this.PhanTichDVO_HDB_TimKiemIP.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PhanTichDVO_HDB_TimKiemIP.Depth = 0;
             this.PhanTichDVO_HDB_TimKiemIP.DetectUrls = false;
-            this.PhanTichDVO_HDB_TimKiemIP.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.PhanTichDVO_HDB_TimKiemIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.PhanTichDVO_HDB_TimKiemIP.LeadingIcon = null;
             this.PhanTichDVO_HDB_TimKiemIP.Location = new System.Drawing.Point(32, 14);
             this.PhanTichDVO_HDB_TimKiemIP.MaxLength = 50;
@@ -206,13 +213,6 @@
             this.PhanTichDVO_HDB_TimKiemBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.PhanTichDVO_HDB_TimKiemBtn.UseAccentColor = false;
             this.PhanTichDVO_HDB_TimKiemBtn.UseVisualStyleBackColor = true;
-            // 
-            // PhanTichDVO_HDB_DP
-            // 
-            this.PhanTichDVO_HDB_DP.Location = new System.Drawing.Point(463, 12);
-            this.PhanTichDVO_HDB_DP.Name = "PhanTichDVO_HDB_DP";
-            this.PhanTichDVO_HDB_DP.Size = new System.Drawing.Size(200, 20);
-            this.PhanTichDVO_HDB_DP.TabIndex = 9;
             // 
             // FormChiTietHoaDonBan
             // 

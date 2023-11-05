@@ -15,31 +15,32 @@ using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDT
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
-    public partial class FormChiTietHoaDonBanFormInfo : MaterialForm
+    public partial class FormChiTietHoaDonNhapInfo : MaterialForm
     {
         private string MaHoaDon;
         private readonly PhanTichDAO phanTichDAO = new PhanTichDAO();
         private readonly FormatValues formatValues = new FormatValues();
 
-        public FormChiTietHoaDonBanFormInfo(string maHD)
+        public FormChiTietHoaDonNhapInfo(string maHD)
         {
             this.MaHoaDon = maHD;
 
             InitializeComponent();
 
             // List View
-            this.FormChiTietHoaDonBanInfo_ListView();
+            this.FormChiTietHoaDonNhapInfo_ListView();
         }
 
-        private void FormChiTietHoaDonBanInfo_ListView()
+        private void FormChiTietHoaDonNhapInfo_ListView()
         {
             // Get Data
-            List<BillDetailInfomationDTO> billDetailInfoResponseDTOs 
-                = phanTichDAO.GetBillsDetailInformation(MaHoaDon: this.MaHoaDon);
+            List<BillDetailInfomationDTO> billOfImportDetailInfoResponseDTOs
+                = phanTichDAO.GetBillOfImportDetailInformation(MaHoaDon: this.MaHoaDon);
+
 
             // Render
             int stt = 0;
-            foreach (BillDetailInfomationDTO billDetailInfoResponseDTO in billDetailInfoResponseDTOs)
+            foreach (BillDetailInfomationDTO billDetailInfoResponseDTO in billOfImportDetailInfoResponseDTOs)
             {
                 ListViewItem item = new ListViewItem();
                 stt++;
@@ -51,7 +52,7 @@ namespace WinformWithExternalLibrary.ExtraForm
                 item.SubItems.Add(formatValues.FormatPriceToView(billDetailInfoResponseDTO.BillDetailInfomationDTO_ThanhTien.ToString(), 3));
 
 
-                ChiTietHoaDonBanInfoLV.Items.Add(item);
+                ChiTietHoaDonNhapInfoLV.Items.Add(item);
             }
         }
     }

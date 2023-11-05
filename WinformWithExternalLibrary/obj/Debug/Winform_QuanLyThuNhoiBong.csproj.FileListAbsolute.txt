@@ -338,3 +338,5 @@ D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBanFormInfo.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonBan.resources
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonBan.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonNhap.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonNhapInfo.resources

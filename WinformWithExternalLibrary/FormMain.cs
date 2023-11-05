@@ -723,6 +723,7 @@ namespace WinformWithExternalLibrary
 		private void Initialize_TranHongThai()
 		{
             this.InitializeBillOfSell();
+			this.InitializeImportBill();
 
             this.InitializeChart1();
             this.InitializeChart2();
@@ -748,10 +749,31 @@ namespace WinformWithExternalLibrary
             TabPagePhanTich_HoaDonBan_ShowBTN.Click += (obj, e) =>
 			{
 				FormChiTietHoaDonBan formChiTietHoaDonBan = new FormChiTietHoaDonBan();
-
 				formChiTietHoaDonBan.Show();
 			};
-		}
+        }
+
+		private void InitializeImportBill()
+		{
+            // Data queried from DB
+			int countBillOfImportCurrentMonth = phanTichDAO.CountBillOfImportCurrentMonth();
+			long importCostCurrentMonth = phanTichDAO.GetImportCostCurrentMonth();
+            long revenueCurrentMonth = phanTichDAO.GetRevenueCurrentMonth();
+			int percentImportPerRevenue = importCostCurrentMonth == 0 ? 0 : (int)Math.Ceiling((double)importCostCurrentMonth / revenueCurrentMonth * 100);
+
+            // Render data
+            TabPagePhanTich_HoaDonNhap_SoLuong_LB.Text = countBillOfImportCurrentMonth.ToString();
+            TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Text = this.formatValues.FormatPriceToView(importCostCurrentMonth.ToString(), 3) + " đ";
+            TabPagePhanTich_HoaDonNhap_TiLePB.Value = percentImportPerRevenue > 100 ? 100 : percentImportPerRevenue;
+            TabPagePhanTich_HoaDonNhap_TiLeLB.Text = $"Tỉ lệ chi phí nhập khẩu so với doanh thu: {percentImportPerRevenue}%";
+
+            // Event
+            TabPagePhanTich_HoaDonNhap_ShowBTN.Click += (obj, e) =>
+            {
+                FormChiTietHoaDonNhap formChiTietHoaDonNhap = new FormChiTietHoaDonNhap();
+				formChiTietHoaDonNhap.Show();
+            };
+        }
 
         private void InitializeChart1()
 		{

@@ -20,6 +20,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public PhanTichDAO() { }
 
+        // Charts
         public List<RevenueResponseDTO> GetDailyRevenueByThisMonth()
         {
             List<RevenueResponseDTO> listRevenueThisMonth = new List<RevenueResponseDTO>();
@@ -105,6 +106,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             return productsBestSeller;
         }
 
+        // Bill of sell
         public int CountBillOfSellCurrentMonth()
         {
             string query = "SELECT COUNT(*) from tHoaDonBan " +
@@ -259,6 +261,99 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 "tChiTietHDBan " +
                 "INNER JOIN tDMSanPham " +
                 $"ON tDMSanPham.MaDMSanPham = tChiTietHDBan.MaDMSanPham AND tChiTietHDBan.MaHDBan = '{MaHoaDon}'";
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+            List<BillDetailInfomationDTO> billDetailInfoResponseDTOs = new List<BillDetailInfomationDTO>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                BillDetailInfomationDTO billDetailInfomationDTO = new BillDetailInfomationDTO();
+                billDetailInfomationDTO.BillDetailInfomationDTO_MaDMSanPham = row[0].ToString();
+                billDetailInfomationDTO.BillDetailInfomationDTO_TenHangHoa = row[1].ToString();
+                billDetailInfomationDTO.BillDetailInfomationDTO_SoLuong = (int)row[2];
+                billDetailInfomationDTO.BillDetailInfomationDTO_ThanhTien = (long)row[3];
+                billDetailInfoResponseDTOs.Add(billDetailInfomationDTO);
+            }
+            return billDetailInfoResponseDTOs;
+        }
+
+        // Bill of import
+        public int CountBillOfImportCurrentMonth()
+        {
+            string query = "SELECT COUNT(*) from tHoaDonNhap " +
+                "WHERE YEAR(NgayNhap) = YEAR(GETDATE()) AND MONTH(NgayNhap) = MONTH(GETDATE());";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            int countBillOfImportCurrentMonth = (int)dataTable.Rows[0][0];
+
+            return countBillOfImportCurrentMonth;
+        }
+
+        public long GetImportCostCurrentMonth()
+        {
+            string query = "SELECT SUM(TongTien) AS ChiPhiNhapKhauThangNay " +
+                "FROM tHoaDonNhap " +
+                "WHERE YEAR(tHoaDonNhap.NgayNhap) = YEAR(GETDATE()) AND MONTH(tHoaDonNhap.NgayNhap) = MONTH(GETDATE())";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            long importCostCurrentMonth = 0;
+
+            if (dataTable.Rows[0][0] != null)
+            {
+                if (long.TryParse(dataTable.Rows[0][0].ToString(), out long result))
+                {
+                    importCostCurrentMonth = result;
+                }
+            }
+
+            return importCostCurrentMonth;
+        }
+
+        public DataTable GetBillOfImportInfomationDataTable()
+        {
+            string query = "SELECT MaHDNhap, TenNhanVien, tNhanVien.DienThoai AS DienThoaiNV, TenNhaCungCap, tNhaCungCap.DiaChi AS DiaChiNCC, tNhaCungCap.DienThoai AS DienThoaiNCC, SoSanPham, TongTien, NgayNhap " +
+                "FROM tHoaDonNhap " +
+                "INNER JOIN tNhaCungCap " +
+                "ON tHoaDonNhap.MaNhaCungCap = tNhaCungCap.MaNhaCungCap " +
+                "INNER JOIN tNhanVien " +
+                "ON tHoaDonNhap.MaNhanVien = tNhanVien.MaNhanVien";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            return dataTable;
+        }
+
+        public List<BillOfImportInfoResponseDTO> GetBillOfImportInformation()
+        {
+            DataTable dataTable = this.GetBillOfImportInfomationDataTable();
+
+            List<BillOfImportInfoResponseDTO> billOfImportInfoResponseDTOs = new List<BillOfImportInfoResponseDTO>();
+            foreach(DataRow row in dataTable.Rows)
+            {
+                BillOfImportInfoResponseDTO billOfImportInfoResponseDTO = new BillOfImportInfoResponseDTO();
+
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_MaHDNhap = row[0].ToString();
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_TenNhanVien = row[1].ToString();
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_DienThoaiNV = row[2].ToString();
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_TenNCC = row[3].ToString();
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_DiaChiNCC = row[4].ToString();
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_DienThoaiNCC = row[5].ToString();
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_SoSanPham = (int)row[6];
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_TongTien = (long)row[7];
+                billOfImportInfoResponseDTO.BillOfImportInfoResponseDTO_NgayNhap = (DateTime)row[8];
+
+                billOfImportInfoResponseDTOs.Add(billOfImportInfoResponseDTO);
+            }
+
+            return billOfImportInfoResponseDTOs;
+        }
+
+        public List<BillDetailInfomationDTO> GetBillOfImportDetailInformation(string MaHoaDon)
+        {
+            string query = "SELECT tChiTietHDNhap.MaDMSanPham AS MaDMSanPham, TenSanPham, SoLuong, ThanhTien FROM " +
+                "tChiTietHDNhap " +
+                "INNER JOIN tDMSanPham " +
+                $"ON tDMSanPham.MaDMSanPham = tChiTietHDNhap.MaDMSanPham AND tChiTietHDNhap.MaHDNhap = '{MaHoaDon}';";
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
             List<BillDetailInfomationDTO> billDetailInfoResponseDTOs = new List<BillDetailInfomationDTO>();
             foreach (DataRow row in dataTable.Rows)
