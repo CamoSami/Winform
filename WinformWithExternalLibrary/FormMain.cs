@@ -43,11 +43,9 @@ namespace WinformWithExternalLibrary
 		private readonly List<List<Label>> listOfLabelsDVO = new List<List<Label>>();
 		private readonly List<List<bool>> isInterracted = new List<List<bool>>();
 
-		private readonly PhanTichDAO phanTichDAO = new PhanTichDAO();
-
 		private readonly FormatValues formatValues = new FormatValues();
 
-        public FormMain()
+		public FormMain()
 		{
 			//		GenerateData
 			// this.InitializeFakeData();
@@ -307,6 +305,10 @@ namespace WinformWithExternalLibrary
 
 		#region Ngô Sách Minh Hiếu
 
+		//		Variable
+		private double tabPageHoaDonBan_phanTramGiamGia = 0f;
+		private long tabPageHoaDonBan_maxGiamGia = 0;
+
 		private void Initialize_NgoSachMinhHieu()
 		{
 			//		TODO: set up Event system for DAOs to update DataSource
@@ -359,6 +361,27 @@ namespace WinformWithExternalLibrary
 			//			HoaDonBanDVO_NhanVien
 			this.NhanVienThuNganDVO_NhanVien.LostFocus += this.NhanVien_AutoComplete;
 			this.NhanVienThuNganDVO_NhanVien.SelectedIndexChanged += this.NhanVien_AutoComplete;
+
+			//		HoaDonBanDVO_TenGiamGia
+			this.HoaDonBanDVO_TenGiamGia.LostFocus += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(this.HoaDonBanDVO_TenGiamGia, onlyOneControl: true, out dynamic baseDVO))
+				{
+					HoaDonBanDVO hoaDonBanDVO = baseDVO as HoaDonBanDVO;
+
+					DataTable dataTable = GiamGiaDAO.Instance.GetDetailGiamGia(hoaDonBanDVO.HoaDonBanDVO_TenGiamGia);
+
+					this.tabPageHoaDonBan_maxGiamGia = long.Parse(dataTable.Rows[0][0].ToString());
+					this.tabPageHoaDonBan_phanTramGiamGia = double.Parse(dataTable.Rows[0][1].ToString());
+				}
+				else
+				{
+					this.tabPageHoaDonBan_maxGiamGia = 0;
+					this.tabPageHoaDonBan_phanTramGiamGia = 0f;
+				}
+
+				this.UpdateTongTienHDBan(tien: 0, biTru: true);
+			};
 
 			//			ChiTietHDBanDVO_SoLuong
 			this.ChiTietHDBanDVO_SoLuong.KeyDown += (obj, e) =>
@@ -481,16 +504,15 @@ namespace WinformWithExternalLibrary
 		//		Event
 		private void UpdateTongTienHDBan(long tien, bool biTru)
 		{
-			long tongTien = this.CheckIfTextboxEmptyOrPlaceholder(this.HoaDonBanDVO_TongTien) ? 0 : long.Parse(this.HoaDonBanDVO_TongTien.Text);
+			long tongTienCurr = this.CheckIfTextboxEmptyOrPlaceholder(this.HoaDonBanDVO_TongTien) ? 0 : long.Parse(this.HoaDonBanDVO_TongTien.Text);
+			long tongTienNew = biTru ? tongTienCurr - tien : tongTienCurr + tien;
 
-			if (biTru)
-			{
-				this.HoaDonBanDVO_TongTien.Text = (tongTien - tien).ToString();
-			}
-			else
-			{
-				this.HoaDonBanDVO_TongTien.Text = (tongTien + tien).ToString();
-			}
+			this.HoaDonBanDVO_TongTien.Text = tongTienNew.ToString();
+
+			long thanhToanTemp = (long)(tongTienNew * this.tabPageHoaDonBan_phanTramGiamGia);
+			long thanhToanFinal = tongTienNew - (thanhToanTemp > tabPageHoaDonBan_maxGiamGia ? tabPageHoaDonBan_maxGiamGia : thanhToanTemp - thanhToanTemp % 100);
+
+			this.HoaDonBanDVO_ThanhToan.Text = thanhToanFinal.ToString();
 		}
 
 		private void NhanVien_AutoComplete(object obj, EventArgs e)
@@ -720,6 +742,7 @@ namespace WinformWithExternalLibrary
 		#endregion
 
 		#region Trần Hồng Thái
+
 		private void Initialize_TranHongThai()
 		{
             this.InitializeBillOfSell();
@@ -731,11 +754,11 @@ namespace WinformWithExternalLibrary
 		private void InitializeBillOfSell()
 		{
 			// Data queried from DB
-			int countBillOfCellCurrentMonth = phanTichDAO.CountBillOfSellCurrentMonth();
-			long revenueCurrentMonth = phanTichDAO.GetRevenueCurrentMonth();
-			double discountTotalCurrentMonth = phanTichDAO.GetDiscountTotalCurrentMonth();
-			double priceTotalCurrentMonth = phanTichDAO.GetPriceTotalCurrentMonth();
-			int percentDiscount = (int)Math.Ceiling((double)discountTotalCurrentMonth / priceTotalCurrentMonth * 100);
+			int countBillOfCellCurrentMonth = PhanTichDAO.Instance.CountBillOfSellCurrentMonth();
+			long revenueCurrentMonth = PhanTichDAO.Instance.GetRevenueCurrentMonth();
+			double discountTotalCurrentMonth = PhanTichDAO.Instance.GetDiscountTotalCurrentMonth();
+			double priceTotalCurrentMonth = PhanTichDAO.Instance.GetPriceTotalCurrentMonth();
+			int percentDiscount = priceTotalCurrentMonth == 0 ? 0 : (int)Math.Ceiling((double)discountTotalCurrentMonth / priceTotalCurrentMonth * 100);
 
             // Render data
             TabPagePhanTich_HoaDonBan_SoLuong_LB.Text = countBillOfCellCurrentMonth.ToString();
