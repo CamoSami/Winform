@@ -29,6 +29,14 @@ namespace WinformWithExternalLibrary
 			unit: GraphicsUnit.Point,
 			gdiCharSet: ((byte)(128))
 			);
+		private readonly ColorScheme colorScheme = new ColorScheme
+				(
+				primary: Primary.Pink200,
+				darkPrimary: Primary.Pink400,
+				lightPrimary: Primary.Pink400,
+				accent: Accent.Pink100,
+				textShade: TextShade.WHITE
+				);
 
 		private readonly List<TextBoxBase> listOfTextboxes = new List<TextBoxBase>();
 		private readonly List<Label> listOfLabels = new List<Label>();
@@ -80,6 +88,21 @@ namespace WinformWithExternalLibrary
 			PhanTichDAO.Instance = new PhanTichDAO();
 		}
 
+		private void RemoveDataObjects()
+		{
+			DataProvider.Instance = null;
+
+			ChiTietHDBanDAO.Instance = null;
+			CongViecDAO.Instance = null;
+			DMSanPhamDAO.Instance = null;
+			GiamGiaDAO.Instance = null;
+			HoaDonBanDAO.Instance = null;
+			KhachHangDAO.Instance = null;
+			NhaCungCapDAO.Instance = null;
+			NhanVienDAO.Instance = null;
+			PhanTichDAO.Instance = null;
+		}
+
 		private void InitializeHardCodedAttributes()
 		{
 			//		Label for Focus
@@ -93,14 +116,7 @@ namespace WinformWithExternalLibrary
 			MaterialSkinManager.Instance.AddFormToManage(this);
 			MaterialSkinManager.Instance.RemoveFormToManage(this);
 			MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.LIGHT;
-			MaterialSkinManager.Instance.ColorScheme = new ColorScheme
-				(
-				primary: Primary.Pink200,
-				darkPrimary: Primary.Pink400,
-				lightPrimary: Primary.Pink400,
-				accent: Accent.Pink100,
-				textShade: TextShade.WHITE
-				);
+			MaterialSkinManager.Instance.ColorScheme = this.colorScheme;
 
 			//		Control
 			foreach (Control control in this.Controls)
@@ -117,6 +133,7 @@ namespace WinformWithExternalLibrary
 
 					//		Clear its Text
 					tempLabel.Text = "";
+					tempLabel.Cursor = Cursors.Default;
 
 					//		For Validation
 					tempLabel.ForeColor = Color.Red;
@@ -241,8 +258,6 @@ namespace WinformWithExternalLibrary
 
 				if (e.Cancel == false)
 				{
-					FormLogin.Instance = null;
-
 					this.hasLeft = true;
 
 					//		Actually, meh
@@ -328,6 +343,8 @@ namespace WinformWithExternalLibrary
 				//		Then close the Form later if FormMain is closed
 				FormMain.Instance.FormClosed += (obj, eventArgs) =>
 				{
+					this.RemoveDataObjects();
+
 					this.Dispose();
 
 					this.Close();
@@ -340,7 +357,7 @@ namespace WinformWithExternalLibrary
 			{
 				MaterialMessageBox.Show(
 					text: "Sai mật khẩu hay tên đăng nhập",
-					caption: "xd",
+					caption: "Không đăng nhập được",
 					UseRichTextBox: false,
 					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
 					);

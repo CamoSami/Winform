@@ -14,6 +14,15 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public GiamGiaDAO() { }
 
+		public DataTable GetDetailGiamGia(string tenGiamGia)
+		{
+
+
+			string queryString = $"SELECT MaxGiamGia, PhanTramGiamGia FROM {DataProvider.GIAMGIA_TABLE} WHERE TenGiamGia = {this.GetString(tenGiamGia)}";
+
+			return DataProvider.Instance.ExecuteQuery(queryString);
+		}
+
 		public string GetEligibleTenGiamGia()
 		{
 			string queryString = $"SELECT TenGiamGia FROM {DataProvider.GIAMGIA_TABLE} WHERE " +

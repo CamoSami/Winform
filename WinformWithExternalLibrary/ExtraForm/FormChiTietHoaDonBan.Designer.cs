@@ -144,7 +144,7 @@
             this.ChiTietHoaDonExelBtn.NoAccentTextColor = System.Drawing.Color.Empty;
             this.ChiTietHoaDonExelBtn.Size = new System.Drawing.Size(137, 36);
             this.ChiTietHoaDonExelBtn.TabIndex = 1;
-            this.ChiTietHoaDonExelBtn.Text = "Export to exel";
+            this.ChiTietHoaDonExelBtn.Text = "Export to excel";
             this.ChiTietHoaDonExelBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.ChiTietHoaDonExelBtn.UseAccentColor = false;
             this.ChiTietHoaDonExelBtn.UseVisualStyleBackColor = true;
@@ -179,7 +179,7 @@
             this.PhanTichDVO_HDB_TimKiemIP.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PhanTichDVO_HDB_TimKiemIP.Depth = 0;
             this.PhanTichDVO_HDB_TimKiemIP.DetectUrls = false;
-            this.PhanTichDVO_HDB_TimKiemIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.PhanTichDVO_HDB_TimKiemIP.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.PhanTichDVO_HDB_TimKiemIP.LeadingIcon = null;
             this.PhanTichDVO_HDB_TimKiemIP.Location = new System.Drawing.Point(32, 14);
             this.PhanTichDVO_HDB_TimKiemIP.MaxLength = 50;

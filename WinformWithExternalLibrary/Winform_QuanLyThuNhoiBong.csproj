@@ -207,6 +207,7 @@
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedNhanVienAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedTenGiamGia.cs" />
+    <Compile Include="DataValidateObject\CustomValidation\TongTienKhachTraDVO_EligibleTongTienKhachTra.cs" />
     <Compile Include="DataValidateObject\HoaDonBanDVO.cs" />
     <Compile Include="DataValidateObject\NhanVienThuNganDVO.cs" />
     <Compile Include="DataValidateObject\TongTienKhachTraDVO.cs" />

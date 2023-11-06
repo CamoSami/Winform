@@ -190,7 +190,7 @@
             this.ChiTietHoaDonNhapExelBtn.NoAccentTextColor = System.Drawing.Color.Empty;
             this.ChiTietHoaDonNhapExelBtn.Size = new System.Drawing.Size(137, 36);
             this.ChiTietHoaDonNhapExelBtn.TabIndex = 13;
-            this.ChiTietHoaDonNhapExelBtn.Text = "Export to exel";
+            this.ChiTietHoaDonNhapExelBtn.Text = "Export to excel";
             this.ChiTietHoaDonNhapExelBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.ChiTietHoaDonNhapExelBtn.UseAccentColor = false;
             this.ChiTietHoaDonNhapExelBtn.UseVisualStyleBackColor = true;

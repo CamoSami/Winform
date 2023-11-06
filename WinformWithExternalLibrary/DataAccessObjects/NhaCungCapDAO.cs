@@ -60,6 +60,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
         public bool InsertNhaCungCap(dynamic baseDTO)
         {
             NhaCungCapDVO nhaCungCapDVO = baseDTO as NhaCungCapDVO;
+
             string insertSupplier = $"INSERT INTO " +
                 $"{DataProvider.NHACUNGCAP_TABLE} " +
                 $"(TenNhaCungCap, DienThoai, DiaChi) " +
@@ -69,6 +70,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 $"{nhaCungCapDVO.NhaCungCapDTO_DiaChi})";
 
             int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertSupplier);
+
             return rowChanged > 0;
         }
     }

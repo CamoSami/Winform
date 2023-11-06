@@ -13,6 +13,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
 	public class KhachHangDAO
 	{
+		public event EventHandler OnKhachHangDAONewInsert;
+
 		public static KhachHangDAO Instance { get; set; }
 
 		public KhachHangDAO() { }
@@ -84,6 +86,11 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 							")";
 
 			int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertKhachHang);
+
+			if (rowChanged > 0)
+			{
+				this.OnKhachHangDAONewInsert?.Invoke(this, new EventArgs());
+			}
 
 			return rowChanged > 0;
 		}
