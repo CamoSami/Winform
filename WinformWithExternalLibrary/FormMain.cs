@@ -1206,7 +1206,7 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_VuHongHanh()
 		{
-			Debug.WriteLine(DMSanPhamDAO.Instance.UpdateCongSoLuongTon("469075421580", 2));
+			//Debug.WriteLine(DMSanPhamDAO.Instance.UpdateCongSoLuongTon("469075421580", 2));
 		}
 
 		#endregion
@@ -1539,7 +1539,7 @@ namespace WinformWithExternalLibrary
 
 			if (type != null)
 			{
-				Debug.WriteLine(type);
+				//Debug.WriteLine(type);
 
 				return type;
 			}
@@ -1553,7 +1553,7 @@ namespace WinformWithExternalLibrary
 
 		private int GetTabPageControlSelectedIndex()
 		{
-			Debug.WriteLine(materialTabControl.SelectedIndex);
+			//Debug.WriteLine(materialTabControl.SelectedIndex);
 
 			return this.materialTabControl.SelectedIndex;
 		}

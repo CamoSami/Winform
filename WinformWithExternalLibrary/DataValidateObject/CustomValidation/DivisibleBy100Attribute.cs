@@ -12,13 +12,13 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 		protected override ValidationResult IsValid(object value, ValidationContext validationContext)
 		{
 			if (value != null &&
-				value is int number &&
-				number % 100 != 0)
+				value is long number &&
+				number % 100 == 0)
 			{
-				return new ValidationResult(this.ErrorMessage, new List<string>() { "TongTienKhachTraDVO_TongTienKhachTra" });
+				return ValidationResult.Success;
 			}
 
-			return ValidationResult.Success;
+			return new ValidationResult(this.ErrorMessage, new List<string>() { "TongTienKhachTraDVO_TongTienKhachTra" });
 		}
 	}
 }
