@@ -15,7 +15,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 				value is int number &&
 				number % 100 != 0)
 			{
-				return new ValidationResult(this.ErrorMessage);
+				return new ValidationResult(this.ErrorMessage, new List<string>() { "TongTienKhachTraDVO_TongTienKhachTra" });
 			}
 
 			return ValidationResult.Success;

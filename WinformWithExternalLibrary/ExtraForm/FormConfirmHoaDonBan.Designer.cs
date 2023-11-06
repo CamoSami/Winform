@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
 			this.TongTienKhachTraDVO_TongTienKhachTra_Validation = new MaterialSkin.Controls.MaterialLabel();
-			this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
 			this.LabelForFocus = new MaterialSkin.Controls.MaterialLabel();
 			this.materialButtonSubmit = new MaterialSkin.Controls.MaterialButton();
 			this.TongTienKhachTraDVO_TongTienKhachTra = new MaterialSkin.Controls.MaterialTextBox();
@@ -49,25 +48,6 @@
 			this.TongTienKhachTraDVO_TongTienKhachTra_Validation.Size = new System.Drawing.Size(647, 23);
 			this.TongTienKhachTraDVO_TongTienKhachTra_Validation.TabIndex = 13;
 			this.TongTienKhachTraDVO_TongTienKhachTra_Validation.Text = "TongTienKhachTraDVO_TongTienKhachTra_Validation";
-			// 
-			// materialButton1
-			// 
-			this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButton1.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButton1.Depth = 0;
-			this.materialButton1.HighEmphasis = true;
-			this.materialButton1.Icon = null;
-			this.materialButton1.Location = new System.Drawing.Point(397, 423);
-			this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButton1.Name = "materialButton1";
-			this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButton1.Size = new System.Drawing.Size(119, 36);
-			this.materialButton1.TabIndex = 12;
-			this.materialButton1.Text = "Xóa Hóa Đơn";
-			this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButton1.UseAccentColor = false;
-			this.materialButton1.UseVisualStyleBackColor = true;
 			// 
 			// LabelForFocus
 			// 
@@ -197,7 +177,6 @@
 			this.Controls.Add(this.FormConfirmHoaDonBan_ThanhToan);
 			this.Controls.Add(this.FormConfirmHoaDonBan_TongTien);
 			this.Controls.Add(this.TongTienKhachTraDVO_TongTienKhachTra_Validation);
-			this.Controls.Add(this.materialButton1);
 			this.Controls.Add(this.LabelForFocus);
 			this.Controls.Add(this.materialButtonSubmit);
 			this.Controls.Add(this.TongTienKhachTraDVO_TongTienKhachTra);
@@ -213,7 +192,6 @@
 		#endregion
 
 		private MaterialSkin.Controls.MaterialLabel TongTienKhachTraDVO_TongTienKhachTra_Validation;
-		private MaterialSkin.Controls.MaterialButton materialButton1;
 		private MaterialSkin.Controls.MaterialLabel LabelForFocus;
 		private MaterialSkin.Controls.MaterialButton materialButtonSubmit;
 		private MaterialSkin.Controls.MaterialTextBox TongTienKhachTraDVO_TongTienKhachTra;

@@ -76,6 +76,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 					//		Clear its Text
 					tempLabel.Text = "";
+					tempLabel.Cursor = Cursors.Default;
 
 					//		For Validation
 					tempLabel.ForeColor = Color.Red;
@@ -84,8 +85,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 				{
 					//		Casting
 					TextBoxBase tempMaterialTextBox = control as TextBoxBase;
-
-					//		Check if Input enabled
 
 					//		Debug
 					//Debug.WriteLine(tempMaterialTextBox.Name);
@@ -143,8 +142,17 @@ namespace WinformWithExternalLibrary.ExtraForm
 					this.TongTienKhachTraDVO_TongTienKhachTra.SelectionStart = this.TongTienKhachTraDVO_TongTienKhachTra.Text.Length;
 				}
 			};
+			FormMain.Instance.FormClosed += (obj, eventArgs) =>
+			{
+				this.Dispose();
+
+				this.Close();
+
+				Environment.Exit(0);
+			};
 
 			//		TextBox
+			this.TongTienKhachTraDVO_TongTienKhachTra.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
 
 			//		Button
 			//			Submit
@@ -340,7 +348,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 		private dynamic GetInput()
 		{
 			if (!long.TryParse(this.GetTextboxTextIfPlaceholderThenEmpty(this.TongTienKhachTraDVO_TongTienKhachTra), out long tempTongTienKhachTra)) {
-				tempTongTienKhachTra = 0;
+				return new TongTienKhachTraDVO();
 			}
 
 			return new TongTienKhachTraDVO(

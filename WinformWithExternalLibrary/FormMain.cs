@@ -35,7 +35,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace WinformWithExternalLibrary
 {
-    public partial class FormMain : MaterialForm
+	public partial class FormMain : MaterialForm
 	{
 		public static FormMain Instance { get; set; }
 
@@ -45,8 +45,12 @@ namespace WinformWithExternalLibrary
 
 		private readonly FormatValues formatValues = new FormatValues();
 
+		private int lastTabPageIndex = 0;
+
 		public FormMain()
 		{
+			//		TODO: set up Event system for DAOs to update DataSource
+
 			//		GenerateData
 			// this.InitializeFakeData();
 
@@ -90,8 +94,8 @@ namespace WinformWithExternalLibrary
 			this.Font = FormLogin.Instance.GetFont();
 
 			//		Generalist Attributes
-			foreach (TabPage tabPage in this.materialTabControl.TabPages) 
-			{ 
+			foreach (TabPage tabPage in this.materialTabControl.TabPages)
+			{
 				if (tabPage != this.HoaDonBanDVO)
 				{
 					continue;
@@ -109,6 +113,7 @@ namespace WinformWithExternalLibrary
 
 						//		For Validation
 						tempLabel.ForeColor = Color.Red;
+						tempLabel.Cursor = Cursors.Default;
 					}
 					//		ComboBox
 					else if (control is ComboBox comboBox)
@@ -215,7 +220,27 @@ namespace WinformWithExternalLibrary
 			//		Form
 			this.FormClosing += (obj, e) =>
 			{
-				//		TODO: if data not saved (DirtyData) -> ask if want to save
+				bool dirtyData = false;
+
+				foreach (Control control in this.listOfControlsDVO[this.lastTabPageIndex])
+				{
+					if (!this.CheckIfTextboxEmptyOrPlaceholder(control))
+					{
+						dirtyData = true;
+
+						break;
+					}
+				}
+
+				if (dirtyData)
+				{
+					if (!this.ShowMessageBoxYesNo("Bạn còn thông tin nhập dở, bạn có muốn rời không?", this.lastTabPageIndex))
+					{
+						e.Cancel = true;
+
+						return;
+					}
+				}
 
 				if (e.Cancel == false)
 				{
@@ -247,11 +272,36 @@ namespace WinformWithExternalLibrary
 				this.ActiveControl = null;
 			};
 
-			//		TODO: Add DirtyData check when leaving tabPage
-			//		TODO: Add Reset (PlaceHolder) when entering tabPage
 			this.materialTabControl.Selecting += (obj, e) =>
 			{
+				bool dirtyData = false;
 
+				foreach (Control control in this.listOfControlsDVO[this.lastTabPageIndex])
+				{
+					if (!this.CheckIfTextboxEmptyOrPlaceholder(control))
+					{
+						dirtyData = true;
+
+						break;
+					}
+				}
+
+				if (dirtyData)
+				{
+					if (!this.ShowMessageBoxYesNo("Bạn còn thông tin nhập dở, bạn có muốn rời không?", this.lastTabPageIndex))
+					{
+						e.Cancel = true;
+
+						return;
+					}
+					else
+					{
+						this.ResetInputForTabPage(this.lastTabPageIndex);
+						this.ResetValidationForTabPage(this.lastTabPageIndex);
+					}
+				}
+
+				this.lastTabPageIndex = this.GetTabPageControlSelectedIndex();
 			};
 		}
 
@@ -273,13 +323,10 @@ namespace WinformWithExternalLibrary
 
 			control.Text = this.GetControlTextIfEmptyThenPlaceholder(control);
 
-			if (this.TryValidationFromControl(
-						control: control, 
-						onlyOneControl: false, 
-						out dynamic baseDVO))
-			{
-				//		TODO: Succeeded btw, do whatever
-			}
+			this.TryValidationFromControl(
+						control: control,
+						onlyOneControl: true,
+						out _);
 		}
 
 		private void TextBoxBase_KeyPress_AlphabetOnly(object sender, KeyPressEventArgs e)
@@ -311,12 +358,21 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_NgoSachMinhHieu()
 		{
-			//		TODO: set up Event system for DAOs to update DataSource
+			this.Initialize_HoaDonBan();
+		}
+
+		private void Initialize_HoaDonBan()
+		{
 			this.TabPageHoaDonBan_materialListView.Scrollable = true;
 
 			this.NhanVienThuNganDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
 			this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
 			this.ChiTietHDBanDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
+
+			KhachHangDAO.Instance.OnKhachHangDAONewInsert += (obj, e) =>
+			{
+				this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
+			};
 
 			this.NhanVienThuNganDVO_NhanVien.SelectedIndex = -1;
 			this.HoaDonBanDVO_DienThoaiKhachHang.SelectedIndex = -1;
@@ -362,7 +418,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienThuNganDVO_NhanVien.LostFocus += this.NhanVien_AutoComplete;
 			this.NhanVienThuNganDVO_NhanVien.SelectedIndexChanged += this.NhanVien_AutoComplete;
 
-			//		HoaDonBanDVO_TenGiamGia
+			//			HoaDonBanDVO_TenGiamGia
 			this.HoaDonBanDVO_TenGiamGia.LostFocus += (obj, e) =>
 			{
 				if (this.TryValidationFromControl(this.HoaDonBanDVO_TenGiamGia, onlyOneControl: true, out dynamic baseDVO))
@@ -403,7 +459,7 @@ namespace WinformWithExternalLibrary
 			//				TODO:	Finish
 			this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Click += (obj, e) =>
 			{
-				
+
 			};
 
 			//			TabPageHoaDonBan_ButtonNhapChiTiet
@@ -464,16 +520,11 @@ namespace WinformWithExternalLibrary
 					this.TryValidationFromControl(this.NhanVienThuNganDVO_NhanVien, onlyOneControl: false, out dynamic baseNhanVienThuNgan))
 				{
 					//		Validated!
-					
+
 					//		...Nothing?
 					if (this.TabPageHoaDonBan_materialListView.Items.Count <= 0)
 					{
-						MaterialMessageBox.Show(
-							text: "Hóa đơn chưa có đủ dữ liệu",
-							caption: this.Text,
-							UseRichTextBox: false,
-							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-							);
+						this.ShowMessageBox(message: "Chưa có sản phẩm trong đơn hàng", this.GetTabPageControlSelectedIndex());
 
 						return;
 					}
@@ -532,10 +583,10 @@ namespace WinformWithExternalLibrary
 		}
 
 		private void DienThoaiKhachHang_AutoComplete(object obj, EventArgs e)
-		{ 
+		{
 			if (this.TryValidationFromControl(
-						control: obj as Control, 
-						onlyOneControl: true, 
+						control: obj as Control,
+						onlyOneControl: true,
 						baseDVO: out _))
 			{
 				this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetTenKhachHangWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
@@ -644,8 +695,8 @@ namespace WinformWithExternalLibrary
 			this.ResetInputForControl(this.HoaDonBanDVO_DienThoaiKhachHang);
 
 			//		Set Interracted
-			this.SetInterractedForControl(this.ChiTietHDBanDVO_MaSanPham, false);
-			this.SetInterractedForControl(this.HoaDonBanDVO_DienThoaiKhachHang, false);
+			this.SetInterractedForControl(this.ChiTietHDBanDVO_MaSanPham, onlyOneControl: false, value: false);
+			this.SetInterractedForControl(this.HoaDonBanDVO_DienThoaiKhachHang, onlyOneControl: false, value: false);
 
 			//		Set Focus
 			this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
@@ -744,17 +795,22 @@ namespace WinformWithExternalLibrary
 			this.ActiveControl = this.HoaDonBanDVO_DienThoaiKhachHang;
 		}
 
+		public long GetThanhToan()
+		{
+			return long.Parse(this.HoaDonBanDVO_ThanhToan.Text);
+		}
+
 		#endregion
 
 		#region Trần Hồng Thái
 
 		private void Initialize_TranHongThai()
 		{
-            this.InitializeBillOfSell();
+			this.InitializeBillOfSell();
 
-            this.InitializeChart1();
-            this.InitializeChart2();
-        }
+			this.InitializeChart1();
+			this.InitializeChart2();
+		}
 
 		private void InitializeBillOfSell()
 		{
@@ -765,15 +821,15 @@ namespace WinformWithExternalLibrary
 			double priceTotalCurrentMonth = PhanTichDAO.Instance.GetPriceTotalCurrentMonth();
 			int percentDiscount = priceTotalCurrentMonth == 0 ? 0 : (int)Math.Ceiling((double)discountTotalCurrentMonth / priceTotalCurrentMonth * 100);
 
-            // Render data
-            TabPagePhanTich_HoaDonBan_SoLuong_LB.Text = countBillOfCellCurrentMonth.ToString();
-            TabPagePhanTich_HoaDonBan_DoanhThu_LB.Text = this.formatValues.FormatPriceToView(revenueCurrentMonth.ToString(), 3) + " đ";
-            TabPagePhanTich_HoaDonBan_GiamGiaPB.Value = percentDiscount;
-            TabPagePhanTich_HoaDonBan_GiamGiaLB.Text = $"Tiền giảm giá tháng này: {this.formatValues.FormatPriceToView(discountTotalCurrentMonth.ToString(), 3)} đ ({percentDiscount}%)";
+			// Render data
+			TabPagePhanTich_HoaDonBan_SoLuong_LB.Text = countBillOfCellCurrentMonth.ToString();
+			TabPagePhanTich_HoaDonBan_DoanhThu_LB.Text = this.formatValues.FormatPriceToView(revenueCurrentMonth.ToString(), 3) + " đ";
+			TabPagePhanTich_HoaDonBan_GiamGiaPB.Value = percentDiscount;
+			TabPagePhanTich_HoaDonBan_GiamGiaLB.Text = $"Tiền giảm giá tháng này: {this.formatValues.FormatPriceToView(discountTotalCurrentMonth.ToString(), 3)} đ ({percentDiscount}%)";
 
 
 			// Event
-            TabPagePhanTich_HoaDonBan_ShowBTN.Click += (obj, e) =>
+			TabPagePhanTich_HoaDonBan_ShowBTN.Click += (obj, e) =>
 			{
 				FormChiTietHoaDonBan formChiTietHoaDonBan = new FormChiTietHoaDonBan();
 
@@ -781,99 +837,99 @@ namespace WinformWithExternalLibrary
 			};
 		}
 
-        private void InitializeChart1()
+		private void InitializeChart1()
 		{
-            // Data queried from DB
+			// Data queried from DB
 			List<ProductsBestSellerResponseDTO> productsTop1BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(1);
-            List<ProductsBestSellerResponseDTO> productsTop2BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(2);
-            List<ProductsBestSellerResponseDTO> productsTop3BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(3);
+			List<ProductsBestSellerResponseDTO> productsTop2BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(2);
+			List<ProductsBestSellerResponseDTO> productsTop3BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(3);
 
-            // Fill all default value each month
-            List<ProductsBestSellerResponseDTO> productsValueFirstColumn = new List<ProductsBestSellerResponseDTO>();
+			// Fill all default value each month
+			List<ProductsBestSellerResponseDTO> productsValueFirstColumn = new List<ProductsBestSellerResponseDTO>();
 			List<ProductsBestSellerResponseDTO> productsValueSecondColumn = new List<ProductsBestSellerResponseDTO>();
 			List<ProductsBestSellerResponseDTO> productsValueThirdColumn = new List<ProductsBestSellerResponseDTO>();
-            for (int i = 0; i < 12; i++)
-            {
-                productsValueFirstColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1});
-                productsValueSecondColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1});
-                productsValueThirdColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1});
-            }
+			for (int i = 0; i < 12; i++)
+			{
+				productsValueFirstColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1 });
+				productsValueSecondColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1 });
+				productsValueThirdColumn.Add(new ProductsBestSellerResponseDTO() { ProductsBestSellerResponseDTO_Thang = i + 1 });
+			}
 
-            // Fill data from DB
+			// Fill data from DB
 			foreach (ProductsBestSellerResponseDTO product in productsTop1BestSeller)
-            {
-                productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan 
+			{
+				productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan
 					= product.ProductsBestSellerResponseDTO_SoLuongBan;
-                productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
+				productsValueFirstColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
 					= product.ProductsBestSellerResponseDTO_TenSanPham;
-            }
-            foreach (ProductsBestSellerResponseDTO product in productsTop2BestSeller)
-            {
-                productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan 
+			}
+			foreach (ProductsBestSellerResponseDTO product in productsTop2BestSeller)
+			{
+				productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan
 					= product.ProductsBestSellerResponseDTO_SoLuongBan;
-                productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
+				productsValueSecondColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
 					= product.ProductsBestSellerResponseDTO_TenSanPham;
-            }
-            foreach (ProductsBestSellerResponseDTO product in productsTop3BestSeller)
-            {
-                productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan
+			}
+			foreach (ProductsBestSellerResponseDTO product in productsTop3BestSeller)
+			{
+				productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_SoLuongBan
 					= product.ProductsBestSellerResponseDTO_SoLuongBan;
-                productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
+				productsValueThirdColumn[product.ProductsBestSellerResponseDTO_Thang - 1].ProductsBestSellerResponseDTO_TenSanPham
 					= product.ProductsBestSellerResponseDTO_TenSanPham;
-            }
+			}
 
-            cartesianChart1.Series = new ISeries[]
+			cartesianChart1.Series = new ISeries[]
 			{
 				new ColumnSeries<ProductsBestSellerResponseDTO>
 				{
 					Values = productsValueFirstColumn,
 					GroupPadding = 8,
-                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsPosition = DataLabelsPosition.End,
-                    Mapping = (product, point) =>
-                    {
-                        point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
-                        point.SecondaryValue = point.Context.Index;
+					YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+					DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+					DataLabelsPosition = DataLabelsPosition.End,
+					Mapping = (product, point) =>
+					{
+						point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
+						point.SecondaryValue = point.Context.Index;
 
-                    },
-                },
+					},
+				},
 				new ColumnSeries<ProductsBestSellerResponseDTO>
 				{
 					Values = productsValueSecondColumn,
-                    GroupPadding = 8,
-                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsPosition = DataLabelsPosition.End,
-                    Mapping = (product, point) =>
-                    {
-                        point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
-                        point.SecondaryValue = point.Context.Index;
+					GroupPadding = 8,
+					YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham} {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+					DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+					DataLabelsPosition = DataLabelsPosition.End,
+					Mapping = (product, point) =>
+					{
+						point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
+						point.SecondaryValue = point.Context.Index;
 
-                    },
-                },
-                new ColumnSeries<ProductsBestSellerResponseDTO>
-                {
-                    Values = productsValueThirdColumn,
-                    GroupPadding = 8,
-                    YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
-                    DataLabelsPosition = DataLabelsPosition.End,
-                    Mapping = (product, point) =>
-                    {
-                        point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
-                        point.SecondaryValue = point.Context.Index;
+					},
+				},
+				new ColumnSeries<ProductsBestSellerResponseDTO>
+				{
+					Values = productsValueThirdColumn,
+					GroupPadding = 8,
+					YToolTipLabelFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+					DataLabelsFormatter = point => $"{point.Model.ProductsBestSellerResponseDTO_TenSanPham}   {point.Model.ProductsBestSellerResponseDTO_SoLuongBan}",
+					DataLabelsPosition = DataLabelsPosition.End,
+					Mapping = (product, point) =>
+					{
+						point.PrimaryValue = product.ProductsBestSellerResponseDTO_SoLuongBan;
+						point.SecondaryValue = point.Context.Index;
 
-                    },
-                }
-            };
+					},
+				}
+			};
 
-            // Axis
+			// Axis
 			List<string> year = new List<string>();
-            for (int i = 1; i <= 12; i++)
-            {
-                year.Add("Tháng " + i.ToString());
-            }
+			for (int i = 1; i <= 12; i++)
+			{
+				year.Add("Tháng " + i.ToString());
+			}
 
 			cartesianChart1.XAxes = new List<Axis>
 			{
@@ -881,25 +937,25 @@ namespace WinformWithExternalLibrary
 				{
 					// Use the labels property to define named labels.
 					Labels = year
-                }
-            };
+				}
+			};
 
-            // Legend custom
-            //cartesianChart1.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
+			// Legend custom
+			//cartesianChart1.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
 
-            //cartesianChart1.
-            cartesianChart1.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
-        }
+			//cartesianChart1.
+			cartesianChart1.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
+		}
 
 		private void InitializeChart2()
 		{
-            // Days in a Month
-            List<string> daysInMonth = new List<string>();
-            int currentMonth = DateTime.Now.Month;
+			// Days in a Month
+			List<string> daysInMonth = new List<string>();
+			int currentMonth = DateTime.Now.Month;
 			int lastMonth = DateTime.Now.Month - 1 != 0 ? DateTime.Now.Month - 1 : 12;
 			int year = DateTime.Now.Month - 1 != 0 ? DateTime.Now.Year : DateTime.Now.Year - 1;
 
-            int countDaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, currentMonth);
+			int countDaysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, currentMonth);
 			int countDaysInLastMonth = DateTime.DaysInMonth(year, lastMonth);
 
 			// Data queried from DB
@@ -909,66 +965,66 @@ namespace WinformWithExternalLibrary
 			List<long> revenuesCurrentMonth = new List<long>(countDaysInMonth);
 			List<long> revenuesLastMonth = new List<long>(countDaysInMonth);
 
-            // Fill all value 0
-            for (int i = 0; i < countDaysInMonth; i++)
-            {
-                revenuesCurrentMonth.Add(0);
-            }
+			// Fill all value 0
+			for (int i = 0; i < countDaysInMonth; i++)
+			{
+				revenuesCurrentMonth.Add(0);
+			}
 
 			for (int i = 0; i < countDaysInLastMonth; i++)
-            {
-                revenuesLastMonth.Add(0);
-            }
+			{
+				revenuesLastMonth.Add(0);
+			}
 
 			// Fill value get from DB
-            foreach (RevenueResponseDTO revanue in revanueResponseCurrentMonth)
+			foreach (RevenueResponseDTO revanue in revanueResponseCurrentMonth)
 			{
-                revenuesCurrentMonth[revanue.RevenueResponseDTO_Ngay - 1] = revanue.RevenueResponseDTO_DoanhThu;
-            }
+				revenuesCurrentMonth[revanue.RevenueResponseDTO_Ngay - 1] = revanue.RevenueResponseDTO_DoanhThu;
+			}
 
-            foreach (RevenueResponseDTO revanue in revanueResponseLastMonth)
+			foreach (RevenueResponseDTO revanue in revanueResponseLastMonth)
 			{
-                revenuesLastMonth[revanue.RevenueResponseDTO_Ngay - 1] = revanue.RevenueResponseDTO_DoanhThu;
-            }
+				revenuesLastMonth[revanue.RevenueResponseDTO_Ngay - 1] = revanue.RevenueResponseDTO_DoanhThu;
+			}
 
-            cartesianChart2.Series = new ISeries[]
-            {
-                new LineSeries<long>
-                {
+			cartesianChart2.Series = new ISeries[]
+			{
+				new LineSeries<long>
+				{
 					Values = revenuesCurrentMonth,
 					GeometrySize = 20,
-                    Name = "Doanh thu tháng " + currentMonth,
-                },
+					Name = "Doanh thu tháng " + currentMonth,
+				},
 				new LineSeries<long>
 				{
 					Values = revenuesLastMonth,
 					GeometrySize = 10,
-                    Name = "Doanh thu tháng " + lastMonth,
+					Name = "Doanh thu tháng " + lastMonth,
 
-                },
+				},
 
 			};
 
 			// Legend custom
 			cartesianChart2.LegendPosition = LiveChartsCore.Measure.LegendPosition.Bottom;
 
-            // Axis
-            for (int i = 1; i <= countDaysInMonth; i++)
-            {
+			// Axis
+			for (int i = 1; i <= countDaysInMonth; i++)
+			{
 				daysInMonth.Add("Ngày " + i.ToString());
-            }
+			}
 
-            cartesianChart2.XAxes = new List<Axis>
+			cartesianChart2.XAxes = new List<Axis>
 			{
 				new Axis
 				{
 					// Use the labels property to define named labels.
 					Labels = daysInMonth
-                }
+				}
 			};
-			
-            cartesianChart2.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
-        }
+
+			cartesianChart2.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
+		}
 
 		#endregion
 
@@ -1001,11 +1057,50 @@ namespace WinformWithExternalLibrary
 
 		#region Generalist Function
 
+		private bool ShowMessageBoxYesNo(string message, int tabPageIndex)
+		{
+			bool ifYes = MaterialMessageBox.Show(
+							text: message,
+							caption: this.Text,
+							buttons: MessageBoxButtons.YesNo,
+							icon: MessageBoxIcon.Question,
+							UseRichTextBox: false,
+							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+							)
+						== DialogResult.Yes;
+
+			this.ResetColorForLabel(tabPageIndex);
+
+			return ifYes;
+		}
+
+		private void ShowMessageBox(string message, int tabPageIndex)
+		{
+			MaterialMessageBox.Show(
+					text: message,
+					caption: this.materialTabControl.SelectedTab.Text,
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+
+			//		Workaround a bug
+			this.ResetColorForLabel(tabPageIndex);
+		}
+
+		private void ResetColorForLabel(int tabPageIndex)
+		{
+			//		Workaround a bug
+			for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
+			{
+				this.listOfLabelsDVO[tabPageIndex][i].ForeColor = Color.Red;
+			}
+		}
+
 		private bool TryValidationFromControl(Control control, bool onlyOneControl, out dynamic baseDVO)
 		{
 			//		Reset Validation
-			this.ResetValidationForControl(control);
-			this.SetInterractedForControl(control, true);
+			this.ResetValidationForControl(control, onlyOneControl: onlyOneControl);
+			this.SetInterractedForControl(control, onlyOneControl: onlyOneControl, true);
 
 			//		New Object
 			baseDVO = this.GetInputFromControl(control);
@@ -1047,7 +1142,7 @@ namespace WinformWithExternalLibrary
 
 				return false;
 			}
-				
+
 			return true;
 		}
 
@@ -1111,33 +1206,11 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		private void SetInterractedForControl(Control control, bool value)
+		private void ResetInputForTabPage(int tabPageIndex)
 		{
-			string getClassName = control.Name.Split('_')[0];
-			int tabPageIndex = this.GetTabPageControlSelectedIndex();
-
-			for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
+			foreach (Control controlTemp in this.listOfControlsDVO[tabPageIndex])
 			{
-				if (this.listOfLabelsDVO[tabPageIndex][i].Name.Contains(getClassName))
-				{
-					this.isInterracted[tabPageIndex][i] = value;
-				}
-			}
-		}
-
-		private void ResetValidationForControl(Control control)
-		{
-			string getClassName = control.Name.Split('_')[0];
-			int tabPageIndex = this.GetTabPageControlSelectedIndex();
-
-			for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
-			{
-				if (this.listOfLabelsDVO[tabPageIndex][i].Name.Contains(getClassName))
-				{
-					this.listOfLabelsDVO[tabPageIndex][i].Text = "";
-
-					this.isInterracted[tabPageIndex][i] = false;
-				}
+				controlTemp.Text = this.GetPlaceholderForControl(controlTemp);
 			}
 		}
 
@@ -1150,7 +1223,93 @@ namespace WinformWithExternalLibrary
 			{
 				if (controlTemp.Name.Contains(getClassName))
 				{
-					controlTemp.Text = "";
+					controlTemp.Text = this.GetPlaceholderForControl(controlTemp);
+				}
+			}
+		}
+
+		private void ResetValidationForTabPage(int tabPageIndex)
+		{
+			for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
+			{
+				this.listOfLabelsDVO[tabPageIndex][i].Text = "";
+			}
+
+			this.SetInterractedForTabPage(tabPageIndex, false);
+		}
+
+		private void ResetValidationForControl(Control control, bool onlyOneControl)
+		{
+			int tabPageIndex = this.GetTabPageControlSelectedIndex();
+			string getClassName;
+
+			if (onlyOneControl)
+			{
+				getClassName = control.Name;
+
+				for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
+				{
+					if (this.listOfLabelsDVO[tabPageIndex][i].Name.Contains(getClassName))
+					{
+						this.listOfLabelsDVO[tabPageIndex][i].Text = "";
+
+						return;
+					}
+				}
+			}
+			else
+			{
+				getClassName = control.Name.Split('_')[0];
+
+				for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
+				{
+					if (this.listOfLabelsDVO[tabPageIndex][i].Name.Contains(getClassName))
+					{
+						this.listOfLabelsDVO[tabPageIndex][i].Text = "";
+					}
+				}
+			}
+
+			this.SetInterractedForControl(control, onlyOneControl: onlyOneControl, false);
+		}
+
+		private void SetInterractedForTabPage(int tabPageIndex, bool value)
+		{
+			for (int i = 0; i < this.isInterracted[tabPageIndex].Count; i++)
+			{
+				this.isInterracted[tabPageIndex][i] = value;
+			}
+		}
+
+		private void SetInterractedForControl(Control control, bool onlyOneControl, bool value)
+		{
+			string getClassName;
+			int tabPageIndex = this.GetTabPageControlSelectedIndex();
+
+			if (onlyOneControl)
+			{
+				getClassName = control.Name;
+
+				for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
+				{
+					if (this.listOfLabelsDVO[tabPageIndex][i].Name.Contains(getClassName))
+					{
+						this.isInterracted[tabPageIndex][i] = value;
+
+						return;
+					}
+				}
+			}
+			else
+			{
+				getClassName = control.Name.Split('_')[0];
+
+				for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
+				{
+					if (this.listOfLabelsDVO[tabPageIndex][i].Name.Contains(getClassName))
+					{
+						this.isInterracted[tabPageIndex][i] = value;
+					}
 				}
 			}
 		}
