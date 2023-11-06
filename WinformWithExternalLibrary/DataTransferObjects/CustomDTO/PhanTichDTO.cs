@@ -55,5 +55,19 @@ namespace WinformWithExternalLibrary.DataTransferObjects.CustomDTO
             public long BillOfImportInfoResponseDTO_TongTien { get; set; }
             public DateTime BillOfImportInfoResponseDTO_NgayNhap { get; set; }
         }
+
+        public class InventoryArrangementResponseDTO
+        {
+            public string InventoryArrangementResponseDTO_MaSanPham { get; set; }
+            public string InventoryArrangementResponseDTO_TenSanPham { get; set; } = "";
+            public int InventoryArrangementResponseDTO_SoLuongTonKho { get; set; } = 0;
+        }
+
+        public class SalaryArrangementResponseDTO
+        {
+            public string SalaryArrangementResponseDTO_MaCongViec { get; set; }
+            public long SalaryArrangementResponseDTO_Luong { get; set; } = 0;
+            public string SalaryArrangementResponseDTO_TenCongViec { get; set; } = "";
+        }
     }
 }

@@ -73,6 +73,12 @@ namespace WinformWithExternalLibrary
             this.TabPageNhaCungCap = new System.Windows.Forms.TabPage();
             this.TabPageHangHoa = new System.Windows.Forms.TabPage();
             this.TabPagePhanTich = new System.Windows.Forms.TabPage();
+            this.materialCard9 = new MaterialSkin.Controls.MaterialCard();
+            this.label6 = new System.Windows.Forms.Label();
+            this.materialCard8 = new MaterialSkin.Controls.MaterialCard();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pieChart2 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+            this.pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
             this.TabPagePhanTich_HoaDonBan_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.materialCard7 = new MaterialSkin.Controls.MaterialCard();
@@ -80,13 +86,14 @@ namespace WinformWithExternalLibrary
             this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
             this.label14 = new System.Windows.Forms.Label();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.materialFloatingActionButton3 = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.materialCard3 = new MaterialSkin.Controls.MaterialCard();
-            this.label13 = new System.Windows.Forms.Label();
-            this.materialProgressBar3 = new MaterialSkin.Controls.MaterialProgressBar();
+            this.TabPagePhanTich_KhachHang_TiLeLB = new System.Windows.Forms.Label();
+            this.TabPagePhanTich_KhachHang_TiLePB = new MaterialSkin.Controls.MaterialProgressBar();
+            this.TabPagePhanTich_KhachHang_KHmoi_LB = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.TabPagePhanTich_KhachHang_Tong_LB = new System.Windows.Forms.Label();
             this.TabPagePhanTich_HoaDonNhap_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
             this.TabPagePhanTich_HoaDonNhap_TiLeLB = new System.Windows.Forms.Label();
@@ -111,6 +118,8 @@ namespace WinformWithExternalLibrary
             this.materialTabControl.SuspendLayout();
             this.HoaDonBanDVO.SuspendLayout();
             this.TabPagePhanTich.SuspendLayout();
+            this.materialCard9.SuspendLayout();
+            this.materialCard8.SuspendLayout();
             this.materialCard7.SuspendLayout();
             this.materialCard6.SuspendLayout();
             this.materialCard3.SuspendLayout();
@@ -648,11 +657,14 @@ namespace WinformWithExternalLibrary
             // 
             // TabPagePhanTich
             // 
+            this.TabPagePhanTich.Controls.Add(this.materialCard9);
+            this.TabPagePhanTich.Controls.Add(this.materialCard8);
+            this.TabPagePhanTich.Controls.Add(this.pieChart2);
+            this.TabPagePhanTich.Controls.Add(this.pieChart1);
             this.TabPagePhanTich.Controls.Add(this.TabPagePhanTich_HoaDonBan_ShowBTN);
             this.TabPagePhanTich.Controls.Add(this.materialCard7);
             this.TabPagePhanTich.Controls.Add(this.materialCard6);
             this.TabPagePhanTich.Controls.Add(this.materialLabel1);
-            this.TabPagePhanTich.Controls.Add(this.materialFloatingActionButton3);
             this.TabPagePhanTich.Controls.Add(this.materialCard3);
             this.TabPagePhanTich.Controls.Add(this.TabPagePhanTich_HoaDonNhap_ShowBTN);
             this.TabPagePhanTich.Controls.Add(this.materialCard2);
@@ -668,6 +680,85 @@ namespace WinformWithExternalLibrary
             this.TabPagePhanTich.Text = "Phân Tích";
             this.TabPagePhanTich.UseVisualStyleBackColor = true;
             // 
+            // materialCard9
+            // 
+            this.materialCard9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard9.Controls.Add(this.label6);
+            this.materialCard9.Depth = 0;
+            this.materialCard9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard9.Location = new System.Drawing.Point(1098, 243);
+            this.materialCard9.Margin = new System.Windows.Forms.Padding(18);
+            this.materialCard9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard9.Name = "materialCard9";
+            this.materialCard9.Size = new System.Drawing.Size(150, 48);
+            this.materialCard9.TabIndex = 21;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(4, 10);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(125, 30);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Biểu đồ lương \n công việc nhiều nhất";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label6.UseMnemonic = false;
+            // 
+            // materialCard8
+            // 
+            this.materialCard8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard8.Controls.Add(this.label5);
+            this.materialCard8.Depth = 0;
+            this.materialCard8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard8.Location = new System.Drawing.Point(246, 243);
+            this.materialCard8.Margin = new System.Windows.Forms.Padding(18);
+            this.materialCard8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard8.Name = "materialCard8";
+            this.materialCard8.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard8.Size = new System.Drawing.Size(150, 48);
+            this.materialCard8.TabIndex = 20;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(11, 10);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(123, 30);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Biểu đồ số sản phẩm \ntồn kho nhiều nhất";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.UseMnemonic = false;
+            // 
+            // pieChart2
+            // 
+            this.pieChart2.InitialRotation = 0D;
+            this.pieChart2.IsClockwise = true;
+            this.pieChart2.Location = new System.Drawing.Point(400, 180);
+            this.pieChart2.MaxAngle = 360D;
+            this.pieChart2.MaxValue = null;
+            this.pieChart2.MinValue = 0D;
+            this.pieChart2.Name = "pieChart2";
+            this.pieChart2.Size = new System.Drawing.Size(231, 175);
+            this.pieChart2.TabIndex = 19;
+            this.pieChart2.Total = null;
+            // 
+            // pieChart1
+            // 
+            this.pieChart1.InitialRotation = 0D;
+            this.pieChart1.IsClockwise = true;
+            this.pieChart1.Location = new System.Drawing.Point(850, 180);
+            this.pieChart1.MaxAngle = 360D;
+            this.pieChart1.MaxValue = null;
+            this.pieChart1.MinValue = 0D;
+            this.pieChart1.Name = "pieChart1";
+            this.pieChart1.Size = new System.Drawing.Size(238, 175);
+            this.pieChart1.TabIndex = 18;
+            this.pieChart1.Total = null;
+            // 
             // TabPagePhanTich_HoaDonBan_ShowBTN
             // 
             this.TabPagePhanTich_HoaDonBan_ShowBTN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -677,7 +768,7 @@ namespace WinformWithExternalLibrary
             this.TabPagePhanTich_HoaDonBan_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
             this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageKey = "icons8-download-48.png";
             this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageList = this.imageList1;
-            this.TabPagePhanTich_HoaDonBan_ShowBTN.Location = new System.Drawing.Point(399, 82);
+            this.TabPagePhanTich_HoaDonBan_ShowBTN.Location = new System.Drawing.Point(399, 61);
             this.TabPagePhanTich_HoaDonBan_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
             this.TabPagePhanTich_HoaDonBan_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPagePhanTich_HoaDonBan_ShowBTN.Name = "TabPagePhanTich_HoaDonBan_ShowBTN";
@@ -712,7 +803,7 @@ namespace WinformWithExternalLibrary
             this.materialCard7.Controls.Add(this.label16);
             this.materialCard7.Depth = 0;
             this.materialCard7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard7.Location = new System.Drawing.Point(1047, 630);
+            this.materialCard7.Location = new System.Drawing.Point(1040, 696);
             this.materialCard7.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard7.Name = "materialCard7";
@@ -739,7 +830,7 @@ namespace WinformWithExternalLibrary
             this.materialCard6.Controls.Add(this.label14);
             this.materialCard6.Depth = 0;
             this.materialCard6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard6.Location = new System.Drawing.Point(322, 630);
+            this.materialCard6.Location = new System.Drawing.Point(326, 696);
             this.materialCard6.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard6.Name = "materialCard6";
@@ -771,34 +862,19 @@ namespace WinformWithExternalLibrary
             this.materialLabel1.Size = new System.Drawing.Size(1, 0);
             this.materialLabel1.TabIndex = 15;
             // 
-            // materialFloatingActionButton3
-            // 
-            this.materialFloatingActionButton3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.materialFloatingActionButton3.Depth = 0;
-            this.materialFloatingActionButton3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.materialFloatingActionButton3.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
-            this.materialFloatingActionButton3.ImageKey = "icons8-download-48.png";
-            this.materialFloatingActionButton3.ImageList = this.imageList1;
-            this.materialFloatingActionButton3.Location = new System.Drawing.Point(1369, 82);
-            this.materialFloatingActionButton3.Margin = new System.Windows.Forms.Padding(4);
-            this.materialFloatingActionButton3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFloatingActionButton3.Name = "materialFloatingActionButton3";
-            this.materialFloatingActionButton3.Size = new System.Drawing.Size(70, 70);
-            this.materialFloatingActionButton3.TabIndex = 11;
-            this.materialFloatingActionButton3.Text = "materialFloatingActionButton3";
-            this.materialFloatingActionButton3.UseVisualStyleBackColor = false;
-            // 
             // materialCard3
             // 
             this.materialCard3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard3.Controls.Add(this.label13);
-            this.materialCard3.Controls.Add(this.materialProgressBar3);
+            this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_TiLeLB);
+            this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_TiLePB);
+            this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_KHmoi_LB);
+            this.materialCard3.Controls.Add(this.label1);
             this.materialCard3.Controls.Add(this.label15);
             this.materialCard3.Controls.Add(this.label17);
-            this.materialCard3.Controls.Add(this.label18);
+            this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_Tong_LB);
             this.materialCard3.Depth = 0;
             this.materialCard3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard3.Location = new System.Drawing.Point(1026, 32);
+            this.materialCard3.Location = new System.Drawing.Point(1040, 11);
             this.materialCard3.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard3.Name = "materialCard3";
@@ -806,27 +882,49 @@ namespace WinformWithExternalLibrary
             this.materialCard3.Size = new System.Drawing.Size(370, 165);
             this.materialCard3.TabIndex = 10;
             // 
-            // label13
+            // TabPagePhanTich_KhachHang_TiLeLB
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(22, 129);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(99, 15);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Mục tiêu đạt 48%";
+            this.TabPagePhanTich_KhachHang_TiLeLB.AutoSize = true;
+            this.TabPagePhanTich_KhachHang_TiLeLB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPagePhanTich_KhachHang_TiLeLB.Location = new System.Drawing.Point(21, 129);
+            this.TabPagePhanTich_KhachHang_TiLeLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TabPagePhanTich_KhachHang_TiLeLB.Name = "TabPagePhanTich_KhachHang_TiLeLB";
+            this.TabPagePhanTich_KhachHang_TiLeLB.Size = new System.Drawing.Size(99, 15);
+            this.TabPagePhanTich_KhachHang_TiLeLB.TabIndex = 11;
+            this.TabPagePhanTich_KhachHang_TiLeLB.Text = "Mục tiêu đạt 48%";
             // 
-            // materialProgressBar3
+            // TabPagePhanTich_KhachHang_TiLePB
             // 
-            this.materialProgressBar3.Depth = 0;
-            this.materialProgressBar3.Location = new System.Drawing.Point(26, 119);
-            this.materialProgressBar3.Margin = new System.Windows.Forms.Padding(4);
-            this.materialProgressBar3.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialProgressBar3.Name = "materialProgressBar3";
-            this.materialProgressBar3.Size = new System.Drawing.Size(269, 5);
-            this.materialProgressBar3.TabIndex = 6;
-            this.materialProgressBar3.Value = 48;
+            this.TabPagePhanTich_KhachHang_TiLePB.Depth = 0;
+            this.TabPagePhanTich_KhachHang_TiLePB.Location = new System.Drawing.Point(24, 119);
+            this.TabPagePhanTich_KhachHang_TiLePB.Margin = new System.Windows.Forms.Padding(4);
+            this.TabPagePhanTich_KhachHang_TiLePB.MouseState = MaterialSkin.MouseState.HOVER;
+            this.TabPagePhanTich_KhachHang_TiLePB.Name = "TabPagePhanTich_KhachHang_TiLePB";
+            this.TabPagePhanTich_KhachHang_TiLePB.Size = new System.Drawing.Size(269, 5);
+            this.TabPagePhanTich_KhachHang_TiLePB.TabIndex = 10;
+            this.TabPagePhanTich_KhachHang_TiLePB.Value = 48;
+            // 
+            // TabPagePhanTich_KhachHang_KHmoi_LB
+            // 
+            this.TabPagePhanTich_KhachHang_KHmoi_LB.AutoSize = true;
+            this.TabPagePhanTich_KhachHang_KHmoi_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPagePhanTich_KhachHang_KHmoi_LB.Location = new System.Drawing.Point(245, 87);
+            this.TabPagePhanTich_KhachHang_KHmoi_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TabPagePhanTich_KhachHang_KHmoi_LB.Name = "TabPagePhanTich_KhachHang_KHmoi_LB";
+            this.TabPagePhanTich_KhachHang_KHmoi_LB.Size = new System.Drawing.Size(43, 24);
+            this.TabPagePhanTich_KhachHang_KHmoi_LB.TabIndex = 9;
+            this.TabPagePhanTich_KhachHang_KHmoi_LB.Text = "344";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(23, 87);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(174, 17);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Khách hàng mới tháng này";
             // 
             // label15
             // 
@@ -843,23 +941,23 @@ namespace WinformWithExternalLibrary
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(21, 50);
+            this.label17.Location = new System.Drawing.Point(23, 52);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(64, 17);
+            this.label17.Size = new System.Drawing.Size(174, 17);
             this.label17.TabIndex = 2;
-            this.label17.Text = "Số lượng";
+            this.label17.Text = "Tổng số lượng khách hàng";
             // 
-            // label18
+            // TabPagePhanTich_KhachHang_Tong_LB
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(131, 46);
-            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(43, 24);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "344";
+            this.TabPagePhanTich_KhachHang_Tong_LB.AutoSize = true;
+            this.TabPagePhanTich_KhachHang_Tong_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TabPagePhanTich_KhachHang_Tong_LB.Location = new System.Drawing.Point(245, 50);
+            this.TabPagePhanTich_KhachHang_Tong_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TabPagePhanTich_KhachHang_Tong_LB.Name = "TabPagePhanTich_KhachHang_Tong_LB";
+            this.TabPagePhanTich_KhachHang_Tong_LB.Size = new System.Drawing.Size(43, 24);
+            this.TabPagePhanTich_KhachHang_Tong_LB.TabIndex = 1;
+            this.TabPagePhanTich_KhachHang_Tong_LB.Text = "344";
             // 
             // TabPagePhanTich_HoaDonNhap_ShowBTN
             // 
@@ -870,7 +968,7 @@ namespace WinformWithExternalLibrary
             this.TabPagePhanTich_HoaDonNhap_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
             this.TabPagePhanTich_HoaDonNhap_ShowBTN.ImageKey = "icons8-download-48.png";
             this.TabPagePhanTich_HoaDonNhap_ShowBTN.ImageList = this.imageList1;
-            this.TabPagePhanTich_HoaDonNhap_ShowBTN.Location = new System.Drawing.Point(888, 82);
+            this.TabPagePhanTich_HoaDonNhap_ShowBTN.Location = new System.Drawing.Point(899, 61);
             this.TabPagePhanTich_HoaDonNhap_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
             this.TabPagePhanTich_HoaDonNhap_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
             this.TabPagePhanTich_HoaDonNhap_ShowBTN.Name = "TabPagePhanTich_HoaDonNhap_ShowBTN";
@@ -891,7 +989,7 @@ namespace WinformWithExternalLibrary
             this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_SoLuong_LB);
             this.materialCard2.Depth = 0;
             this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard2.Location = new System.Drawing.Point(546, 32);
+            this.materialCard2.Location = new System.Drawing.Point(557, 11);
             this.materialCard2.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard2.Name = "materialCard2";
@@ -982,7 +1080,7 @@ namespace WinformWithExternalLibrary
             this.materialCard5.Controls.Add(this.cartesianChart2);
             this.materialCard5.Depth = 0;
             this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard5.Location = new System.Drawing.Point(788, 292);
+            this.materialCard5.Location = new System.Drawing.Point(781, 358);
             this.materialCard5.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard5.Name = "materialCard5";
@@ -1004,7 +1102,7 @@ namespace WinformWithExternalLibrary
             this.materialCard4.Controls.Add(this.cartesianChart1);
             this.materialCard4.Depth = 0;
             this.materialCard4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard4.Location = new System.Drawing.Point(48, 292);
+            this.materialCard4.Location = new System.Drawing.Point(52, 358);
             this.materialCard4.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard4.Name = "materialCard4";
@@ -1032,7 +1130,7 @@ namespace WinformWithExternalLibrary
             this.materialCard1.Controls.Add(this.label2);
             this.materialCard1.Depth = 0;
             this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard1.Location = new System.Drawing.Point(52, 32);
+            this.materialCard1.Location = new System.Drawing.Point(52, 11);
             this.materialCard1.Margin = new System.Windows.Forms.Padding(18);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCard1.Name = "materialCard1";
@@ -1133,6 +1231,10 @@ namespace WinformWithExternalLibrary
             this.HoaDonBanDVO.PerformLayout();
             this.TabPagePhanTich.ResumeLayout(false);
             this.TabPagePhanTich.PerformLayout();
+            this.materialCard9.ResumeLayout(false);
+            this.materialCard9.PerformLayout();
+            this.materialCard8.ResumeLayout(false);
+            this.materialCard8.PerformLayout();
             this.materialCard7.ResumeLayout(false);
             this.materialCard7.PerformLayout();
             this.materialCard6.ResumeLayout(false);
@@ -1169,18 +1271,15 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.TabPage TabPageNhaCungCap;
 		private System.Windows.Forms.TabPage TabPageHangHoa;
         private System.Windows.Forms.TabPage TabPagePhanTich;
-        private MaterialSkin.Controls.MaterialFloatingActionButton materialFloatingActionButton3;
 		private MaterialSkin.Controls.MaterialCard materialCard7;
 		private System.Windows.Forms.Label label16;
 		private MaterialSkin.Controls.MaterialCard materialCard6;
 		private System.Windows.Forms.Label label14;
 		private MaterialSkin.Controls.MaterialLabel materialLabel1;
 		private MaterialSkin.Controls.MaterialCard materialCard3;
-		private System.Windows.Forms.Label label13;
-		private MaterialSkin.Controls.MaterialProgressBar materialProgressBar3;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.Label label17;
-		private System.Windows.Forms.Label label18;
+		private System.Windows.Forms.Label TabPagePhanTich_KhachHang_Tong_LB;
 		private MaterialSkin.Controls.MaterialFloatingActionButton TabPagePhanTich_HoaDonNhap_ShowBTN;
 		private MaterialSkin.Controls.MaterialCard materialCard2;
 		private System.Windows.Forms.Label TabPagePhanTich_HoaDonNhap_TiLeLB;
@@ -1232,5 +1331,15 @@ namespace WinformWithExternalLibrary
         private MaterialSkin.Controls.MaterialFloatingActionButton TabPagePhanTich_HoaDonBan_ShowBTN;
 		private System.Windows.Forms.Label HoaDonBanDVO_ThanhToan_Validation;
 		private MaterialSkin.Controls.MaterialTextBox HoaDonBanDVO_ThanhToan;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label TabPagePhanTich_KhachHang_KHmoi_LB;
+        private System.Windows.Forms.Label TabPagePhanTich_KhachHang_TiLeLB;
+        private MaterialSkin.Controls.MaterialProgressBar TabPagePhanTich_KhachHang_TiLePB;
+        private LiveChartsCore.SkiaSharpView.WinForms.PieChart pieChart1;
+        private LiveChartsCore.SkiaSharpView.WinForms.PieChart pieChart2;
+        private MaterialSkin.Controls.MaterialCard materialCard8;
+        private System.Windows.Forms.Label label5;
+        private MaterialSkin.Controls.MaterialCard materialCard9;
+        private System.Windows.Forms.Label label6;
     }
 }

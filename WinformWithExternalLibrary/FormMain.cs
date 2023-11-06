@@ -32,6 +32,7 @@ using System.Runtime.Remoting.Channels;
 using System.Runtime.InteropServices;
 using System.Drawing.Text;
 using System.Security.Cryptography.X509Certificates;
+using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace WinformWithExternalLibrary
 {
@@ -724,9 +725,12 @@ namespace WinformWithExternalLibrary
 		{
             this.InitializeBillOfSell();
 			this.InitializeImportBill();
+			this.InitializeCustomerAnalytics();
 
             this.InitializeChart1();
             this.InitializeChart2();
+			this.InitializeChart3();
+			this.InitializeChart4();
         }
 
 		private void InitializeBillOfSell()
@@ -773,6 +777,24 @@ namespace WinformWithExternalLibrary
                 FormChiTietHoaDonNhap formChiTietHoaDonNhap = new FormChiTietHoaDonNhap();
 				formChiTietHoaDonNhap.Show();
             };
+        }
+
+		private void InitializeCustomerAnalytics()
+		{
+            // Data queried from DB
+            List<string> customerPhoneNumersNotInCurrentMonth = phanTichDAO.GetCustomerPhoneNumberListNotInCurrentMonth();
+            List<string> customerPhoneNumersCurrentMonth = phanTichDAO.GetCustomerPhoneNumberListCurrentMonth();
+
+			// Handle logic
+			int countNewCustomerCurrentMonth = this.CountUniquePhoneNumbers(customerPhoneNumersNotInCurrentMonth, customerPhoneNumersCurrentMonth);
+			int percentCustomerReturn = countNewCustomerCurrentMonth == 0 ? 0 : 
+				(int)Math.Ceiling((double)(customerPhoneNumersCurrentMonth.Count - countNewCustomerCurrentMonth) / customerPhoneNumersNotInCurrentMonth.Count * 100);
+
+            // Render data
+            TabPagePhanTich_KhachHang_Tong_LB.Text = (customerPhoneNumersNotInCurrentMonth.Count + customerPhoneNumersCurrentMonth.Count).ToString();
+            TabPagePhanTich_KhachHang_KHmoi_LB.Text = countNewCustomerCurrentMonth.ToString();
+            TabPagePhanTich_KhachHang_TiLePB.Value = percentCustomerReturn;
+            TabPagePhanTich_KhachHang_TiLeLB.Text = $"Tỉ lệ khách quay lại tháng này: {percentCustomerReturn}%";
         }
 
         private void InitializeChart1()
@@ -964,11 +986,116 @@ namespace WinformWithExternalLibrary
             cartesianChart2.ZoomMode = LiveChartsCore.Measure.ZoomAndPanMode.Both;
         }
 
-		#endregion
+		private void InitializeChart3()
+		{
+			List<SalaryArrangementResponseDTO> salaryArrangementResponseDTOs = PhanTichDAO.Instance.GetSalaryArrangementResponseDTOs();
+            SalaryArrangementResponseDTO salaryArrangementFirst = salaryArrangementResponseDTOs[0] != null ? salaryArrangementResponseDTOs[0] : new SalaryArrangementResponseDTO();
+            SalaryArrangementResponseDTO salaryArrangementSecond = salaryArrangementResponseDTOs[1] != null ? salaryArrangementResponseDTOs[1] : new SalaryArrangementResponseDTO();
+            SalaryArrangementResponseDTO salaryArrangementThird = salaryArrangementResponseDTOs[2] != null ? salaryArrangementResponseDTOs[2] : new SalaryArrangementResponseDTO();
 
-		#region Nguyễn Hồng Sơn
+            pieChart1.Series = new ISeries[]
+			{
+				new PieSeries<double>
+				{
+					Values = new List<double> { salaryArrangementFirst.SalaryArrangementResponseDTO_Luong },
+					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+					DataLabelsSize = 14,
+					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+					DataLabelsFormatter = point => salaryArrangementFirst.SalaryArrangementResponseDTO_Luong.ToString(),
+					Name = salaryArrangementFirst.SalaryArrangementResponseDTO_TenCongViec
+                },
+				new PieSeries<double>
+				{
+					Values = new List<double> { salaryArrangementSecond.SalaryArrangementResponseDTO_Luong },
+					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+					DataLabelsSize = 14,
+					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+					DataLabelsFormatter = point => salaryArrangementSecond.SalaryArrangementResponseDTO_Luong.ToString(),
+                    Name = salaryArrangementSecond.SalaryArrangementResponseDTO_TenCongViec
+                },
+				new PieSeries<double>
+				{
+					Values = new List<double> { salaryArrangementThird.SalaryArrangementResponseDTO_Luong },
+					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+					DataLabelsSize = 14,
+					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+					DataLabelsFormatter = point => salaryArrangementThird.SalaryArrangementResponseDTO_Luong.ToString(),
+                    Name = salaryArrangementThird.SalaryArrangementResponseDTO_TenCongViec
+                }
+			};
+        }
 
-		private void Initialize_NguyenHongSon()
+		private void InitializeChart4()
+		{
+            List<InventoryArrangementResponseDTO> inventoryArrangementResponseDTOs = PhanTichDAO.Instance.GetInventoryArrangementResponseDTOs();
+            InventoryArrangementResponseDTO inventoryArrangementFirst = inventoryArrangementResponseDTOs[0] != null ? inventoryArrangementResponseDTOs[0] : new InventoryArrangementResponseDTO();
+            InventoryArrangementResponseDTO inventoryArrangementSecond = inventoryArrangementResponseDTOs[1] != null ? inventoryArrangementResponseDTOs[1] : new InventoryArrangementResponseDTO();
+            InventoryArrangementResponseDTO inventoryArrangementThird = inventoryArrangementResponseDTOs[2] != null ? inventoryArrangementResponseDTOs[2] : new InventoryArrangementResponseDTO();
+
+            pieChart2.Series = new ISeries[]
+            {
+                new PieSeries<double>
+                {
+                    Values = new List<double> { inventoryArrangementFirst.InventoryArrangementResponseDTO_SoLuongTonKho },
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsSize = 20,
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                    DataLabelsFormatter = point => inventoryArrangementFirst.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
+                    Name = inventoryArrangementFirst.InventoryArrangementResponseDTO_TenSanPham
+                },
+                new PieSeries<double>
+                {
+                    Values = new List<double> { inventoryArrangementSecond.InventoryArrangementResponseDTO_SoLuongTonKho },
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsSize = 20,
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                    DataLabelsFormatter = point => inventoryArrangementSecond.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
+                    Name = inventoryArrangementSecond.InventoryArrangementResponseDTO_TenSanPham
+                },
+                new PieSeries<double>
+                {
+                    Values = new List<double> { inventoryArrangementThird.InventoryArrangementResponseDTO_SoLuongTonKho },
+                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+                    DataLabelsSize = 20,
+                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                    DataLabelsFormatter = point => inventoryArrangementThird.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
+                    Name = inventoryArrangementThird.InventoryArrangementResponseDTO_TenSanPham
+                }
+            };
+        }
+
+        private int CountUniquePhoneNumbers(List<string> A, List<string> B)
+        {
+            Dictionary<string, int> phoneCount = new Dictionary<string, int>();
+
+            // Đếm số lượng xuất hiện của từng số điện thoại trong danh sách A
+            foreach (string number in A)
+            {
+                if (phoneCount.ContainsKey(number))
+                    phoneCount[number]++;
+                else
+                    phoneCount[number] = 1;
+            }
+
+            // Kiểm tra số lượng số điện thoại của B không trùng trong A
+            int uniqueCount = 0;
+            foreach (string number in B)
+            {
+                if (phoneCount.ContainsKey(number) && phoneCount[number] > 0)
+                {
+                    uniqueCount++;
+                    phoneCount[number]--;
+                }
+            }
+
+            return uniqueCount;
+        }
+
+        #endregion
+
+        #region Nguyễn Hồng Sơn
+
+        private void Initialize_NguyenHongSon()
 		{
 
 		}

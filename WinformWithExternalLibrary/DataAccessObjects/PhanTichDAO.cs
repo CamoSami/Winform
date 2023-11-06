@@ -106,6 +106,51 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             return productsBestSeller;
         }
 
+        public List<InventoryArrangementResponseDTO> GetInventoryArrangementResponseDTOs()
+        {
+            string query = "SELECT MaSanPham, TenSanPham, SoLuongTonKho " +
+                "FROM tDMSanPham " +
+                "ORDER BY SoLuongTonKho DESC;";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            List<InventoryArrangementResponseDTO> inventoryArrangementResponseDTOs = new List<InventoryArrangementResponseDTO>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                InventoryArrangementResponseDTO inventoryArrangementResponseDTO = new InventoryArrangementResponseDTO();
+
+                inventoryArrangementResponseDTO.InventoryArrangementResponseDTO_MaSanPham = row[0].ToString();
+                inventoryArrangementResponseDTO.InventoryArrangementResponseDTO_TenSanPham = (string)row[1];
+                inventoryArrangementResponseDTO.InventoryArrangementResponseDTO_SoLuongTonKho = (int)row[2];
+
+                inventoryArrangementResponseDTOs.Add(inventoryArrangementResponseDTO);
+            }
+
+            return inventoryArrangementResponseDTOs;
+        }
+
+        public List<SalaryArrangementResponseDTO> GetSalaryArrangementResponseDTOs()
+        {
+            string query = "SELECT * FROM tCongViec " +
+                "ORDER BY MucLuong DESC";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            List<SalaryArrangementResponseDTO> salaryArrangementResponseDTOs = new List<SalaryArrangementResponseDTO>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                SalaryArrangementResponseDTO salaryArrangementResponseDTO = new SalaryArrangementResponseDTO();
+
+                salaryArrangementResponseDTO.SalaryArrangementResponseDTO_MaCongViec = row[0].ToString();
+                salaryArrangementResponseDTO.SalaryArrangementResponseDTO_Luong = (long)row[1];
+                salaryArrangementResponseDTO.SalaryArrangementResponseDTO_TenCongViec = (string)row[2];
+
+                salaryArrangementResponseDTOs.Add(salaryArrangementResponseDTO);
+            }
+
+            return salaryArrangementResponseDTOs;
+        }
+
         // Bill of sell
         public int CountBillOfSellCurrentMonth()
         {
@@ -202,7 +247,6 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             }
             else if(searchValue == "" && dateTimeConverted != "")
             {
-                Debug.WriteLine(dateTimeConverted);
                 dateQuery = $" WHERE CONVERT(DATE, NgayBan) = '{dateTimeConverted}';";
             }
 
@@ -309,23 +353,45 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             return importCostCurrentMonth;
         }
 
-        public DataTable GetBillOfImportInfomationDataTable()
+        public DataTable GetBillOfImportInfomationDataTable(string searchValue, string dateTimeConverted)
         {
+            string searchQuery = "";
+            string dateQuery = "";
+
+            if (searchValue != "")
+            {
+                searchQuery = $" WHERE (MaHDNhap LIKE '{searchValue}%' OR TenNhanVien LIKE N'%{searchValue}%' OR TenNhaCungCap LIKE N'%{searchValue}%' " +
+                    $"OR tNhaCungCap.DiaChi LIKE '%{searchValue}%' OR tNhaCungCap.DienThoai LIKE '{searchValue}%')";
+            }
+
+            if (searchValue != "" && dateTimeConverted != "")
+            {
+                dateQuery = $" AND CONVERT(DATE, NgayNhap) = '{dateTimeConverted}';";
+            }
+            else if (searchValue == "" && dateTimeConverted != "")
+            {
+                dateQuery = $" WHERE CONVERT(DATE, NgayNhap) = '{dateTimeConverted}';";
+            }
+
             string query = "SELECT MaHDNhap, TenNhanVien, tNhanVien.DienThoai AS DienThoaiNV, TenNhaCungCap, tNhaCungCap.DiaChi AS DiaChiNCC, tNhaCungCap.DienThoai AS DienThoaiNCC, SoSanPham, TongTien, NgayNhap " +
                 "FROM tHoaDonNhap " +
                 "INNER JOIN tNhaCungCap " +
                 "ON tHoaDonNhap.MaNhaCungCap = tNhaCungCap.MaNhaCungCap " +
                 "INNER JOIN tNhanVien " +
-                "ON tHoaDonNhap.MaNhanVien = tNhanVien.MaNhanVien";
+                "ON tHoaDonNhap.MaNhanVien = tNhanVien.MaNhanVien" +
+                (searchValue == "" && dateTimeConverted == "" ? ";" :
+                searchQuery
+                + dateQuery
+                );
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
             return dataTable;
         }
 
-        public List<BillOfImportInfoResponseDTO> GetBillOfImportInformation()
+        public List<BillOfImportInfoResponseDTO> GetBillOfImportInformation(string searchValue, string dateTimeConverted)
         {
-            DataTable dataTable = this.GetBillOfImportInfomationDataTable();
+            DataTable dataTable = this.GetBillOfImportInfomationDataTable(searchValue, dateTimeConverted);
 
             List<BillOfImportInfoResponseDTO> billOfImportInfoResponseDTOs = new List<BillOfImportInfoResponseDTO>();
             foreach(DataRow row in dataTable.Rows)
@@ -366,6 +432,43 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 billDetailInfoResponseDTOs.Add(billDetailInfomationDTO);
             }
             return billDetailInfoResponseDTOs;
+        }
+
+        // Customer analytics
+        public List<string> GetCustomerPhoneNumberListNotInCurrentMonth()
+        {
+            string query = "SELECT DienThoai FROM tHoaDonBan " +
+                "INNER JOIN tKhachHang " +
+                "ON tHoaDonBan.MaKhachHang = tKhachHang.MaKhachHang " +
+                "WHERE tKhachHang.MaKhachHang is not NULL AND (YEAR(tHoaDonBan.NgayBan) != YEAR(GETDATE()) OR (YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) != MONTH(GETDATE())));";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            List<string> customerPhoneNumers = new List<string>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                customerPhoneNumers.Add(row[0].ToString().Trim());
+            }
+
+            return customerPhoneNumers;
+        }
+
+        public List<string> GetCustomerPhoneNumberListCurrentMonth()
+        {
+            string query = "SELECT DienThoai FROM tHoaDonBan " +
+                "INNER JOIN tKhachHang " +
+                "ON tHoaDonBan.MaKhachHang = tKhachHang.MaKhachHang " +
+                "WHERE tKhachHang.MaKhachHang is not NULL AND YEAR(tHoaDonBan.NgayBan) = YEAR(GETDATE()) AND MONTH(tHoaDonBan.NgayBan) = MONTH(GETDATE());";
+
+            DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+            List<string> customerPhoneNumersCurrentMonth = new List<string>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                customerPhoneNumersCurrentMonth.Add(row[0].ToString().Trim());
+            }
+
+            return customerPhoneNumersCurrentMonth;
         }
     }
 }

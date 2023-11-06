@@ -75,7 +75,7 @@ namespace WinformWithExternalLibrary.ExtraForm
                     DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
                     this.exportTableData.ExportToExcel(
                         dataTable: dataTable,
-                        workSheetName: "Chi tiết hóa đơn",
+                        workSheetName: "Chi tiết hóa đơn bán",
                         filePath: ""
                     );
 

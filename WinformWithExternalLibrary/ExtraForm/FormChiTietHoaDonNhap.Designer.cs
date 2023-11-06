@@ -42,6 +42,7 @@
             this.PhanTichDVO_HDN_DP = new System.Windows.Forms.DateTimePicker();
             this.PhanTichDVO_HDN_TimKiemIP = new MaterialSkin.Controls.MaterialTextBox();
             this.PhanTichDVO_HDN_TimKiemBtn = new MaterialSkin.Controls.MaterialButton();
+            this.ChiTietHoaDonNhapExelBtn = new MaterialSkin.Controls.MaterialButton();
             this.SuspendLayout();
             // 
             // ChiTietHoaDonNhapLV
@@ -82,7 +83,7 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Mã hóa đơn bán";
+            this.columnHeader1.Text = "Mã hóa đơn nhập";
             this.columnHeader1.Width = 150;
             // 
             // columnHeader2
@@ -138,7 +139,7 @@
             this.PhanTichDVO_HDN_TimKiemIP.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PhanTichDVO_HDN_TimKiemIP.Depth = 0;
             this.PhanTichDVO_HDN_TimKiemIP.DetectUrls = false;
-            this.PhanTichDVO_HDN_TimKiemIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.PhanTichDVO_HDN_TimKiemIP.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.PhanTichDVO_HDN_TimKiemIP.LeadingIcon = null;
             this.PhanTichDVO_HDN_TimKiemIP.Location = new System.Drawing.Point(28, 490);
             this.PhanTichDVO_HDN_TimKiemIP.MaxLength = 50;
@@ -173,11 +174,33 @@
             this.PhanTichDVO_HDN_TimKiemBtn.UseAccentColor = false;
             this.PhanTichDVO_HDN_TimKiemBtn.UseVisualStyleBackColor = true;
             // 
+            // ChiTietHoaDonNhapExelBtn
+            // 
+            this.ChiTietHoaDonNhapExelBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ChiTietHoaDonNhapExelBtn.CharacterCasing = MaterialSkin.Controls.MaterialButton.CharacterCasingEnum.Normal;
+            this.ChiTietHoaDonNhapExelBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ChiTietHoaDonNhapExelBtn.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.ChiTietHoaDonNhapExelBtn.Depth = 0;
+            this.ChiTietHoaDonNhapExelBtn.HighEmphasis = true;
+            this.ChiTietHoaDonNhapExelBtn.Icon = null;
+            this.ChiTietHoaDonNhapExelBtn.Location = new System.Drawing.Point(787, 481);
+            this.ChiTietHoaDonNhapExelBtn.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.ChiTietHoaDonNhapExelBtn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.ChiTietHoaDonNhapExelBtn.Name = "ChiTietHoaDonNhapExelBtn";
+            this.ChiTietHoaDonNhapExelBtn.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.ChiTietHoaDonNhapExelBtn.Size = new System.Drawing.Size(137, 36);
+            this.ChiTietHoaDonNhapExelBtn.TabIndex = 13;
+            this.ChiTietHoaDonNhapExelBtn.Text = "Export to exel";
+            this.ChiTietHoaDonNhapExelBtn.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.ChiTietHoaDonNhapExelBtn.UseAccentColor = false;
+            this.ChiTietHoaDonNhapExelBtn.UseVisualStyleBackColor = true;
+            // 
             // FormChiTietHoaDonNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 592);
+            this.Controls.Add(this.ChiTietHoaDonNhapExelBtn);
             this.Controls.Add(this.PhanTichDVO_HDN_DP);
             this.Controls.Add(this.PhanTichDVO_HDN_TimKiemIP);
             this.Controls.Add(this.PhanTichDVO_HDN_TimKiemBtn);
@@ -205,5 +228,6 @@
         private System.Windows.Forms.DateTimePicker PhanTichDVO_HDN_DP;
         private MaterialSkin.Controls.MaterialTextBox PhanTichDVO_HDN_TimKiemIP;
         private MaterialSkin.Controls.MaterialButton PhanTichDVO_HDN_TimKiemBtn;
+        private MaterialSkin.Controls.MaterialButton ChiTietHoaDonNhapExelBtn;
     }
 }
