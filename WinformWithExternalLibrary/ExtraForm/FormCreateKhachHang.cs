@@ -152,7 +152,7 @@ namespace WinformWithExternalLibrary
 
 					if (this.onlyOnceFromFormMain)
 					{
-						FormMain.Instance.SetDienThoaiKhachHang(this.KhachHangDVO_DienThoai.Text);
+						FormMain.Instance.TabPageHoaDonBan_SetDienThoaiKhachHang(this.KhachHangDVO_DienThoai.Text);
 
 						this.Close();
 					}

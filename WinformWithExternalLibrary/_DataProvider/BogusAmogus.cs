@@ -13,7 +13,7 @@ using Bogus.Extensions;
 using WinformWithExternalLibrary.DataAccessObjects;
 using WinformWithExternalLibrary.DataTransferObjects;
 
-namespace WinformWithExternalLibrary.CustomComponent
+namespace WinformWithExternalLibrary._DataProvider
 {
 	public class BogusAmogus
 	{
@@ -42,10 +42,10 @@ namespace WinformWithExternalLibrary.CustomComponent
 
 		public void GenerateFakeData()
 		{
-			int soLuong_DMSanPhamDTO = 500;
+			int soLuong_DMSanPhamDTO = 200;
 			int soLuong_NhanVienDTO = 40;
-			int soLuong_NhaCungCapDTO = 60;
-			int soLuong_HoaDonNhapDTO = 600;
+			int soLuong_NhaCungCapDTO = 40;
+			int soLuong_HoaDonNhapDTO = 400;
 			int soLuong_KhachHangDTO = 200;
 			int soLuong_HoaDonBanDTO = 2000;
 

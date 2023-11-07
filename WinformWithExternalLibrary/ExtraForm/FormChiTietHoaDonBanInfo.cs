@@ -10,18 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinformWithExternalLibrary.DataAccessObjects;
-using WinformWithExternalLibrary.Utils;
+using WinformWithExternalLibrary._Utilities;
 using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
-    public partial class FormChiTietHoaDonBanFormInfo : MaterialForm
+    public partial class FormChiTietHoaDonBanInfo : MaterialForm
     {
         private string MaHoaDon;
         private readonly PhanTichDAO phanTichDAO = new PhanTichDAO();
         private readonly FormatValues formatValues = new FormatValues();
 
-        public FormChiTietHoaDonBanFormInfo(string maHD)
+        public FormChiTietHoaDonBanInfo(string maHD)
         {
             this.MaHoaDon = maHD;
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary.DataValidateObjects;
+using WinformWithExternalLibrary._DataProvider;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -45,7 +46,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             return phoneNumbers;
         }
 
-        public bool IfPhoneNumberTaken(string NhaCungCapDVO_DienThoai)
+        public bool IfPhoneNumberExist(string NhaCungCapDVO_DienThoai)
         {
             string selectPhoneNumber = $"SELECT * FROM " +
                 $"{DataProvider.NHACUNGCAP_TABLE}" +

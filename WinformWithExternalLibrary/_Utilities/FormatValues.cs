@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinformWithExternalLibrary.Utils
+namespace WinformWithExternalLibrary._Utilities
 {
     public class FormatValues
     {

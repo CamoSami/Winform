@@ -9,7 +9,7 @@ using WinformWithExternalLibrary.DataValidateObject.CustomValidation;
 
 namespace WinformWithExternalLibrary.DataValidateObject
 {
-	public class ChiTietHDBanDVO
+	public class ChiTietHDNhapDVO
 	{
 		[Required(
 			ErrorMessage = "Hãy nhập mã sản phẩm"
@@ -18,7 +18,7 @@ namespace WinformWithExternalLibrary.DataValidateObject
 			ErrorMessage = "Mã sản phẩm không tồn tại"
 			)]
 		[DisplayName("Mã sản phẩm")]
-		public string ChiTietHDBanDVO_MaSanPham { get; set; }
+		public string ChiTietHDNhapDVO_MaSanPham { get; set; }
 
 
 
@@ -26,7 +26,7 @@ namespace WinformWithExternalLibrary.DataValidateObject
 			ErrorMessage = "Hãy nhập tên sản phẩm"
 			)]
 		[DisplayName("Tên sản phẩm")]
-		public string ChiTietHDBanDVO_TenSanPham { get; set; }
+		public string ChiTietHDNhapDVO_TenSanPham { get; set; }
 
 
 
@@ -37,19 +37,16 @@ namespace WinformWithExternalLibrary.DataValidateObject
 			minimum: 1,
 			maximum: int.MaxValue,
 			ErrorMessage = "Số lượng phải lớn hơn 0")]
-		[ChiTietHDBanDVO_EligibleSoLuong(
-			otherProperty: "ChiTietHDBanDVO_MaSanPham",
-			ErrorMessage = "Số lượng vượt quá số lượng tồn kho")]
 		[DisplayName("Số lượng")]
-		public int ChiTietHDBanDVO_SoLuong { get; set; }
+		public int ChiTietHDNhapDVO_SoLuong { get; set; }
 
-		public ChiTietHDBanDVO() { }
+		public ChiTietHDNhapDVO() { }
 
-		public ChiTietHDBanDVO(string chiTietHDBanDVO_MaSanPham, string chiTietHDBanDVO_TenSanPham, int chiTietHDBanDVO_SoLuong)
+		public ChiTietHDNhapDVO(string chiTietHDNhapDVO_MaSanPham, string chiTietHDNhapDVO_TenSanPham, int chiTietHDNhapDVO_SoLuong)
 		{
-			this.ChiTietHDBanDVO_MaSanPham = chiTietHDBanDVO_MaSanPham;
-			this.ChiTietHDBanDVO_TenSanPham = chiTietHDBanDVO_TenSanPham;
-			this.ChiTietHDBanDVO_SoLuong = chiTietHDBanDVO_SoLuong;
+			this.ChiTietHDNhapDVO_MaSanPham = chiTietHDNhapDVO_MaSanPham;
+			this.ChiTietHDNhapDVO_TenSanPham = chiTietHDNhapDVO_TenSanPham;
+			this.ChiTietHDNhapDVO_SoLuong = chiTietHDNhapDVO_SoLuong;
 		}
 	}
 }

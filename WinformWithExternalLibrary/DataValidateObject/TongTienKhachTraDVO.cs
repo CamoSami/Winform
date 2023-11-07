@@ -12,14 +12,17 @@ namespace WinformWithExternalLibrary.DataValidateObject
 {
 	public class TongTienKhachTraDVO
 	{
-		[Required(
+		[Range(
+			type: typeof(long),
+			minimum: "1",
+			maximum: "9223372036854775807",
 			ErrorMessage = "Xin vui lòng nhập tổng tiền"
-			)]
-		[DivisibleBy100(
-			ErrorMessage = "Tổng tiền vừa nhập không hợp lệ"
 			)]
 		[TongTienKhachTraDVO_EligibleTongTienKhachTra(
 			ErrorMessage = "Tổng tiền không được ít hơn tiền thanh toán"
+			)]
+		[DivisibleBy100(
+			ErrorMessage = "Tổng tiền vừa nhập không hợp lệ"
 			)]
 		[DisplayName("Tổng Tiền Khách Trả")]
 		public long TongTienKhachTraDVO_TongTienKhachTra { get; set; }

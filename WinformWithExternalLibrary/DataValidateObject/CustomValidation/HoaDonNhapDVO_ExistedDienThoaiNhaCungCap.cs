@@ -8,7 +8,7 @@ using WinformWithExternalLibrary.DataAccessObjects;
 
 namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 {
-	public class HoaDonBanDVO_ExistedTenGiamGia : ValidationAttribute
+	public class HoaDonNhapDVO_ExistedDienThoaiNhaCungCapAttribute : ValidationAttribute
 	{
 		protected override ValidationResult IsValid(object value, ValidationContext validationContext)
 		{
@@ -22,7 +22,7 @@ namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 			{
 				//Debug.WriteLine(value.ToString());
 
-				if (GiamGiaDAO.Instance.CheckIfGiamGiaExists(value.ToString()))
+				if (NhaCungCapDAO.Instance.IfPhoneNumberExist(value.ToString()))
 				{
 					//Debug.WriteLine("Success!");
 
@@ -32,7 +32,7 @@ namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 
 			return new ValidationResult(
 				this.ErrorMessage,
-				new List<string>() { "HoaDonBanDVO_TenGiamGia" }
+				new List<string>() { "HoaDonBanDVO_DienThoaiKhachHang" }
 				);
 		}
 	}

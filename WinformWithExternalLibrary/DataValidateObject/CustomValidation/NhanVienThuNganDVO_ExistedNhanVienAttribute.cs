@@ -9,7 +9,7 @@ using WinformWithExternalLibrary.DataAccessObjects;
 
 namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 {
-	public class ChiTietHDBanDVO_ExistedMaSanPhamAttribute : ValidationAttribute
+	public class NhanVienThuNganDVO_ExistedNhanVienAttribute : ValidationAttribute
 	{
 		protected override ValidationResult IsValid(object value, ValidationContext validationContext)
 		{
@@ -17,19 +17,25 @@ namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 			{
 				//Debug.WriteLine(value.ToString());
 
-				string maSanPham = value.ToString();
-
-				if (DMSanPhamDAO.Instance.CheckMaSanPhamExist(maSanPham))
+				if (value.ToString().Contains("|"))
 				{
-					//Debug.WriteLine("Success!");
+					string[] dividedString = value.ToString().Split('|');
+					
+					string tenNhanVien = dividedString[0].Trim();
+					string ngaySinh = dividedString[1].Trim();
 
-					return ValidationResult.Success;
+					if (NhanVienDAO.Instance.CheckNhanVienByTenNhanVienAndNgaySinh(tenNhanVien, ngaySinh))
+					{
+						//Debug.WriteLine("Success!");
+
+						return ValidationResult.Success;
+					}
 				}
 			}
 
 			return new ValidationResult(
 				this.ErrorMessage,
-				new List<string>() { "ChiTietHDBanDVO_MaSanPham" }
+				new List<string>() { "NhanVienThuNganDVO_NhanVien" }
 				);
 		}
 	}

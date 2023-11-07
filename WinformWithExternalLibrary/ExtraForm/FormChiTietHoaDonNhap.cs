@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinformWithExternalLibrary.DataAccessObjects;
-using WinformWithExternalLibrary.Utils;
+using WinformWithExternalLibrary._Utilities;
 using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
 
 namespace WinformWithExternalLibrary.ExtraForm

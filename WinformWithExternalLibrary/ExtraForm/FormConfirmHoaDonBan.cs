@@ -131,26 +131,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private void InitializeSpecializedEvent()
 		{
-			//		Form
-			this.KeyPress += (obj, e) =>
-			{
-				if (char.IsDigit(e.KeyChar))
-				{
-					this.TongTienKhachTraDVO_TongTienKhachTra.Text = e.KeyChar.ToString();
-
-					this.ActiveControl = this.TongTienKhachTraDVO_TongTienKhachTra;
-					this.TongTienKhachTraDVO_TongTienKhachTra.SelectionStart = this.TongTienKhachTraDVO_TongTienKhachTra.Text.Length;
-				}
-			};
-			FormMain.Instance.FormClosed += (obj, eventArgs) =>
-			{
-				this.Dispose();
-
-				this.Close();
-
-				Environment.Exit(0);
-			};
-
 			//		TextBox
 			this.TongTienKhachTraDVO_TongTienKhachTra.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
 
@@ -162,6 +142,26 @@ namespace WinformWithExternalLibrary.ExtraForm
 			};
 
 			//		Form
+			this.KeyPress += (obj, e) =>
+			{
+				if (char.IsDigit(e.KeyChar))
+				{
+					this.TongTienKhachTraDVO_TongTienKhachTra.Text = e.KeyChar.ToString();
+
+					this.ActiveControl = this.TongTienKhachTraDVO_TongTienKhachTra;
+					this.TongTienKhachTraDVO_TongTienKhachTra.SelectionStart = this.TongTienKhachTraDVO_TongTienKhachTra.Text.Length;
+				}
+			};
+
+			FormMain.Instance.FormClosed += (obj, eventArgs) =>
+			{
+				this.Dispose();
+
+				this.Close();
+
+				Environment.Exit(0);
+			};
+
 			//			DirtyData check before closing
 			this.FormClosing += (obj, e) =>
 			{
@@ -201,6 +201,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 					}
 					else
 					{
+						this.TongTienKhachTraDVO_TongTienKhachTra_Validation.ForeColor = Color.Red;
+
 						e.Cancel = true;
 					}
 				}
@@ -227,6 +229,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 			this.Load += (obj, e) =>
 			{
 				this.ActiveControl = this.LabelForFocus;
+
+				this.TopMost = true;
 
 				this.Activate();
 			};
@@ -306,6 +310,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 			foreach (Label label in this.listOfLabels)
 			{
 				label.Text = "";
+				label.ForeColor = Color.Red;
 			}
 
 			//		New Object

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinformWithExternalLibrary.DataAccessObjects;
-using WinformWithExternalLibrary.Utils;
+using WinformWithExternalLibrary._Utilities;
 using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
 
 namespace WinformWithExternalLibrary.ExtraForm
@@ -94,8 +94,8 @@ namespace WinformWithExternalLibrary.ExtraForm
             {
                 var firstSelectedItem = ChiTietHoaDonBanLV.SelectedItems[0];
 
-                FormChiTietHoaDonBanFormInfo formChiTietHoaDonBanFormInfo 
-                = new FormChiTietHoaDonBanFormInfo(firstSelectedItem.SubItems[1].Text);
+                FormChiTietHoaDonBanInfo formChiTietHoaDonBanFormInfo 
+                = new FormChiTietHoaDonBanInfo(firstSelectedItem.SubItems[1].Text);
                 formChiTietHoaDonBanFormInfo.Show();
             };
         }

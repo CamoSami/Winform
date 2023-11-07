@@ -12,7 +12,7 @@ namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 	{
 		protected override ValidationResult IsValid(object value, ValidationContext validationContext)
 		{
-			//		Not Required
+			//		Not my job
 			if (value.ToString() == "")
 			{
 				return ValidationResult.Success;

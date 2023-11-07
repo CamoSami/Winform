@@ -201,13 +201,17 @@
     <Compile Include="DataAccessObjects\PhanTichDAO.cs" />
     <Compile Include="DataTransferObjects\CustomDTO\PhanTichDTO.cs" />
     <Compile Include="DataTransferObjects\GiamGiaDTO.cs" />
+    <Compile Include="DataValidateObject\ChiTietHDNhapDVO.cs" />
     <Compile Include="DataValidateObject\ChiTietHDBanDVO.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\ChiTietHDBanDVO_ExistedMaSanPhamAttribute.cs" />
+    <Compile Include="DataValidateObject\CustomValidation\ChiTietHDBanDVO_EligibleSoLuongAttribute.cs" />
+    <Compile Include="DataValidateObject\CustomValidation\ChiTietHDDVO_ExistedMaSanPhamAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_EligibleTenGiamGia.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedNhanVienAttribute.cs" />
+    <Compile Include="DataValidateObject\CustomValidation\HoaDonNhapDVO_ExistedDienThoaiNhaCungCap.cs" />
+    <Compile Include="DataValidateObject\CustomValidation\NhanVienThuNganDVO_ExistedNhanVienAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedTenGiamGia.cs" />
     <Compile Include="DataValidateObject\CustomValidation\TongTienKhachTraDVO_EligibleTongTienKhachTra.cs" />
+    <Compile Include="DataValidateObject\HoaDonNhapDVO.cs" />
     <Compile Include="DataValidateObject\HoaDonBanDVO.cs" />
     <Compile Include="DataValidateObject\NhanVienThuNganDVO.cs" />
     <Compile Include="DataValidateObject\TongTienKhachTraDVO.cs" />
@@ -227,11 +231,11 @@
     <Compile Include="ExtraForm\FormChiTietHoaDonBan.Designer.cs">
       <DependentUpon>FormChiTietHoaDonBan.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExtraForm\FormChiTietHoaDonBanFormInfo.cs">
+    <Compile Include="ExtraForm\FormChiTietHoaDonBanInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExtraForm\FormChiTietHoaDonBanFormInfo.Designer.cs">
-      <DependentUpon>FormChiTietHoaDonBanFormInfo.cs</DependentUpon>
+    <Compile Include="ExtraForm\FormChiTietHoaDonBanInfo.Designer.cs">
+      <DependentUpon>FormChiTietHoaDonBanInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="ExtraForm\FormChiTietHoaDonNhap.cs">
       <SubType>Form</SubType>
@@ -251,8 +255,8 @@
     <Compile Include="ExtraForm\FormConfirmHoaDonBan.Designer.cs">
       <DependentUpon>FormConfirmHoaDonBan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\ExportTableData.cs" />
-    <Compile Include="Utils\FormatValues.cs" />
+    <Compile Include="_Utilities\ExportTableData.cs" />
+    <Compile Include="_Utilities\FormatValues.cs" />
     <Compile Include="_DataProvider\BogusAmogus.cs" />
     <Compile Include="DataAccessObjects\KhachHangDAO.cs" />
     <Compile Include="_DataProvider\DataProvider.cs" />
@@ -288,8 +292,8 @@
     <EmbeddedResource Include="ExtraForm\FormChiTietHoaDonBan.resx">
       <DependentUpon>FormChiTietHoaDonBan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExtraForm\FormChiTietHoaDonBanFormInfo.resx">
-      <DependentUpon>FormChiTietHoaDonBanFormInfo.cs</DependentUpon>
+    <EmbeddedResource Include="ExtraForm\FormChiTietHoaDonBanInfo.resx">
+      <DependentUpon>FormChiTietHoaDonBanInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormChiTietHoaDonNhap.resx">
       <DependentUpon>FormChiTietHoaDonNhap.cs</DependentUpon>

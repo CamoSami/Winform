@@ -1,6 +1,6 @@
 ﻿namespace WinformWithExternalLibrary.ExtraForm
 {
-    partial class FormChiTietHoaDonBanFormInfo
+    partial class FormChiTietHoaDonBanInfo
     {
         /// <summary>
         /// Required designer variable.

@@ -15,7 +15,7 @@ namespace WinformWithExternalLibrary.DataValidateObject
 		[Required(
 			ErrorMessage = "Hãy chọn nhân viên đang tạo hóa đơn"
 			)]
-		[HoaDonBanDVO_ExistedNhanVien(
+		[NhanVienThuNganDVO_ExistedNhanVien(
 			ErrorMessage = "Nhân viên không tồn tại"
 			)]
 		[DisplayName("Nhân viên")]

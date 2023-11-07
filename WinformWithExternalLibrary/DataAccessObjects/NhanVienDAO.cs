@@ -13,6 +13,7 @@ using System.Diagnostics;
 using WinformWithExternalLibrary.DataValidateObjects;
 using MaterialSkin.Controls;
 using WinformWithExternalLibrary.DataValidateObject;
+using WinformWithExternalLibrary._DataProvider;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -21,7 +22,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
         public static NhanVienDAO Instance { get; set; }
         public NhanVienDAO() { }
 
-		//		Add: Lấy danh sách TenNhanVien và NgaySinh nhân viên
+		//		MinhHieu Add: Lấy danh sách TenNhanVien và NgaySinh nhân viên
 		public List<string> GetTenNhanVienAndNgaySinhList()
 		{
 			string queryListNV = $"SELECT TenNhanVien, NgaySinh FROM {DataProvider.NHANVIEN_TABLE}";
@@ -38,7 +39,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return listNV;
 		}
 
-		//		Add: Tìm MaNhanVien theo TenNhanVien và NgaySinh
+		//		MinhHieu Add: Tìm MaNhanVien theo TenNhanVien và NgaySinh
 		public Guid GetMaNhanVienByTenNhanVienAndNgaySinh(string nhanVien)
 		{
 			string tenNhanVien = nhanVien.Split('|')[0].Trim();
@@ -62,7 +63,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return Guid.Parse(obj.ToString());
 		}
 
-		//		Add: Tìm nhân viên theo TenNhanVien và NgaySinh
+		//		MinhHieu Add: Tìm nhân viên theo TenNhanVien và NgaySinh
 		public bool CheckNhanVienByTenNhanVienAndNgaySinh(string tenNhanVien, string ngaySinh)
 		{
 			if (!DateTime.TryParse(ngaySinh, out DateTime ngaySinhNhanVien))
@@ -78,7 +79,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return dataTable.Rows.Count > 0;
 		}
 
-		//		Add: Tìm xem có tài khoản nhân viên không
+		//		MinhHieu Add: Tìm xem có tài khoản nhân viên không
 		public bool CheckNhanVienLogin(LoginDVO loginDVO)
 		{
 			string queryTimNV = $"SELECT * FROM {DataProvider.NHANVIEN_TABLE} " +

@@ -335,10 +335,10 @@ D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\System.
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.SuggestedBindingRedirects.cache
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe.config
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBan.resources
-D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBanFormInfo.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonBan.resources
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonBan.resources
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonNhap.resources
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonNhapInfo.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonNhap.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonNhapInfo.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBanInfo.resources

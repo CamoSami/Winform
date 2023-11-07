@@ -24,11 +24,11 @@ namespace WinformWithExternalLibrary.DataValidateObject
 
 
 
-		[HoaDonBanDVO_ExistedTenGiamGia(
-			ErrorMessage = "Tên giảm giá không tồn tại"
-			)]
 		[HoaDonBanDVO_EligibleTenGiamGia(
 			ErrorMessage = "Tên giảm giá không áp dụng được"
+			)]
+		[HoaDonBanDVO_ExistedTenGiamGia(
+			ErrorMessage = "Tên giảm giá không tồn tại"
 			)]
 		[DisplayName("Tên giảm giá")]
 		public string HoaDonBanDVO_TenGiamGia { get; set; }
