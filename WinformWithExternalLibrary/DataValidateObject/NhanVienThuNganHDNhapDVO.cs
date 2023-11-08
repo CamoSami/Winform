@@ -9,7 +9,7 @@ using WinformWithExternalLibrary.DataValidateObject.CustomValidation;
 
 namespace WinformWithExternalLibrary.DataValidateObject
 {
-	public class NhanVienThuNganDVO
+	public class NhanVienThuNganHDNhapDVO
 	{
 		//		TenNhanVien + NgaySinh
 		[Required(
@@ -19,13 +19,13 @@ namespace WinformWithExternalLibrary.DataValidateObject
 			ErrorMessage = "Nhân viên không tồn tại"
 			)]
 		[DisplayName("Nhân viên")]
-		public string NhanVienThuNganDVO_NhanVien { get; set; }
+		public string NhanVienThuNganHDNhapDVO_NhanVien { get; set; }
 
-		public NhanVienThuNganDVO() { }
+		public NhanVienThuNganHDNhapDVO() { }
 
-		public NhanVienThuNganDVO(string nhanVienThuNganDVO_NhanVien)
+		public NhanVienThuNganHDNhapDVO(string nhanVienThuNganHDNhapDVO_NhanVien)
 		{
-			this.NhanVienThuNganDVO_NhanVien = nhanVienThuNganDVO_NhanVien;
+			this.NhanVienThuNganHDNhapDVO_NhanVien = nhanVienThuNganHDNhapDVO_NhanVien;
 		}
 	}
 }

@@ -213,14 +213,13 @@
     <Compile Include="DataValidateObject\CustomValidation\TongTienKhachTraDVO_EligibleTongTienKhachTra.cs" />
     <Compile Include="DataValidateObject\HoaDonNhapDVO.cs" />
     <Compile Include="DataValidateObject\HoaDonBanDVO.cs" />
-    <Compile Include="DataValidateObject\NhanVienThuNganDVO.cs" />
+    <Compile Include="DataValidateObject\NhanVienThuNganHDNhapDVO.cs" />
+    <Compile Include="DataValidateObject\NhanVienThuNganHDBanDVO.cs" />
     <Compile Include="DataValidateObject\TongTienKhachTraDVO.cs" />
-    <Compile Include="DataValidateObject\_Reference\ChiTietHDNhapDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\CongViecDVO.cs" />
     <Compile Include="DataValidateObject\CustomValidation\DivisibleBy100Attribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\KhachHangDVO_UniqueDienThoaiAttribute.cs" />
     <Compile Include="DataValidateObject\_Reference\DMSanPhamDVO.cs" />
-    <Compile Include="DataValidateObject\_Reference\HoaDonNhapDVO.cs" />
     <Compile Include="DataValidateObject\KhachHangDVO.cs" />
     <Compile Include="DataValidateObject\LoginDVO.cs" />
     <Compile Include="DataValidateObject\_Reference\NhaCungCapDVO.cs" />

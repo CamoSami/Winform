@@ -52,9 +52,6 @@ namespace WinformWithExternalLibrary
 		{
 			//		TODO: set up Event system for DAOs to update DataSource
 
-			//		GenerateData
-			//this.InitializeFakeData();
-
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
 
@@ -89,7 +86,7 @@ namespace WinformWithExternalLibrary
 			MaterialSkinManager.Instance.AddFormToManage(this);
 
 			//		Label(s) for Focus
-			this.labelForFocus.Text = "";
+			this.LabelForFocus.Text = "";
 
 			//		Font
 			this.Font = FormLogin.Instance.GetFont();
@@ -97,7 +94,7 @@ namespace WinformWithExternalLibrary
 			//		Generalist Attributes
 			foreach (TabPage tabPage in this.materialTabControl.TabPages)
 			{
-				if (tabPage != this.HoaDonBanDVO)
+				if (tabPage != this.TabPageHoaDonBan && tabPage != this.TabPageHoaDonNhap)
 				{
 					continue;
 				}
@@ -145,6 +142,9 @@ namespace WinformWithExternalLibrary
 						//		Design
 						tempMaterialListView.GridLines = true;
 						tempMaterialListView.BorderStyle = BorderStyle.FixedSingle;
+
+						//		Extra
+						tempMaterialListView.Scrollable = true;
 					}
 				}
 			}
@@ -166,7 +166,7 @@ namespace WinformWithExternalLibrary
 				};
 
 				//		TEST: only for HoaDonBan
-				if (this.materialTabControl.TabPages[i] != this.HoaDonBanDVO)
+				if (this.materialTabControl.TabPages[i] != this.TabPageHoaDonBan && this.materialTabControl.TabPages[i] != this.TabPageHoaDonNhap)
 				{
 					continue;
 				}
@@ -260,7 +260,7 @@ namespace WinformWithExternalLibrary
 				this.MinimumSize = this.Size;
 				this.MaximumSize = this.Size;
 
-				this.ActiveControl = this.labelForFocus;
+				this.ActiveControl = this.LabelForFocus;
 			};
 
 			//		Set ActiveControl to nothing
@@ -364,41 +364,297 @@ namespace WinformWithExternalLibrary
 		private void Initialize_NgoSachMinhHieu()
 		{
 			this.Initialize_HoaDonBan();
+			this.Initialize_HoaDonNhap();
 		}
 
-		private void Initialize_HoaDonBan()
+		private void Initialize_HoaDonNhap()
 		{
-			this.TabPageHoaDonBan_materialListView.Scrollable = true;
+			this.NhanVienThuNganHDNhapDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
+			this.ChiTietHDNhapDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
+			this.HoaDonNhapDVO_DienThoaiNhaCungCap.DataSource = NhaCungCapDAO.Instance.GetPhoneNumbers();
 
-			this.NhanVienThuNganDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
-			this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
-			this.ChiTietHDBanDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
+			//		TODO: Finish this
 
-			KhachHangDAO.Instance.OnKhachHangDAONewInsert += (obj, e) =>
-			{
-				this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
-			};
-
-			this.NhanVienThuNganDVO_NhanVien.SelectedIndex = -1;
-			this.HoaDonBanDVO_DienThoaiKhachHang.SelectedIndex = -1;
-			this.ChiTietHDBanDVO_MaSanPham.SelectedIndex = -1;
+			this.NhanVienThuNganHDNhapDVO_NhanVien.SelectedIndex = -1;
+			this.ChiTietHDNhapDVO_MaSanPham.SelectedIndex = -1;
+			this.HoaDonNhapDVO_DienThoaiNhaCungCap.SelectedIndex = -1;
 
 			//		Event For Validate Controls
-			//			TabPageHoaDonBan_materialListView
-			this.TabPageHoaDonBan_materialListView.SelectedIndexChanged += (obj, e) =>
+			//			TabPageHoaDonNhap_MaterialListView
+			this.TabPageHoaDonNhap_MaterialListView.SelectedIndexChanged += (obj, e) =>
 			{
 				//		Nothing
-				if (this.TabPageHoaDonBan_materialListView.SelectedIndices.Count <= 0)
+				if (this.TabPageHoaDonNhap_MaterialListView.SelectedIndices.Count <= 0)
 				{
 					return;
 				}
 
 				//		Update Controls
-				int index = this.TabPageHoaDonBan_materialListView.SelectedIndices[0];
+				int index = this.TabPageHoaDonNhap_MaterialListView.SelectedIndices[0];
 
 				if (index >= 0)
 				{
-					ListViewItem listViewItem = this.TabPageHoaDonBan_materialListView.Items[index];
+					ListViewItem listViewItem = this.TabPageHoaDonNhap_MaterialListView.Items[index];
+
+					this.ChiTietHDNhapDVO_MaSanPham.Text = listViewItem.SubItems[1].Text;
+					this.ChiTietHDNhapDVO_TenSanPham.Text = listViewItem.SubItems[2].Text;
+					this.ChiTietHDNhapDVO_SoLuong.Text = listViewItem.SubItems[3].Text;
+				}
+
+				//		Update Focus
+				this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
+			};
+
+			//			HoaDonNhapDVO_DienThoaiNhaCungCap
+			this.HoaDonNhapDVO_DienThoaiNhaCungCap.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+			//				Auto Completion
+			this.HoaDonNhapDVO_DienThoaiNhaCungCap.LostFocus += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+				{
+					Control control = obj as Control;
+
+					this.HoaDonNhapDVO_TenNhaCungCap.Text = NhaCungCapDAO.Instance.GetNameWithPhoneNumber(this.HoaDonNhapDVO_DienThoaiNhaCungCap.Text);
+				}
+			};
+			this.HoaDonNhapDVO_DienThoaiNhaCungCap.SelectedIndexChanged += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+				{
+					Control control = obj as Control;
+
+					this.HoaDonNhapDVO_TenNhaCungCap.Text = NhaCungCapDAO.Instance.GetNameWithPhoneNumber(this.HoaDonNhapDVO_DienThoaiNhaCungCap.Text);
+				}
+			};
+
+			//			ChiTietHDNhapDVO_MaSanPham
+			this.ChiTietHDNhapDVO_MaSanPham.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+			//				Auto Completion
+			this.ChiTietHDNhapDVO_MaSanPham.LostFocus += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+				{
+					this.ChiTietHDNhapDVO_TenSanPham.Text = DMSanPhamDAO.Instance.GetTenSanPhamWithMaSanPham(this.ChiTietHDNhapDVO_MaSanPham.Text);
+
+					this.ActiveControl = this.ChiTietHDNhapDVO_SoLuong;
+
+					if (this.CheckIfControlEmptyOrPlaceholder(this.ChiTietHDNhapDVO_SoLuong))
+					{
+						this.ChiTietHDNhapDVO_SoLuong.Text = 1.ToString();
+					}
+					this.ChiTietHDNhapDVO_SoLuong.SelectionStart = this.ChiTietHDNhapDVO_SoLuong.Text.Length;
+				}
+			};
+			this.ChiTietHDNhapDVO_MaSanPham.SelectedIndexChanged += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+				{
+					this.ChiTietHDNhapDVO_TenSanPham.Text = DMSanPhamDAO.Instance.GetTenSanPhamWithMaSanPham(this.ChiTietHDNhapDVO_MaSanPham.Text);
+
+					this.ActiveControl = this.ChiTietHDNhapDVO_SoLuong;
+
+					if (this.CheckIfControlEmptyOrPlaceholder(this.ChiTietHDNhapDVO_SoLuong))
+					{
+						this.ChiTietHDNhapDVO_SoLuong.Text = 1.ToString();
+					}
+					this.ChiTietHDNhapDVO_SoLuong.SelectionStart = this.ChiTietHDNhapDVO_SoLuong.Text.Length;
+				}
+			};
+
+			//			NhanVienThuNganHDNhapDVO_NhanVien
+			//				Auto Completion
+			this.NhanVienThuNganHDNhapDVO_NhanVien.LostFocus += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+							control: obj as Control,
+							onlyOneControl: true,
+							baseDVO: out _))
+				{
+					this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
+				}
+			};
+			this.NhanVienThuNganHDNhapDVO_NhanVien.SelectedIndexChanged += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+							control: obj as Control,
+							onlyOneControl: true,
+							baseDVO: out _))
+				{
+					this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
+				}
+			};
+
+			//			ChiTietHDNhapDVO_SoLuong
+			this.ChiTietHDNhapDVO_SoLuong.KeyDown += (obj, e) =>
+			{
+				//		If Enter
+				if (e.KeyCode == Keys.Enter)
+				{
+					this.NewChiTietHDNhap();
+				}
+			};
+
+			//		Event For Buttons
+			//			TabPageHoaDonNhap_ButtonTaoSanPham
+			//				TODO:	Finish
+			this.TabPageHoaDonNhap_ButtonTaoSanPham.Click += (obj, e) =>
+			{
+
+			};
+
+			//			TabPageHoaDonNhap_ButtonNhapSanPham
+			this.TabPageHoaDonNhap_ButtonNhapSanPham.Click += (obj, e) =>
+			{
+				this.NewChiTietHDNhap();
+			};
+
+			//			TabPageHoaDonNhap_ButtonXoaSanPham
+			this.TabPageHoaDonNhap_ButtonXoaSanPham.Click += (obj, e) =>
+			{
+				//		Nothing is picked isn't it
+				if (this.TabPageHoaDonNhap_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox(message: "Xin vui lòng chọn sản phẩm cần xóa", this.GetTabPageControlSelectedIndex());
+
+					return;
+				}
+				//		Else, delete the ones highlighted
+				else
+				{
+					ListView.SelectedListViewItemCollection selectedItems = this.TabPageHoaDonNhap_MaterialListView.SelectedItems;
+
+					//		Remove
+					foreach (ListViewItem item in selectedItems)
+					{
+						this.UpdateTongTienHDBan(
+								tien: long.Parse(item.SubItems[5].Text),
+								biTru: true);
+
+						this.TabPageHoaDonNhap_MaterialListView.Items.Remove(item);
+					}
+
+					//		Re-Indexing
+					for (int i = 0; i < this.TabPageHoaDonNhap_MaterialListView.Items.Count; i++)
+					{
+						this.TabPageHoaDonNhap_MaterialListView.Items[i].SubItems[0].Text = (i + 1).ToString();
+					}
+
+					//		Focus
+					this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
+
+					//		Reset Input
+					this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+				}
+			};
+
+			//			TabPageHoaDonNhap_ButtonNhapMoiSanPham
+			this.TabPageHoaDonNhap_ButtonNhapMoiSanPham.Click += (obj, e) =>
+			{
+				if (this.ShowMessageBoxYesNo(message: "Bạn có muốn nhập mới sản phẩm không?", this.GetTabPageControlSelectedIndex()))
+				{
+					this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+
+					return;
+				}
+			};
+
+			//			TabPageHoaDonNhap_ButtonTaoNhaCungCap
+			//				TODO: finish
+			this.TabPageHoaDonNhap_ButtonTaoNhaCungCap.Click += (obj, e) =>
+			{
+				
+			};
+
+			//			TabPageHoaDonNhap_ButtonNhapHoaDon
+			//				TODO: finish
+			this.TabPageHoaDonNhap_ButtonNhapHoaDon.Click += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(this.HoaDonNhapDVO_TongTien, onlyOneControl: false, out dynamic baseHoaDonNhap) &&
+					this.TryValidationFromControl(this.NhanVienThuNganHDNhapDVO_NhanVien, onlyOneControl: false, out dynamic baseNhanVienThuNgan))
+				{
+					//		Validated!
+
+					//		...Nothing?
+					if (this.TabPageHoaDonNhap_MaterialListView.Items.Count <= 0)
+					{
+						this.ShowMessageBox(message: "Chưa có sản phẩm trong đơn hàng", this.GetTabPageControlSelectedIndex());
+
+						return;
+					}
+
+					//		Casting
+					NhanVienThuNganHDNhapDVO nhanVienThuNganDVO = baseNhanVienThuNgan as NhanVienThuNganHDNhapDVO;
+					HoaDonNhapDVO hoaDonNhapDVO = baseHoaDonNhap as HoaDonNhapDVO;
+
+					//		Show another Confirmation Form
+					//			TODO:
+					//FormConfirmHoaDonBan formConfirmHoaDonBan = new FormConfirmHoaDonBan(hoaDonNhapDVO, nhanVienThuNganDVO);
+					//formConfirmHoaDonBan.FormClosing += (_obj, _e) =>
+					//{
+					//	this.ResetColorForLabel(this.GetTabPageControlSelectedIndex());
+					//};
+
+					//formConfirmHoaDonBan.Show();
+					//formConfirmHoaDonBan.Activate();
+				}
+			};
+
+			//			TabPageHoaDonNhap_ButtonNhapMoiHoaDon
+			this.TabPageHoaDonNhap_ButtonNhapMoiHoaDon.Click += (obj, e) =>
+			{
+				if (this.ShowMessageBoxYesNo(message: "Bạn có chắc muốn nhập mới hóa đơn không?", this.GetTabPageControlSelectedIndex()))
+				{
+					this.ResetHoaDonNhapAndChiTietHDNhap();
+
+					return;
+				}
+			};
+		}
+
+		private void Initialize_HoaDonBan()
+		{
+			this.NhanVienThuNganHDBanDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
+			this.ChiTietHDBanDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
+			this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
+
+			//		TODO: Finish this
+			KhachHangDAO.Instance.OnKhachHangDAONewInsert += (obj, e) =>
+			{
+				this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
+			};
+
+			this.NhanVienThuNganHDBanDVO_NhanVien.SelectedIndex = -1;
+			this.ChiTietHDBanDVO_MaSanPham.SelectedIndex = -1;
+			this.HoaDonBanDVO_DienThoaiKhachHang.SelectedIndex = -1;
+
+			//		Event For Validate Controls
+			//			TabPageHoaDonBan_materialListView
+			this.TabPageHoaDonBan_MaterialListView.SelectedIndexChanged += (obj, e) =>
+			{
+				//		Nothing
+				if (this.TabPageHoaDonBan_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					return;
+				}
+
+				//		Update Controls
+				int index = this.TabPageHoaDonBan_MaterialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageHoaDonBan_MaterialListView.Items[index];
 
 					this.ChiTietHDBanDVO_MaSanPham.Text = listViewItem.SubItems[1].Text;
 					this.ChiTietHDBanDVO_TenSanPham.Text = listViewItem.SubItems[2].Text;
@@ -411,17 +667,108 @@ namespace WinformWithExternalLibrary
 
 			//			HoaDonBanDVO_DienThoaiKhachHang
 			this.HoaDonBanDVO_DienThoaiKhachHang.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
-			this.HoaDonBanDVO_DienThoaiKhachHang.LostFocus += this.DienThoaiKhachHang_AutoComplete;
-			this.HoaDonBanDVO_DienThoaiKhachHang.SelectedIndexChanged += this.DienThoaiKhachHang_AutoComplete;
+			//				Auto Completion
+			this.HoaDonBanDVO_DienThoaiKhachHang.LostFocus += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+				{
+					Control control = obj as Control;
+
+					if (this.CheckIfControlEmptyOrPlaceholder(control))
+					{
+						return;
+					}
+
+					this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetTenKhachHangWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
+
+					this.ActiveControl = this.HoaDonBanDVO_TenGiamGia;
+				}
+			};
+			this.HoaDonBanDVO_DienThoaiKhachHang.SelectedIndexChanged += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+				{
+					Control control = obj as Control;
+
+					if (this.CheckIfControlEmptyOrPlaceholder(control))
+					{
+						return;
+					}
+
+					this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetTenKhachHangWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
+
+					this.ActiveControl = this.HoaDonBanDVO_TenGiamGia;
+				}
+			};
 
 			//			ChiTietHDBanDVO_MaSanPham
 			this.ChiTietHDBanDVO_MaSanPham.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
-			this.ChiTietHDBanDVO_MaSanPham.LostFocus += this.MaSanPham_AutoComplete;
-			this.ChiTietHDBanDVO_MaSanPham.SelectedIndexChanged += this.MaSanPham_AutoComplete;
+			//				Auto Completion
+			this.ChiTietHDBanDVO_MaSanPham.LostFocus += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+				{
+					this.ChiTietHDBanDVO_TenSanPham.Text = DMSanPhamDAO.Instance.GetTenSanPhamWithMaSanPham(this.ChiTietHDBanDVO_MaSanPham.Text);
+
+					this.ActiveControl = this.ChiTietHDBanDVO_SoLuong;
+
+					if (this.CheckIfControlEmptyOrPlaceholder(this.ChiTietHDBanDVO_SoLuong))
+					{
+						this.ChiTietHDBanDVO_SoLuong.Text = 1.ToString();
+					}
+					this.ChiTietHDBanDVO_SoLuong.SelectionStart = this.ChiTietHDBanDVO_SoLuong.Text.Length;
+				}
+			};
+			this.ChiTietHDBanDVO_MaSanPham.SelectedIndexChanged += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+						control: obj as Control,
+						onlyOneControl: true,
+						baseDVO: out _))
+				{
+					this.ChiTietHDBanDVO_TenSanPham.Text = DMSanPhamDAO.Instance.GetTenSanPhamWithMaSanPham(this.ChiTietHDBanDVO_MaSanPham.Text);
+
+					this.ActiveControl = this.ChiTietHDBanDVO_SoLuong;
+
+					if (this.CheckIfControlEmptyOrPlaceholder(this.ChiTietHDBanDVO_SoLuong))
+					{
+						this.ChiTietHDBanDVO_SoLuong.Text = 1.ToString();
+					}
+					this.ChiTietHDBanDVO_SoLuong.SelectionStart = this.ChiTietHDBanDVO_SoLuong.Text.Length;
+				}
+			};
 
 			//			HoaDonBanDVO_NhanVien
-			this.NhanVienThuNganDVO_NhanVien.LostFocus += this.NhanVien_AutoComplete;
-			this.NhanVienThuNganDVO_NhanVien.SelectedIndexChanged += this.NhanVien_AutoComplete;
+			//				Auto Completion
+			this.NhanVienThuNganHDBanDVO_NhanVien.LostFocus += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+							control: obj as Control,
+							onlyOneControl: true,
+							baseDVO: out _))
+				{
+					this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+				}
+			};
+			this.NhanVienThuNganHDBanDVO_NhanVien.SelectedIndexChanged += (obj, e) =>
+			{
+				if (this.TryValidationFromControl(
+							control: obj as Control,
+							onlyOneControl: true,
+							baseDVO: out _))
+				{
+					this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+				}
+			};
 
 			//			HoaDonBanDVO_TenGiamGia
 			this.HoaDonBanDVO_TenGiamGia.LostFocus += (obj, e) =>
@@ -451,7 +798,7 @@ namespace WinformWithExternalLibrary
 				//		If Enter
 				if (e.KeyCode == Keys.Enter)
 				{
-					this.NewChiTietHDBan(obj as Control);
+					this.NewChiTietHDBan();
 				}
 			};
 
@@ -464,16 +811,16 @@ namespace WinformWithExternalLibrary
 			};
 
 			//			TabPageHoaDonBan_ButtonNhapChiTiet
-			this.TabPageHoaDonBan_ButtonNhapChiTiet.Click += (obj, e) =>
+			this.TabPageHoaDonBan_ButtonNhapSanPham.Click += (obj, e) =>
 			{
-				this.NewChiTietHDBan(this.ChiTietHDBanDVO_MaSanPham);
+				this.NewChiTietHDBan();
 			};
 
 			//			TabPageHoaDonBan_ButtonXoaSanPham
 			this.TabPageHoaDonBan_ButtonXoaSanPham.Click += (obj, e) =>
 			{
 				//		Nothing is picked isn't it
-				if (this.TabPageHoaDonBan_materialListView.SelectedIndices.Count <= 0)
+				if (this.TabPageHoaDonBan_MaterialListView.SelectedIndices.Count <= 0)
 				{
 					this.ShowMessageBox(message: "Xin vui lòng chọn sản phẩm cần xóa", this.GetTabPageControlSelectedIndex());
 
@@ -482,7 +829,7 @@ namespace WinformWithExternalLibrary
 				//		Else, delete the ones highlighted
 				else
 				{
-					ListView.SelectedListViewItemCollection selectedItems = this.TabPageHoaDonBan_materialListView.SelectedItems;
+					ListView.SelectedListViewItemCollection selectedItems = this.TabPageHoaDonBan_MaterialListView.SelectedItems;
 
 					//		Remove
 					foreach (ListViewItem item in selectedItems)
@@ -491,25 +838,25 @@ namespace WinformWithExternalLibrary
 								tien: long.Parse(item.SubItems[5].Text),
 								biTru: true);
 
-						this.TabPageHoaDonBan_materialListView.Items.Remove(item);
+						this.TabPageHoaDonBan_MaterialListView.Items.Remove(item);
 					}
 
 					//		Re-Indexing
-					for (int i = 0; i < this.TabPageHoaDonBan_materialListView.Items.Count; i++)
+					for (int i = 0; i < this.TabPageHoaDonBan_MaterialListView.Items.Count; i++)
 					{
-						this.TabPageHoaDonBan_materialListView.Items[i].SubItems[0].Text = (i + 1).ToString();
+						this.TabPageHoaDonBan_MaterialListView.Items[i].SubItems[0].Text = (i + 1).ToString();
 					}
-
-					//		Reset Input
-					this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
 
 					//		Focus
 					this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+
+					//		Reset Input
+					this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
 				}
 			};
 
 			//			TabPageHoaDonBan_ButtonTaoMoiSanPham
-			this.TabPageHoaDonBan_ButtonTaoMoiSanPham.Click += (obj, e) =>
+			this.TabPageHoaDonBan_ButtonNhapMoiSanPham.Click += (obj, e) =>
 			{
 				if (this.ShowMessageBoxYesNo(message: "Bạn có muốn nhập mới sản phẩm không?", this.GetTabPageControlSelectedIndex()))
 				{
@@ -534,12 +881,12 @@ namespace WinformWithExternalLibrary
 			this.TabPageHoaDonBan_ButtonNhapHoaDon.Click += (obj, e) =>
 			{
 				if (this.TryValidationFromControl(this.HoaDonBanDVO_TongTien, onlyOneControl: false, out dynamic baseHoaDonBan) &&
-					this.TryValidationFromControl(this.NhanVienThuNganDVO_NhanVien, onlyOneControl: false, out dynamic baseNhanVienThuNgan))
+					this.TryValidationFromControl(this.NhanVienThuNganHDBanDVO_NhanVien, onlyOneControl: false, out dynamic baseNhanVienThuNgan))
 				{
 					//		Validated!
 
 					//		...Nothing?
-					if (this.TabPageHoaDonBan_materialListView.Items.Count <= 0)
+					if (this.TabPageHoaDonBan_MaterialListView.Items.Count <= 0)
 					{
 						this.ShowMessageBox(message: "Chưa có sản phẩm trong đơn hàng", this.GetTabPageControlSelectedIndex());
 
@@ -547,7 +894,7 @@ namespace WinformWithExternalLibrary
 					}
 
 					//		Casting
-					NhanVienThuNganDVO nhanVienThuNganDVO = baseNhanVienThuNgan as NhanVienThuNganDVO;
+					NhanVienThuNganHDBanDVO nhanVienThuNganDVO = baseNhanVienThuNgan as NhanVienThuNganHDBanDVO;
 					HoaDonBanDVO hoaDonBanDVO = baseHoaDonBan as HoaDonBanDVO;
 
 					//		Show another Confirmation Form
@@ -563,7 +910,7 @@ namespace WinformWithExternalLibrary
 			};
 
 			//			TabPageHoaDonBan_ButtonTaoMoiHoaDon
-			this.TabPageHoaDonBan_ButtonTaoMoiHoaDon.Click += (obj, e) =>
+			this.TabPageHoaDonBan_ButtonNhapMoiHoaDon.Click += (obj, e) =>
 			{
 				if (this.ShowMessageBoxYesNo(message: "Bạn có chắc muốn nhập mới hóa đơn không?", this.GetTabPageControlSelectedIndex()))
 				{
@@ -574,7 +921,18 @@ namespace WinformWithExternalLibrary
 			};
 		}
 
-		//		Event
+		//		Function
+
+		private void UpdateTongTienHDNhap(long tien, bool biTru)
+		{
+			long tongTienCurr = this.CheckIfControlEmptyOrPlaceholder(this.HoaDonNhapDVO_TongTien) ? 0 : long.Parse(this.HoaDonNhapDVO_TongTien.Text);
+			long tongTienNew = biTru ? tongTienCurr - tien : tongTienCurr + tien;
+
+			this.HoaDonNhapDVO_TongTien.Text = tongTienNew.ToString();
+
+			this.HoaDonNhapDVO_ThanhToan.Text = tongTienNew.ToString();
+		}
+
 		private void UpdateTongTienHDBan(long tien, bool biTru)
 		{
 			long tongTienCurr = this.CheckIfControlEmptyOrPlaceholder(this.HoaDonBanDVO_TongTien) ? 0 : long.Parse(this.HoaDonBanDVO_TongTien.Text);
@@ -588,65 +946,14 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_ThanhToan.Text = thanhToanFinal.ToString();
 		}
 
-		private void NhanVien_AutoComplete(object obj, EventArgs e)
-		{
-			if (this.TryValidationFromControl(
-							control: obj as Control,
-							onlyOneControl: true,
-							baseDVO: out _))
-			{
-				this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
-			}
-		}
-
-		private void DienThoaiKhachHang_AutoComplete(object obj, EventArgs e)
-		{
-			if (this.TryValidationFromControl(
-						control: obj as Control,
-						onlyOneControl: true,
-						baseDVO: out _))
-			{
-				Control control = obj as Control;
-
-				if (this.CheckIfControlEmptyOrPlaceholder(control))
-				{
-					return;
-				}
-
-				this.HoaDonBanDVO_TenKhachHang.Text = KhachHangDAO.Instance.GetTenKhachHangWithPhoneNumber(this.HoaDonBanDVO_DienThoaiKhachHang.Text);
-
-				this.ActiveControl = this.HoaDonBanDVO_TenGiamGia;
-			}
-		}
-
-		private void MaSanPham_AutoComplete(object obj, EventArgs e)
-		{
-			if (this.TryValidationFromControl(
-						control: obj as Control,
-						onlyOneControl: true,
-						baseDVO: out _))
-			{
-				this.ChiTietHDBanDVO_TenSanPham.Text = DMSanPhamDAO.Instance.GetTenSanPhamWithMaSanPham(this.ChiTietHDBanDVO_MaSanPham.Text);
-
-				this.ActiveControl = this.ChiTietHDBanDVO_SoLuong;
-
-				if (this.CheckIfControlEmptyOrPlaceholder(this.ChiTietHDBanDVO_SoLuong))
-				{
-					this.ChiTietHDBanDVO_SoLuong.Text = 1.ToString();
-				}
-				this.ChiTietHDBanDVO_SoLuong.SelectionStart = this.ChiTietHDBanDVO_SoLuong.Text.Length;
-			}
-		}
-
-		//		Function
-		public void NhapHoaDonBan(HoaDonBanDVO hoaDonBanDVO, NhanVienThuNganDVO nhanVienThuNganDVO, TongTienKhachTraDVO tongTienKhachTraDVO)
+		public void NhapHoaDonBan(HoaDonBanDVO hoaDonBanDVO, NhanVienThuNganHDBanDVO nhanVienThuNganDVO, TongTienKhachTraDVO tongTienKhachTraDVO)
 		{
 			HoaDonBanDTO hoaDonBanDTO = new HoaDonBanDTO(
 				hoaDonBanDTO_MaHDBan: Guid.NewGuid(),
 				hoaDonBanDTO_MaKhachHang: KhachHangDAO.Instance.GetMaKhachHangWithPhoneNumbers(hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang),
-				hoaDonBanDTO_MaNhanVien: NhanVienDAO.Instance.GetMaNhanVienByTenNhanVienAndNgaySinh(nhanVienThuNganDVO.NhanVienThuNganDVO_NhanVien),
+				hoaDonBanDTO_MaNhanVien: NhanVienDAO.Instance.GetMaNhanVienByTenNhanVienAndNgaySinh(nhanVienThuNganDVO.NhanVienThuNganHDBanDVO_NhanVien),
 				hoaDonBanDTO_NgayBan: DateTime.Now,
-				hoaDonBanDTO_SoSanPham: this.TabPageHoaDonBan_materialListView.Items.Count,
+				hoaDonBanDTO_SoSanPham: this.TabPageHoaDonBan_MaterialListView.Items.Count,
 				hoaDonBanDTO_MaGiamGia: GiamGiaDAO.Instance.GetMaGiamGia(hoaDonBanDVO.HoaDonBanDVO_TenGiamGia),
 				hoaDonBanDTO_TongTien: hoaDonBanDVO.HoaDonBanDVO_ThanhToan,
 				hoaDonBanDTO_TongTienKhachTra: tongTienKhachTraDVO.TongTienKhachTraDVO_TongTienKhachTra
@@ -664,7 +971,7 @@ namespace WinformWithExternalLibrary
 				return;
 			}
 
-			foreach (ListViewItem listViewItem in this.TabPageHoaDonBan_materialListView.Items)
+			foreach (ListViewItem listViewItem in this.TabPageHoaDonBan_MaterialListView.Items)
 			{
 				//		Get MaDMSanPham
 				Guid maDMSanPhamTemp = DMSanPhamDAO.Instance.GetMaDMSanPhamFromMaSanPham(listViewItem.SubItems[1].Text);
@@ -710,10 +1017,30 @@ namespace WinformWithExternalLibrary
 			this.ResetHoaDonBanAndChiTietHDBan();
 		}
 
+		private void ResetHoaDonNhapAndChiTietHDNhap()
+		{
+			//		Clear ListView
+			this.TabPageHoaDonNhap_MaterialListView.Items.Clear();
+
+			//		Set Focus
+			this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
+
+			//		Reset Controls
+			this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+			this.ResetInputForControl(this.HoaDonNhapDVO_DienThoaiNhaCungCap);
+
+			//		Set Interracted
+			this.SetInterractedForControl(this.ChiTietHDNhapDVO_MaSanPham, onlyOneControl: false, value: false);
+			this.SetInterractedForControl(this.HoaDonNhapDVO_DienThoaiNhaCungCap, onlyOneControl: false, value: false);
+		}
+
 		private void ResetHoaDonBanAndChiTietHDBan()
 		{
 			//		Clear ListView
-			this.TabPageHoaDonBan_materialListView.Items.Clear();
+			this.TabPageHoaDonBan_MaterialListView.Items.Clear();
+
+			//		Set Focus
+			this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
 
 			//		Reset Controls
 			this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
@@ -722,14 +1049,102 @@ namespace WinformWithExternalLibrary
 			//		Set Interracted
 			this.SetInterractedForControl(this.ChiTietHDBanDVO_MaSanPham, onlyOneControl: false, value: false);
 			this.SetInterractedForControl(this.HoaDonBanDVO_DienThoaiKhachHang, onlyOneControl: false, value: false);
-
-			//		Set Focus
-			this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
 		}
 
-		private void NewChiTietHDBan(Control control)
+		private void NewChiTietHDNhap()
 		{
-			if (this.TryValidationFromControl(control, onlyOneControl: false, out dynamic baseDVO))
+			if (this.TryValidationFromControl(this.ChiTietHDNhapDVO_MaSanPham, onlyOneControl: false, out dynamic baseDVO))
+			{
+				//		Casting
+				ChiTietHDNhapDVO chiTietHDNhapDVO = baseDVO as ChiTietHDNhapDVO;
+
+				//		Get DonGiaBan
+				long tempDonGiaNhap = DMSanPhamDAO.Instance.GetDonGiaNhapWithMaSanPham(chiTietHDNhapDVO.ChiTietHDNhapDVO_MaSanPham);
+
+				if (this.TabPageHoaDonNhap_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					//		If already Existed AND not Selected => Update
+					foreach (ListViewItem listViewItem1 in this.TabPageHoaDonNhap_MaterialListView.Items)
+					{
+						if (listViewItem1.SubItems[1].Text.Equals(this.ChiTietHDNhapDVO_MaSanPham.Text))
+						{
+							//		Reset TongTien
+							this.UpdateTongTienHDNhap(
+								tien: long.Parse(listViewItem1.SubItems[5].Text),
+								biTru: true);
+
+							//		Update
+							int soLuongTemp = int.Parse(listViewItem1.SubItems[3].Text) + chiTietHDNhapDVO.ChiTietHDNhapDVO_SoLuong;
+
+							listViewItem1.SubItems[3].Text = soLuongTemp.ToString();
+							listViewItem1.SubItems[5].Text = (soLuongTemp * tempDonGiaNhap).ToString();
+
+							//		Update TongTien
+							this.UpdateTongTienHDNhap(
+								tien: long.Parse(listViewItem1.SubItems[5].Text),
+								biTru: false);
+
+							//		Grant Control
+							this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
+
+							this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+
+							return;
+						}
+					}
+				}
+				else
+				{
+					//		Remove Selected Indexes
+					ListView.SelectedListViewItemCollection selectedItems = this.TabPageHoaDonNhap_MaterialListView.SelectedItems;
+
+					foreach (ListViewItem item in selectedItems)
+					{
+						this.UpdateTongTienHDNhap(
+							tien: long.Parse(item.SubItems[5].Text),
+							biTru: true);
+
+						this.TabPageHoaDonNhap_MaterialListView.Items.Remove(item);
+					}
+
+					//		Re-Indexing
+					for (int i = 0; i < this.TabPageHoaDonNhap_MaterialListView.Items.Count; i++)
+					{
+						this.TabPageHoaDonNhap_MaterialListView.Items[i].SubItems[0].Text = (i + 1).ToString();
+					}
+				}
+
+				//		If not Existed => Add new
+				ListViewItem listViewItem = new ListViewItem();
+
+				listViewItem.SubItems[0].Text = ((this.TabPageHoaDonNhap_MaterialListView.Items.Count + 1).ToString());
+				listViewItem.SubItems.Add(chiTietHDNhapDVO.ChiTietHDNhapDVO_MaSanPham);
+				listViewItem.SubItems.Add(chiTietHDNhapDVO.ChiTietHDNhapDVO_TenSanPham);
+				listViewItem.SubItems.Add(chiTietHDNhapDVO.ChiTietHDNhapDVO_SoLuong.ToString());
+				listViewItem.SubItems.Add(tempDonGiaNhap.ToString());
+				listViewItem.SubItems.Add((tempDonGiaNhap * chiTietHDNhapDVO.ChiTietHDNhapDVO_SoLuong).ToString());
+
+				//		Add new
+				this.TabPageHoaDonNhap_MaterialListView.Items.Add(listViewItem);
+
+				//		Update TongTien
+				this.UpdateTongTienHDNhap(
+					tien: long.Parse(listViewItem.SubItems[5].Text),
+					biTru: false);
+
+				//		Reset Focus
+				this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
+
+				//		Reset Input
+				this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+
+				return;
+			}
+		}
+
+		private void NewChiTietHDBan()
+		{
+			if (this.TryValidationFromControl(this.ChiTietHDBanDVO_MaSanPham, onlyOneControl: false, out dynamic baseDVO))
 			{
 				//		Casting
 				ChiTietHDBanDVO chiTietHDBanDVO = baseDVO as ChiTietHDBanDVO;
@@ -738,9 +1153,9 @@ namespace WinformWithExternalLibrary
 				long tempDonGiaBan = DMSanPhamDAO.Instance.GetDonGiaBanWithMaSanPham(chiTietHDBanDVO.ChiTietHDBanDVO_MaSanPham);
 
 				//		If already Existed AND not Selected => Update
-				if (this.TabPageHoaDonBan_materialListView.SelectedIndices.Count <= 0)
+				if (this.TabPageHoaDonBan_MaterialListView.SelectedIndices.Count <= 0)
 				{
-					foreach (ListViewItem listViewItem1 in this.TabPageHoaDonBan_materialListView.Items)
+					foreach (ListViewItem listViewItem1 in this.TabPageHoaDonBan_MaterialListView.Items)
 					{
 						if (listViewItem1.SubItems[1].Text.Equals(this.ChiTietHDBanDVO_MaSanPham.Text))
 						{
@@ -761,29 +1176,18 @@ namespace WinformWithExternalLibrary
 								biTru: false);
 
 							//		Grant Control
-							this.ResetInputForControl(control);
-
 							this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+
+							this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
 
 							return;
 						}
 					}
 				}
-
-				//		If not Existed => Add new
-				ListViewItem listViewItem = new ListViewItem();
-
-				listViewItem.SubItems[0].Text = ((this.TabPageHoaDonBan_materialListView.Items.Count + 1).ToString());
-				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_MaSanPham);
-				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_TenSanPham);
-				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong.ToString());
-				listViewItem.SubItems.Add(tempDonGiaBan.ToString());
-				listViewItem.SubItems.Add((tempDonGiaBan * chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong).ToString());
-
-				//		Remove Selected Indexes
-				if (this.TabPageHoaDonBan_materialListView.SelectedIndices.Count > 0)
+				//		Remove selected Indexes
+				else
 				{
-					ListView.SelectedListViewItemCollection selectedItems = this.TabPageHoaDonBan_materialListView.SelectedItems;
+					ListView.SelectedListViewItemCollection selectedItems = this.TabPageHoaDonBan_MaterialListView.SelectedItems;
 
 					foreach (ListViewItem item in selectedItems)
 					{
@@ -791,23 +1195,41 @@ namespace WinformWithExternalLibrary
 							tien: long.Parse(item.SubItems[5].Text),
 							biTru: true);
 
-						this.TabPageHoaDonBan_materialListView.Items.Remove(item);
+						this.TabPageHoaDonBan_MaterialListView.Items.Remove(item);
+					}
+
+					//		Re-Indexing
+					for (int i = 0; i < this.TabPageHoaDonBan_MaterialListView.Items.Count; i++)
+					{
+						this.TabPageHoaDonBan_MaterialListView.Items[i].SubItems[0].Text = (i + 1).ToString();
 					}
 				}
 
+				//		If not Existed => Add new
+				ListViewItem listViewItem = new ListViewItem();
+
+				listViewItem.SubItems[0].Text = ((this.TabPageHoaDonBan_MaterialListView.Items.Count + 1).ToString());
+				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_MaSanPham);
+				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_TenSanPham);
+				listViewItem.SubItems.Add(chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong.ToString());
+				listViewItem.SubItems.Add(tempDonGiaBan.ToString());
+				listViewItem.SubItems.Add((tempDonGiaBan * chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong).ToString());
+
 				//		Add new
-				this.TabPageHoaDonBan_materialListView.Items.Add(listViewItem);
+				this.TabPageHoaDonBan_MaterialListView.Items.Add(listViewItem);
 
 				//		Update TongTien
 				this.UpdateTongTienHDBan(
 					tien: long.Parse(listViewItem.SubItems[5].Text),
 					biTru: false);
 
-				//		Reset Input
-				this.ResetInputForControl(control);
-
 				//		Reset Focus
 				this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
+
+				//		Reset Input
+				this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
+
+				return;
 			}
 		}
 
@@ -1237,6 +1659,7 @@ namespace WinformWithExternalLibrary
 
 		#region Generalist Function
 
+		//		Hiện MessageBox với các lựa chọn Yes No cho TabPage
 		private bool ShowMessageBoxYesNo(string message, int tabPageIndex)
 		{
 			bool ifYes = MaterialMessageBox.Show(
@@ -1254,6 +1677,7 @@ namespace WinformWithExternalLibrary
 			return ifYes;
 		}
 
+		//		Hiện MessageBox cho TabPage
 		private void ShowMessageBox(string message, int tabPageIndex)
 		{
 			MaterialMessageBox.Show(
@@ -1267,6 +1691,7 @@ namespace WinformWithExternalLibrary
 			this.ResetColorForLabel(tabPageIndex);
 		}
 
+		//		Sửa lại màu cho Label của TabPage
 		private void ResetColorForLabel(int tabPageIndex)
 		{
 			//		Workaround a bug
@@ -1276,6 +1701,8 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
+		//		Thử Validate nội dung từ Control, onlyOneControl để check xem có Validate MỖI nội dung đấy
+		//		hay không, và đầu ra là baseDVO (= null nếu validate lỗi)
 		private bool TryValidationFromControl(Control control, bool onlyOneControl, out dynamic baseDVO)
 		{
 			//		Reset Validation
@@ -1328,6 +1755,7 @@ namespace WinformWithExternalLibrary
 			return true;
 		}
 
+		//		Thử xem TextBox đã được chạm vào chưa
 		private bool CheckIfTextboxInterracted(Control control)
 		{
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
@@ -1337,27 +1765,32 @@ namespace WinformWithExternalLibrary
 					[this.listOfControlsDVO[selectedIndex].IndexOf(control)];
 		}
 
+		//		Thử xem TextBox đã có nội dung nhập chưa hay chỉ có Placeholder hoặc trống rỗng
 		private bool CheckIfControlEmptyOrPlaceholder(Control control)
 		{
-			return this.CheckTextboxTextEqualToString(control: control, text: "") ||
-					this.CheckTextboxTextEqualToString(control: control, text: this.GetPlaceholderForControl(control));
+			return this.CheckControlTextEqualToString(control: control, text: "") ||
+					this.CheckControlTextEqualToString(control: control, text: this.GetPlaceholderForControl(control));
 		}
 
-		private bool CheckTextboxTextEqualToString(Control control, string text)
+		//		Thử xem nội dung của Control có bằng String không
+		private bool CheckControlTextEqualToString(Control control, string text)
 		{
 			return control.Text.Trim().Equals(text);
 		}
 
+		//		Lấy nội dung của Control (nếu = PlaceHolder thì trả lại rỗng)
 		private string GetControlTextIfPlaceholderThenEmpty(Control control)
 		{
 			return control.Text == this.GetPlaceholderForControl(control) ? "" : control.Text;
 		}
 
+		//		Lấy nội dung của Control (nếu = rỗng thì trả lại PlaceHolder)
 		private string GetControlTextIfEmptyThenPlaceholder(Control control)
 		{
 			return control.Text == "" ? this.GetPlaceholderForControl(control) : control.Text;
 		}
 
+		//		Lấy PlaceHolder cho Control
 		private string GetPlaceholderForControl(Control control)
 		{
 			//		Get Type + Attribute Name
@@ -1372,6 +1805,7 @@ namespace WinformWithExternalLibrary
 			return displayNameAttribute.DisplayName;
 		}
 
+		//		Đặt String cho Label tương ứng với Control được gửi
 		private void SetStringLabelForControl(Control control, int selectedIndex, string text)
 		{
 			string controlName = control.Name;
@@ -1389,14 +1823,30 @@ namespace WinformWithExternalLibrary
 			Debug.WriteLine("\n\nFailed to set String Label for Control");
 		}
 
+		//		Reset lại tất cả Input cho TabPage
 		private void ResetInputForTabPage(int tabPageIndex)
 		{
 			foreach (Control controlTemp in this.listOfControlsDVO[tabPageIndex])
 			{
+				if (controlTemp is ComboBox comboBox)
+				{
+					comboBox.SelectedIndex = -1;
+				}
+
 				controlTemp.Text = this.GetPlaceholderForControl(controlTemp);
+			}
+
+			if (tabPageIndex == 1)
+			{
+				this.TabPageHoaDonBan_MaterialListView.Items.Clear();
+			}
+			else if (tabPageIndex == 2)
+			{
+				this.TabPageHoaDonNhap_MaterialListView.Items.Clear();
 			}
 		}
 
+		//		Reset lại tất cả Input tương ứng với DVO của 1 Control
 		private void ResetInputForControl(Control control)
 		{
 			string getClassName = control.Name.Split('_')[0];
@@ -1404,13 +1854,18 @@ namespace WinformWithExternalLibrary
 
 			foreach (Control controlTemp in this.listOfControlsDVO[tabPageIndex])
 			{
-				if (controlTemp.Name.Contains(getClassName))
+				if (controlTemp != this.ActiveControl && controlTemp.Name.Contains(getClassName))
 				{
 					controlTemp.Text = this.GetPlaceholderForControl(controlTemp);
+				}
+				else if (controlTemp == this.ActiveControl)
+				{
+					controlTemp.Text = "";
 				}
 			}
 		}
 
+		//		Reset lại Validation cho cả 1 TabPage
 		private void ResetValidationForTabPage(int tabPageIndex)
 		{
 			for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
@@ -1421,6 +1876,7 @@ namespace WinformWithExternalLibrary
 			this.SetInterractedForTabPage(tabPageIndex, false);
 		}
 
+		//		Reset lại Validation cho 1 hoặc tất cả Input tương ứng với DVO của 1 Control
 		private void ResetValidationForControl(Control control, bool onlyOneControl)
 		{
 			int tabPageIndex = this.GetTabPageControlSelectedIndex();
@@ -1456,6 +1912,7 @@ namespace WinformWithExternalLibrary
 			this.SetInterractedForControl(control, onlyOneControl: onlyOneControl, false);
 		}
 
+		//		Cài đặt TabPage xem các phần tử đã được chạm chưa
 		private void SetInterractedForTabPage(int tabPageIndex, bool value)
 		{
 			for (int i = 0; i < this.isInterracted[tabPageIndex].Count; i++)
@@ -1464,6 +1921,7 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
+		//		Cài đặt Control và DVO tương đương nó xem các phần tử đã được chạm chưa
 		private void SetInterractedForControl(Control control, bool onlyOneControl, bool value)
 		{
 			string getClassName;
@@ -1497,6 +1955,7 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
+		//		Lấy DVO đã nhập từ Control và các Control liên quan tới nó
 		private dynamic GetInputFromControl(Control control)
 		{
 			string getClassName = "WinformWithExternalLibrary.DataValidateObject." + control.Name.Split('_')[0];
@@ -1507,14 +1966,19 @@ namespace WinformWithExternalLibrary
 			{
 				object obj = Activator.CreateInstance(type);
 
-				if (obj is NhanVienThuNganDVO nhanVienThuNganDVO)
+				if (obj is NhanVienThuNganHDBanDVO nhanVienThuNganHDBanDVO)
 				{
-					nhanVienThuNganDVO.NhanVienThuNganDVO_NhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienThuNganDVO_NhanVien);
+					nhanVienThuNganHDBanDVO.NhanVienThuNganHDBanDVO_NhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienThuNganHDBanDVO_NhanVien);
 
-					return nhanVienThuNganDVO;
+					return nhanVienThuNganHDBanDVO;
 				}
+				else if (obj is NhanVienThuNganHDNhapDVO nhanVienThuNganHDNhapDVO)
+				{
+					nhanVienThuNganHDNhapDVO.NhanVienThuNganHDNhapDVO_NhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienThuNganHDNhapDVO_NhanVien);
 
-				if (obj is HoaDonBanDVO hoaDonBanDVO)
+					return nhanVienThuNganHDNhapDVO;
+				}
+				else if (obj is HoaDonBanDVO hoaDonBanDVO)
 				{
 					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien), out long tempTongTien))
 					{
@@ -1533,6 +1997,24 @@ namespace WinformWithExternalLibrary
 
 					return hoaDonBanDVO;
 				}
+				else if (obj is HoaDonNhapDVO hoaDonNhapDVO)
+				{
+					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_TongTien), out long tempTongTien))
+					{
+						tempTongTien = 0;
+					}
+					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_ThanhToan), out long tempThanhToan))
+					{
+						tempThanhToan = 0;
+					}
+
+					hoaDonNhapDVO.HoaDonNhapDVO_DienThoaiNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_DienThoaiNhaCungCap);
+					hoaDonNhapDVO.HoaDonNhapDVO_TenNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_TenNhaCungCap);
+					hoaDonNhapDVO.HoaDonNhapDVO_TongTien = tempTongTien;
+					hoaDonNhapDVO.HoaDonNhapDVO_ThanhToan = tempThanhToan;
+
+					return hoaDonNhapDVO;
+				}
 				else if (obj is ChiTietHDBanDVO chiTietHDBanDVO)
 				{
 					if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_SoLuong), out int tempSoLuong))
@@ -1546,6 +2028,19 @@ namespace WinformWithExternalLibrary
 
 					return chiTietHDBanDVO;
 				}
+				else if (obj is ChiTietHDNhapDVO chiTietHDNhapDVO)
+				{
+					if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_SoLuong), out int tempSoLuong))
+					{
+						tempSoLuong = 0;
+					}
+
+					chiTietHDNhapDVO.ChiTietHDNhapDVO_MaSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_MaSanPham);
+					chiTietHDNhapDVO.ChiTietHDNhapDVO_TenSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_TenSanPham);
+					chiTietHDNhapDVO.ChiTietHDNhapDVO_SoLuong = tempSoLuong;
+
+					return chiTietHDNhapDVO;
+				} 
 
 				return obj;
 			}
@@ -1557,7 +2052,7 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		//		Get DataValidateObject from Control
+		//		Lấy kiểu DVO từ Control
 		private Type GetBaseDVOFromControl(Control control)
 		{
 			string getClassName = "WinformWithExternalLibrary.DataValidateObject." + control.Name.Split('_')[0];
@@ -1578,6 +2073,7 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
+		//		Lấy Index của TabPage đang được chọn
 		private int GetTabPageControlSelectedIndex()
 		{
 			//Debug.WriteLine(materialTabControl.SelectedIndex);

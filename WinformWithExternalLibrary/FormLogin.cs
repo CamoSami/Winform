@@ -51,9 +51,6 @@ namespace WinformWithExternalLibrary
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
 
-			//		Data Access Objects
-			this.InitializeDataObjects();
-
 			//		Assigning Essential
 			this.InitializeHardCodedAttributes();
 
@@ -72,21 +69,6 @@ namespace WinformWithExternalLibrary
 			}
 
 			return base.ProcessCmdKey(ref msg, keyData);
-		}
-
-		private void InitializeDataObjects()
-		{
-			DataProvider.Instance = new DataProvider();
-
-			ChiTietHDBanDAO.Instance = new ChiTietHDBanDAO();
-			CongViecDAO.Instance = new CongViecDAO();
-			DMSanPhamDAO.Instance = new DMSanPhamDAO();
-			GiamGiaDAO.Instance = new GiamGiaDAO();
-			HoaDonBanDAO.Instance = new HoaDonBanDAO();
-			KhachHangDAO.Instance = new KhachHangDAO();
-			NhaCungCapDAO.Instance = new NhaCungCapDAO();
-			NhanVienDAO.Instance = new NhanVienDAO();
-			PhanTichDAO.Instance = new PhanTichDAO();
 		}
 
 		private void RemoveDataObjects()

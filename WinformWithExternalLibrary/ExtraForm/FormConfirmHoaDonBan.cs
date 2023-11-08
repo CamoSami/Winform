@@ -23,9 +23,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 		private bool hasDone = false;
 
 		private HoaDonBanDVO hoaDonBanDVO;
-		private NhanVienThuNganDVO nhanVienThuNganDVO;
+		private NhanVienThuNganHDBanDVO nhanVienThuNganDVO;
 
-		public FormConfirmHoaDonBan(HoaDonBanDVO hoaDonBanDVO, NhanVienThuNganDVO nhanVienThuNganDVO)
+		public FormConfirmHoaDonBan(HoaDonBanDVO hoaDonBanDVO, NhanVienThuNganHDBanDVO nhanVienThuNganDVO)
 		{
 			this.InitializeComponent();
 
@@ -58,7 +58,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 			this.LabelForFocus.Text = "";
 
 			//		Text
-			this.FormConfirmHoaDonBan_NhanVien.Text = "Nhân viên: " + nhanVienThuNganDVO.NhanVienThuNganDVO_NhanVien;
+			this.FormConfirmHoaDonBan_NhanVien.Text = "Nhân viên: " + nhanVienThuNganDVO.NhanVienThuNganHDBanDVO_NhanVien;
 			this.FormConfirmHoaDonBan_KhachHang.Text = "Khách hàng: " + hoaDonBanDVO.HoaDonBanDVO_TenKhachHang;
 			this.FormConfirmHoaDonBan_TongTien.Text = "Tồng tiền: " + hoaDonBanDVO.HoaDonBanDVO_TongTien.ToString();
 			this.FormConfirmHoaDonBan_ThanhToan.Text = "Thanh toán: " + hoaDonBanDVO.HoaDonBanDVO_ThanhToan.ToString();

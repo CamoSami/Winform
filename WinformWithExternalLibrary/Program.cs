@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinformWithExternalLibrary._DataProvider;
+using WinformWithExternalLibrary.DataAccessObjects;
 
 namespace WinformWithExternalLibrary
 {
@@ -17,10 +19,27 @@ namespace WinformWithExternalLibrary
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			FormLogin.Instance = new FormLogin();
-			FormLogin.Instance.Show();
 
-			Application.Run();
+			//		GenerateData
+			//this.InitializeFakeData();
+
+			//		Data Access Objects
+			DataProvider.Instance = new DataProvider();
+
+			ChiTietHDBanDAO.Instance = new ChiTietHDBanDAO();
+			CongViecDAO.Instance = new CongViecDAO();
+			DMSanPhamDAO.Instance = new DMSanPhamDAO();
+			GiamGiaDAO.Instance = new GiamGiaDAO();
+			HoaDonBanDAO.Instance = new HoaDonBanDAO();
+			KhachHangDAO.Instance = new KhachHangDAO();
+			NhaCungCapDAO.Instance = new NhaCungCapDAO();
+			NhanVienDAO.Instance = new NhanVienDAO();
+			PhanTichDAO.Instance = new PhanTichDAO();
+
+			//		Form
+			FormLogin.Instance = new FormLogin();
+
+			Application.Run(FormLogin.Instance);
 		}
 	}
 }
