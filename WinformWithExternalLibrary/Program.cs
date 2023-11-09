@@ -19,9 +19,6 @@ namespace WinformWithExternalLibrary
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			//		GenerateData
-			//this.InitializeFakeData();
-
 			//		Data Access Objects
 			DataProvider.Instance = new DataProvider();
 
@@ -36,6 +33,10 @@ namespace WinformWithExternalLibrary
 			NhaCungCapDAO.Instance = new NhaCungCapDAO();
 			NhanVienDAO.Instance = new NhanVienDAO();
 			PhanTichDAO.Instance = new PhanTichDAO();
+
+			//		Generate Data
+			//BogusAmogus bogusAmogus = new BogusAmogus();
+			//bogusAmogus.GenerateFakeData();
 
 			//		Form
 			FormLogin.Instance = new FormLogin();

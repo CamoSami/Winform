@@ -11,7 +11,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
 	public class GiamGiaDAO
 	{
-		public event EventHandler OnDAONewInsert;
+		public event EventHandler OnDAODatabaseChanged;
 
 		public static GiamGiaDAO Instance { get; set; }
 
@@ -98,7 +98,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			if (rowChanged > 0)
 			{
-				this.OnDAONewInsert?.Invoke(this, EventArgs.Empty);
+				this.OnDAODatabaseChanged?.Invoke(this, EventArgs.Empty);
 			}
 
 			return rowChanged > 0;

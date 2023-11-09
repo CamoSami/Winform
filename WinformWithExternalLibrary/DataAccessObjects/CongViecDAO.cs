@@ -11,7 +11,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
     public class CongViecDAO
 	{
-		public event EventHandler OnDAONewInsert;
+		public event EventHandler OnDAODatabaseChanged;
 
 		public static CongViecDAO Instance { get; set; }
         public CongViecDAO() { }
@@ -48,7 +48,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			if (rowChanged > 0)
 			{
-				this.OnDAONewInsert?.Invoke(this, EventArgs.Empty);
+				this.OnDAODatabaseChanged?.Invoke(this, EventArgs.Empty);
 			}
             
 			return rowChanged > 0;

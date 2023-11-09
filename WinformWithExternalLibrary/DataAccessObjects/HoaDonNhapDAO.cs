@@ -12,7 +12,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
 	public class HoaDonNhapDAO
 	{
-		public event EventHandler OnDAONewInsert;
+		public event EventHandler OnDAODatabaseChanged;
 
 		public static HoaDonNhapDAO Instance { get; set; }
 
@@ -34,7 +34,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			if (rowChanged > 0)
 			{
-				this.OnDAONewInsert?.Invoke(this, new EventArgs());
+				this.OnDAODatabaseChanged?.Invoke(this, new EventArgs());
 			}
 
 			return rowChanged > 0;

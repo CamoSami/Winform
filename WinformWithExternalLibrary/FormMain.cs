@@ -302,44 +302,44 @@ namespace WinformWithExternalLibrary
 
 		private void InitializeAutoDataSourceUpdate()
 		{
-			ChiTietHDBanDAO.Instance.OnDAONewInsert += (obj, e) =>
+			ChiTietHDBanDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 
 			};
-			ChiTietHDNhapDAO.Instance.OnDAONewInsert += (obj, e) =>
+			ChiTietHDNhapDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 
 			};
-			CongViecDAO.Instance.OnDAONewInsert += (obj, e) =>
+			CongViecDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 
 			};
-			DMSanPhamDAO.Instance.OnDAONewInsert += (obj, e) =>
+			DMSanPhamDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 				this.UpdateDataSource(ChiTietHDBanDVO_MaSanPham, DMSanPhamDAO.Instance.GetMaSanPhamList);
 				this.UpdateDataSource(ChiTietHDNhapDVO_MaSanPham, DMSanPhamDAO.Instance.GetMaSanPhamList);
 			};
-			GiamGiaDAO.Instance.OnDAONewInsert += (obj, e) =>
+			GiamGiaDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 
 			};
-			HoaDonBanDAO.Instance.OnDAONewInsert += (obj, e) =>
+			HoaDonBanDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 
 			};
-			HoaDonNhapDAO.Instance.OnDAONewInsert += (obj, e) =>
+			HoaDonNhapDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 
 			};
-			KhachHangDAO.Instance.OnDAONewInsert += (obj, e) =>
+			KhachHangDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 				this.UpdateDataSource(HoaDonBanDVO_DienThoaiKhachHang, KhachHangDAO.Instance.GetPhoneNumberList);
 			};
-			NhaCungCapDAO.Instance.OnDAONewInsert += (obj, e) =>
+			NhaCungCapDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 				this.UpdateDataSource(this.HoaDonNhapDVO_DienThoaiNhaCungCap, NhaCungCapDAO.Instance.GetPhoneNumbers);
 			};
-			NhanVienDAO.Instance.OnDAONewInsert += (obj, e) =>
+			NhanVienDAO.Instance.OnDAODatabaseChanged += (obj, e) =>
 			{
 				this.UpdateDataSource(this.NhanVienThuNganHDNhapDVO_NhanVien, NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList);
 				this.UpdateDataSource(this.NhanVienThuNganHDBanDVO_NhanVien, NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList);

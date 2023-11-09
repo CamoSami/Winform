@@ -12,7 +12,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
     public class DMSanPhamDAO
 	{
-		public event EventHandler OnDAONewInsert;
+		public event EventHandler OnDAODatabaseChanged;
 
 		public static DMSanPhamDAO Instance { get; set; }
 
@@ -87,7 +87,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			if (rowChanged > 0)
 			{
-				this.OnDAONewInsert?.Invoke(this, new EventArgs());
+				this.OnDAODatabaseChanged?.Invoke(this, new EventArgs());
 			}
 
 			return rowChanged > 0;

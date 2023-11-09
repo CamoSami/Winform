@@ -11,7 +11,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
 	public class ChiTietHDNhapDAO
 	{
-		public event EventHandler OnDAONewInsert;
+		public event EventHandler OnDAODatabaseChanged;
 
 		public static ChiTietHDNhapDAO Instance { get; set; }
 
@@ -31,7 +31,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			if (temp > 0) 
 			{
-				this.OnDAONewInsert?.Invoke(this, EventArgs.Empty);
+				this.OnDAODatabaseChanged?.Invoke(this, EventArgs.Empty);
 			}
 
 			return temp > 0;
