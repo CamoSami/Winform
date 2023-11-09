@@ -342,3 +342,5 @@ E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalL
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonNhap.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonNhapInfo.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBanInfo.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormListImportBill.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormListSellBill.resources

@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinformWithExternalLibrary.DataAccessObjects;
-using WinformWithExternalLibrary.DataValidateObjects;
+using WinformWithExternalLibrary.DataValidateObject;
 
 namespace WinformWithExternalLibrary
 {

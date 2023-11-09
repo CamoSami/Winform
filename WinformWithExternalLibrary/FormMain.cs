@@ -47,6 +47,12 @@ namespace WinformWithExternalLibrary
 		private readonly FormatValues formatValues = new FormatValues();
 
 		private int lastTabPageIndex = 0;
+		private readonly DateTime dateTimeDefault = new DateTime
+			(
+				day: DateTime.Now.Day,
+				month: DateTime.Now.Month,
+				year: DateTime.Now.Year
+			);
 
 		public FormMain()
 		{
@@ -66,7 +72,7 @@ namespace WinformWithExternalLibrary
 			this.Initialize_NgoSachMinhHieu();
 			this.Initialize_TranHongThai();
 			this.Initialize_NguyenHongSon();
-			this.Initialize_NguyenThanhTruc();
+			this.Initialize_BuiThiThanhTruc();
 			this.Initialize_VuHongHanh();
 		}
 
@@ -94,7 +100,11 @@ namespace WinformWithExternalLibrary
 			//		Generalist Attributes
 			foreach (TabPage tabPage in this.materialTabControl.TabPages)
 			{
-				if (tabPage != this.TabPageHoaDonBan && tabPage != this.TabPageHoaDonNhap)
+				if (tabPage != this.TabPageHoaDonBan &&
+					tabPage != this.TabPageNhanVien &&
+					tabPage != this.TabPageKhachHang &&
+					tabPage != this.TabPageNhaCungCap &&
+					tabPage != this.TabPageHoaDonNhap)
 				{
 					continue;
 				}
@@ -127,10 +137,10 @@ namespace WinformWithExternalLibrary
 					else if (control is DateTimePicker tempDateTimePicker)
 					{
 						//		Current Day = Now
-						tempDateTimePicker.Value = DateTime.Now;
+						tempDateTimePicker.Value = this.dateTimeDefault;
 
 						//		Max Range = Now
-						tempDateTimePicker.MaxDate = DateTime.Now;
+						tempDateTimePicker.MaxDate = this.dateTimeDefault;
 					}
 					//		MaterialListView
 					else if (control is MaterialListView tempMaterialListView)
@@ -166,7 +176,11 @@ namespace WinformWithExternalLibrary
 				};
 
 				//		TEST: only for HoaDonBan
-				if (this.materialTabControl.TabPages[i] != this.TabPageHoaDonBan && this.materialTabControl.TabPages[i] != this.TabPageHoaDonNhap)
+				if (this.materialTabControl.TabPages[i] != this.TabPageHoaDonBan &&
+					this.materialTabControl.TabPages[i] != this.TabPageNhanVien &&
+					this.materialTabControl.TabPages[i] != this.TabPageKhachHang &&
+					this.materialTabControl.TabPages[i] != this.TabPageNhaCungCap &&
+					this.materialTabControl.TabPages[i] != this.TabPageHoaDonNhap)
 				{
 					continue;
 				}
@@ -188,6 +202,23 @@ namespace WinformWithExternalLibrary
 					//		Validate Control
 					else if (control.Name.Contains("DVO"))
 					{
+						//Debug.WriteLine("\n" + control.Name);
+
+						if (control is DateTimePicker dateTimePicker)
+						{
+							//		Adding in the list
+							this.isInterracted[i].Add(false);
+							this.listOfControlsDVO[i].Add(control);
+
+							//		Event
+							dateTimePicker.ValueChanged += (obj, e) =>
+							{
+								this.TryValidationFromControl(dateTimePicker, onlyOneControl: true, out _);
+							};
+
+							continue;
+						}
+
 						//		Get Placeholder
 						control.Text = this.GetPlaceholderForControl(control);
 
@@ -199,15 +230,6 @@ namespace WinformWithExternalLibrary
 						control.GotFocus += this.ControlForInput_GotFocus;
 						control.LostFocus += this.ControlForInput_LostFocus;
 					}
-					//		DateTimePicker
-					else if (control is DateTimePicker tempDateTimePicker)
-					{
-						//		Event
-						//tempDateTimePicker.ValueChanged += (obj, e) =>
-						//{
-						//	this.TryValidationFromControl(tempDateTimePicker);
-						//};
-					}
 				}
 			}
 		}
@@ -217,19 +239,7 @@ namespace WinformWithExternalLibrary
 			//		Form
 			this.FormClosing += (obj, e) =>
 			{
-				bool dirtyData = false;
-
-				foreach (Control control in this.listOfControlsDVO[this.lastTabPageIndex])
-				{
-					if (!this.CheckIfControlEmptyOrPlaceholder(control))
-					{
-						dirtyData = true;
-
-						break;
-					}
-				}
-
-				if (dirtyData)
+				if (this.CheckIfDirtyData(this.lastTabPageIndex))
 				{
 					if (!this.ShowMessageBoxYesNo("Bạn còn thông tin nhập dở, bạn có muốn tắt form không?", this.lastTabPageIndex))
 					{
@@ -271,19 +281,7 @@ namespace WinformWithExternalLibrary
 
 			this.materialTabControl.Selecting += (obj, e) =>
 			{
-				bool dirtyData = false;
-
-				foreach (Control control in this.listOfControlsDVO[this.lastTabPageIndex])
-				{
-					if (!this.CheckIfControlEmptyOrPlaceholder(control))
-					{
-						dirtyData = true;
-
-						break;
-					}
-				}
-
-				if (dirtyData)
+				if (this.CheckIfDirtyData(this.lastTabPageIndex))
 				{
 					if (!this.ShowMessageBoxYesNo("Bạn còn thông tin nhập dở, bạn có muốn rời tab không?", this.lastTabPageIndex))
 					{
@@ -302,6 +300,8 @@ namespace WinformWithExternalLibrary
 
 				this.ResetInputForTabPage(this.lastTabPageIndex);
 				this.ResetValidationForTabPage(this.lastTabPageIndex);
+
+				this.ResetColorForLabel(this.lastTabPageIndex);
 			};
 		}
 
@@ -311,6 +311,8 @@ namespace WinformWithExternalLibrary
 
 		private void ControlForInput_GotFocus(object sender, EventArgs e)
 		{
+			//Debug.WriteLine("Triggered!");
+
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
 			Control controlTemp = sender as Control;
 
@@ -357,8 +359,8 @@ namespace WinformWithExternalLibrary
 		#region Ngô Sách Minh Hiếu
 
 		//		Variable
-		private double tabPageHoaDonBan_phanTramGiamGia = 0f;
-		private long tabPageHoaDonBan_maxGiamGia = 0;
+		private double TabPageHoaDonBan_phanTramGiamGia = 0f;
+		private long TabPageHoaDonBan_maxGiamGia = 0;
 
 		//		Initialize
 		private void Initialize_NgoSachMinhHieu()
@@ -372,8 +374,6 @@ namespace WinformWithExternalLibrary
 			this.NhanVienThuNganHDNhapDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
 			this.ChiTietHDNhapDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
 			this.HoaDonNhapDVO_DienThoaiNhaCungCap.DataSource = NhaCungCapDAO.Instance.GetPhoneNumbers();
-
-			//		TODO: Finish this
 
 			this.NhanVienThuNganHDNhapDVO_NhanVien.SelectedIndex = -1;
 			this.ChiTietHDNhapDVO_MaSanPham.SelectedIndex = -1;
@@ -538,7 +538,7 @@ namespace WinformWithExternalLibrary
 					//		Remove
 					foreach (ListViewItem item in selectedItems)
 					{
-						this.UpdateTongTienHDBan(
+						this.UpdateTongTienHDNhap(
 								tien: long.Parse(item.SubItems[5].Text),
 								biTru: true);
 
@@ -555,7 +555,7 @@ namespace WinformWithExternalLibrary
 					this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
 
 					//		Reset Input
-					this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+					this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham, false);
 				}
 			};
 
@@ -564,7 +564,7 @@ namespace WinformWithExternalLibrary
 			{
 				if (this.ShowMessageBoxYesNo(message: "Bạn có muốn nhập mới sản phẩm không?", this.GetTabPageControlSelectedIndex()))
 				{
-					this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+					this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham, false);
 
 					return;
 				}
@@ -574,7 +574,7 @@ namespace WinformWithExternalLibrary
 			//				TODO: finish
 			this.TabPageHoaDonNhap_ButtonTaoNhaCungCap.Click += (obj, e) =>
 			{
-				
+
 			};
 
 			//			TabPageHoaDonNhap_ButtonNhapHoaDon
@@ -628,12 +628,6 @@ namespace WinformWithExternalLibrary
 			this.NhanVienThuNganHDBanDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
 			this.ChiTietHDBanDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
 			this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
-
-			//		TODO: Finish this
-			KhachHangDAO.Instance.OnKhachHangDAONewInsert += (obj, e) =>
-			{
-				this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
-			};
 
 			this.NhanVienThuNganHDBanDVO_NhanVien.SelectedIndex = -1;
 			this.ChiTietHDBanDVO_MaSanPham.SelectedIndex = -1;
@@ -778,15 +772,15 @@ namespace WinformWithExternalLibrary
 				{
 					HoaDonBanDVO hoaDonBanDVO = baseDVO as HoaDonBanDVO;
 
-                    System.Data.DataTable dataTable = GiamGiaDAO.Instance.GetDetailGiamGia(hoaDonBanDVO.HoaDonBanDVO_TenGiamGia);
+					System.Data.DataTable dataTable = GiamGiaDAO.Instance.GetDetailGiamGia(hoaDonBanDVO.HoaDonBanDVO_TenGiamGia);
 
-					this.tabPageHoaDonBan_maxGiamGia = long.Parse(dataTable.Rows[0][0].ToString());
-					this.tabPageHoaDonBan_phanTramGiamGia = double.Parse(dataTable.Rows[0][1].ToString());
+					this.TabPageHoaDonBan_maxGiamGia = long.Parse(dataTable.Rows[0][0].ToString());
+					this.TabPageHoaDonBan_phanTramGiamGia = double.Parse(dataTable.Rows[0][1].ToString());
 				}
 				else
 				{
-					this.tabPageHoaDonBan_maxGiamGia = 0;
-					this.tabPageHoaDonBan_phanTramGiamGia = 0f;
+					this.TabPageHoaDonBan_maxGiamGia = 0;
+					this.TabPageHoaDonBan_phanTramGiamGia = 0f;
 				}
 
 				this.UpdateTongTienHDBan(tien: 0, biTru: true);
@@ -851,7 +845,7 @@ namespace WinformWithExternalLibrary
 					this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
 
 					//		Reset Input
-					this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
+					this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham, false);
 				}
 			};
 
@@ -860,7 +854,7 @@ namespace WinformWithExternalLibrary
 			{
 				if (this.ShowMessageBoxYesNo(message: "Bạn có muốn nhập mới sản phẩm không?", this.GetTabPageControlSelectedIndex()))
 				{
-					this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
+					this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham, false);
 
 					return;
 				}
@@ -928,8 +922,15 @@ namespace WinformWithExternalLibrary
 			long tongTienCurr = this.CheckIfControlEmptyOrPlaceholder(this.HoaDonNhapDVO_TongTien) ? 0 : long.Parse(this.HoaDonNhapDVO_TongTien.Text);
 			long tongTienNew = biTru ? tongTienCurr - tien : tongTienCurr + tien;
 
-			this.HoaDonNhapDVO_TongTien.Text = tongTienNew.ToString();
+			if (tongTienNew == 0)
+			{
+				this.ResetInputForControl(this.HoaDonNhapDVO_TongTien, true);
+				this.ResetInputForControl(this.HoaDonNhapDVO_ThanhToan, true);
 
+				return;
+			}
+
+			this.HoaDonNhapDVO_TongTien.Text = tongTienNew.ToString();
 			this.HoaDonNhapDVO_ThanhToan.Text = tongTienNew.ToString();
 		}
 
@@ -938,10 +939,18 @@ namespace WinformWithExternalLibrary
 			long tongTienCurr = this.CheckIfControlEmptyOrPlaceholder(this.HoaDonBanDVO_TongTien) ? 0 : long.Parse(this.HoaDonBanDVO_TongTien.Text);
 			long tongTienNew = biTru ? tongTienCurr - tien : tongTienCurr + tien;
 
+			if (tongTienNew == 0)
+			{
+				this.ResetInputForControl(this.HoaDonBanDVO_TongTien, true);
+				this.ResetInputForControl(this.HoaDonBanDVO_ThanhToan, true);
+
+				return;
+			}
+
 			this.HoaDonBanDVO_TongTien.Text = tongTienNew.ToString();
 
-			long thanhToanTemp = (long)(tongTienNew * this.tabPageHoaDonBan_phanTramGiamGia);
-			long thanhToanFinal = tongTienNew - (thanhToanTemp > tabPageHoaDonBan_maxGiamGia ? tabPageHoaDonBan_maxGiamGia : thanhToanTemp - thanhToanTemp % 100);
+			long thanhToanTemp = (long)(tongTienNew * this.TabPageHoaDonBan_phanTramGiamGia);
+			long thanhToanFinal = tongTienNew - (thanhToanTemp > TabPageHoaDonBan_maxGiamGia ? TabPageHoaDonBan_maxGiamGia : thanhToanTemp - thanhToanTemp % 100);
 
 			this.HoaDonBanDVO_ThanhToan.Text = thanhToanFinal.ToString();
 		}
@@ -1026,8 +1035,8 @@ namespace WinformWithExternalLibrary
 			this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
 
 			//		Reset Controls
-			this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
-			this.ResetInputForControl(this.HoaDonNhapDVO_DienThoaiNhaCungCap);
+			this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham, false);
+			this.ResetInputForControl(this.HoaDonNhapDVO_DienThoaiNhaCungCap, false);
 
 			//		Set Interracted
 			this.SetInterractedForControl(this.ChiTietHDNhapDVO_MaSanPham, onlyOneControl: false, value: false);
@@ -1043,8 +1052,8 @@ namespace WinformWithExternalLibrary
 			this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
 
 			//		Reset Controls
-			this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
-			this.ResetInputForControl(this.HoaDonBanDVO_DienThoaiKhachHang);
+			this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham, false);
+			this.ResetInputForControl(this.HoaDonBanDVO_DienThoaiKhachHang, false);
 
 			//		Set Interracted
 			this.SetInterractedForControl(this.ChiTietHDBanDVO_MaSanPham, onlyOneControl: false, value: false);
@@ -1087,7 +1096,7 @@ namespace WinformWithExternalLibrary
 							//		Grant Control
 							this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
 
-							this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+							this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham, false);
 
 							return;
 						}
@@ -1136,7 +1145,7 @@ namespace WinformWithExternalLibrary
 				this.ActiveControl = this.ChiTietHDNhapDVO_MaSanPham;
 
 				//		Reset Input
-				this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham);
+				this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham, false);
 
 				return;
 			}
@@ -1178,7 +1187,7 @@ namespace WinformWithExternalLibrary
 							//		Grant Control
 							this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
 
-							this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
+							this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham, false);
 
 							return;
 						}
@@ -1227,7 +1236,7 @@ namespace WinformWithExternalLibrary
 				this.ActiveControl = this.ChiTietHDBanDVO_MaSanPham;
 
 				//		Reset Input
-				this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham);
+				this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham, false);
 
 				return;
 			}
@@ -1242,16 +1251,16 @@ namespace WinformWithExternalLibrary
 			this.ActiveControl = this.HoaDonBanDVO_DienThoaiKhachHang;
 
 			this.ResetColorForLabel(this.GetTabPageControlSelectedIndex());
-        }
+		}
 
 		public long TabPageHoaDonBan_GetThanhToan()
 		{
-			if(!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_ThanhToan), out long tempThanhToan))
+			if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_ThanhToan), out long tempThanhToan))
 			{
-                tempThanhToan = 0;
-            }
+				tempThanhToan = 0;
+			}
 
-            return tempThanhToan;
+			return tempThanhToan;
 		}
 
 		#endregion
@@ -1260,15 +1269,15 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_TranHongThai()
 		{
-            this.InitializeBillOfSell();
+			this.InitializeBillOfSell();
 			this.InitializeImportBill();
 			this.InitializeCustomerAnalytics();
 
-            this.InitializeChart1();
-            this.InitializeChart2();
+			this.InitializeChart1();
+			this.InitializeChart2();
 			this.InitializeChart3();
 			this.InitializeChart4();
-        }
+		}
 
 		private void InitializeBillOfSell()
 		{
@@ -1292,49 +1301,49 @@ namespace WinformWithExternalLibrary
 				FormChiTietHoaDonBan formChiTietHoaDonBan = new FormChiTietHoaDonBan();
 				formChiTietHoaDonBan.Show();
 			};
-        }
+		}
 
 		private void InitializeImportBill()
 		{
-            // Data queried from DB
+			// Data queried from DB
 			int countBillOfImportCurrentMonth = PhanTichDAO.Instance.CountBillOfImportCurrentMonth();
 			long importCostCurrentMonth = PhanTichDAO.Instance.GetImportCostCurrentMonth();
-            long revenueCurrentMonth = PhanTichDAO.Instance.GetRevenueCurrentMonth();
+			long revenueCurrentMonth = PhanTichDAO.Instance.GetRevenueCurrentMonth();
 			int percentImportPerRevenue = importCostCurrentMonth == 0 ? 0 : (int)Math.Ceiling((double)importCostCurrentMonth / revenueCurrentMonth * 100);
 
-            // Render data
-            TabPagePhanTich_HoaDonNhap_SoLuong_LB.Text = countBillOfImportCurrentMonth.ToString();
-            TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Text = this.formatValues.FormatPriceToView(importCostCurrentMonth.ToString(), 3) + " đ";
-            TabPagePhanTich_HoaDonNhap_TiLePB.Value = percentImportPerRevenue > 100 ? 100 : percentImportPerRevenue;
-            TabPagePhanTich_HoaDonNhap_TiLeLB.Text = $"Tỉ lệ chi phí nhập khẩu so với doanh thu: {percentImportPerRevenue}%";
+			// Render data
+			TabPagePhanTich_HoaDonNhap_SoLuong_LB.Text = countBillOfImportCurrentMonth.ToString();
+			TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Text = this.formatValues.FormatPriceToView(importCostCurrentMonth.ToString(), 3) + " đ";
+			TabPagePhanTich_HoaDonNhap_TiLePB.Value = percentImportPerRevenue > 100 ? 100 : percentImportPerRevenue;
+			TabPagePhanTich_HoaDonNhap_TiLeLB.Text = $"Tỉ lệ chi phí nhập khẩu so với doanh thu: {percentImportPerRevenue}%";
 
-            // Event
-            TabPagePhanTich_HoaDonNhap_ShowBTN.Click += (obj, e) =>
-            {
-                FormChiTietHoaDonNhap formChiTietHoaDonNhap = new FormChiTietHoaDonNhap();
+			// Event
+			TabPagePhanTich_HoaDonNhap_ShowBTN.Click += (obj, e) =>
+			{
+				FormChiTietHoaDonNhap formChiTietHoaDonNhap = new FormChiTietHoaDonNhap();
 				formChiTietHoaDonNhap.Show();
-            };
-        }
+			};
+		}
 
 		private void InitializeCustomerAnalytics()
 		{
-            // Data queried from DB
-            List<string> customerPhoneNumersNotInCurrentMonth = PhanTichDAO.Instance.GetCustomerPhoneNumberListNotInCurrentMonth();
-            List<string> customerPhoneNumersCurrentMonth = PhanTichDAO.Instance.GetCustomerPhoneNumberListCurrentMonth();
+			// Data queried from DB
+			List<string> customerPhoneNumersNotInCurrentMonth = PhanTichDAO.Instance.GetCustomerPhoneNumberListNotInCurrentMonth();
+			List<string> customerPhoneNumersCurrentMonth = PhanTichDAO.Instance.GetCustomerPhoneNumberListCurrentMonth();
 
 			// Handle logic
 			int countNewCustomerCurrentMonth = this.CountUniquePhoneNumbers(customerPhoneNumersNotInCurrentMonth, customerPhoneNumersCurrentMonth);
-			int percentCustomerReturn = countNewCustomerCurrentMonth == 0 ? 0 : 
+			int percentCustomerReturn = countNewCustomerCurrentMonth == 0 ? 0 :
 				(int)Math.Ceiling((double)(customerPhoneNumersCurrentMonth.Count - countNewCustomerCurrentMonth) / customerPhoneNumersNotInCurrentMonth.Count * 100);
 
-            // Render data
-            TabPagePhanTich_KhachHang_Tong_LB.Text = (customerPhoneNumersNotInCurrentMonth.Count + customerPhoneNumersCurrentMonth.Count).ToString();
-            TabPagePhanTich_KhachHang_KHmoi_LB.Text = countNewCustomerCurrentMonth.ToString();
-            TabPagePhanTich_KhachHang_TiLePB.Value = percentCustomerReturn;
-            TabPagePhanTich_KhachHang_TiLeLB.Text = $"Tỉ lệ khách quay lại tháng này: {percentCustomerReturn}%";
-        }
+			// Render data
+			TabPagePhanTich_KhachHang_Tong_LB.Text = (customerPhoneNumersNotInCurrentMonth.Count + customerPhoneNumersCurrentMonth.Count).ToString();
+			TabPagePhanTich_KhachHang_KHmoi_LB.Text = countNewCustomerCurrentMonth.ToString();
+			TabPagePhanTich_KhachHang_TiLePB.Value = percentCustomerReturn;
+			TabPagePhanTich_KhachHang_TiLeLB.Text = $"Tỉ lệ khách quay lại tháng này: {percentCustomerReturn}%";
+		}
 
-        private void InitializeChart1()
+		private void InitializeChart1()
 		{
 			// Data queried from DB
 			List<ProductsBestSellerResponseDTO> productsTop1BestSeller = PhanTichDAO.Instance.GetRankProductsByMonth(1);
@@ -1526,11 +1535,11 @@ namespace WinformWithExternalLibrary
 		private void InitializeChart3()
 		{
 			List<SalaryArrangementResponseDTO> salaryArrangementResponseDTOs = PhanTichDAO.Instance.GetSalaryArrangementResponseDTOs();
-            SalaryArrangementResponseDTO salaryArrangementFirst = salaryArrangementResponseDTOs[0] != null ? salaryArrangementResponseDTOs[0] : new SalaryArrangementResponseDTO();
-            SalaryArrangementResponseDTO salaryArrangementSecond = salaryArrangementResponseDTOs[1] != null ? salaryArrangementResponseDTOs[1] : new SalaryArrangementResponseDTO();
-            SalaryArrangementResponseDTO salaryArrangementThird = salaryArrangementResponseDTOs[2] != null ? salaryArrangementResponseDTOs[2] : new SalaryArrangementResponseDTO();
+			SalaryArrangementResponseDTO salaryArrangementFirst = salaryArrangementResponseDTOs[0] != null ? salaryArrangementResponseDTOs[0] : new SalaryArrangementResponseDTO();
+			SalaryArrangementResponseDTO salaryArrangementSecond = salaryArrangementResponseDTOs[1] != null ? salaryArrangementResponseDTOs[1] : new SalaryArrangementResponseDTO();
+			SalaryArrangementResponseDTO salaryArrangementThird = salaryArrangementResponseDTOs[2] != null ? salaryArrangementResponseDTOs[2] : new SalaryArrangementResponseDTO();
 
-            pieChart1.Series = new ISeries[]
+			pieChart1.Series = new ISeries[]
 			{
 				new PieSeries<double>
 				{
@@ -1540,7 +1549,7 @@ namespace WinformWithExternalLibrary
 					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
 					DataLabelsFormatter = point => salaryArrangementFirst.SalaryArrangementResponseDTO_Luong.ToString(),
 					Name = salaryArrangementFirst.SalaryArrangementResponseDTO_TenCongViec
-                },
+				},
 				new PieSeries<double>
 				{
 					Values = new List<double> { salaryArrangementSecond.SalaryArrangementResponseDTO_Luong },
@@ -1548,8 +1557,8 @@ namespace WinformWithExternalLibrary
 					DataLabelsSize = 14,
 					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
 					DataLabelsFormatter = point => salaryArrangementSecond.SalaryArrangementResponseDTO_Luong.ToString(),
-                    Name = salaryArrangementSecond.SalaryArrangementResponseDTO_TenCongViec
-                },
+					Name = salaryArrangementSecond.SalaryArrangementResponseDTO_TenCongViec
+				},
 				new PieSeries<double>
 				{
 					Values = new List<double> { salaryArrangementThird.SalaryArrangementResponseDTO_Luong },
@@ -1557,93 +1566,97 @@ namespace WinformWithExternalLibrary
 					DataLabelsSize = 14,
 					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
 					DataLabelsFormatter = point => salaryArrangementThird.SalaryArrangementResponseDTO_Luong.ToString(),
-                    Name = salaryArrangementThird.SalaryArrangementResponseDTO_TenCongViec
-                }
+					Name = salaryArrangementThird.SalaryArrangementResponseDTO_TenCongViec
+				}
 			};
-        }
+		}
 
 		private void InitializeChart4()
 		{
-            List<InventoryArrangementResponseDTO> inventoryArrangementResponseDTOs = PhanTichDAO.Instance.GetInventoryArrangementResponseDTOs();
-            InventoryArrangementResponseDTO inventoryArrangementFirst = inventoryArrangementResponseDTOs[0] != null ? inventoryArrangementResponseDTOs[0] : new InventoryArrangementResponseDTO();
-            InventoryArrangementResponseDTO inventoryArrangementSecond = inventoryArrangementResponseDTOs[1] != null ? inventoryArrangementResponseDTOs[1] : new InventoryArrangementResponseDTO();
-            InventoryArrangementResponseDTO inventoryArrangementThird = inventoryArrangementResponseDTOs[2] != null ? inventoryArrangementResponseDTOs[2] : new InventoryArrangementResponseDTO();
+			List<InventoryArrangementResponseDTO> inventoryArrangementResponseDTOs = PhanTichDAO.Instance.GetInventoryArrangementResponseDTOs();
+			InventoryArrangementResponseDTO inventoryArrangementFirst = inventoryArrangementResponseDTOs[0] != null ? inventoryArrangementResponseDTOs[0] : new InventoryArrangementResponseDTO();
+			InventoryArrangementResponseDTO inventoryArrangementSecond = inventoryArrangementResponseDTOs[1] != null ? inventoryArrangementResponseDTOs[1] : new InventoryArrangementResponseDTO();
+			InventoryArrangementResponseDTO inventoryArrangementThird = inventoryArrangementResponseDTOs[2] != null ? inventoryArrangementResponseDTOs[2] : new InventoryArrangementResponseDTO();
 
-            pieChart2.Series = new ISeries[]
-            {
-                new PieSeries<double>
-                {
-                    Values = new List<double> { inventoryArrangementFirst.InventoryArrangementResponseDTO_SoLuongTonKho },
-                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-                    DataLabelsSize = 20,
-                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                    DataLabelsFormatter = point => inventoryArrangementFirst.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
-                    Name = inventoryArrangementFirst.InventoryArrangementResponseDTO_TenSanPham
-                },
-                new PieSeries<double>
-                {
-                    Values = new List<double> { inventoryArrangementSecond.InventoryArrangementResponseDTO_SoLuongTonKho },
-                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-                    DataLabelsSize = 20,
-                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                    DataLabelsFormatter = point => inventoryArrangementSecond.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
-                    Name = inventoryArrangementSecond.InventoryArrangementResponseDTO_TenSanPham
-                },
-                new PieSeries<double>
-                {
-                    Values = new List<double> { inventoryArrangementThird.InventoryArrangementResponseDTO_SoLuongTonKho },
-                    DataLabelsPaint = new SolidColorPaint(SKColors.Black),
-                    DataLabelsSize = 20,
-                    DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                    DataLabelsFormatter = point => inventoryArrangementThird.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
-                    Name = inventoryArrangementThird.InventoryArrangementResponseDTO_TenSanPham
-                }
-            };
-        }
+			pieChart2.Series = new ISeries[]
+			{
+				new PieSeries<double>
+				{
+					Values = new List<double> { inventoryArrangementFirst.InventoryArrangementResponseDTO_SoLuongTonKho },
+					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+					DataLabelsSize = 20,
+					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+					DataLabelsFormatter = point => inventoryArrangementFirst.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
+					Name = inventoryArrangementFirst.InventoryArrangementResponseDTO_TenSanPham
+				},
+				new PieSeries<double>
+				{
+					Values = new List<double> { inventoryArrangementSecond.InventoryArrangementResponseDTO_SoLuongTonKho },
+					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+					DataLabelsSize = 20,
+					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+					DataLabelsFormatter = point => inventoryArrangementSecond.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
+					Name = inventoryArrangementSecond.InventoryArrangementResponseDTO_TenSanPham
+				},
+				new PieSeries<double>
+				{
+					Values = new List<double> { inventoryArrangementThird.InventoryArrangementResponseDTO_SoLuongTonKho },
+					DataLabelsPaint = new SolidColorPaint(SKColors.Black),
+					DataLabelsSize = 20,
+					DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+					DataLabelsFormatter = point => inventoryArrangementThird.InventoryArrangementResponseDTO_SoLuongTonKho.ToString(),
+					Name = inventoryArrangementThird.InventoryArrangementResponseDTO_TenSanPham
+				}
+			};
+		}
 
-        private int CountUniquePhoneNumbers(List<string> A, List<string> B)
-        {
-            Dictionary<string, int> phoneCount = new Dictionary<string, int>();
+		private int CountUniquePhoneNumbers(List<string> A, List<string> B)
+		{
+			Dictionary<string, int> phoneCount = new Dictionary<string, int>();
 
-            // Đếm số lượng xuất hiện của từng số điện thoại trong danh sách A
-            foreach (string number in A)
-            {
-                if (phoneCount.ContainsKey(number))
-                    phoneCount[number]++;
-                else
-                    phoneCount[number] = 1;
-            }
+			// Đếm số lượng xuất hiện của từng số điện thoại trong danh sách A
+			foreach (string number in A)
+			{
+				if (phoneCount.ContainsKey(number))
+					phoneCount[number]++;
+				else
+					phoneCount[number] = 1;
+			}
 
-            // Kiểm tra số lượng số điện thoại của B không trùng trong A
-            int uniqueCount = 0;
-            foreach (string number in B)
-            {
-                if (phoneCount.ContainsKey(number) && phoneCount[number] > 0)
-                {
-                    uniqueCount++;
-                    phoneCount[number]--;
-                }
-            }
+			// Kiểm tra số lượng số điện thoại của B không trùng trong A
+			int uniqueCount = 0;
+			foreach (string number in B)
+			{
+				if (phoneCount.ContainsKey(number) && phoneCount[number] > 0)
+				{
+					uniqueCount++;
+					phoneCount[number]--;
+				}
+			}
 
-            return uniqueCount;
-        }
+			return uniqueCount;
+		}
 
-        #endregion
+		#endregion
 
-        #region Nguyễn Hồng Sơn
+		#region Nguyễn Hồng Sơn
 
-        private void Initialize_NguyenHongSon()
+		private void Initialize_NguyenHongSon()
 		{
 
 		}
 
 		#endregion
 
-		#region Nguyễn Thanh Trúc
+		#region Bùi Thị Thanh Trúc
 
-		private void Initialize_NguyenThanhTruc()
+		private void Initialize_BuiThiThanhTruc()
 		{
+			this.NhanVienDVO_TenCongViec.DataSource = CongViecDAO.Instance.GetTenCongViec();
 
+			this.NhanVienDVO_TenCongViec.SelectedIndex = -1;
+
+			this.NhanVienDVO_TenCongViec.Text = this.GetPlaceholderForControl(this.NhanVienDVO_TenCongViec);
 		}
 
 		#endregion
@@ -1741,7 +1754,7 @@ namespace WinformWithExternalLibrary
 						foreach (Control controlToValidate in this.listOfControlsDVO[selectedIndex])
 						{
 							if (result.MemberNames.Contains(controlToValidate.Name) &&
-								this.CheckIfTextboxInterracted(controlToValidate))
+								this.CheckIfControlInterracted(controlToValidate))
 							{
 								this.SetStringLabelForControl(controlToValidate, selectedIndex, result.ErrorMessage);
 							}
@@ -1756,7 +1769,7 @@ namespace WinformWithExternalLibrary
 		}
 
 		//		Thử xem TextBox đã được chạm vào chưa
-		private bool CheckIfTextboxInterracted(Control control)
+		private bool CheckIfControlInterracted(Control control)
 		{
 			int selectedIndex = this.GetTabPageControlSelectedIndex();
 
@@ -1828,7 +1841,13 @@ namespace WinformWithExternalLibrary
 		{
 			foreach (Control controlTemp in this.listOfControlsDVO[tabPageIndex])
 			{
-				if (controlTemp is ComboBox comboBox)
+				if (controlTemp is DateTimePicker dateTimePicker)
+				{
+					dateTimePicker.Value = this.dateTimeDefault;
+
+					return;
+				}
+				else if (controlTemp is ComboBox comboBox)
 				{
 					comboBox.SelectedIndex = -1;
 				}
@@ -1847,10 +1866,32 @@ namespace WinformWithExternalLibrary
 		}
 
 		//		Reset lại tất cả Input tương ứng với DVO của 1 Control
-		private void ResetInputForControl(Control control)
+		private void ResetInputForControl(Control control, bool onlyOneControl)
 		{
-			string getClassName = control.Name.Split('_')[0];
 			int tabPageIndex = this.GetTabPageControlSelectedIndex();
+
+			if (onlyOneControl)
+			{
+				foreach (Control controlTemp in this.listOfControlsDVO[tabPageIndex])
+				{
+					if (controlTemp != this.ActiveControl && controlTemp == control)
+					{
+						controlTemp.Text = this.GetPlaceholderForControl(controlTemp);
+
+						return;
+					}
+					else if (controlTemp == this.ActiveControl)
+					{
+						controlTemp.Text = "";
+
+						return;
+					}
+				}
+
+				return;
+			}
+
+			string getClassName = control.Name.Split('_')[0];
 
 			foreach (Control controlTemp in this.listOfControlsDVO[tabPageIndex])
 			{
@@ -1966,87 +2007,111 @@ namespace WinformWithExternalLibrary
 			{
 				object obj = Activator.CreateInstance(type);
 
-				if (obj is NhanVienThuNganHDBanDVO nhanVienThuNganHDBanDVO)
+				switch (obj)
 				{
-					nhanVienThuNganHDBanDVO.NhanVienThuNganHDBanDVO_NhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienThuNganHDBanDVO_NhanVien);
+					case NhanVienThuNganHDBanDVO nhanVienThuNganHDBanDVO:
+						nhanVienThuNganHDBanDVO.NhanVienThuNganHDBanDVO_NhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienThuNganHDBanDVO_NhanVien);
 
-					return nhanVienThuNganHDBanDVO;
+						return nhanVienThuNganHDBanDVO;
+
+					case NhanVienThuNganHDNhapDVO nhanVienThuNganHDNhapDVO:
+						nhanVienThuNganHDNhapDVO.NhanVienThuNganHDNhapDVO_NhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienThuNganHDNhapDVO_NhanVien);
+
+						return nhanVienThuNganHDNhapDVO;
+
+					case HoaDonBanDVO hoaDonBanDVO:
+						if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien), out long tempTongTien_hoaDonBanDVO))
+						{
+							tempTongTien_hoaDonBanDVO = 0;
+						}
+
+						if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_ThanhToan), out long tempThanhToan_hoaDonBanDVO))
+						{
+							tempThanhToan_hoaDonBanDVO = 0;
+						}
+
+						hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_DienThoaiKhachHang);
+						hoaDonBanDVO.HoaDonBanDVO_TenGiamGia = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenGiamGia);
+						hoaDonBanDVO.HoaDonBanDVO_TenKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenKhachHang);
+						hoaDonBanDVO.HoaDonBanDVO_TongTien = tempTongTien_hoaDonBanDVO;
+						hoaDonBanDVO.HoaDonBanDVO_ThanhToan = tempThanhToan_hoaDonBanDVO;
+
+						return hoaDonBanDVO;
+
+					case HoaDonNhapDVO hoaDonNhapDVO:
+						if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_TongTien), out long tempTongTien_hoaDonNhapDVO))
+						{
+							tempTongTien_hoaDonNhapDVO = 0;
+						}
+
+						if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_ThanhToan), out long tempThanhToan_hoaDonNhapDVO))
+						{
+							tempThanhToan_hoaDonNhapDVO = 0;
+						}
+
+						hoaDonNhapDVO.HoaDonNhapDVO_DienThoaiNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_DienThoaiNhaCungCap);
+						hoaDonNhapDVO.HoaDonNhapDVO_TenNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_TenNhaCungCap);
+						hoaDonNhapDVO.HoaDonNhapDVO_TongTien = tempTongTien_hoaDonNhapDVO;
+						hoaDonNhapDVO.HoaDonNhapDVO_ThanhToan = tempThanhToan_hoaDonNhapDVO;
+
+						return hoaDonNhapDVO;
+
+					case ChiTietHDBanDVO chiTietHDBanDVO:
+						if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_SoLuong), out int tempSoLuong_chiTietHDBanDVO))
+						{
+							tempSoLuong_chiTietHDBanDVO = 0;
+						}
+
+						chiTietHDBanDVO.ChiTietHDBanDVO_MaSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_MaSanPham);
+						chiTietHDBanDVO.ChiTietHDBanDVO_TenSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_TenSanPham);
+						chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong = tempSoLuong_chiTietHDBanDVO;
+
+						return chiTietHDBanDVO;
+
+					case ChiTietHDNhapDVO chiTietHDNhapDVO:
+						if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_SoLuong), out int tempSoLuong_chiTietHDNhapDVO))
+						{
+							tempSoLuong_chiTietHDNhapDVO = 0;
+						}
+
+						chiTietHDNhapDVO.ChiTietHDNhapDVO_MaSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_MaSanPham);
+						chiTietHDNhapDVO.ChiTietHDNhapDVO_TenSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_TenSanPham);
+						chiTietHDNhapDVO.ChiTietHDNhapDVO_SoLuong = tempSoLuong_chiTietHDNhapDVO;
+
+						return chiTietHDNhapDVO;
+
+					case NhanVienDVO nhanVienDVO:
+						nhanVienDVO.NhanVienDVO_SelectNhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_SelectNhanVien);
+						nhanVienDVO.NhanVienDVO_TenNhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_TenNhanVien);
+						nhanVienDVO.NhanVienDVO_NgaySinh = this.NhanVienDVO_NgaySinh.Value;
+						nhanVienDVO.NhanVienDVO_GioiTinh = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_GioiTinh);
+						nhanVienDVO.NhanVienDVO_SoDienThoai = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_SoDienThoai);
+						nhanVienDVO.NhanVienDVO_DiaChi = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_DiaChi);
+						nhanVienDVO.NhanVienDVO_TenCongViec = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_TenCongViec);
+						nhanVienDVO.NhanVienDVO_Email = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_Email);
+
+						return nhanVienDVO;
+
+					case KhachHangDVO khachHangDVO:
+						khachHangDVO.KhachHangDVO_TenKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_TenKhachHang);
+						khachHangDVO.KhachHangDVO_DiaChi = this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_DiaChi);
+						khachHangDVO.KhachHangDVO_DienThoai = this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_DienThoai);
+
+						return khachHangDVO;
+						
+					case NhaCungCapDVO nhaCungCapDVO:
+						nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.NhaCungCapDVO_TenNhaCungCap);
+						nhaCungCapDVO.NhaCungCapDVO_DiaChi = this.GetControlTextIfPlaceholderThenEmpty(this.NhaCungCapDVO_DiaChi);
+						nhaCungCapDVO.NhaCungCapDVO_DienThoai = this.GetControlTextIfPlaceholderThenEmpty(this.NhaCungCapDVO_DienThoai);
+
+						return nhaCungCapDVO;
 				}
-				else if (obj is NhanVienThuNganHDNhapDVO nhanVienThuNganHDNhapDVO)
-				{
-					nhanVienThuNganHDNhapDVO.NhanVienThuNganHDNhapDVO_NhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienThuNganHDNhapDVO_NhanVien);
-
-					return nhanVienThuNganHDNhapDVO;
-				}
-				else if (obj is HoaDonBanDVO hoaDonBanDVO)
-				{
-					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TongTien), out long tempTongTien))
-					{
-						tempTongTien = 0;
-					}
-					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_ThanhToan), out long tempThanhToan))
-					{
-						tempThanhToan = 0;
-					}
-
-					hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_DienThoaiKhachHang);
-					hoaDonBanDVO.HoaDonBanDVO_TenGiamGia = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenGiamGia);
-					hoaDonBanDVO.HoaDonBanDVO_TenKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonBanDVO_TenKhachHang);
-					hoaDonBanDVO.HoaDonBanDVO_TongTien = tempTongTien;
-					hoaDonBanDVO.HoaDonBanDVO_ThanhToan = tempThanhToan;
-
-					return hoaDonBanDVO;
-				}
-				else if (obj is HoaDonNhapDVO hoaDonNhapDVO)
-				{
-					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_TongTien), out long tempTongTien))
-					{
-						tempTongTien = 0;
-					}
-					if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_ThanhToan), out long tempThanhToan))
-					{
-						tempThanhToan = 0;
-					}
-
-					hoaDonNhapDVO.HoaDonNhapDVO_DienThoaiNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_DienThoaiNhaCungCap);
-					hoaDonNhapDVO.HoaDonNhapDVO_TenNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_TenNhaCungCap);
-					hoaDonNhapDVO.HoaDonNhapDVO_TongTien = tempTongTien;
-					hoaDonNhapDVO.HoaDonNhapDVO_ThanhToan = tempThanhToan;
-
-					return hoaDonNhapDVO;
-				}
-				else if (obj is ChiTietHDBanDVO chiTietHDBanDVO)
-				{
-					if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_SoLuong), out int tempSoLuong))
-					{
-						tempSoLuong = 0;
-					}
-
-					chiTietHDBanDVO.ChiTietHDBanDVO_MaSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_MaSanPham);
-					chiTietHDBanDVO.ChiTietHDBanDVO_TenSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDBanDVO_TenSanPham);
-					chiTietHDBanDVO.ChiTietHDBanDVO_SoLuong = tempSoLuong;
-
-					return chiTietHDBanDVO;
-				}
-				else if (obj is ChiTietHDNhapDVO chiTietHDNhapDVO)
-				{
-					if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_SoLuong), out int tempSoLuong))
-					{
-						tempSoLuong = 0;
-					}
-
-					chiTietHDNhapDVO.ChiTietHDNhapDVO_MaSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_MaSanPham);
-					chiTietHDNhapDVO.ChiTietHDNhapDVO_TenSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.ChiTietHDNhapDVO_TenSanPham);
-					chiTietHDNhapDVO.ChiTietHDNhapDVO_SoLuong = tempSoLuong;
-
-					return chiTietHDNhapDVO;
-				} 
 
 				return obj;
 			}
 			else
 			{
-				Debug.WriteLine(getClassName);
+				Debug.WriteLine("GetInputFromControl failed: " + getClassName);
 
 				return null;
 			}
@@ -2067,7 +2132,7 @@ namespace WinformWithExternalLibrary
 			}
 			else
 			{
-				Debug.WriteLine(getClassName);
+				Debug.WriteLine("GetBaseDVOFromControl failed: " + getClassName);
 
 				return null;
 			}
@@ -2079,6 +2144,33 @@ namespace WinformWithExternalLibrary
 			//Debug.WriteLine(materialTabControl.SelectedIndex);
 
 			return this.materialTabControl.SelectedIndex;
+		}
+
+		//		Thử xem TabPage còn thông tin nhập dở không
+		private bool CheckIfDirtyData(int tabPageIndex)
+		{
+			foreach (Control control in this.listOfControlsDVO[tabPageIndex])
+			{
+				//		Check DirtyData for DateTimePicker is different
+				if (control is DateTimePicker dateTimePicker)
+				{
+					if (dateTimePicker.Value != this.dateTimeDefault)
+					{
+						//Debug.WriteLine(control.Name);
+
+						return true;
+					}
+				}
+				//		If not DateTimePicker:
+				else if (!this.CheckIfControlEmptyOrPlaceholder(control))
+				{
+					//Debug.WriteLine(control.Name);
+
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		#endregion

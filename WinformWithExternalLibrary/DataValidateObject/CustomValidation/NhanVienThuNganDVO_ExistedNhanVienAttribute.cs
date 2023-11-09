@@ -35,7 +35,7 @@ namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 
 			return new ValidationResult(
 				this.ErrorMessage,
-				new List<string>() { "NhanVienThuNganDVO_NhanVien" }
+				new List<string>() { "NhanVienThuNganHDBanDVO_NhanVien", "NhanVienThuNganHDNhapDVO_NhanVien" }
 				);
 		}
 	}

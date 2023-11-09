@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WinformWithExternalLibrary.DataValidateObjects
+namespace WinformWithExternalLibrary.DataValidateObject
 {
     public class NhaCungCapDVO
     {
@@ -21,7 +21,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects
         [DisplayName(
             "Tên nhà cung cấp"
             )]
-        public string NhaCungCapDTO_TenNhaCungCap { get; set; }
+        public string NhaCungCapDVO_TenNhaCungCap { get; set; }
 
 
 
@@ -36,7 +36,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects
         [DisplayName(
             "Số điện thoại"
             )]
-        public string NhaCungCapDTO_DienThoai { get; set; }
+        public string NhaCungCapDVO_DienThoai { get; set; }
 
 
         [Required(
@@ -50,15 +50,15 @@ namespace WinformWithExternalLibrary.DataValidateObjects
         [DisplayName(
             "Địa chỉ"
             )]
-        public string NhaCungCapDTO_DiaChi { get; set; }
+        public string NhaCungCapDVO_DiaChi { get; set; }
 
 		public NhaCungCapDVO() { }
 
-		public NhaCungCapDVO(string nhaCungCapDTO_TenNhaCungCap, string nhaCungCapDTO_DienThoai, string nhaCungCapDTO_DiaChi)
+		public NhaCungCapDVO(string nhaCungCapDVO_TenNhaCungCap, string nhaCungCapDVO_DienThoai, string nhaCungCapDVO_DiaChi)
 		{
-			this.NhaCungCapDTO_TenNhaCungCap = nhaCungCapDTO_TenNhaCungCap;
-			this.NhaCungCapDTO_DienThoai = nhaCungCapDTO_DienThoai;
-			this.NhaCungCapDTO_DiaChi = nhaCungCapDTO_DiaChi;
+			this.NhaCungCapDVO_TenNhaCungCap = nhaCungCapDVO_TenNhaCungCap;
+			this.NhaCungCapDVO_DienThoai = nhaCungCapDVO_DienThoai;
+			this.NhaCungCapDVO_DiaChi = nhaCungCapDVO_DiaChi;
 		}
 	}
 }

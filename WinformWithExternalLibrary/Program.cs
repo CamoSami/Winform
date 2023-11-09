@@ -19,7 +19,6 @@ namespace WinformWithExternalLibrary
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-
 			//		GenerateData
 			//this.InitializeFakeData();
 

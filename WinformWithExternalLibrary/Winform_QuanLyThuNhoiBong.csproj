@@ -208,11 +208,13 @@
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_EligibleTenGiamGia.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonNhapDVO_ExistedDienThoaiNhaCungCap.cs" />
+    <Compile Include="DataValidateObject\NhaCungCapDVO.cs" />
     <Compile Include="DataValidateObject\CustomValidation\NhanVienThuNganDVO_ExistedNhanVienAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedTenGiamGia.cs" />
     <Compile Include="DataValidateObject\CustomValidation\TongTienKhachTraDVO_EligibleTongTienKhachTra.cs" />
     <Compile Include="DataValidateObject\HoaDonNhapDVO.cs" />
     <Compile Include="DataValidateObject\HoaDonBanDVO.cs" />
+    <Compile Include="DataValidateObject\NhanVienDVO.cs" />
     <Compile Include="DataValidateObject\NhanVienThuNganHDNhapDVO.cs" />
     <Compile Include="DataValidateObject\NhanVienThuNganHDBanDVO.cs" />
     <Compile Include="DataValidateObject\TongTienKhachTraDVO.cs" />
@@ -222,8 +224,6 @@
     <Compile Include="DataValidateObject\_Reference\DMSanPhamDVO.cs" />
     <Compile Include="DataValidateObject\KhachHangDVO.cs" />
     <Compile Include="DataValidateObject\LoginDVO.cs" />
-    <Compile Include="DataValidateObject\_Reference\NhaCungCapDVO.cs" />
-    <Compile Include="DataValidateObject\_Reference\NhanVienDVO.cs" />
     <Compile Include="ExtraForm\FormChiTietHoaDonBan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -253,6 +253,18 @@
     </Compile>
     <Compile Include="ExtraForm\FormConfirmHoaDonBan.Designer.cs">
       <DependentUpon>FormConfirmHoaDonBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtraForm\FormListImportBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormListImportBill.Designer.cs">
+      <DependentUpon>FormListImportBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtraForm\FormListSellBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormListSellBill.Designer.cs">
+      <DependentUpon>FormListSellBill.cs</DependentUpon>
     </Compile>
     <Compile Include="_Utilities\ExportTableData.cs" />
     <Compile Include="_Utilities\FormatValues.cs" />
@@ -305,6 +317,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateKhachHang.resx">
       <DependentUpon>FormCreateKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormListImportBill.resx">
+      <DependentUpon>FormListImportBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormListSellBill.resx">
+      <DependentUpon>FormListSellBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>

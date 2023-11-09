@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
-using WinformWithExternalLibrary.DataValidateObjects;
+using WinformWithExternalLibrary.DataValidateObject;
 using WinformWithExternalLibrary._DataProvider;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
@@ -66,9 +66,9 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 $"{DataProvider.NHACUNGCAP_TABLE} " +
                 $"(TenNhaCungCap, DienThoai, DiaChi) " +
                 $"VALUES(" +
-                $"N'{nhaCungCapDVO.NhaCungCapDTO_TenNhaCungCap}'," +
-                $" {nhaCungCapDVO.NhaCungCapDTO_DienThoai}, " +
-                $"{nhaCungCapDVO.NhaCungCapDTO_DiaChi})";
+                $"N'{nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap}'," +
+                $" {nhaCungCapDVO.NhaCungCapDVO_DienThoai}, " +
+                $"{nhaCungCapDVO.NhaCungCapDVO_DiaChi})";
 
             int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertSupplier);
 

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataValidateObjects.CustomValidation;
 
-namespace WinformWithExternalLibrary.DataValidateObjects
+namespace WinformWithExternalLibrary.DataValidateObject
 {
 	public class KhachHangDVO
 	{
