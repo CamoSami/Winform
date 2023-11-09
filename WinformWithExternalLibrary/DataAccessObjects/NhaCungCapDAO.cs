@@ -13,8 +13,10 @@ using WinformWithExternalLibrary._DataProvider;
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
     public class NhaCungCapDAO
-    {
-        public static NhaCungCapDAO Instance { get; set; }
+	{
+		public event EventHandler OnDAONewInsert;
+
+		public static NhaCungCapDAO Instance { get; set; }
 
         public NhaCungCapDAO() { }
 
@@ -72,7 +74,12 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertSupplier);
 
-            return rowChanged > 0;
+			if (rowChanged > 0)
+			{
+				this.OnDAONewInsert?.Invoke(this, new EventArgs());
+			}
+
+			return rowChanged > 0;
         }
     }
 }

@@ -15,9 +15,9 @@ using WinformWithExternalLibrary._DataProvider;
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
  
-    internal class PhanTichDAO
-    {
-        public static PhanTichDAO Instance { get; set; }
+    public class PhanTichDAO
+	{
+		public static PhanTichDAO Instance { get; set; }
 
         public PhanTichDAO() { }
 

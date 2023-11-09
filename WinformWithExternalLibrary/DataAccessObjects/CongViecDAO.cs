@@ -10,8 +10,10 @@ using System.Data;
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
     public class CongViecDAO
-    {
-        public static CongViecDAO Instance { get; set; }
+	{
+		public event EventHandler OnDAONewInsert;
+
+		public static CongViecDAO Instance { get; set; }
         public CongViecDAO() { }
 
 		//		Hieu Add
@@ -43,6 +45,11 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                                     ")";
             
 			int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertCongViec);
+
+			if (rowChanged > 0)
+			{
+				this.OnDAONewInsert?.Invoke(this, EventArgs.Empty);
+			}
             
 			return rowChanged > 0;
         }

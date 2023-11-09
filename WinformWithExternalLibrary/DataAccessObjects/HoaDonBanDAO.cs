@@ -12,6 +12,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
 	public class HoaDonBanDAO
 	{
+		public event EventHandler OnDAONewInsert;
+
 		public static HoaDonBanDAO Instance { get; set; }
 
 		public HoaDonBanDAO() { }
@@ -40,9 +42,14 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 					$"{this.GetString(hoaDonBanDTO.HoaDonBanDTO_TongTienKhachTra)}" +
 					$")";
 
-			int temp = DataProvider.Instance.ExecuteNonQuery(stringQuery);
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(stringQuery);
 
-			return temp > 0;
+			if (rowChanged > 0)
+			{
+				this.OnDAONewInsert?.Invoke(this, new EventArgs());
+			}
+
+			return rowChanged > 0;
 		}
 
 

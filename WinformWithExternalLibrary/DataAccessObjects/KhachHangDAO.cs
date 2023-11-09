@@ -14,7 +14,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
 	public class KhachHangDAO
 	{
-		public event EventHandler OnKhachHangDAONewInsert;
+		public event EventHandler OnDAONewInsert;
 
 		public static KhachHangDAO Instance { get; set; }
 
@@ -90,7 +90,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			if (rowChanged > 0)
 			{
-				this.OnKhachHangDAONewInsert?.Invoke(this, new EventArgs());
+				this.OnDAONewInsert?.Invoke(this, new EventArgs());
 			}
 
 			return rowChanged > 0;

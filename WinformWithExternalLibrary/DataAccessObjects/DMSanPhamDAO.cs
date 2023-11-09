@@ -11,8 +11,10 @@ using WinformWithExternalLibrary._DataProvider;
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
     public class DMSanPhamDAO
-    {
-        public static DMSanPhamDAO Instance { get; set; }
+	{
+		public event EventHandler OnDAONewInsert;
+
+		public static DMSanPhamDAO Instance { get; set; }
 
         public DMSanPhamDAO() { }
 
@@ -83,7 +85,12 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertSanPham);
 
-            return rowChanged > 0;
+			if (rowChanged > 0)
+			{
+				this.OnDAONewInsert?.Invoke(this, new EventArgs());
+			}
+
+			return rowChanged > 0;
 		}
 
 		public bool UpdateCongSoLuongTon(string maSanPham, int soLuongCanCong)

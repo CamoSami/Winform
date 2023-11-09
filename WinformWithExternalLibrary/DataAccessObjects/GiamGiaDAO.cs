@@ -11,14 +11,14 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 {
 	public class GiamGiaDAO
 	{
+		public event EventHandler OnDAONewInsert;
+
 		public static GiamGiaDAO Instance { get; set; }
 
 		public GiamGiaDAO() { }
 
 		public DataTable GetDetailGiamGia(string tenGiamGia)
 		{
-
-
 			string queryString = $"SELECT MaxGiamGia, PhanTramGiamGia FROM {DataProvider.GIAMGIA_TABLE} WHERE TenGiamGia = {this.GetString(tenGiamGia)}";
 
 			return DataProvider.Instance.ExecuteQuery(queryString);
@@ -78,6 +78,30 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryString);
 
 			return dataTable.Rows.Count > 0;
+		}
+
+		public bool InsertGiamGia(dynamic baseDTO)
+		{
+			GiamGiaDTO giamGiaDTO = baseDTO as GiamGiaDTO;
+
+			string insertGiamGia = $"INSERT INTO {DataProvider.GIAMGIA_TABLE}" +
+								$" (MaGiamGia, TenGiamGia, PhanTramGiamGia, MaxGiamGia, NgayBatDau, NgayKetThuc) VALUES (" +
+								$"{this.GetString(giamGiaDTO.GiamGiaDTO_MaGiamGia)}," +
+								$"{this.GetString(giamGiaDTO.GiamGiaDTO_TenGiamGia)}," +
+								$"{this.GetString(giamGiaDTO.GiamGiaDTO_PhanTramGiamGia)}," +
+								$"{this.GetString(giamGiaDTO.GiamGiaDTO_MaxGiamGia)}," +
+								$"{this.GetString(giamGiaDTO.GiamGiaDTO_NgayBatDau)}," +
+								$"{this.GetString(giamGiaDTO.GiamGiaDTO_NgayKetThuc)}" +
+								$")";
+
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertGiamGia);
+
+			if (rowChanged > 0)
+			{
+				this.OnDAONewInsert?.Invoke(this, EventArgs.Empty);
+			}
+
+			return rowChanged > 0;
 		}
 
 

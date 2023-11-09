@@ -56,6 +56,7 @@ namespace WinformWithExternalLibrary
 
 		public FormMain()
 		{
+			//		TODO: Make Insert GiamGia
 			//		TODO: set up Event system for DAOs to update DataSource
 
 			//		NOTE: THIS ALWAYS GO FIRST
@@ -67,6 +68,7 @@ namespace WinformWithExternalLibrary
 			//		Events
 			this.InitializeAutomaticEventAndList();
 			this.InitializeSpecializedEvent();
+			this.InitializeAutoDataSourceUpdate();
 
 			//		Specific
 			this.Initialize_NgoSachMinhHieu();
@@ -79,13 +81,6 @@ namespace WinformWithExternalLibrary
 		#region Initialize
 
 		//		Initializing
-
-		private void InitializeFakeData()
-		{
-			BogusAmogus bogusAmogus = new BogusAmogus();
-			bogusAmogus.GenerateFakeData();
-		}
-
 		private void InitializeHardCodedAttributes()
 		{
 			//		Material Skin Manager
@@ -305,6 +300,52 @@ namespace WinformWithExternalLibrary
 			};
 		}
 
+		private void InitializeAutoDataSourceUpdate()
+		{
+			ChiTietHDBanDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+
+			};
+			ChiTietHDNhapDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+
+			};
+			CongViecDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+
+			};
+			DMSanPhamDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+				this.UpdateDataSource(ChiTietHDBanDVO_MaSanPham, DMSanPhamDAO.Instance.GetMaSanPhamList);
+				this.UpdateDataSource(ChiTietHDNhapDVO_MaSanPham, DMSanPhamDAO.Instance.GetMaSanPhamList);
+			};
+			GiamGiaDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+
+			};
+			HoaDonBanDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+
+			};
+			HoaDonNhapDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+
+			};
+			KhachHangDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+				this.UpdateDataSource(HoaDonBanDVO_DienThoaiKhachHang, KhachHangDAO.Instance.GetPhoneNumberList);
+			};
+			NhaCungCapDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+				this.UpdateDataSource(this.HoaDonNhapDVO_DienThoaiNhaCungCap, NhaCungCapDAO.Instance.GetPhoneNumbers);
+			};
+			NhanVienDAO.Instance.OnDAONewInsert += (obj, e) =>
+			{
+				this.UpdateDataSource(this.NhanVienThuNganHDNhapDVO_NhanVien, NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList);
+				this.UpdateDataSource(this.NhanVienThuNganHDBanDVO_NhanVien, NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList);
+			};
+		}
+
 		#endregion
 
 		#region Event
@@ -371,13 +412,9 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_HoaDonNhap()
 		{
-			this.NhanVienThuNganHDNhapDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
-			this.ChiTietHDNhapDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
-			this.HoaDonNhapDVO_DienThoaiNhaCungCap.DataSource = NhaCungCapDAO.Instance.GetPhoneNumbers();
-
-			this.NhanVienThuNganHDNhapDVO_NhanVien.SelectedIndex = -1;
-			this.ChiTietHDNhapDVO_MaSanPham.SelectedIndex = -1;
-			this.HoaDonNhapDVO_DienThoaiNhaCungCap.SelectedIndex = -1;
+			this.UpdateDataSource(this.NhanVienThuNganHDNhapDVO_NhanVien, NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList);
+			this.UpdateDataSource(this.ChiTietHDNhapDVO_MaSanPham, DMSanPhamDAO.Instance.GetMaSanPhamList);
+			this.UpdateDataSource(this.HoaDonNhapDVO_DienThoaiNhaCungCap, NhaCungCapDAO.Instance.GetPhoneNumbers);
 
 			//		Event For Validate Controls
 			//			TabPageHoaDonNhap_MaterialListView
@@ -625,13 +662,9 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_HoaDonBan()
 		{
-			this.NhanVienThuNganHDBanDVO_NhanVien.DataSource = NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList();
-			this.ChiTietHDBanDVO_MaSanPham.DataSource = DMSanPhamDAO.Instance.GetMaSanPhamList();
-			this.HoaDonBanDVO_DienThoaiKhachHang.DataSource = KhachHangDAO.Instance.GetPhoneNumberList();
-
-			this.NhanVienThuNganHDBanDVO_NhanVien.SelectedIndex = -1;
-			this.ChiTietHDBanDVO_MaSanPham.SelectedIndex = -1;
-			this.HoaDonBanDVO_DienThoaiKhachHang.SelectedIndex = -1;
+			this.UpdateDataSource(NhanVienThuNganHDBanDVO_NhanVien, NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList);
+			this.UpdateDataSource(ChiTietHDBanDVO_MaSanPham, DMSanPhamDAO.Instance.GetMaSanPhamList);
+			this.UpdateDataSource(HoaDonBanDVO_DienThoaiKhachHang, KhachHangDAO.Instance.GetPhoneNumberList);
 
 			//		Event For Validate Controls
 			//			TabPageHoaDonBan_materialListView
@@ -1671,6 +1704,16 @@ namespace WinformWithExternalLibrary
 		#endregion
 
 		#region Generalist Function
+
+		delegate List<string> DAOUpdateDelegate();
+
+		//		Cài đặt Update tự động
+		private void UpdateDataSource(ComboBox comboBox, DAOUpdateDelegate dAOUpdateDelegate)
+		{
+			comboBox.DataSource = dAOUpdateDelegate();
+
+			comboBox.SelectedIndex = -1;
+		}
 
 		//		Hiện MessageBox với các lựa chọn Yes No cho TabPage
 		private bool ShowMessageBoxYesNo(string message, int tabPageIndex)

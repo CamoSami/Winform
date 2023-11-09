@@ -18,8 +18,11 @@ using WinformWithExternalLibrary._DataProvider;
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
     public class NhanVienDAO
-    {
-        public static NhanVienDAO Instance { get; set; }
+	{
+		public event EventHandler OnDAONewInsert;
+
+		public static NhanVienDAO Instance { get; set; }
+
         public NhanVienDAO() { }
 
 		//		MinhHieu Add: Lấy danh sách TenNhanVien và NgaySinh nhân viên
@@ -111,7 +114,12 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                                     ")";
             
 			int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertNhanVien);
-            
+
+			if (rowChanged > 0)
+			{
+				this.OnDAONewInsert?.Invoke(this, new EventArgs());
+			}
+
 			return rowChanged > 0;
         }
 

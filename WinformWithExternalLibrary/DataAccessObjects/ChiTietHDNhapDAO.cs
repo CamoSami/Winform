@@ -9,22 +9,22 @@ using WinformWithExternalLibrary._DataProvider;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
-	public class ChiTietHDBanDAO
+	public class ChiTietHDNhapDAO
 	{
 		public event EventHandler OnDAONewInsert;
 
-		public static ChiTietHDBanDAO Instance { get; set; }
+		public static ChiTietHDNhapDAO Instance { get; set; }
 
-		public ChiTietHDBanDAO() { }
+		public ChiTietHDNhapDAO() { }
 
-		public bool InsertChiTietHDBan(ChiTietHDBanDTO chiTietHDBanDTO)
+		public bool InsertChiTietHDNhap(ChiTietHDNhapDTO chiTietHDNhapDTO)
 		{
-			string queryString = $"INSERT INTO {DataProvider.CHITIETHDBAN_TABLE} " +
-				$"(MaHDBan, MaDMSanPham, SoLuong, ThanhTien) VALUES (" +
-				$"{this.GetString(chiTietHDBanDTO.ChiTietHDBanDTO_MaHDBan)}," +
-				$"{this.GetString(chiTietHDBanDTO.ChiTietHDBanDTO_MaDMSanPham)}," +
-				$"{chiTietHDBanDTO.ChiTietHDBanDTO_SoLuong}," +
-				$"{chiTietHDBanDTO.ChiTietHDBanDTO_ThanhTien}" +
+			string queryString = $"INSERT INTO {DataProvider.CHITIETHDNHAP_TABLE} " +
+				$"(MaHDNhap, MaDMSanPham, SoLuong, ThanhTien) VALUES (" +
+				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_MaHDNhap)}," +
+				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_MaDMSanPham)}," +
+				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_SoLuong)}," +
+				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_ThanhTien)}," +
 				$")";
 
 			int temp = DataProvider.Instance.ExecuteNonQuery(queryString);

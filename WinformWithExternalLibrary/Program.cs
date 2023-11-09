@@ -26,10 +26,12 @@ namespace WinformWithExternalLibrary
 			DataProvider.Instance = new DataProvider();
 
 			ChiTietHDBanDAO.Instance = new ChiTietHDBanDAO();
+			ChiTietHDNhapDAO.Instance = new ChiTietHDNhapDAO();
 			CongViecDAO.Instance = new CongViecDAO();
 			DMSanPhamDAO.Instance = new DMSanPhamDAO();
 			GiamGiaDAO.Instance = new GiamGiaDAO();
 			HoaDonBanDAO.Instance = new HoaDonBanDAO();
+			HoaDonNhapDAO.Instance = new HoaDonNhapDAO();
 			KhachHangDAO.Instance = new KhachHangDAO();
 			NhaCungCapDAO.Instance = new NhaCungCapDAO();
 			NhanVienDAO.Instance = new NhanVienDAO();
