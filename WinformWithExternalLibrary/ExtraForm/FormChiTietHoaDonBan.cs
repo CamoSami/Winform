@@ -16,117 +16,117 @@ using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDT
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
-    public partial class FormChiTietHoaDonBan : MaterialForm
-    {
-        private string search { get; set; } = "";
-        private string dateConverted { get; set; } = "";
+	public partial class FormChiTietHoaDonBan : MaterialForm
+	{
+		private string search { get; set; } = "";
+		private string dateConverted { get; set; } = "";
 
-        PhanTichDAO phanTichDAO = new PhanTichDAO();
-        FormatValues formatValues = new FormatValues();
-        ExportTableData exportTableData = new ExportTableData();
+		PhanTichDAO phanTichDAO = new PhanTichDAO();
+		FormatValues formatValues = new FormatValues();
+		ExportTableData exportTableData = new ExportTableData();
 
-        public FormChiTietHoaDonBan()
-        {
-            InitializeComponent();
+		public FormChiTietHoaDonBan()
+		{
+			InitializeComponent();
 
-            // Bill of seller information List View
-            this.FormChiTietHoaDonBan_ListView(search: this.search, dateTimeConverted: this.dateConverted);
+			// Bill of seller information List View
+			this.FormChiTietHoaDonBan_ListView(search: this.search, dateTimeConverted: this.dateConverted);
 
-            // Event
-            this.HandleClickExportBtn();
-            this.HandleOpenExtraForm();
-            this.HandleSearch();
-            this.HandleFilterByDateTime();
-        }
+			// Event
+			this.HandleClickExportBtn();
+			this.HandleOpenExtraForm();
+			this.HandleSearch();
+			this.HandleFilterByDateTime();
+		}
 
-        private void FormChiTietHoaDonBan_ListView(string search, string dateTimeConverted)
-        {
-            // Get data
-            List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = this.phanTichDAO.GetBillsOfSellerInformation(searchValue: search, dateTimeConverted: dateTimeConverted);
+		private void FormChiTietHoaDonBan_ListView(string search, string dateTimeConverted)
+		{
+			// Get data
+			List<BillsOfSellerInfoResponseDTO> billsOfSellerInfoResponseDTOs = this.phanTichDAO.GetBillsOfSellerInformation(searchValue: search, dateTimeConverted: dateTimeConverted);
 
-            // Render
-            int stt = 0;
-            foreach(BillsOfSellerInfoResponseDTO billsOfSellerInfoResponseDTO in billsOfSellerInfoResponseDTOs)
-            {
-                ListViewItem item = new ListViewItem();
-                stt++;
+			// Render
+			int stt = 0;
+			foreach (BillsOfSellerInfoResponseDTO billsOfSellerInfoResponseDTO in billsOfSellerInfoResponseDTOs)
+			{
+				ListViewItem item = new ListViewItem();
+				stt++;
 
-                item.SubItems[0].Text = stt.ToString();
-                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_MaHDBan);
-                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenNhanVien);
-                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiNV);
-                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenKhachHang);
-                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiKH);
-                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_SoSanPham.ToString());
-                item.SubItems.Add(formatValues.NumberToPercentString(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia));
-                item.SubItems.Add(formatValues.FormatPriceToView(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TongTien.ToString(), 3));
-                item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_NgayBan.ToString("dd/MM/yyyy"));
+				item.SubItems[0].Text = stt.ToString();
+				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_MaHDBan);
+				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenNhanVien);
+				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiNV);
+				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenKhachHang);
+				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiKH);
+				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_SoSanPham.ToString());
+				item.SubItems.Add(formatValues.NumberToPercentString(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia));
+				item.SubItems.Add(formatValues.FormatPriceToView(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TongTien.ToString(), 3));
+				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_NgayBan.ToString("dd/MM/yyyy"));
 
-                ChiTietHoaDonBanLV.Items.Add(item);
-            }
-        }
+				ChiTietHoaDonBanLV.Items.Add(item);
+			}
+		}
 
-        private void HandleClickExportBtn()
-        {
-            ChiTietHoaDonExelBtn.Click += (object sender, EventArgs e) =>
-            {
-                try
-                {
-                    DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
-                    this.exportTableData.ExportToExcel(
-                        dataTable: dataTable,
-                        workSheetName: "Chi tiết hóa đơn bán",
-                        filePath: ""
-                    );
+		private void HandleClickExportBtn()
+		{
+			ChiTietHoaDonExelBtn.Click += (object sender, EventArgs e) =>
+			{
+				try
+				{
+					DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
+					this.exportTableData.ExportToExcel(
+						dataTable: dataTable,
+						workSheetName: "Chi tiết hóa đơn bán",
+						filePath: ""
+					);
 
-                    MaterialMessageBox.Show("Xuất dữ liệu thành công", "Message", UseRichTextBox: false);
-                }
-                catch(Exception)
-                {
-                    MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error", UseRichTextBox: false);
-                }
-            };
-        }
+					MaterialMessageBox.Show("Xuất dữ liệu thành công", "Message", UseRichTextBox: false);
+				}
+				catch (Exception)
+				{
+					MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error", UseRichTextBox: false);
+				}
+			};
+		}
 
-        private void HandleOpenExtraForm()
-        {
-            ChiTietHoaDonBanLV.DoubleClick += (object sender, EventArgs e) =>
-            {
-                var firstSelectedItem = ChiTietHoaDonBanLV.SelectedItems[0];
+		private void HandleOpenExtraForm()
+		{
+			ChiTietHoaDonBanLV.DoubleClick += (object sender, EventArgs e) =>
+			{
+				var firstSelectedItem = ChiTietHoaDonBanLV.SelectedItems[0];
 
-                FormChiTietHoaDonBanInfo formChiTietHoaDonBanFormInfo 
-                = new FormChiTietHoaDonBanInfo(firstSelectedItem.SubItems[1].Text);
-                formChiTietHoaDonBanFormInfo.Show();
-            };
-        }
+				FormChiTietHoaDonBanInfo formChiTietHoaDonBanFormInfo
+				= new FormChiTietHoaDonBanInfo(firstSelectedItem.SubItems[1].Text);
+				formChiTietHoaDonBanFormInfo.Show();
+			};
+		}
 
-        private void HandleSearch()
-        {
-            PhanTichDVO_HDB_TimKiemBtn.Click += (object sender, EventArgs e) =>
-            {
-                string search = PhanTichDVO_HDB_TimKiemIP.Text;
-                // Delete all old items
-                ChiTietHoaDonBanLV.Items.Clear();
-                // Render new items
-                this.FormChiTietHoaDonBan_ListView(search: search, dateTimeConverted: "");
-                // Clear search on UI and save search value
-                this.search = search;
-                PhanTichDVO_HDB_TimKiemIP.Text = "";
-            };
-        }
+		private void HandleSearch()
+		{
+			PhanTichDVO_HDB_TimKiemBtn.Click += (object sender, EventArgs e) =>
+			{
+				string search = PhanTichDVO_HDB_TimKiemIP.Text;
+				// Delete all old items
+				ChiTietHoaDonBanLV.Items.Clear();
+				// Render new items
+				this.FormChiTietHoaDonBan_ListView(search: search, dateTimeConverted: "");
+				// Clear search on UI and save search value
+				this.search = search;
+				PhanTichDVO_HDB_TimKiemIP.Text = "";
+			};
+		}
 
-        private void HandleFilterByDateTime()
-        {
-            PhanTichDVO_HDB_DP.ValueChanged += (object sender, EventArgs e) =>
-            {
-                string dateTimeConverted = PhanTichDVO_HDB_DP.Value.ToString("MM/dd/yyyy");
-                string search = PhanTichDVO_HDB_TimKiemIP.Text; // Remain search value
-                this.dateConverted = dateTimeConverted; // Save date
-                // Delete all old items
-                ChiTietHoaDonBanLV.Items.Clear();
-                // Render new items
-                this.FormChiTietHoaDonBan_ListView(search: this.search, dateTimeConverted: dateTimeConverted);
-            };
-        }
-    }
+		private void HandleFilterByDateTime()
+		{
+			PhanTichDVO_HDB_DP.ValueChanged += (object sender, EventArgs e) =>
+			{
+				string dateTimeConverted = PhanTichDVO_HDB_DP.Value.ToString("MM/dd/yyyy");
+				string search = PhanTichDVO_HDB_TimKiemIP.Text; // Remain search value
+				this.dateConverted = dateTimeConverted; // Save date
+														// Delete all old items
+				ChiTietHoaDonBanLV.Items.Clear();
+				// Render new items
+				this.FormChiTietHoaDonBan_ListView(search: this.search, dateTimeConverted: dateTimeConverted);
+			};
+		}
+	}
 }
