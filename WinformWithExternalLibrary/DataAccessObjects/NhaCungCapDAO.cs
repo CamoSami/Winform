@@ -22,8 +22,13 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public string GetNameWithPhoneNumber(string phoneNumber)
         {
+			if (phoneNumber == null)
+			{
+				return "";
+			}
+
             string selectSupplier = $"SELECT TenNhaCungCap FROM " +
-                $"{DataProvider.NHACUNGCAP_TABLE}" +
+                $"{DataProvider.NHACUNGCAP_TABLE} " +
                 $"WHERE DienThoai = '{phoneNumber}'";
             
             object supplier = DataProvider.Instance.ExecuteScalar(selectSupplier);
@@ -64,13 +69,16 @@ namespace WinformWithExternalLibrary.DataAccessObjects
         {
             NhaCungCapDVO nhaCungCapDVO = baseDTO as NhaCungCapDVO;
 
-            string insertSupplier = $"INSERT INTO " +
+			Guid NhaCungCapDVO_MaNhaCungCap = Guid.NewGuid();
+
+			string insertSupplier = $"INSERT INTO " +
                 $"{DataProvider.NHACUNGCAP_TABLE} " +
-                $"(TenNhaCungCap, DienThoai, DiaChi) " +
+                $"(MaNhaCungCap, TenNhaCungCap, DienThoai, DiaChi) " +
                 $"VALUES(" +
-                $"N'{nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap}'," +
-                $" {nhaCungCapDVO.NhaCungCapDVO_DienThoai}, " +
-                $"{nhaCungCapDVO.NhaCungCapDVO_DiaChi})";
+				$"N'{NhaCungCapDVO_MaNhaCungCap}'," +
+				$"N'{nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap}'," +
+                $" '{nhaCungCapDVO.NhaCungCapDVO_DienThoai}', " +
+                $"N'{nhaCungCapDVO.NhaCungCapDVO_DiaChi}')";
 
             int rowChanged = DataProvider.Instance.ExecuteNonQuery(insertSupplier);
 
@@ -80,6 +88,78 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			}
 
 			return rowChanged > 0;
-        }
-    }
+		}
+
+		public DataTable QueryAllNhaCungCap()
+		{
+			string query = $"SELECT * FROM {DataProvider.NHACUNGCAP_TABLE}";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable;
+		}
+
+		public bool UpdateNhaCungCap(string TenNhaCungCap, string DiaChi, string DienThoai)
+		{
+			string query = $"UPDATE {DataProvider.NHACUNGCAP_TABLE} " +
+				$"SET TenNhaCungCap = N'{TenNhaCungCap}' " +
+				$"DiaChi = N'{DiaChi}' " +
+				$"WHERE DienThoai = {DienThoai}";
+
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(query);
+
+			if (rowChanged > 0)
+			{
+				this.OnDAODatabaseChanged?.Invoke(this, new EventArgs());
+			}
+
+			return rowChanged > 0;
+		}
+
+		public DataTable NhaCungCapInformationFromPhoneNumber(string NhaCungCapDVO_DienThoai)
+		{
+			string selectDienThoai = "SELECT * FROM " +
+							DataProvider.NHACUNGCAP_TABLE +
+							" WHERE DienThoai = " +
+							"'" + NhaCungCapDVO_DienThoai + "'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectDienThoai);
+
+			return dataTable;
+		}
+
+		public bool UpdateNhaCungCapFull(dynamic baseDTO, string DienThoai)
+		{
+			NhaCungCapDVO nhaCungCapDVO = baseDTO as NhaCungCapDVO;
+
+			Guid NhaCungCapDVO_MaNhaCungCap = Guid.NewGuid();
+
+			string update = $"UPDATE {DataProvider.NHACUNGCAP_TABLE} " +
+				$"SET TenNhaCungCap = N'{nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap}', " +
+				$"DiaChi = N'{nhaCungCapDVO.NhaCungCapDVO_DiaChi}', " +
+				$"DienThoai = N'{nhaCungCapDVO.NhaCungCapDVO_DienThoai}' " +
+				$"WHERE DienThoai = N'{DienThoai}'";
+
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(update);
+
+			if (rowChanged > 0)
+			{
+				this.OnDAODatabaseChanged?.Invoke(this, new EventArgs());
+			}
+
+			return rowChanged > 0;
+		}
+
+		public DataTable NhaCungCapInformationFromName(string NhaCungCapDVO_TenNhaCungCap)
+		{
+			string selectNhaCungCap = "SELECT * FROM " +
+							DataProvider.NHACUNGCAP_TABLE +
+							" WHERE TenNhaCungCap = " +
+							"N'" + NhaCungCapDVO_TenNhaCungCap + "'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectNhaCungCap);
+
+			return dataTable;
+		}
+	}
 }

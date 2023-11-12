@@ -95,5 +95,76 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			return rowChanged > 0;
 		}
+
+		public DataTable QueryFullKhachHang()
+		{
+			string query = $"SELECT * FROM {DataProvider.KHACHHANG_TABLE}";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable;
+		}
+
+		public bool UpdateKhachHang(string TenKhachHang, string DiaChi, string DienThoai)
+		{
+			string query = $"UPDATE {DataProvider.KHACHHANG_TABLE} " +
+				$"SET TenKhachHang = N'{TenKhachHang}', DiaChi = N'{DiaChi}' " +
+				$"WHERE DienThoai = N'{DienThoai}'";
+
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(query);
+
+			if (rowChanged > 0)
+			{
+				this.OnDAODatabaseChanged?.Invoke(this, new EventArgs());
+			}
+
+			return rowChanged > 0;
+		}
+
+		public DataTable KhachHangInformationFromPhoneNumber(string KhachHangDVO_DienThoai)
+		{
+			string selectKhachHang = "SELECT * FROM " +
+							DataProvider.KHACHHANG_TABLE +
+							" WHERE DienThoai = " +
+							"'" + KhachHangDVO_DienThoai + "'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectKhachHang);
+
+			return dataTable;
+		}
+
+		public bool UpdateKhachHangFull(dynamic baseDTO, string DienThoai)
+		{
+			KhachHangDVO khachHangDVO = baseDTO as KhachHangDVO;
+
+			Guid KhachHangDVO_MaKhachHang = Guid.NewGuid();
+
+			string update = $"UPDATE {DataProvider.KHACHHANG_TABLE} " +
+				$"SET TenKhachHang = N'{khachHangDVO.KhachHangDVO_TenKhachHang}', " +
+				$"DiaChi = N'{khachHangDVO.KhachHangDVO_DiaChi}', " +
+				$"DienThoai = N'{khachHangDVO.KhachHangDVO_DienThoai}' " +
+				$"WHERE DienThoai = N'{DienThoai}'";
+
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(update);
+
+			if (rowChanged > 0)
+			{
+				this.OnDAODatabaseChanged?.Invoke(this, new EventArgs());
+			}
+
+			return rowChanged > 0;
+		}
+
+		public DataTable KhachHangInformationFromName(string KhachHangDVO_TenKhachHang)
+		{
+			string selectKhachHang = "SELECT * FROM " +
+							DataProvider.KHACHHANG_TABLE +
+							" WHERE TenKhachHang = " +
+							"N'" + KhachHangDVO_TenKhachHang + "'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectKhachHang);
+
+			return dataTable;
+		}
 	}
 }

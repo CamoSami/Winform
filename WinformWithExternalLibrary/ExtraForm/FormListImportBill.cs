@@ -8,14 +8,119 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinformWithExternalLibrary._Utilities;
+using WinformWithExternalLibrary.DataAccessObjects;
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
 	public partial class FormListImportBill : MaterialForm
 	{
-		public FormListImportBill()
+		string NhaCungCap_MaNhaCungCap;
+
+		ExportTableData exportTableData = new ExportTableData();
+		public FormListImportBill(string NhaCungCap_MaNhaCungCap)
 		{
 			InitializeComponent();
+
+			this.NhaCungCap_MaNhaCungCap = NhaCungCap_MaNhaCungCap;
+
+			this.Load += (obj, e) =>
+			{
+				Process();
+			};
+
+			this.materialButton_SPTrongDonBan.Click += MaterialButton_SPTrongDonBan_Click;
+
+			this.materialButton_Exit.Click += (obj, e) =>
+			{
+				if (ShowMessageBoxYesNo("Bạn có muốn thoát khỏi lịch sử khách hàng không?"))
+				{
+					this.Close();
+				}
+			};
+		}
+
+		private void MaterialButton_SPTrongDonBan_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				int index = this.materialListView_LichSuNhapHang.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.materialListView_LichSuNhapHang.Items[index];
+
+					string HoaDon_MaHoaDon = listViewItem.SubItems[1].Text;
+
+					DataTable Bill = ChiTietHDNhapDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
+					ListViewItem item;
+
+					int cnt = 0;
+					foreach (DataRow row in Bill.Rows)
+					{
+						item = new ListViewItem();
+						cnt += 1;
+						item.SubItems[0].Text = cnt.ToString();
+						for (int i = 0; i < Bill.Columns.Count; i++)
+						{
+							item.SubItems.Add(row[i].ToString().Trim());
+						}
+						this.materialListView_HangCoTrongBill.Items.Add(item);
+					}
+				}
+			}
+			catch (Exception)
+			{
+				ShowMessageBox("Hãy chọn Bill có trên bảng trước khi xem chi tiết Bill!");
+			}
+		}
+
+		private void Process()
+		{
+			DataTable DTBill = HoaDonNhapDAO.Instance.HoaDonBanInformationFromMaNhaCungCap(NhaCungCap_MaNhaCungCap);
+			ListViewItem item;
+
+			int cnt = 0;
+			foreach (DataRow row in DTBill.Rows)
+			{
+				item = new ListViewItem();
+				cnt += 1;
+				item.SubItems[0].Text = cnt.ToString();
+				for (int i = 0; i < DTBill.Columns.Count; i++)
+				{
+					item.SubItems.Add(row[i].ToString().Trim());
+				}
+				this.materialListView_LichSuNhapHang.Items.Add(item);
+			}
+		}
+
+
+
+		private void ShowMessageBox(string message)
+		{
+			MaterialMessageBox.Show(
+					text: message,
+					caption: "Notification",
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+
+		}
+
+		private bool ShowMessageBoxYesNo(string message)
+		{
+			bool ifYes = MaterialMessageBox.Show(
+							text: message,
+							caption: "Notification",
+							buttons: MessageBoxButtons.YesNo,
+							icon: MessageBoxIcon.Question,
+							UseRichTextBox: false,
+							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+							)
+						== DialogResult.Yes;
+
+
+			return ifYes;
 		}
 	}
 }

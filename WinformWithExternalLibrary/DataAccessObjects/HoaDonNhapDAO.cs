@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary._DataProvider;
+using System.Diagnostics;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -38,6 +39,17 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			}
 
 			return rowChanged > 0;
+		}
+
+		public DataTable HoaDonBanInformationFromMaNhaCungCap(string NhaCungCap_MaNhaCungCap)
+		{
+			string query = $"SELECT MaHDNhap, NgayNhap, TongTien " +
+				$"FROM {DataProvider.HOADONNHAP_TABLE} " +
+				$"WHERE MaNhaCungCap = N'{NhaCungCap_MaNhaCungCap}'";
+			Debug.WriteLine(query);
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable;
 		}
 
 

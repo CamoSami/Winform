@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary._DataProvider;
+using System.Diagnostics;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -35,6 +36,20 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			}
 
 			return temp > 0;
+		}
+
+		public DataTable HoaDonInformationFromMaHoaDon(string MaHoaDonBan)
+		{
+			string query = $"SELECT {DataProvider.CHITIETHDBAN_TABLE}.MaDMSanPham, TenSanPham, SoLuong, ThanhTien " +
+				$"FROM {DataProvider.CHITIETHDBAN_TABLE} INNER JOIN {DataProvider.DMSANPHAM_TABLE} " +
+					$"ON {DataProvider.CHITIETHDBAN_TABLE}.MaDMSanPham = {DataProvider.DMSANPHAM_TABLE}.MaDMSanPham " +
+				$"WHERE {DataProvider.CHITIETHDBAN_TABLE}.MaHDBan = N'{MaHoaDonBan}'";
+
+			//Debug.WriteLine(MaHoaDonBan);
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable;
 		}
 
 

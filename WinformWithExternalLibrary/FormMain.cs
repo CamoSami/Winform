@@ -1674,10 +1674,725 @@ namespace WinformWithExternalLibrary
 
 		#region Nguyễn Hồng Sơn
 
+		ExportTableData exportTableData = new ExportTableData();
+
 		private void Initialize_NguyenHongSon()
 		{
+			Initialize_KhachHang();
+			Initialize_NhaCungCap();
+		}
+
+		#region Khách hàng
+		private void Initialize_KhachHang()
+		{
+			this.Load += FormMain_KhachHang_Load;
+
+			this.TabPageKhachHang_MaterialListView.SelectedIndexChanged += TabPageKhachHang_MaterialListView_SelectedIndexChanged;
+
+			this.KhachHangDVO_DienThoai.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+
+			this.KhachHangDVO_DienThoai.KeyDown += (obj, e) =>
+			{
+				if (e.KeyCode == Keys.Enter)
+				{
+					NewKhachHang();
+				}
+			};
+
+			this.materialButton_TaoKhachHang.Click += (obj, e) =>
+			{
+				NewKhachHang();
+			};
+
+			this.materialButton_SuaKhachHang.Click += MaterialButton_SuaKhachHang_Click;
+
+			this.materialButton_SearchKH.Click += MaterialButton_SearchKH_Click;
+
+			this.materialButton_RefreshKhachHang.Click += (obj, e) =>
+			{
+				ResetKhachHangDVO();
+				LoadKhachHang();
+			};
+
+			this.materialButton_XuatExcelKH.Click += (obj, e) =>
+			{
+				try
+				{
+					System.Data.DataTable dataTable = KhachHangDAO.Instance.QueryFullKhachHang();
+					this.exportTableData.ExportToExcel(
+						dataTable: dataTable,
+						workSheetName: "Danh sách khách hàng",
+						filePath: ""
+					);
+
+					this.ShowMessageBox("Xuất dữ liệu thành công", this.GetTabPageControlSelectedIndex());
+				}
+				catch (Exception)
+				{
+					this.ShowMessageBox("Lỗi khi export dữ liệu", this.GetTabPageControlSelectedIndex());
+				}
+			};
+
+			this.materialButton_LichSuMuaHang.Click += MaterialButton_LichSuMuaHang_Click;
+		}
+
+		private void MaterialButton_LichSuMuaHang_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
+
+					string KhachHang_MaKhachHang = listViewItem.SubItems[1].Text;
+					FormListSellBill formListSellBill = new FormListSellBill(KhachHang_MaKhachHang);
+					formListSellBill.ShowDialog();
+				}
+			}
+			catch (Exception)
+			{
+				ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!", this.GetTabPageControlSelectedIndex());
+			}
 
 		}
+
+		private void LoadKhachHang()
+		{
+			System.Data.DataTable khachHangDT = KhachHangDAO.Instance.QueryFullKhachHang();
+
+			ListViewItem item;
+
+			int cnt = 0;
+			foreach (DataRow row in khachHangDT.Rows)
+			{
+				item = new ListViewItem();
+				cnt += 1;
+				item.SubItems[0].Text = cnt.ToString();
+				for (int i = 0; i < khachHangDT.Columns.Count; i++)
+				{
+					item.SubItems.Add(row[i].ToString().Trim());
+				}
+				this.TabPageKhachHang_MaterialListView.Items.Add(item);
+			}
+		}
+
+		private bool CheckNullKH()
+		{
+			return KhachHangDVO_DienThoai.Text.Equals("Số điện thoại") && KhachHangDVO_TenKhachHang.Text.Equals("Họ tên");
+		}
+
+		private void MaterialButton_SearchKH_Click(object sender, EventArgs e)
+		{
+			ResetValidationForControl(KhachHangDVO_DienThoai, true);
+			if (!CheckNullKH())
+			{
+				if (!KhachHangDVO_DienThoai.Text.Equals("Số điện thoại"))
+				{
+					System.Data.DataTable khachHang = KhachHangDAO.Instance.KhachHangInformationFromPhoneNumber(KhachHangDVO_DienThoai.Text.Trim());
+					this.TabPageKhachHang_MaterialListView.Items.Clear();
+					ListViewItem items;
+
+					this.KhachHangDVO_TenKhachHang.Text = "??????????????";
+					this.KhachHangDVO_DiaChi.Text = "??????????????";
+
+					int count = 0;
+					foreach (DataRow row in khachHang.Rows)
+					{
+						items = new ListViewItem();
+						count += 1;
+						//Debug.Write(count);
+						items.SubItems[0].Text = count.ToString();
+						for (int i = 0; i < khachHang.Columns.Count; i++)
+						{
+							items.SubItems.Add(row[i].ToString().Trim());
+						}
+						this.TabPageKhachHang_MaterialListView.Items.Add(items);
+					}
+
+
+					if (this.TabPageKhachHang_MaterialListView.Items.Count > 0)
+					{
+						ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[0];
+
+						this.KhachHangDVO_TenKhachHang.Text = listViewItem.SubItems[2].Text;
+						this.KhachHangDVO_DiaChi.Text = listViewItem.SubItems[3].Text;
+					}
+					else
+					{
+						ShowMessageBox("Khách hàng bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!", this.GetTabPageControlSelectedIndex());
+
+						LoadKhachHang();
+					}
+				}
+				else if (!KhachHangDVO_TenKhachHang.Text.Equals("Họ tên"))
+				{
+					System.Data.DataTable khachHang = KhachHangDAO.Instance.KhachHangInformationFromName(KhachHangDVO_TenKhachHang.Text.Trim());
+					this.TabPageKhachHang_MaterialListView.Items.Clear();
+					ListViewItem items;
+
+					this.KhachHangDVO_DienThoai.Text = "??????????????";
+					this.KhachHangDVO_DiaChi.Text = "??????????????";
+
+					int count = 0;
+					foreach (DataRow row in khachHang.Rows)
+					{
+						items = new ListViewItem();
+						count += 1;
+						//Debug.Write(count);
+						items.SubItems[0].Text = count.ToString();
+						for (int i = 0; i < khachHang.Columns.Count; i++)
+						{
+							items.SubItems.Add(row[i].ToString().Trim());
+						}
+						this.TabPageKhachHang_MaterialListView.Items.Add(items);
+					}
+
+
+					if (this.TabPageKhachHang_MaterialListView.Items.Count > 0)
+					{
+						ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[0];
+
+						this.KhachHangDVO_DiaChi.Text = listViewItem.SubItems[3].Text;
+						this.KhachHangDVO_DienThoai.Text = listViewItem.SubItems[4].Text;
+
+					}
+					else
+					{
+						ShowMessageBox("Khách hàng bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!", this.GetTabPageControlSelectedIndex());
+
+						LoadKhachHang();
+					}
+				}
+			}
+		}
+
+		private void MaterialButton_SuaKhachHang_Click(object sender, EventArgs e)
+		{
+			// Nothing
+			if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
+			{
+				return;
+			}
+
+			if (!this.TryValidationFromControl(this.KhachHangDVO_DienThoai, onlyOneControl: false, out dynamic baseDVO))
+			{
+				KhachHangDVO khachHangDVO = baseDVO as KhachHangDVO;
+				// Update Controls
+				int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
+
+					string KhachHang_TenKhachHangTMP = listViewItem.SubItems[2].Text;
+					string KhachHang_DienThoaiTMP = listViewItem.SubItems[4].Text;
+
+					if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi khách hàng {KhachHang_TenKhachHangTMP} có số điện thoại {KhachHang_DienThoaiTMP}?", this.GetTabPageControlSelectedIndex()))
+					{
+						if (KhachHangDAO.Instance.UpdateKhachHangFull(khachHangDVO, KhachHang_DienThoaiTMP))
+						{
+							ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+							listViewItem.SubItems[2].Text = khachHangDVO.KhachHangDVO_TenKhachHang;
+							listViewItem.SubItems[3].Text = khachHangDVO.KhachHangDVO_DiaChi;
+							listViewItem.SubItems[4].Text = khachHangDVO.KhachHangDVO_DienThoai;
+						}
+						else
+						{
+							ShowMessageBox("Thay đổi thất bại!", this.GetTabPageControlSelectedIndex());
+						}
+					}
+				}
+
+			}
+
+		}
+
+		private void ResetKhachHangDVO()
+		{
+			this.KhachHangDVO_TenKhachHang.Text = this.GetPlaceholderForControl(KhachHangDVO_TenKhachHang);
+			this.KhachHangDVO_DienThoai.Text = this.GetPlaceholderForControl(KhachHangDVO_DienThoai);
+			this.KhachHangDVO_DiaChi.Text = this.GetPlaceholderForControl(KhachHangDVO_DiaChi);
+		}
+
+		private void NewKhachHang()
+		{
+			if (this.TryValidationFromControl(this.KhachHangDVO_DienThoai, onlyOneControl: false, out dynamic baseDVO))
+			{
+				KhachHangDVO khachHangDVO = baseDVO as KhachHangDVO;
+				if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					foreach (ListViewItem items in this.TabPageKhachHang_MaterialListView.Items)
+					{
+						// If the phone number already exists, update the customer information
+						string phoneNumber = items.SubItems[4].Text;
+						if (phoneNumber.Equals(this.KhachHangDVO_DienThoai.Text))
+						{
+							if (ShowMessageBoxYesNo($"Khách hàng có số điện thoại {phoneNumber} đã tồn tại, bạn có muốn cập nhật lại thông tin khách hàng không?", this.GetTabPageControlSelectedIndex()))
+							{
+								bool status = KhachHangDAO.Instance.UpdateKhachHang(
+									items.SubItems[2].Text,
+									items.SubItems[3].Text,
+									items.SubItems[4].Text);
+								if (status)
+								{
+									ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+								}
+								else
+								{
+									ShowMessageBox("Cập nhật thất bại, hãy kiểm tra lại các thông tin!!", this.GetTabPageControlSelectedIndex());
+
+								}
+								ResetKhachHangDVO();
+								return;
+							}
+							else
+							{
+								return;
+							}
+						}
+					}
+				}
+				else
+				{
+
+					for (int i = 0; i < this.TabPageKhachHang_MaterialListView.Items.Count; i++)
+					{
+						this.TabPageKhachHang_MaterialListView.Items[i].SubItems[0].Text = (i + 1).ToString();
+					}
+				}
+
+				if (KhachHangDAO.Instance.InsertKhachHang(khachHangDVO))
+				{
+					ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+					System.Data.DataTable dataTable = KhachHangDAO.Instance.KhachHangInformationFromPhoneNumber(KhachHangDVO_DienThoai.Text);
+
+					ListViewItem item = new ListViewItem();
+
+					item.SubItems[0].Text = (this.TabPageKhachHang_MaterialListView.Items.Count + 1).ToString();
+					//item.SubItems.Add()
+
+					foreach (DataRow row in dataTable.Rows)
+					{
+						for (int i = 0; i < dataTable.Columns.Count; i++)
+						{
+							item.SubItems.Add(row[i].ToString().Trim());
+						}
+					}
+
+					this.TabPageKhachHang_MaterialListView.Items.Add(item);
+				}
+				else
+				{
+					ShowMessageBox("Cập nhật thất bại, hãy kiểm tra lại các thông tin!!", this.GetTabPageControlSelectedIndex());
+				}
+
+
+				ResetKhachHangDVO();
+
+				return;
+			}
+
+		}
+
+
+		private void FormMain_KhachHang_Load(object sender, EventArgs e)
+		{
+			System.Data.DataTable khachHang = KhachHangDAO.Instance.QueryFullKhachHang();
+
+			ListViewItem items;
+
+			int count = 0;
+			foreach (DataRow row in khachHang.Rows)
+			{
+				items = new ListViewItem();
+				count += 1;
+				//Debug.Write(count);
+				items.SubItems[0].Text = count.ToString();
+				for (int i = 0; i < khachHang.Columns.Count; i++)
+				{
+					items.SubItems.Add(row[i].ToString().Trim());
+				}
+				//items.Remove();
+				this.TabPageKhachHang_MaterialListView.Items.Add(items);
+			}
+
+		}
+
+		private void TabPageKhachHang_MaterialListView_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			// Nothing
+			if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
+			{
+				return;
+			}
+
+			// Update Controls
+			int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
+
+			if (index >= 0)
+			{
+				ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
+
+				this.KhachHangDVO_TenKhachHang.Text = listViewItem.SubItems[2].Text;
+				this.KhachHangDVO_DiaChi.Text = listViewItem.SubItems[3].Text;
+				this.KhachHangDVO_DienThoai.Text = listViewItem.SubItems[4].Text;
+			}
+
+		}
+		#endregion
+
+		#region Nhà cung cấp
+		private void Initialize_NhaCungCap()
+		{
+			this.Load += FormMain_NhaCungCap_Load;
+
+			this.TabPageNhaCungCap_MaterialListView.SelectedIndexChanged += TabPageNhaCungCap_MaterialListView_SelectedIndexChanged;
+
+			this.NhaCungCapDVO_DienThoai.KeyDown += (obj, e) =>
+			{
+				if (e.KeyCode == Keys.Enter)
+				{
+					NewNhaCungCap();
+				}
+			};
+
+			this.materialButton_TaoNhaCungCap.Click += (obj, e) =>
+			{
+				NewNhaCungCap();
+			};
+
+			this.materialButton_SuaNCC.Click += MaterialButton_SuaNCC_Click;
+
+			this.materialButton_SearchNCC.Click += MaterialButton_SearchNCC_Click;
+
+			this.materialButton_RefreshNhaCungCap.Click += (obj, e) =>
+			{
+				ResetNhaCungCapDVO();
+				LoadNhaCungCap();
+			};
+
+			this.materialButton_XuatExcelNCC.Click += (obj, e) =>
+			{
+				try
+				{
+					System.Data.DataTable dataTable = NhaCungCapDAO.Instance.QueryAllNhaCungCap();
+					this.exportTableData.ExportToExcel(
+						dataTable: dataTable,
+						workSheetName: "Danh sách nhà cung cấp",
+						filePath: ""
+					);
+
+					this.ShowMessageBox("Xuất dữ liệu thành công", this.GetTabPageControlSelectedIndex());
+				}
+				catch (Exception)
+				{
+					this.ShowMessageBox("Lỗi khi export dữ liệu", this.GetTabPageControlSelectedIndex());
+				}
+			};
+
+			this.materialButton_LichSuNhapHang.Click += MaterialButton_LichSuNhapHang_Click;
+		}
+
+		private void MaterialButton_LichSuNhapHang_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				int index = this.TabPageNhaCungCap_MaterialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[index];
+
+					string NhaCungCap_MaNhaCungCap = listViewItem.SubItems[1].Text;
+					FormListImportBill formListSellBill = new FormListImportBill(NhaCungCap_MaNhaCungCap);
+					formListSellBill.ShowDialog();
+				}
+			}
+			catch (Exception)
+			{
+				ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!", 4);
+			}
+		}
+
+		private bool CheckNullNCC()
+		{
+			return NhaCungCapDVO_DienThoai.Text.Equals("Số điện thoại") && NhaCungCapDVO_TenNhaCungCap.Text.Equals("Họ tên");
+		}
+
+		private void LoadNhaCungCap()
+		{
+			System.Data.DataTable nhaCungCapDT = NhaCungCapDAO.Instance.QueryAllNhaCungCap();
+
+			ListViewItem item;
+
+			int cnt = 0;
+			foreach (DataRow row in nhaCungCapDT.Rows)
+			{
+				item = new ListViewItem();
+				cnt += 1;
+				item.SubItems[0].Text = cnt.ToString();
+				for (int i = 0; i < nhaCungCapDT.Columns.Count; i++)
+				{
+					item.SubItems.Add(row[i].ToString().Trim());
+				}
+				this.TabPageNhaCungCap_MaterialListView.Items.Add(item);
+			}
+		}
+
+		private void MaterialButton_SearchNCC_Click(object sender, EventArgs e)
+		{
+			ResetValidationForControl(NhaCungCapDVO_DienThoai, true);
+			if (!CheckNullNCC())
+			{
+				if (!NhaCungCapDVO_DienThoai.Text.Equals("Số điện thoại"))
+				{
+					System.Data.DataTable nhaCungCap = NhaCungCapDAO.Instance.NhaCungCapInformationFromPhoneNumber(NhaCungCapDVO_DienThoai.Text.Trim());
+					this.TabPageNhaCungCap_MaterialListView.Items.Clear();
+					ListViewItem items;
+
+					this.NhaCungCapDVO_TenNhaCungCap.Text = "??????????????";
+					this.NhaCungCapDVO_DiaChi.Text = "??????????????";
+
+					int count = 0;
+					foreach (DataRow row in nhaCungCap.Rows)
+					{
+						items = new ListViewItem();
+						count += 1;
+						//Debug.Write(count);
+						items.SubItems[0].Text = count.ToString();
+						for (int i = 0; i < nhaCungCap.Columns.Count; i++)
+						{
+							items.SubItems.Add(row[i].ToString().Trim());
+						}
+						this.TabPageNhaCungCap_MaterialListView.Items.Add(items);
+					}
+
+
+					if (this.TabPageNhaCungCap_MaterialListView.Items.Count > 0)
+					{
+						ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[0];
+
+						this.NhaCungCapDVO_TenNhaCungCap.Text = listViewItem.SubItems[2].Text;
+						this.NhaCungCapDVO_DiaChi.Text = listViewItem.SubItems[4].Text;
+					}
+					else
+					{
+						this.ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!", this.GetTabPageControlSelectedIndex());
+
+						LoadNhaCungCap();
+					}
+				}
+				else if (!NhaCungCapDVO_TenNhaCungCap.Text.Equals("Họ tên"))
+				{
+					System.Data.DataTable nhaCungCap = NhaCungCapDAO.Instance.NhaCungCapInformationFromName(NhaCungCapDVO_TenNhaCungCap.Text.Trim());
+					this.TabPageNhaCungCap_MaterialListView.Items.Clear();
+					ListViewItem items;
+
+					this.NhaCungCapDVO_DienThoai.Text = "??????????????";
+					this.NhaCungCapDVO_DiaChi.Text = "??????????????";
+
+					int count = 0;
+					foreach (DataRow row in nhaCungCap.Rows)
+					{
+						items = new ListViewItem();
+						count += 1;
+						//Debug.Write(count);
+						items.SubItems[0].Text = count.ToString();
+						for (int i = 0; i < nhaCungCap.Columns.Count; i++)
+						{
+							items.SubItems.Add(row[i].ToString().Trim());
+						}
+						this.TabPageNhaCungCap_MaterialListView.Items.Add(items);
+					}
+
+
+					if (this.TabPageNhaCungCap_MaterialListView.Items.Count > 0)
+					{
+						ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[0];
+
+						this.NhaCungCapDVO_DiaChi.Text = listViewItem.SubItems[4].Text;
+						this.NhaCungCapDVO_DienThoai.Text = listViewItem.SubItems[3].Text;
+
+					}
+					else
+					{
+						ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!", this.GetTabPageControlSelectedIndex());
+
+						LoadKhachHang();
+					}
+				}
+			}
+			else
+			{
+				ShowMessageBox("Vui lòng nhập một trong hai mục họ tên hoặc số điện thoại!", 4);
+			}
+		}
+
+		private void MaterialButton_SuaNCC_Click(object sender, EventArgs e)
+		{
+			if (this.TabPageNhaCungCap_MaterialListView.SelectedIndices.Count <= 0)
+			{
+				return;
+			}
+
+			if (this.TryValidationFromControl(this.NhaCungCapDVO_DienThoai, onlyOneControl: false, out dynamic baseDVO))
+			{
+				NhaCungCapDVO nhaCungCapDVO = baseDVO as NhaCungCapDVO;
+				// Update Controls
+				int index = this.TabPageNhaCungCap_MaterialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[index];
+
+					string NhaCungCap_TenNhaCungCapTMP = listViewItem.SubItems[2].Text;
+					string NhaCungCap_DienThoaiTMP = listViewItem.SubItems[3].Text;
+
+					if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi khách hàng {NhaCungCap_TenNhaCungCapTMP} có số điện thoại {NhaCungCap_DienThoaiTMP}?", this.GetTabPageControlSelectedIndex()))
+					{
+						if (NhaCungCapDAO.Instance.UpdateNhaCungCapFull(nhaCungCapDVO, NhaCungCap_DienThoaiTMP))
+						{
+							ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+							listViewItem.SubItems[2].Text = nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap;
+							listViewItem.SubItems[3].Text = nhaCungCapDVO.NhaCungCapDVO_DienThoai;
+							listViewItem.SubItems[4].Text = nhaCungCapDVO.NhaCungCapDVO_DiaChi;
+						}
+						else
+						{
+							ShowMessageBox("Thay đổi thất bại!", this.GetTabPageControlSelectedIndex());
+						}
+					}
+				}
+
+			}
+		}
+
+		private void ResetNhaCungCapDVO()
+		{
+			this.NhaCungCapDVO_TenNhaCungCap.Text = this.GetPlaceholderForControl(NhaCungCapDVO_TenNhaCungCap);
+			this.NhaCungCapDVO_DienThoai.Text = this.GetPlaceholderForControl(NhaCungCapDVO_DienThoai);
+			this.NhaCungCapDVO_DiaChi.Text = this.GetPlaceholderForControl(NhaCungCapDVO_DiaChi);
+		}
+
+		private void NewNhaCungCap()
+		{
+			if (this.TryValidationFromControl(this.NhaCungCapDVO_DienThoai, onlyOneControl: false, out dynamic baseDVO))
+			{
+				NhaCungCapDVO nhaCungCapDVO = baseDVO as NhaCungCapDVO;
+				if (this.TabPageNhaCungCap_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					foreach (ListViewItem items in this.TabPageNhaCungCap_MaterialListView.Items)
+					{
+						// If the phone number already exists, update the customer information
+						string phoneNumber = items.SubItems[3].Text;
+						if (phoneNumber.Equals(this.NhaCungCapDVO_DienThoai.Text))
+						{
+							if (ShowMessageBoxYesNo($"Nhà cung cấp có số điện thoại {phoneNumber} đã tồn tại, bạn có muốn cập nhật lại thông tin khách hàng không?", this.GetTabPageControlSelectedIndex()))
+							{
+								bool status = NhaCungCapDAO.Instance.UpdateNhaCungCap(
+									items.SubItems[2].Text,
+									items.SubItems[4].Text,
+									items.SubItems[3].Text);
+								if (status)
+								{
+									ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+								}
+								else
+								{
+									ShowMessageBox("Cập nhật thất bại, hãy kiểm tra lại các thông tin!!", this.GetTabPageControlSelectedIndex());
+								}
+								ResetNhaCungCapDVO();
+								return;
+							}
+							else
+							{
+								return;
+							}
+						}
+					}
+				}
+				else
+				{
+					for (int i = 0; i < this.TabPageNhaCungCap_MaterialListView.Items.Count; i++)
+					{
+						this.TabPageNhaCungCap_MaterialListView.Items[i].SubItems[0].Text = (i + 1).ToString();
+					}
+				}
+
+				if (NhaCungCapDAO.Instance.InsertNhaCungCap(nhaCungCapDVO))
+				{
+					ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+					System.Data.DataTable dataTable = NhaCungCapDAO.Instance.NhaCungCapInformationFromPhoneNumber(NhaCungCapDVO_DienThoai.Text);
+
+					ListViewItem item = new ListViewItem();
+
+					item.SubItems[0].Text = (this.TabPageNhaCungCap_MaterialListView.Items.Count + 1).ToString();
+
+					foreach (DataRow row in dataTable.Rows)
+					{
+						for (int i = 0; i < dataTable.Columns.Count; i++)
+						{
+							item.SubItems.Add(row[i].ToString().Trim());
+						}
+					}
+
+					this.TabPageNhaCungCap_MaterialListView.Items.Add(item);
+				}
+
+				ResetNhaCungCapDVO();
+
+				return;
+			}
+
+		}
+
+		private void TabPageNhaCungCap_MaterialListView_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			// Nothing
+			if (this.TabPageNhaCungCap_MaterialListView.SelectedIndices.Count <= 0)
+			{
+				return;
+			}
+
+			// Update Controls
+			int index = this.TabPageNhaCungCap_MaterialListView.SelectedIndices[0];
+
+			if (index >= 0)
+			{
+				ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[index];
+
+				this.NhaCungCapDVO_TenNhaCungCap.Text = listViewItem.SubItems[2].Text;
+				this.NhaCungCapDVO_DienThoai.Text = listViewItem.SubItems[3].Text;
+				this.NhaCungCapDVO_DiaChi.Text = listViewItem.SubItems[4].Text;
+			}
+		}
+
+		private void FormMain_NhaCungCap_Load(object sender, EventArgs e)
+		{
+			System.Data.DataTable nhaCungCap = NhaCungCapDAO.Instance.QueryAllNhaCungCap();
+			ListViewItem items;
+
+			int count = 0;
+			foreach (DataRow row in nhaCungCap.Rows)
+			{
+				items = new ListViewItem();
+				Console.WriteLine(count);
+				count += 1;
+				//Debug.Write(count);
+
+				items.SubItems[0].Text = count.ToString();
+				for (int i = 0; i < nhaCungCap.Columns.Count; i++)
+				{
+					items.SubItems.Add(row[i].ToString().Trim());
+				}
+				this.TabPageNhaCungCap_MaterialListView.Items.Add(items);
+			}
+		}
+
+
+		#endregion
 
 		#endregion
 
