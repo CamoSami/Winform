@@ -210,7 +210,7 @@ namespace WinformWithExternalLibrary
 							break;
 						}
 					}
-					Debug.WriteLine(temp);
+					//Debug.WriteLine(temp);
 				}
 
 				//		Check sequence

@@ -36,7 +36,7 @@ namespace WinformWithExternalLibrary.DataValidateObject.CustomValidation
 				}
 			}
 
-			Debug.WriteLine("MaSanPham: " + (maSanPham != null ? maSanPham.ToString() : "null") + ", SoLuong: " + value);
+			//Debug.WriteLine("MaSanPham: " + (maSanPham != null ? maSanPham.ToString() : "null") + ", SoLuong: " + value);
 
 			return new ValidationResult(
 				this.ErrorMessage,

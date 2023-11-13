@@ -18,7 +18,14 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 				return ValidationResult.Success;
 			}
 
-			return new ValidationResult(this.ErrorMessage, new List<string>() { "TongTienKhachTraDVO_TongTienKhachTra" });
+			return new ValidationResult(
+				this.ErrorMessage, 
+				new List<string>() { 
+					"TongTienKhachTraDVO_TongTienKhachTra",
+					"FormCreateSanPhamDVO_DonGiaBan",
+					"FormCreateSanPhamDVO_DonGiaNhap"
+					}
+				);
 		}
 	}
 }

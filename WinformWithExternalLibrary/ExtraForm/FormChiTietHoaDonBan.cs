@@ -58,7 +58,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TenKhachHang);
 				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_DienThoaiKH);
 				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_SoSanPham.ToString());
-				item.SubItems.Add(formatValues.NumberToPercentString(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia));
+				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_GiamGia);
 				item.SubItems.Add(formatValues.FormatPriceToView(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_TongTien.ToString(), 3));
 				item.SubItems.Add(billsOfSellerInfoResponseDTO.BillOfSellerInfoResponseDTO_NgayBan.ToString("dd/MM/yyyy"));
 
@@ -70,21 +70,14 @@ namespace WinformWithExternalLibrary.ExtraForm
 		{
 			ChiTietHoaDonExelBtn.Click += (object sender, EventArgs e) =>
 			{
-				try
-				{
-					DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
-					this.exportTableData.ExportToExcel(
-						dataTable: dataTable,
-						workSheetName: "Chi tiết hóa đơn bán",
-						filePath: ""
-					);
+				DataTable dataTable = this.phanTichDAO.GetBillsOfSellerInformationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
+				this.exportTableData.ExportToExcel(
+					dataTable: dataTable,
+					workSheetName: "HoaDonBan_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year,
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.HoaDonBan
+				);
 
-					MaterialMessageBox.Show("Xuất dữ liệu thành công", "Message", UseRichTextBox: false);
-				}
-				catch (Exception)
-				{
-					MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error", UseRichTextBox: false);
-				}
 			};
 		}
 

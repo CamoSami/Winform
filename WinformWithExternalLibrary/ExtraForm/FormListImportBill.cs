@@ -55,6 +55,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 					DataTable Bill = ChiTietHDNhapDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
 					ListViewItem item;
 
+					this.materialListView_HangCoTrongBill.Items.Clear();
+
 					int cnt = 0;
 					foreach (DataRow row in Bill.Rows)
 					{

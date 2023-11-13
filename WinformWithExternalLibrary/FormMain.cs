@@ -95,15 +95,6 @@ namespace WinformWithExternalLibrary
 			//		Generalist Attributes
 			foreach (TabPage tabPage in this.materialTabControl.TabPages)
 			{
-				if (tabPage != this.TabPageHoaDonBan &&
-					tabPage != this.TabPageNhanVien &&
-					tabPage != this.TabPageKhachHang &&
-					tabPage != this.TabPageNhaCungCap &&
-					tabPage != this.TabPageHoaDonNhap)
-				{
-					continue;
-				}
-
 				foreach (Control control in tabPage.Controls)
 				{
 					//Debug.WriteLine(control.Name);
@@ -169,16 +160,6 @@ namespace WinformWithExternalLibrary
 				{
 					this.ActiveControl = null;
 				};
-
-				//		TEST: only for HoaDonBan
-				if (this.materialTabControl.TabPages[i] != this.TabPageHoaDonBan &&
-					this.materialTabControl.TabPages[i] != this.TabPageNhanVien &&
-					this.materialTabControl.TabPages[i] != this.TabPageKhachHang &&
-					this.materialTabControl.TabPages[i] != this.TabPageNhaCungCap &&
-					this.materialTabControl.TabPages[i] != this.TabPageHoaDonNhap)
-				{
-					continue;
-				}
 
 				foreach (Control control in this.materialTabControl.TabPages[i].Controls)
 				{
@@ -409,6 +390,8 @@ namespace WinformWithExternalLibrary
 			this.Initialize_HoaDonBan();
 			this.Initialize_HoaDonNhap();
 		}
+
+		#region HoaDonNhap
 
 		private void Initialize_HoaDonNhap()
 		{
@@ -659,6 +642,10 @@ namespace WinformWithExternalLibrary
 				}
 			};
 		}
+
+		#endregion
+
+		#region HoaDonBan
 
 		private void Initialize_HoaDonBan()
 		{
@@ -947,6 +934,8 @@ namespace WinformWithExternalLibrary
 				}
 			};
 		}
+
+		#endregion
 
 		//		Function
 
@@ -2414,6 +2403,12 @@ namespace WinformWithExternalLibrary
 		private void Initialize_VuHongHanh()
 		{
 			//Debug.WriteLine(DMSanPhamDAO.Instance.UpdateCongSoLuongTon("469075421580", 2));
+
+			this.TabPageSanPham_ButtonThemSanPham.Click += (obj, e) =>
+			{
+				FormCreateSanPham formCreateSanPham = new FormCreateSanPham();
+				formCreateSanPham.Show();
+			};
 		}
 
 		#endregion

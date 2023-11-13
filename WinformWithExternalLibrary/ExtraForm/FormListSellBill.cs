@@ -93,7 +93,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 				{
 					foreach (object obj in row.ItemArray)
 					{
-						Debug.WriteLine(obj.ToString());
+						//Debug.WriteLine(obj.ToString());
 					}
 				}
 
@@ -118,6 +118,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 		{
 			try
 			{
+				this.materialListView_HangCoTrongBill.Items.Clear();
+
 				int index = this.materialListView_LichSuMuaHang.SelectedIndices[0];
 
 				if (index >= 0)

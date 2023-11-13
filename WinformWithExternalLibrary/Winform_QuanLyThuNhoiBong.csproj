@@ -210,6 +210,7 @@
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_EligibleTenGiamGia.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonNhapDVO_ExistedDienThoaiNhaCungCap.cs" />
+    <Compile Include="DataValidateObject\FormCreateSanPhamDVO.cs" />
     <Compile Include="DataValidateObject\NhaCungCapDVO.cs" />
     <Compile Include="DataValidateObject\CustomValidation\NhanVienThuNganDVO_ExistedNhanVienAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedTenGiamGia.cs" />
@@ -223,7 +224,6 @@
     <Compile Include="DataValidateObject\_Reference\CongViecDVO.cs" />
     <Compile Include="DataValidateObject\CustomValidation\DivisibleBy100Attribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\KhachHangDVO_UniqueDienThoaiAttribute.cs" />
-    <Compile Include="DataValidateObject\_Reference\DMSanPhamDVO.cs" />
     <Compile Include="DataValidateObject\KhachHangDVO.cs" />
     <Compile Include="DataValidateObject\LoginDVO.cs" />
     <Compile Include="ExtraForm\FormChiTietHoaDonBan.cs">
@@ -255,6 +255,12 @@
     </Compile>
     <Compile Include="ExtraForm\FormConfirmHoaDonBan.Designer.cs">
       <DependentUpon>FormConfirmHoaDonBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtraForm\FormCreateSanPham.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormCreateSanPham.Designer.cs">
+      <DependentUpon>FormCreateSanPham.cs</DependentUpon>
     </Compile>
     <Compile Include="ExtraForm\FormListImportBill.cs">
       <SubType>Form</SubType>
@@ -322,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateKhachHang.resx">
       <DependentUpon>FormCreateKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormCreateSanPham.resx">
+      <DependentUpon>FormCreateSanPham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormListImportBill.resx">
       <DependentUpon>FormListImportBill.cs</DependentUpon>

@@ -131,51 +131,6 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDNhapDVO_MaSanPham = new System.Windows.Forms.ComboBox();
 			this.ChiTietHDNhapDVO_TenSanPham = new MaterialSkin.Controls.MaterialTextBox();
 			this.TabPageKhachHang = new System.Windows.Forms.TabPage();
-			this.TabPageNhaCungCap = new System.Windows.Forms.TabPage();
-			this.TabPageSanPham = new System.Windows.Forms.TabPage();
-			this.TabPagePhanTich = new System.Windows.Forms.TabPage();
-			this.materialCard9 = new MaterialSkin.Controls.MaterialCard();
-			this.label6 = new System.Windows.Forms.Label();
-			this.materialCard8 = new MaterialSkin.Controls.MaterialCard();
-			this.label5 = new System.Windows.Forms.Label();
-			this.pieChart2 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
-			this.pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
-			this.TabPagePhanTich_HoaDonBan_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
-			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-			this.materialCard7 = new MaterialSkin.Controls.MaterialCard();
-			this.label16 = new System.Windows.Forms.Label();
-			this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
-			this.label14 = new System.Windows.Forms.Label();
-			this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-			this.materialCard3 = new MaterialSkin.Controls.MaterialCard();
-			this.TabPagePhanTich_KhachHang_TiLeLB = new System.Windows.Forms.Label();
-			this.TabPagePhanTich_KhachHang_TiLePB = new MaterialSkin.Controls.MaterialProgressBar();
-			this.TabPagePhanTich_KhachHang_KHmoi_LB = new System.Windows.Forms.Label();
-			this.label1 = new System.Windows.Forms.Label();
-			this.label15 = new System.Windows.Forms.Label();
-			this.label17 = new System.Windows.Forms.Label();
-			this.TabPagePhanTich_KhachHang_Tong_LB = new System.Windows.Forms.Label();
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
-			this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB = new System.Windows.Forms.Label();
-			this.TabPagePhanTich_HoaDonNhap_TiLePB = new MaterialSkin.Controls.MaterialProgressBar();
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB = new System.Windows.Forms.Label();
-			this.label9 = new System.Windows.Forms.Label();
-			this.label10 = new System.Windows.Forms.Label();
-			this.label11 = new System.Windows.Forms.Label();
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB = new System.Windows.Forms.Label();
-			this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
-			this.cartesianChart2 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
-			this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
-			this.cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
-			this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB = new System.Windows.Forms.Label();
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB = new MaterialSkin.Controls.MaterialProgressBar();
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB = new System.Windows.Forms.Label();
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
 			this.materialButton_RefreshKhachHang = new MaterialSkin.Controls.MaterialButton();
 			this.materialButton_SuaKhachHang = new MaterialSkin.Controls.MaterialButton();
 			this.materialButton_LichSuMuaHang = new MaterialSkin.Controls.MaterialButton();
@@ -194,6 +149,7 @@ namespace WinformWithExternalLibrary
 			this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.TabPageNhaCungCap = new System.Windows.Forms.TabPage();
 			this.materialButton_RefreshNhaCungCap = new MaterialSkin.Controls.MaterialButton();
 			this.materialButton_SuaNCC = new MaterialSkin.Controls.MaterialButton();
 			this.materialButton_LichSuNhapHang = new MaterialSkin.Controls.MaterialButton();
@@ -212,12 +168,87 @@ namespace WinformWithExternalLibrary
 			this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.TabPageSanPham = new System.Windows.Forms.TabPage();
+			this.TabPagePhanTich = new System.Windows.Forms.TabPage();
+			this.materialCard9 = new MaterialSkin.Controls.MaterialCard();
+			this.label6 = new System.Windows.Forms.Label();
+			this.materialCard8 = new MaterialSkin.Controls.MaterialCard();
+			this.label5 = new System.Windows.Forms.Label();
+			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+			this.materialCard7 = new MaterialSkin.Controls.MaterialCard();
+			this.label16 = new System.Windows.Forms.Label();
+			this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
+			this.label14 = new System.Windows.Forms.Label();
+			this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+			this.materialCard3 = new MaterialSkin.Controls.MaterialCard();
+			this.TabPagePhanTich_KhachHang_TiLeLB = new System.Windows.Forms.Label();
+			this.TabPagePhanTich_KhachHang_TiLePB = new MaterialSkin.Controls.MaterialProgressBar();
+			this.TabPagePhanTich_KhachHang_KHmoi_LB = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label17 = new System.Windows.Forms.Label();
+			this.TabPagePhanTich_KhachHang_Tong_LB = new System.Windows.Forms.Label();
+			this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB = new System.Windows.Forms.Label();
+			this.TabPagePhanTich_HoaDonNhap_TiLePB = new MaterialSkin.Controls.MaterialProgressBar();
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB = new System.Windows.Forms.Label();
+			this.label9 = new System.Windows.Forms.Label();
+			this.label10 = new System.Windows.Forms.Label();
+			this.label11 = new System.Windows.Forms.Label();
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB = new System.Windows.Forms.Label();
+			this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
+			this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
+			this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB = new System.Windows.Forms.Label();
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB = new MaterialSkin.Controls.MaterialProgressBar();
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB = new System.Windows.Forms.Label();
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.materialListView2 = new MaterialSkin.Controls.MaterialListView();
+			this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader31 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.materialCard10 = new MaterialSkin.Controls.MaterialCard();
+			this.TabPageSanPham_ButtonXuatRaFileExcel = new MaterialSkin.Controls.MaterialButton();
+			this.TabPageSanPham_SoLuongTonKhoMax = new MaterialSkin.Controls.MaterialTextBox();
+			this.TabPageSanPham_DonGiaNhapMax = new MaterialSkin.Controls.MaterialTextBox();
+			this.TabPageSanPham_LabelThoiGianBaoHanh = new MaterialSkin.Controls.MaterialLabel();
+			this.TabPageSanPham_LabelDonGiaNhap = new MaterialSkin.Controls.MaterialLabel();
+			this.TabPageSanPham_SoLuongTonKhoMin = new MaterialSkin.Controls.MaterialTextBox();
+			this.TabPageSanPham_DonGiaNhapMin = new MaterialSkin.Controls.MaterialTextBox();
+			this.TabPageSanPham_DonGiaBanMax = new MaterialSkin.Controls.MaterialTextBox();
+			this.TabPageSanPham_TenSanPham = new MaterialSkin.Controls.MaterialTextBox();
+			this.TabPageSanPham_LabelSoLuongTonKho = new MaterialSkin.Controls.MaterialLabel();
+			this.TabPageSanPham_LabelDonGiaBan = new MaterialSkin.Controls.MaterialLabel();
+			this.TabPageSanPham_DonGiaBanMin = new MaterialSkin.Controls.MaterialTextBox();
+			this.materialScrollBar2 = new MaterialSkin.Controls.MaterialScrollBar();
+			this.TabPageSanPham_ButtonXoaSanPham = new MaterialSkin.Controls.MaterialButton();
+			this.TabPageSanPham_ButtonThemSanPham = new MaterialSkin.Controls.MaterialButton();
+			this.TabPageSanPham_MaSanPham = new MaterialSkin.Controls.MaterialTextBox();
+			this.TabPageSanPham_ButtonSuaSanPham = new MaterialSkin.Controls.MaterialButton();
+			this.TabPageSanPham_ButtonTimKiem = new MaterialSkin.Controls.MaterialButton();
+			this.TabPageSanPham_RJDateTimePickerMin = new WinformWithExternalLibrary._Utilities.RJDatePicker();
+			this.TabPageSanPham_RJDateTimePickerMax = new WinformWithExternalLibrary._Utilities.RJDatePicker();
+			this.pieChart2 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+			this.pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+			this.TabPagePhanTich_HoaDonBan_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
+			this.cartesianChart2 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
+			this.cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
+			this.TabPageSanPham_NhapMoiSanPham = new MaterialSkin.Controls.MaterialButton();
 			this.materialTabControl.SuspendLayout();
 			this.TabPageNhanVien.SuspendLayout();
 			this.TabPageHoaDonBan.SuspendLayout();
 			this.TabPageHoaDonNhap.SuspendLayout();
 			this.TabPageKhachHang.SuspendLayout();
 			this.TabPageNhaCungCap.SuspendLayout();
+			this.TabPageSanPham.SuspendLayout();
 			this.TabPagePhanTich.SuspendLayout();
 			this.materialCard9.SuspendLayout();
 			this.materialCard8.SuspendLayout();
@@ -228,6 +259,7 @@ namespace WinformWithExternalLibrary
 			this.materialCard5.SuspendLayout();
 			this.materialCard4.SuspendLayout();
 			this.materialCard1.SuspendLayout();
+			this.materialCard10.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// materialTabControl
@@ -302,7 +334,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_Email.AnimateReadOnly = false;
 			this.NhanVienDVO_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_Email.Depth = 0;
-			this.NhanVienDVO_Email.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_Email.LeadingIcon = null;
 			this.NhanVienDVO_Email.Location = new System.Drawing.Point(1057, 523);
 			this.NhanVienDVO_Email.MaxLength = 50;
@@ -319,7 +351,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_DiaChi.AnimateReadOnly = false;
 			this.NhanVienDVO_DiaChi.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_DiaChi.Depth = 0;
-			this.NhanVienDVO_DiaChi.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_DiaChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_DiaChi.LeadingIcon = null;
 			this.NhanVienDVO_DiaChi.Location = new System.Drawing.Point(1057, 393);
 			this.NhanVienDVO_DiaChi.MaxLength = 50;
@@ -336,7 +368,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_SoDienThoai.AnimateReadOnly = false;
 			this.NhanVienDVO_SoDienThoai.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_SoDienThoai.Depth = 0;
-			this.NhanVienDVO_SoDienThoai.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_SoDienThoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_SoDienThoai.LeadingIcon = null;
 			this.NhanVienDVO_SoDienThoai.Location = new System.Drawing.Point(1056, 261);
 			this.NhanVienDVO_SoDienThoai.MaxLength = 50;
@@ -353,7 +385,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_TenNhanVien.AnimateReadOnly = false;
 			this.NhanVienDVO_TenNhanVien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_TenNhanVien.Depth = 0;
-			this.NhanVienDVO_TenNhanVien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_TenNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_TenNhanVien.LeadingIcon = null;
 			this.NhanVienDVO_TenNhanVien.Location = new System.Drawing.Point(1056, 125);
 			this.NhanVienDVO_TenNhanVien.MaxLength = 50;
@@ -370,7 +402,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_SelectNhanVien.AnimateReadOnly = false;
 			this.NhanVienDVO_SelectNhanVien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_SelectNhanVien.Depth = 0;
-			this.NhanVienDVO_SelectNhanVien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_SelectNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_SelectNhanVien.LeadingIcon = null;
 			this.NhanVienDVO_SelectNhanVien.Location = new System.Drawing.Point(6, 12);
 			this.NhanVienDVO_SelectNhanVien.MaxLength = 50;
@@ -708,7 +740,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_ThanhToan.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonBanDVO_ThanhToan.Depth = 0;
 			this.HoaDonBanDVO_ThanhToan.Enabled = false;
-			this.HoaDonBanDVO_ThanhToan.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonBanDVO_ThanhToan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonBanDVO_ThanhToan.LeadingIcon = null;
 			this.HoaDonBanDVO_ThanhToan.Location = new System.Drawing.Point(1112, 628);
 			this.HoaDonBanDVO_ThanhToan.MaxLength = 50;
@@ -860,7 +892,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_TongTien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonBanDVO_TongTien.Depth = 0;
 			this.HoaDonBanDVO_TongTien.Enabled = false;
-			this.HoaDonBanDVO_TongTien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonBanDVO_TongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonBanDVO_TongTien.LeadingIcon = null;
 			this.HoaDonBanDVO_TongTien.Location = new System.Drawing.Point(1112, 549);
 			this.HoaDonBanDVO_TongTien.MaxLength = 50;
@@ -898,7 +930,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_TenGiamGia.AnimateReadOnly = false;
 			this.HoaDonBanDVO_TenGiamGia.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonBanDVO_TenGiamGia.Depth = 0;
-			this.HoaDonBanDVO_TenGiamGia.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonBanDVO_TenGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonBanDVO_TenGiamGia.LeadingIcon = null;
 			this.HoaDonBanDVO_TenGiamGia.Location = new System.Drawing.Point(1112, 470);
 			this.HoaDonBanDVO_TenGiamGia.MaxLength = 50;
@@ -944,7 +976,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_TenKhachHang.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonBanDVO_TenKhachHang.Depth = 0;
 			this.HoaDonBanDVO_TenKhachHang.Enabled = false;
-			this.HoaDonBanDVO_TenKhachHang.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonBanDVO_TenKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonBanDVO_TenKhachHang.LeadingIcon = null;
 			this.HoaDonBanDVO_TenKhachHang.Location = new System.Drawing.Point(1112, 391);
 			this.HoaDonBanDVO_TenKhachHang.MaxLength = 50;
@@ -1012,7 +1044,7 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDBanDVO_SoLuong.AnimateReadOnly = false;
 			this.ChiTietHDBanDVO_SoLuong.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ChiTietHDBanDVO_SoLuong.Depth = 0;
-			this.ChiTietHDBanDVO_SoLuong.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ChiTietHDBanDVO_SoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.ChiTietHDBanDVO_SoLuong.LeadingIcon = null;
 			this.ChiTietHDBanDVO_SoLuong.Location = new System.Drawing.Point(1112, 205);
 			this.ChiTietHDBanDVO_SoLuong.MaxLength = 50;
@@ -1094,7 +1126,7 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDBanDVO_TenSanPham.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ChiTietHDBanDVO_TenSanPham.Depth = 0;
 			this.ChiTietHDBanDVO_TenSanPham.Enabled = false;
-			this.ChiTietHDBanDVO_TenSanPham.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ChiTietHDBanDVO_TenSanPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.ChiTietHDBanDVO_TenSanPham.LeadingIcon = null;
 			this.ChiTietHDBanDVO_TenSanPham.Location = new System.Drawing.Point(1112, 126);
 			this.ChiTietHDBanDVO_TenSanPham.MaxLength = 50;
@@ -1155,7 +1187,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonNhapDVO_ThanhToan.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonNhapDVO_ThanhToan.Depth = 0;
 			this.HoaDonNhapDVO_ThanhToan.Enabled = false;
-			this.HoaDonNhapDVO_ThanhToan.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonNhapDVO_ThanhToan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonNhapDVO_ThanhToan.LeadingIcon = null;
 			this.HoaDonNhapDVO_ThanhToan.Location = new System.Drawing.Point(1112, 628);
 			this.HoaDonNhapDVO_ThanhToan.MaxLength = 50;
@@ -1299,7 +1331,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonNhapDVO_TongTien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonNhapDVO_TongTien.Depth = 0;
 			this.HoaDonNhapDVO_TongTien.Enabled = false;
-			this.HoaDonNhapDVO_TongTien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonNhapDVO_TongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonNhapDVO_TongTien.LeadingIcon = null;
 			this.HoaDonNhapDVO_TongTien.Location = new System.Drawing.Point(1112, 549);
 			this.HoaDonNhapDVO_TongTien.MaxLength = 50;
@@ -1366,7 +1398,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonNhapDVO_TenNhaCungCap.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonNhapDVO_TenNhaCungCap.Depth = 0;
 			this.HoaDonNhapDVO_TenNhaCungCap.Enabled = false;
-			this.HoaDonNhapDVO_TenNhaCungCap.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonNhapDVO_TenNhaCungCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonNhapDVO_TenNhaCungCap.LeadingIcon = null;
 			this.HoaDonNhapDVO_TenNhaCungCap.Location = new System.Drawing.Point(1112, 391);
 			this.HoaDonNhapDVO_TenNhaCungCap.MaxLength = 50;
@@ -1425,7 +1457,7 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDNhapDVO_SoLuong.AnimateReadOnly = false;
 			this.ChiTietHDNhapDVO_SoLuong.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ChiTietHDNhapDVO_SoLuong.Depth = 0;
-			this.ChiTietHDNhapDVO_SoLuong.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ChiTietHDNhapDVO_SoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.ChiTietHDNhapDVO_SoLuong.LeadingIcon = null;
 			this.ChiTietHDNhapDVO_SoLuong.Location = new System.Drawing.Point(1112, 205);
 			this.ChiTietHDNhapDVO_SoLuong.MaxLength = 50;
@@ -1507,7 +1539,7 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDNhapDVO_TenSanPham.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ChiTietHDNhapDVO_TenSanPham.Depth = 0;
 			this.ChiTietHDNhapDVO_TenSanPham.Enabled = false;
-			this.ChiTietHDNhapDVO_TenSanPham.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ChiTietHDNhapDVO_TenSanPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.ChiTietHDNhapDVO_TenSanPham.LeadingIcon = null;
 			this.ChiTietHDNhapDVO_TenSanPham.Location = new System.Drawing.Point(1112, 126);
 			this.ChiTietHDNhapDVO_TenSanPham.MaxLength = 50;
@@ -1542,602 +1574,6 @@ namespace WinformWithExternalLibrary
 			this.TabPageKhachHang.TabIndex = 4;
 			this.TabPageKhachHang.Text = "Khách Hàng";
 			this.TabPageKhachHang.UseVisualStyleBackColor = true;
-			// 
-			// TabPageNhaCungCap
-			// 
-			this.TabPageNhaCungCap.Controls.Add(this.materialButton_RefreshNhaCungCap);
-			this.TabPageNhaCungCap.Controls.Add(this.materialButton_SuaNCC);
-			this.TabPageNhaCungCap.Controls.Add(this.materialButton_LichSuNhapHang);
-			this.TabPageNhaCungCap.Controls.Add(this.materialButton_SearchNCC);
-			this.TabPageNhaCungCap.Controls.Add(this.materialButton_XuatExcelNCC);
-			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DienThoai_Validation);
-			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DienThoai);
-			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DiaChi_Validation);
-			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_TenNhaCungCap_Validation);
-			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DiaChi);
-			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_TenNhaCungCap);
-			this.TabPageNhaCungCap.Controls.Add(this.materialButton_TaoNhaCungCap);
-			this.TabPageNhaCungCap.Controls.Add(this.TabPageNhaCungCap_MaterialListView);
-			this.TabPageNhaCungCap.ImageKey = "icons8-administrator-male-32.png";
-			this.TabPageNhaCungCap.Location = new System.Drawing.Point(4, 39);
-			this.TabPageNhaCungCap.Name = "TabPageNhaCungCap";
-			this.TabPageNhaCungCap.Padding = new System.Windows.Forms.Padding(3);
-			this.TabPageNhaCungCap.Size = new System.Drawing.Size(1473, 760);
-			this.TabPageNhaCungCap.TabIndex = 5;
-			this.TabPageNhaCungCap.Text = "Nhà Cung Cấp";
-			this.TabPageNhaCungCap.UseVisualStyleBackColor = true;
-			// 
-			// TabPageSanPham
-			// 
-			this.TabPageSanPham.ImageKey = "icons8-new-product-32.png";
-			this.TabPageSanPham.Location = new System.Drawing.Point(4, 39);
-			this.TabPageSanPham.Name = "TabPageSanPham";
-			this.TabPageSanPham.Padding = new System.Windows.Forms.Padding(3);
-			this.TabPageSanPham.Size = new System.Drawing.Size(1473, 760);
-			this.TabPageSanPham.TabIndex = 6;
-			this.TabPageSanPham.Text = "Sản Phẩm";
-			this.TabPageSanPham.UseVisualStyleBackColor = true;
-			// 
-			// TabPagePhanTich
-			// 
-			this.TabPagePhanTich.Controls.Add(this.materialCard9);
-			this.TabPagePhanTich.Controls.Add(this.materialCard8);
-			this.TabPagePhanTich.Controls.Add(this.pieChart2);
-			this.TabPagePhanTich.Controls.Add(this.pieChart1);
-			this.TabPagePhanTich.Controls.Add(this.TabPagePhanTich_HoaDonBan_ShowBTN);
-			this.TabPagePhanTich.Controls.Add(this.materialCard7);
-			this.TabPagePhanTich.Controls.Add(this.materialCard6);
-			this.TabPagePhanTich.Controls.Add(this.materialLabel1);
-			this.TabPagePhanTich.Controls.Add(this.materialCard3);
-			this.TabPagePhanTich.Controls.Add(this.TabPagePhanTich_HoaDonNhap_ShowBTN);
-			this.TabPagePhanTich.Controls.Add(this.materialCard2);
-			this.TabPagePhanTich.Controls.Add(this.materialCard5);
-			this.TabPagePhanTich.Controls.Add(this.materialCard4);
-			this.TabPagePhanTich.Controls.Add(this.materialCard1);
-			this.TabPagePhanTich.ImageKey = "icons8-intelligence-32.png";
-			this.TabPagePhanTich.Location = new System.Drawing.Point(4, 39);
-			this.TabPagePhanTich.Name = "TabPagePhanTich";
-			this.TabPagePhanTich.Padding = new System.Windows.Forms.Padding(3);
-			this.TabPagePhanTich.Size = new System.Drawing.Size(1473, 760);
-			this.TabPagePhanTich.TabIndex = 7;
-			this.TabPagePhanTich.Text = "Phân Tích";
-			this.TabPagePhanTich.UseVisualStyleBackColor = true;
-			// 
-			// materialCard9
-			// 
-			this.materialCard9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard9.Controls.Add(this.label6);
-			this.materialCard9.Depth = 0;
-			this.materialCard9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard9.Location = new System.Drawing.Point(1098, 243);
-			this.materialCard9.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard9.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard9.Name = "materialCard9";
-			this.materialCard9.Padding = new System.Windows.Forms.Padding(14);
-			this.materialCard9.Size = new System.Drawing.Size(150, 48);
-			this.materialCard9.TabIndex = 21;
-			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label6.Location = new System.Drawing.Point(4, 10);
-			this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(157, 40);
-			this.label6.TabIndex = 0;
-			this.label6.Text = "Biểu đồ lương \n công việc nhiều nhất";
-			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.label6.UseMnemonic = false;
-			// 
-			// materialCard8
-			// 
-			this.materialCard8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard8.Controls.Add(this.label5);
-			this.materialCard8.Depth = 0;
-			this.materialCard8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard8.Location = new System.Drawing.Point(246, 243);
-			this.materialCard8.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard8.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard8.Name = "materialCard8";
-			this.materialCard8.Padding = new System.Windows.Forms.Padding(14);
-			this.materialCard8.Size = new System.Drawing.Size(150, 48);
-			this.materialCard8.TabIndex = 20;
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label5.Location = new System.Drawing.Point(11, 10);
-			this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(158, 40);
-			this.label5.TabIndex = 0;
-			this.label5.Text = "Biểu đồ số sản phẩm \ntồn kho nhiều nhất";
-			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.label5.UseMnemonic = false;
-			// 
-			// pieChart2
-			// 
-			this.pieChart2.InitialRotation = 0D;
-			this.pieChart2.IsClockwise = true;
-			this.pieChart2.Location = new System.Drawing.Point(400, 180);
-			this.pieChart2.MaxAngle = 360D;
-			this.pieChart2.MaxValue = null;
-			this.pieChart2.MinValue = 0D;
-			this.pieChart2.Name = "pieChart2";
-			this.pieChart2.Size = new System.Drawing.Size(231, 175);
-			this.pieChart2.TabIndex = 19;
-			this.pieChart2.Total = null;
-			// 
-			// pieChart1
-			// 
-			this.pieChart1.InitialRotation = 0D;
-			this.pieChart1.IsClockwise = true;
-			this.pieChart1.Location = new System.Drawing.Point(850, 180);
-			this.pieChart1.MaxAngle = 360D;
-			this.pieChart1.MaxValue = null;
-			this.pieChart1.MinValue = 0D;
-			this.pieChart1.Name = "pieChart1";
-			this.pieChart1.Size = new System.Drawing.Size(238, 175);
-			this.pieChart1.TabIndex = 18;
-			this.pieChart1.Total = null;
-			// 
-			// TabPagePhanTich_HoaDonBan_ShowBTN
-			// 
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Depth = 0;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageKey = "icons8-download-48.png";
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageList = this.imageList1;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Location = new System.Drawing.Point(399, 61);
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Name = "TabPagePhanTich_HoaDonBan_ShowBTN";
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Size = new System.Drawing.Size(70, 70);
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.TabIndex = 10;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Text = "materialFloatingActionButton1";
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.UseVisualStyleBackColor = false;
-			// 
-			// imageList1
-			// 
-			this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-			this.imageList1.TransparentColor = System.Drawing.Color.White;
-			this.imageList1.Images.SetKeyName(0, "icons8-boxes-32.png");
-			this.imageList1.Images.SetKeyName(1, "icons8-create-order-32.png");
-			this.imageList1.Images.SetKeyName(2, "icons8-favorite-package-32.png");
-			this.imageList1.Images.SetKeyName(3, "icons8-intelligence-32.png");
-			this.imageList1.Images.SetKeyName(4, "icons8-new-product-32.png");
-			this.imageList1.Images.SetKeyName(5, "icons8-package-delivery-logistics-32.png");
-			this.imageList1.Images.SetKeyName(6, "icons8-store-front-32.png");
-			this.imageList1.Images.SetKeyName(7, "icons8-warehouse-32.png");
-			this.imageList1.Images.SetKeyName(8, "icons8-invoice-32 (1).png");
-			this.imageList1.Images.SetKeyName(9, "icons8-purchase-order-32.png");
-			this.imageList1.Images.SetKeyName(10, "icons8-administrator-male-32.png");
-			this.imageList1.Images.SetKeyName(11, "icons8-male-user-32.png");
-			this.imageList1.Images.SetKeyName(12, "icons8-people-32.png");
-			this.imageList1.Images.SetKeyName(13, "icons8-user-32.png");
-			this.imageList1.Images.SetKeyName(14, "icons8-download-64.png");
-			// 
-			// materialCard7
-			// 
-			this.materialCard7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard7.Controls.Add(this.label16);
-			this.materialCard7.Depth = 0;
-			this.materialCard7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard7.Location = new System.Drawing.Point(1040, 696);
-			this.materialCard7.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard7.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard7.Name = "materialCard7";
-			this.materialCard7.Padding = new System.Windows.Forms.Padding(18);
-			this.materialCard7.Size = new System.Drawing.Size(165, 59);
-			this.materialCard7.TabIndex = 17;
-			// 
-			// label16
-			// 
-			this.label16.AutoSize = true;
-			this.label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label16.Location = new System.Drawing.Point(2, 14);
-			this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label16.Name = "label16";
-			this.label16.Size = new System.Drawing.Size(165, 40);
-			this.label16.TabIndex = 0;
-			this.label16.Text = "Biểu đồ doanh thu \n  các ngày trong tháng";
-			this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.label16.UseMnemonic = false;
-			// 
-			// materialCard6
-			// 
-			this.materialCard6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard6.Controls.Add(this.label14);
-			this.materialCard6.Depth = 0;
-			this.materialCard6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard6.Location = new System.Drawing.Point(326, 696);
-			this.materialCard6.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard6.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard6.Name = "materialCard6";
-			this.materialCard6.Padding = new System.Windows.Forms.Padding(18);
-			this.materialCard6.Size = new System.Drawing.Size(178, 59);
-			this.materialCard6.TabIndex = 16;
-			// 
-			// label14
-			// 
-			this.label14.AutoSize = true;
-			this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label14.Location = new System.Drawing.Point(6, 14);
-			this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(169, 40);
-			this.label14.TabIndex = 0;
-			this.label14.Text = "Các sản phẩm đẫn đầu \n các tháng";
-			this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// materialLabel1
-			// 
-			this.materialLabel1.AutoSize = true;
-			this.materialLabel1.Depth = 0;
-			this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.materialLabel1.Location = new System.Drawing.Point(588, 721);
-			this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialLabel1.Name = "materialLabel1";
-			this.materialLabel1.Size = new System.Drawing.Size(1, 0);
-			this.materialLabel1.TabIndex = 15;
-			// 
-			// materialCard3
-			// 
-			this.materialCard3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_TiLeLB);
-			this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_TiLePB);
-			this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_KHmoi_LB);
-			this.materialCard3.Controls.Add(this.label1);
-			this.materialCard3.Controls.Add(this.label15);
-			this.materialCard3.Controls.Add(this.label17);
-			this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_Tong_LB);
-			this.materialCard3.Depth = 0;
-			this.materialCard3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard3.Location = new System.Drawing.Point(1040, 11);
-			this.materialCard3.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard3.Name = "materialCard3";
-			this.materialCard3.Padding = new System.Windows.Forms.Padding(18);
-			this.materialCard3.Size = new System.Drawing.Size(370, 165);
-			this.materialCard3.TabIndex = 10;
-			// 
-			// TabPagePhanTich_KhachHang_TiLeLB
-			// 
-			this.TabPagePhanTich_KhachHang_TiLeLB.AutoSize = true;
-			this.TabPagePhanTich_KhachHang_TiLeLB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_KhachHang_TiLeLB.Location = new System.Drawing.Point(21, 129);
-			this.TabPagePhanTich_KhachHang_TiLeLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_KhachHang_TiLeLB.Name = "TabPagePhanTich_KhachHang_TiLeLB";
-			this.TabPagePhanTich_KhachHang_TiLeLB.Size = new System.Drawing.Size(124, 20);
-			this.TabPagePhanTich_KhachHang_TiLeLB.TabIndex = 11;
-			this.TabPagePhanTich_KhachHang_TiLeLB.Text = "Mục tiêu đạt 48%";
-			// 
-			// TabPagePhanTich_KhachHang_TiLePB
-			// 
-			this.TabPagePhanTich_KhachHang_TiLePB.Depth = 0;
-			this.TabPagePhanTich_KhachHang_TiLePB.Location = new System.Drawing.Point(24, 119);
-			this.TabPagePhanTich_KhachHang_TiLePB.Margin = new System.Windows.Forms.Padding(4);
-			this.TabPagePhanTich_KhachHang_TiLePB.MouseState = MaterialSkin.MouseState.HOVER;
-			this.TabPagePhanTich_KhachHang_TiLePB.Name = "TabPagePhanTich_KhachHang_TiLePB";
-			this.TabPagePhanTich_KhachHang_TiLePB.Size = new System.Drawing.Size(269, 5);
-			this.TabPagePhanTich_KhachHang_TiLePB.TabIndex = 10;
-			this.TabPagePhanTich_KhachHang_TiLePB.Value = 48;
-			// 
-			// TabPagePhanTich_KhachHang_KHmoi_LB
-			// 
-			this.TabPagePhanTich_KhachHang_KHmoi_LB.AutoSize = true;
-			this.TabPagePhanTich_KhachHang_KHmoi_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_KhachHang_KHmoi_LB.Location = new System.Drawing.Point(245, 87);
-			this.TabPagePhanTich_KhachHang_KHmoi_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_KhachHang_KHmoi_LB.Name = "TabPagePhanTich_KhachHang_KHmoi_LB";
-			this.TabPagePhanTich_KhachHang_KHmoi_LB.Size = new System.Drawing.Size(55, 29);
-			this.TabPagePhanTich_KhachHang_KHmoi_LB.TabIndex = 9;
-			this.TabPagePhanTich_KhachHang_KHmoi_LB.Text = "344";
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(23, 87);
-			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(225, 23);
-			this.label1.TabIndex = 8;
-			this.label1.Text = "Khách hàng mới tháng này";
-			// 
-			// label15
-			// 
-			this.label15.AutoSize = true;
-			this.label15.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label15.Location = new System.Drawing.Point(19, 15);
-			this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label15.Name = "label15";
-			this.label15.Size = new System.Drawing.Size(147, 32);
-			this.label15.TabIndex = 4;
-			this.label15.Text = "Khách hàng";
-			// 
-			// label17
-			// 
-			this.label17.AutoSize = true;
-			this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label17.Location = new System.Drawing.Point(23, 52);
-			this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label17.Name = "label17";
-			this.label17.Size = new System.Drawing.Size(223, 23);
-			this.label17.TabIndex = 2;
-			this.label17.Text = "Tổng số lượng khách hàng";
-			// 
-			// TabPagePhanTich_KhachHang_Tong_LB
-			// 
-			this.TabPagePhanTich_KhachHang_Tong_LB.AutoSize = true;
-			this.TabPagePhanTich_KhachHang_Tong_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_KhachHang_Tong_LB.Location = new System.Drawing.Point(245, 50);
-			this.TabPagePhanTich_KhachHang_Tong_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_KhachHang_Tong_LB.Name = "TabPagePhanTich_KhachHang_Tong_LB";
-			this.TabPagePhanTich_KhachHang_Tong_LB.Size = new System.Drawing.Size(55, 29);
-			this.TabPagePhanTich_KhachHang_Tong_LB.TabIndex = 1;
-			this.TabPagePhanTich_KhachHang_Tong_LB.Text = "344";
-			// 
-			// TabPagePhanTich_HoaDonNhap_ShowBTN
-			// 
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Depth = 0;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.ImageKey = "icons8-download-48.png";
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.ImageList = this.imageList1;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Location = new System.Drawing.Point(899, 61);
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Name = "TabPagePhanTich_HoaDonNhap_ShowBTN";
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Size = new System.Drawing.Size(70, 70);
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.TabIndex = 9;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Text = "materialFloatingActionButton2";
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.UseVisualStyleBackColor = false;
-			// 
-			// materialCard2
-			// 
-			this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_TiLeLB);
-			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_TiLePB);
-			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB);
-			this.materialCard2.Controls.Add(this.label9);
-			this.materialCard2.Controls.Add(this.label10);
-			this.materialCard2.Controls.Add(this.label11);
-			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_SoLuong_LB);
-			this.materialCard2.Depth = 0;
-			this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard2.Location = new System.Drawing.Point(557, 11);
-			this.materialCard2.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard2.Name = "materialCard2";
-			this.materialCard2.Padding = new System.Windows.Forms.Padding(18);
-			this.materialCard2.Size = new System.Drawing.Size(370, 165);
-			this.materialCard2.TabIndex = 8;
-			// 
-			// TabPagePhanTich_HoaDonNhap_TiLeLB
-			// 
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB.AutoSize = true;
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Location = new System.Drawing.Point(22, 129);
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Name = "TabPagePhanTich_HoaDonNhap_TiLeLB";
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Size = new System.Drawing.Size(124, 20);
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB.TabIndex = 7;
-			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Text = "Mục tiêu đạt 48%";
-			// 
-			// TabPagePhanTich_HoaDonNhap_TiLePB
-			// 
-			this.TabPagePhanTich_HoaDonNhap_TiLePB.Depth = 0;
-			this.TabPagePhanTich_HoaDonNhap_TiLePB.Location = new System.Drawing.Point(26, 119);
-			this.TabPagePhanTich_HoaDonNhap_TiLePB.Margin = new System.Windows.Forms.Padding(4);
-			this.TabPagePhanTich_HoaDonNhap_TiLePB.MouseState = MaterialSkin.MouseState.HOVER;
-			this.TabPagePhanTich_HoaDonNhap_TiLePB.Name = "TabPagePhanTich_HoaDonNhap_TiLePB";
-			this.TabPagePhanTich_HoaDonNhap_TiLePB.Size = new System.Drawing.Size(269, 5);
-			this.TabPagePhanTich_HoaDonNhap_TiLePB.TabIndex = 6;
-			this.TabPagePhanTich_HoaDonNhap_TiLePB.Value = 48;
-			// 
-			// TabPagePhanTich_HoaDonNhap_ChiPhi_LB
-			// 
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.AutoSize = true;
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Location = new System.Drawing.Point(131, 82);
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Name = "TabPagePhanTich_HoaDonNhap_ChiPhi_LB";
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Size = new System.Drawing.Size(126, 29);
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.TabIndex = 5;
-			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Text = "150.000 đ";
-			// 
-			// label9
-			// 
-			this.label9.AutoSize = true;
-			this.label9.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label9.Location = new System.Drawing.Point(19, 15);
-			this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(176, 32);
-			this.label9.TabIndex = 4;
-			this.label9.Text = "Hóa đơn nhập";
-			// 
-			// label10
-			// 
-			this.label10.AutoSize = true;
-			this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label10.Location = new System.Drawing.Point(21, 82);
-			this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(110, 23);
-			this.label10.TabIndex = 3;
-			this.label10.Text = "Tổng chi phí";
-			// 
-			// label11
-			// 
-			this.label11.AutoSize = true;
-			this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label11.Location = new System.Drawing.Point(21, 50);
-			this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label11.Name = "label11";
-			this.label11.Size = new System.Drawing.Size(83, 23);
-			this.label11.TabIndex = 2;
-			this.label11.Text = "Số lượng";
-			// 
-			// TabPagePhanTich_HoaDonNhap_SoLuong_LB
-			// 
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.AutoSize = true;
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Location = new System.Drawing.Point(131, 50);
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Name = "TabPagePhanTich_HoaDonNhap_SoLuong_LB";
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Size = new System.Drawing.Size(55, 29);
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.TabIndex = 1;
-			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Text = "344";
-			// 
-			// materialCard5
-			// 
-			this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard5.Controls.Add(this.cartesianChart2);
-			this.materialCard5.Depth = 0;
-			this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard5.Location = new System.Drawing.Point(781, 358);
-			this.materialCard5.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard5.Name = "materialCard5";
-			this.materialCard5.Padding = new System.Windows.Forms.Padding(18);
-			this.materialCard5.Size = new System.Drawing.Size(630, 316);
-			this.materialCard5.TabIndex = 7;
-			// 
-			// cartesianChart2
-			// 
-			this.cartesianChart2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cartesianChart2.Location = new System.Drawing.Point(18, 18);
-			this.cartesianChart2.Name = "cartesianChart2";
-			this.cartesianChart2.Size = new System.Drawing.Size(594, 280);
-			this.cartesianChart2.TabIndex = 1;
-			// 
-			// materialCard4
-			// 
-			this.materialCard4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard4.Controls.Add(this.cartesianChart1);
-			this.materialCard4.Depth = 0;
-			this.materialCard4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard4.Location = new System.Drawing.Point(52, 358);
-			this.materialCard4.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard4.Name = "materialCard4";
-			this.materialCard4.Padding = new System.Windows.Forms.Padding(18);
-			this.materialCard4.Size = new System.Drawing.Size(684, 316);
-			this.materialCard4.TabIndex = 6;
-			// 
-			// cartesianChart1
-			// 
-			this.cartesianChart1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cartesianChart1.Location = new System.Drawing.Point(18, 18);
-			this.cartesianChart1.Name = "cartesianChart1";
-			this.cartesianChart1.Size = new System.Drawing.Size(648, 280);
-			this.cartesianChart1.TabIndex = 0;
-			// 
-			// materialCard1
-			// 
-			this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_GiamGiaLB);
-			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_GiamGiaPB);
-			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_DoanhThu_LB);
-			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_SoLuong_LB);
-			this.materialCard1.Controls.Add(this.label4);
-			this.materialCard1.Controls.Add(this.label3);
-			this.materialCard1.Controls.Add(this.label2);
-			this.materialCard1.Depth = 0;
-			this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.materialCard1.Location = new System.Drawing.Point(52, 11);
-			this.materialCard1.Margin = new System.Windows.Forms.Padding(18);
-			this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialCard1.Name = "materialCard1";
-			this.materialCard1.Padding = new System.Windows.Forms.Padding(18);
-			this.materialCard1.Size = new System.Drawing.Size(370, 165);
-			this.materialCard1.TabIndex = 0;
-			// 
-			// TabPagePhanTich_HoaDonBan_GiamGiaLB
-			// 
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.AutoSize = true;
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Location = new System.Drawing.Point(22, 132);
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Name = "TabPagePhanTich_HoaDonBan_GiamGiaLB";
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Size = new System.Drawing.Size(124, 20);
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.TabIndex = 8;
-			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Text = "Mục tiêu đạt 48%";
-			// 
-			// TabPagePhanTich_HoaDonBan_GiamGiaPB
-			// 
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Depth = 0;
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Location = new System.Drawing.Point(25, 119);
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Margin = new System.Windows.Forms.Padding(4);
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.MouseState = MaterialSkin.MouseState.HOVER;
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Name = "TabPagePhanTich_HoaDonBan_GiamGiaPB";
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Size = new System.Drawing.Size(269, 5);
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.TabIndex = 7;
-			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Value = 48;
-			// 
-			// TabPagePhanTich_HoaDonBan_DoanhThu_LB
-			// 
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.AutoSize = true;
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Location = new System.Drawing.Point(106, 82);
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Name = "TabPagePhanTich_HoaDonBan_DoanhThu_LB";
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Size = new System.Drawing.Size(126, 29);
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.TabIndex = 6;
-			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Text = "150.000 đ";
-			// 
-			// TabPagePhanTich_HoaDonBan_SoLuong_LB
-			// 
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.AutoSize = true;
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Location = new System.Drawing.Point(106, 50);
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Name = "TabPagePhanTich_HoaDonBan_SoLuong_LB";
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Size = new System.Drawing.Size(55, 29);
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.TabIndex = 5;
-			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Text = "344";
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label4.Location = new System.Drawing.Point(20, 15);
-			this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(162, 32);
-			this.label4.TabIndex = 4;
-			this.label4.Text = "Hóa đơn bán";
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(21, 82);
-			this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(94, 23);
-			this.label3.TabIndex = 3;
-			this.label3.Text = "Doanh thu";
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(21, 50);
-			this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(83, 23);
-			this.label2.TabIndex = 2;
-			this.label2.Text = "Số lượng";
 			// 
 			// materialButton_RefreshKhachHang
 			// 
@@ -2391,6 +1827,30 @@ namespace WinformWithExternalLibrary
 			this.columnHeader19.Text = "Số Điện Thoại";
 			this.columnHeader19.Width = 120;
 			// 
+			// TabPageNhaCungCap
+			// 
+			this.TabPageNhaCungCap.Controls.Add(this.materialButton_RefreshNhaCungCap);
+			this.TabPageNhaCungCap.Controls.Add(this.materialButton_SuaNCC);
+			this.TabPageNhaCungCap.Controls.Add(this.materialButton_LichSuNhapHang);
+			this.TabPageNhaCungCap.Controls.Add(this.materialButton_SearchNCC);
+			this.TabPageNhaCungCap.Controls.Add(this.materialButton_XuatExcelNCC);
+			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DienThoai_Validation);
+			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DienThoai);
+			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DiaChi_Validation);
+			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_TenNhaCungCap_Validation);
+			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DiaChi);
+			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_TenNhaCungCap);
+			this.TabPageNhaCungCap.Controls.Add(this.materialButton_TaoNhaCungCap);
+			this.TabPageNhaCungCap.Controls.Add(this.TabPageNhaCungCap_MaterialListView);
+			this.TabPageNhaCungCap.ImageKey = "icons8-administrator-male-32.png";
+			this.TabPageNhaCungCap.Location = new System.Drawing.Point(4, 39);
+			this.TabPageNhaCungCap.Name = "TabPageNhaCungCap";
+			this.TabPageNhaCungCap.Padding = new System.Windows.Forms.Padding(3);
+			this.TabPageNhaCungCap.Size = new System.Drawing.Size(1473, 760);
+			this.TabPageNhaCungCap.TabIndex = 5;
+			this.TabPageNhaCungCap.Text = "Nhà Cung Cấp";
+			this.TabPageNhaCungCap.UseVisualStyleBackColor = true;
+			// 
 			// materialButton_RefreshNhaCungCap
 			// 
 			this.materialButton_RefreshNhaCungCap.AutoSize = false;
@@ -2643,6 +2103,1019 @@ namespace WinformWithExternalLibrary
 			this.columnHeader23.Text = "Địa Chỉ";
 			this.columnHeader23.Width = 429;
 			// 
+			// TabPageSanPham
+			// 
+			this.TabPageSanPham.Controls.Add(this.materialListView2);
+			this.TabPageSanPham.Controls.Add(this.materialCard10);
+			this.TabPageSanPham.ImageKey = "icons8-new-product-32.png";
+			this.TabPageSanPham.Location = new System.Drawing.Point(4, 39);
+			this.TabPageSanPham.Name = "TabPageSanPham";
+			this.TabPageSanPham.Padding = new System.Windows.Forms.Padding(3);
+			this.TabPageSanPham.Size = new System.Drawing.Size(1473, 760);
+			this.TabPageSanPham.TabIndex = 6;
+			this.TabPageSanPham.Text = "Sản Phẩm";
+			this.TabPageSanPham.UseVisualStyleBackColor = true;
+			// 
+			// TabPagePhanTich
+			// 
+			this.TabPagePhanTich.Controls.Add(this.materialCard9);
+			this.TabPagePhanTich.Controls.Add(this.materialCard8);
+			this.TabPagePhanTich.Controls.Add(this.materialCard7);
+			this.TabPagePhanTich.Controls.Add(this.materialCard6);
+			this.TabPagePhanTich.Controls.Add(this.materialLabel1);
+			this.TabPagePhanTich.Controls.Add(this.materialCard3);
+			this.TabPagePhanTich.Controls.Add(this.materialCard2);
+			this.TabPagePhanTich.Controls.Add(this.materialCard5);
+			this.TabPagePhanTich.Controls.Add(this.materialCard4);
+			this.TabPagePhanTich.Controls.Add(this.materialCard1);
+			this.TabPagePhanTich.Controls.Add(this.pieChart2);
+			this.TabPagePhanTich.Controls.Add(this.pieChart1);
+			this.TabPagePhanTich.Controls.Add(this.TabPagePhanTich_HoaDonBan_ShowBTN);
+			this.TabPagePhanTich.Controls.Add(this.TabPagePhanTich_HoaDonNhap_ShowBTN);
+			this.TabPagePhanTich.ImageKey = "icons8-intelligence-32.png";
+			this.TabPagePhanTich.Location = new System.Drawing.Point(4, 39);
+			this.TabPagePhanTich.Name = "TabPagePhanTich";
+			this.TabPagePhanTich.Padding = new System.Windows.Forms.Padding(3);
+			this.TabPagePhanTich.Size = new System.Drawing.Size(1473, 760);
+			this.TabPagePhanTich.TabIndex = 7;
+			this.TabPagePhanTich.Text = "Phân Tích";
+			this.TabPagePhanTich.UseVisualStyleBackColor = true;
+			// 
+			// materialCard9
+			// 
+			this.materialCard9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard9.Controls.Add(this.label6);
+			this.materialCard9.Depth = 0;
+			this.materialCard9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard9.Location = new System.Drawing.Point(1098, 243);
+			this.materialCard9.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard9.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard9.Name = "materialCard9";
+			this.materialCard9.Padding = new System.Windows.Forms.Padding(14);
+			this.materialCard9.Size = new System.Drawing.Size(150, 48);
+			this.materialCard9.TabIndex = 21;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.Location = new System.Drawing.Point(4, 10);
+			this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(157, 40);
+			this.label6.TabIndex = 0;
+			this.label6.Text = "Biểu đồ lương \n công việc nhiều nhất";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.label6.UseMnemonic = false;
+			// 
+			// materialCard8
+			// 
+			this.materialCard8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard8.Controls.Add(this.label5);
+			this.materialCard8.Depth = 0;
+			this.materialCard8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard8.Location = new System.Drawing.Point(246, 243);
+			this.materialCard8.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard8.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard8.Name = "materialCard8";
+			this.materialCard8.Padding = new System.Windows.Forms.Padding(14);
+			this.materialCard8.Size = new System.Drawing.Size(150, 48);
+			this.materialCard8.TabIndex = 20;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label5.Location = new System.Drawing.Point(11, 10);
+			this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(158, 40);
+			this.label5.TabIndex = 0;
+			this.label5.Text = "Biểu đồ số sản phẩm \ntồn kho nhiều nhất";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.label5.UseMnemonic = false;
+			// 
+			// imageList1
+			// 
+			this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+			this.imageList1.TransparentColor = System.Drawing.Color.White;
+			this.imageList1.Images.SetKeyName(0, "icons8-boxes-32.png");
+			this.imageList1.Images.SetKeyName(1, "icons8-create-order-32.png");
+			this.imageList1.Images.SetKeyName(2, "icons8-favorite-package-32.png");
+			this.imageList1.Images.SetKeyName(3, "icons8-intelligence-32.png");
+			this.imageList1.Images.SetKeyName(4, "icons8-new-product-32.png");
+			this.imageList1.Images.SetKeyName(5, "icons8-package-delivery-logistics-32.png");
+			this.imageList1.Images.SetKeyName(6, "icons8-store-front-32.png");
+			this.imageList1.Images.SetKeyName(7, "icons8-warehouse-32.png");
+			this.imageList1.Images.SetKeyName(8, "icons8-invoice-32 (1).png");
+			this.imageList1.Images.SetKeyName(9, "icons8-purchase-order-32.png");
+			this.imageList1.Images.SetKeyName(10, "icons8-administrator-male-32.png");
+			this.imageList1.Images.SetKeyName(11, "icons8-male-user-32.png");
+			this.imageList1.Images.SetKeyName(12, "icons8-people-32.png");
+			this.imageList1.Images.SetKeyName(13, "icons8-user-32.png");
+			this.imageList1.Images.SetKeyName(14, "icons8-download-64.png");
+			// 
+			// materialCard7
+			// 
+			this.materialCard7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard7.Controls.Add(this.label16);
+			this.materialCard7.Depth = 0;
+			this.materialCard7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard7.Location = new System.Drawing.Point(1040, 696);
+			this.materialCard7.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard7.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard7.Name = "materialCard7";
+			this.materialCard7.Padding = new System.Windows.Forms.Padding(18);
+			this.materialCard7.Size = new System.Drawing.Size(165, 59);
+			this.materialCard7.TabIndex = 17;
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label16.Location = new System.Drawing.Point(2, 14);
+			this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(165, 40);
+			this.label16.TabIndex = 0;
+			this.label16.Text = "Biểu đồ doanh thu \n  các ngày trong tháng";
+			this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.label16.UseMnemonic = false;
+			// 
+			// materialCard6
+			// 
+			this.materialCard6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard6.Controls.Add(this.label14);
+			this.materialCard6.Depth = 0;
+			this.materialCard6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard6.Location = new System.Drawing.Point(326, 696);
+			this.materialCard6.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard6.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard6.Name = "materialCard6";
+			this.materialCard6.Padding = new System.Windows.Forms.Padding(18);
+			this.materialCard6.Size = new System.Drawing.Size(178, 59);
+			this.materialCard6.TabIndex = 16;
+			// 
+			// label14
+			// 
+			this.label14.AutoSize = true;
+			this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label14.Location = new System.Drawing.Point(6, 14);
+			this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(169, 40);
+			this.label14.TabIndex = 0;
+			this.label14.Text = "Các sản phẩm đẫn đầu \n các tháng";
+			this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// materialLabel1
+			// 
+			this.materialLabel1.AutoSize = true;
+			this.materialLabel1.Depth = 0;
+			this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.materialLabel1.Location = new System.Drawing.Point(588, 721);
+			this.materialLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialLabel1.Name = "materialLabel1";
+			this.materialLabel1.Size = new System.Drawing.Size(1, 0);
+			this.materialLabel1.TabIndex = 15;
+			// 
+			// materialCard3
+			// 
+			this.materialCard3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_TiLeLB);
+			this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_TiLePB);
+			this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_KHmoi_LB);
+			this.materialCard3.Controls.Add(this.label1);
+			this.materialCard3.Controls.Add(this.label15);
+			this.materialCard3.Controls.Add(this.label17);
+			this.materialCard3.Controls.Add(this.TabPagePhanTich_KhachHang_Tong_LB);
+			this.materialCard3.Depth = 0;
+			this.materialCard3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard3.Location = new System.Drawing.Point(1040, 11);
+			this.materialCard3.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard3.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard3.Name = "materialCard3";
+			this.materialCard3.Padding = new System.Windows.Forms.Padding(18);
+			this.materialCard3.Size = new System.Drawing.Size(370, 165);
+			this.materialCard3.TabIndex = 10;
+			// 
+			// TabPagePhanTich_KhachHang_TiLeLB
+			// 
+			this.TabPagePhanTich_KhachHang_TiLeLB.AutoSize = true;
+			this.TabPagePhanTich_KhachHang_TiLeLB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_KhachHang_TiLeLB.Location = new System.Drawing.Point(21, 129);
+			this.TabPagePhanTich_KhachHang_TiLeLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_KhachHang_TiLeLB.Name = "TabPagePhanTich_KhachHang_TiLeLB";
+			this.TabPagePhanTich_KhachHang_TiLeLB.Size = new System.Drawing.Size(124, 20);
+			this.TabPagePhanTich_KhachHang_TiLeLB.TabIndex = 11;
+			this.TabPagePhanTich_KhachHang_TiLeLB.Text = "Mục tiêu đạt 48%";
+			// 
+			// TabPagePhanTich_KhachHang_TiLePB
+			// 
+			this.TabPagePhanTich_KhachHang_TiLePB.Depth = 0;
+			this.TabPagePhanTich_KhachHang_TiLePB.Location = new System.Drawing.Point(24, 119);
+			this.TabPagePhanTich_KhachHang_TiLePB.Margin = new System.Windows.Forms.Padding(4);
+			this.TabPagePhanTich_KhachHang_TiLePB.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPagePhanTich_KhachHang_TiLePB.Name = "TabPagePhanTich_KhachHang_TiLePB";
+			this.TabPagePhanTich_KhachHang_TiLePB.Size = new System.Drawing.Size(269, 5);
+			this.TabPagePhanTich_KhachHang_TiLePB.TabIndex = 10;
+			this.TabPagePhanTich_KhachHang_TiLePB.Value = 48;
+			// 
+			// TabPagePhanTich_KhachHang_KHmoi_LB
+			// 
+			this.TabPagePhanTich_KhachHang_KHmoi_LB.AutoSize = true;
+			this.TabPagePhanTich_KhachHang_KHmoi_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_KhachHang_KHmoi_LB.Location = new System.Drawing.Point(245, 87);
+			this.TabPagePhanTich_KhachHang_KHmoi_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_KhachHang_KHmoi_LB.Name = "TabPagePhanTich_KhachHang_KHmoi_LB";
+			this.TabPagePhanTich_KhachHang_KHmoi_LB.Size = new System.Drawing.Size(55, 29);
+			this.TabPagePhanTich_KhachHang_KHmoi_LB.TabIndex = 9;
+			this.TabPagePhanTich_KhachHang_KHmoi_LB.Text = "344";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.Location = new System.Drawing.Point(23, 87);
+			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(225, 23);
+			this.label1.TabIndex = 8;
+			this.label1.Text = "Khách hàng mới tháng này";
+			// 
+			// label15
+			// 
+			this.label15.AutoSize = true;
+			this.label15.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label15.Location = new System.Drawing.Point(19, 15);
+			this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(147, 32);
+			this.label15.TabIndex = 4;
+			this.label15.Text = "Khách hàng";
+			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label17.Location = new System.Drawing.Point(23, 52);
+			this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(223, 23);
+			this.label17.TabIndex = 2;
+			this.label17.Text = "Tổng số lượng khách hàng";
+			// 
+			// TabPagePhanTich_KhachHang_Tong_LB
+			// 
+			this.TabPagePhanTich_KhachHang_Tong_LB.AutoSize = true;
+			this.TabPagePhanTich_KhachHang_Tong_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_KhachHang_Tong_LB.Location = new System.Drawing.Point(245, 50);
+			this.TabPagePhanTich_KhachHang_Tong_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_KhachHang_Tong_LB.Name = "TabPagePhanTich_KhachHang_Tong_LB";
+			this.TabPagePhanTich_KhachHang_Tong_LB.Size = new System.Drawing.Size(55, 29);
+			this.TabPagePhanTich_KhachHang_Tong_LB.TabIndex = 1;
+			this.TabPagePhanTich_KhachHang_Tong_LB.Text = "344";
+			// 
+			// materialCard2
+			// 
+			this.materialCard2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_TiLeLB);
+			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_TiLePB);
+			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB);
+			this.materialCard2.Controls.Add(this.label9);
+			this.materialCard2.Controls.Add(this.label10);
+			this.materialCard2.Controls.Add(this.label11);
+			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_SoLuong_LB);
+			this.materialCard2.Depth = 0;
+			this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard2.Location = new System.Drawing.Point(557, 11);
+			this.materialCard2.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard2.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard2.Name = "materialCard2";
+			this.materialCard2.Padding = new System.Windows.Forms.Padding(18);
+			this.materialCard2.Size = new System.Drawing.Size(370, 165);
+			this.materialCard2.TabIndex = 8;
+			// 
+			// TabPagePhanTich_HoaDonNhap_TiLeLB
+			// 
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB.AutoSize = true;
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Location = new System.Drawing.Point(22, 129);
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Name = "TabPagePhanTich_HoaDonNhap_TiLeLB";
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Size = new System.Drawing.Size(124, 20);
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB.TabIndex = 7;
+			this.TabPagePhanTich_HoaDonNhap_TiLeLB.Text = "Mục tiêu đạt 48%";
+			// 
+			// TabPagePhanTich_HoaDonNhap_TiLePB
+			// 
+			this.TabPagePhanTich_HoaDonNhap_TiLePB.Depth = 0;
+			this.TabPagePhanTich_HoaDonNhap_TiLePB.Location = new System.Drawing.Point(26, 119);
+			this.TabPagePhanTich_HoaDonNhap_TiLePB.Margin = new System.Windows.Forms.Padding(4);
+			this.TabPagePhanTich_HoaDonNhap_TiLePB.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPagePhanTich_HoaDonNhap_TiLePB.Name = "TabPagePhanTich_HoaDonNhap_TiLePB";
+			this.TabPagePhanTich_HoaDonNhap_TiLePB.Size = new System.Drawing.Size(269, 5);
+			this.TabPagePhanTich_HoaDonNhap_TiLePB.TabIndex = 6;
+			this.TabPagePhanTich_HoaDonNhap_TiLePB.Value = 48;
+			// 
+			// TabPagePhanTich_HoaDonNhap_ChiPhi_LB
+			// 
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.AutoSize = true;
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Location = new System.Drawing.Point(131, 82);
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Name = "TabPagePhanTich_HoaDonNhap_ChiPhi_LB";
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Size = new System.Drawing.Size(126, 29);
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.TabIndex = 5;
+			this.TabPagePhanTich_HoaDonNhap_ChiPhi_LB.Text = "150.000 đ";
+			// 
+			// label9
+			// 
+			this.label9.AutoSize = true;
+			this.label9.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label9.Location = new System.Drawing.Point(19, 15);
+			this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(176, 32);
+			this.label9.TabIndex = 4;
+			this.label9.Text = "Hóa đơn nhập";
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label10.Location = new System.Drawing.Point(21, 82);
+			this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(110, 23);
+			this.label10.TabIndex = 3;
+			this.label10.Text = "Tổng chi phí";
+			// 
+			// label11
+			// 
+			this.label11.AutoSize = true;
+			this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label11.Location = new System.Drawing.Point(21, 50);
+			this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(83, 23);
+			this.label11.TabIndex = 2;
+			this.label11.Text = "Số lượng";
+			// 
+			// TabPagePhanTich_HoaDonNhap_SoLuong_LB
+			// 
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.AutoSize = true;
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Location = new System.Drawing.Point(131, 50);
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Name = "TabPagePhanTich_HoaDonNhap_SoLuong_LB";
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Size = new System.Drawing.Size(55, 29);
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.TabIndex = 1;
+			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB.Text = "344";
+			// 
+			// materialCard5
+			// 
+			this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard5.Controls.Add(this.cartesianChart2);
+			this.materialCard5.Depth = 0;
+			this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard5.Location = new System.Drawing.Point(781, 358);
+			this.materialCard5.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard5.Name = "materialCard5";
+			this.materialCard5.Padding = new System.Windows.Forms.Padding(18);
+			this.materialCard5.Size = new System.Drawing.Size(630, 316);
+			this.materialCard5.TabIndex = 7;
+			// 
+			// materialCard4
+			// 
+			this.materialCard4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard4.Controls.Add(this.cartesianChart1);
+			this.materialCard4.Depth = 0;
+			this.materialCard4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard4.Location = new System.Drawing.Point(52, 358);
+			this.materialCard4.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard4.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard4.Name = "materialCard4";
+			this.materialCard4.Padding = new System.Windows.Forms.Padding(18);
+			this.materialCard4.Size = new System.Drawing.Size(684, 316);
+			this.materialCard4.TabIndex = 6;
+			// 
+			// materialCard1
+			// 
+			this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_GiamGiaLB);
+			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_GiamGiaPB);
+			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_DoanhThu_LB);
+			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_SoLuong_LB);
+			this.materialCard1.Controls.Add(this.label4);
+			this.materialCard1.Controls.Add(this.label3);
+			this.materialCard1.Controls.Add(this.label2);
+			this.materialCard1.Depth = 0;
+			this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard1.Location = new System.Drawing.Point(52, 11);
+			this.materialCard1.Margin = new System.Windows.Forms.Padding(18);
+			this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard1.Name = "materialCard1";
+			this.materialCard1.Padding = new System.Windows.Forms.Padding(18);
+			this.materialCard1.Size = new System.Drawing.Size(370, 165);
+			this.materialCard1.TabIndex = 0;
+			// 
+			// TabPagePhanTich_HoaDonBan_GiamGiaLB
+			// 
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.AutoSize = true;
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Location = new System.Drawing.Point(22, 132);
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Name = "TabPagePhanTich_HoaDonBan_GiamGiaLB";
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Size = new System.Drawing.Size(124, 20);
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.TabIndex = 8;
+			this.TabPagePhanTich_HoaDonBan_GiamGiaLB.Text = "Mục tiêu đạt 48%";
+			// 
+			// TabPagePhanTich_HoaDonBan_GiamGiaPB
+			// 
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Depth = 0;
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Location = new System.Drawing.Point(25, 119);
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Margin = new System.Windows.Forms.Padding(4);
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Name = "TabPagePhanTich_HoaDonBan_GiamGiaPB";
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Size = new System.Drawing.Size(269, 5);
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.TabIndex = 7;
+			this.TabPagePhanTich_HoaDonBan_GiamGiaPB.Value = 48;
+			// 
+			// TabPagePhanTich_HoaDonBan_DoanhThu_LB
+			// 
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.AutoSize = true;
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Location = new System.Drawing.Point(106, 82);
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Name = "TabPagePhanTich_HoaDonBan_DoanhThu_LB";
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Size = new System.Drawing.Size(126, 29);
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.TabIndex = 6;
+			this.TabPagePhanTich_HoaDonBan_DoanhThu_LB.Text = "150.000 đ";
+			// 
+			// TabPagePhanTich_HoaDonBan_SoLuong_LB
+			// 
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.AutoSize = true;
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Location = new System.Drawing.Point(106, 50);
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Name = "TabPagePhanTich_HoaDonBan_SoLuong_LB";
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Size = new System.Drawing.Size(55, 29);
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.TabIndex = 5;
+			this.TabPagePhanTich_HoaDonBan_SoLuong_LB.Text = "344";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Location = new System.Drawing.Point(20, 15);
+			this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(162, 32);
+			this.label4.TabIndex = 4;
+			this.label4.Text = "Hóa đơn bán";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(21, 82);
+			this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(94, 23);
+			this.label3.TabIndex = 3;
+			this.label3.Text = "Doanh thu";
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.Location = new System.Drawing.Point(21, 50);
+			this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(83, 23);
+			this.label2.TabIndex = 2;
+			this.label2.Text = "Số lượng";
+			// 
+			// materialListView2
+			// 
+			this.materialListView2.AutoSizeTable = false;
+			this.materialListView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialListView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.materialListView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader25,
+            this.columnHeader26,
+            this.columnHeader27,
+            this.columnHeader28,
+            this.columnHeader29,
+            this.columnHeader30,
+            this.columnHeader31});
+			this.materialListView2.Depth = 0;
+			this.materialListView2.FullRowSelect = true;
+			this.materialListView2.HideSelection = false;
+			this.materialListView2.Location = new System.Drawing.Point(3, 3);
+			this.materialListView2.MinimumSize = new System.Drawing.Size(200, 100);
+			this.materialListView2.MouseLocation = new System.Drawing.Point(-1, -1);
+			this.materialListView2.MouseState = MaterialSkin.MouseState.OUT;
+			this.materialListView2.Name = "materialListView2";
+			this.materialListView2.OwnerDraw = true;
+			this.materialListView2.Size = new System.Drawing.Size(966, 757);
+			this.materialListView2.TabIndex = 15;
+			this.materialListView2.UseCompatibleStateImageBehavior = false;
+			this.materialListView2.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader25
+			// 
+			this.columnHeader25.Text = "STT";
+			this.columnHeader25.Width = 76;
+			// 
+			// columnHeader26
+			// 
+			this.columnHeader26.Text = "Mã sản phẩm";
+			this.columnHeader26.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.columnHeader26.Width = 145;
+			// 
+			// columnHeader27
+			// 
+			this.columnHeader27.Text = "Tên sản phẩm";
+			this.columnHeader27.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.columnHeader27.Width = 142;
+			// 
+			// columnHeader28
+			// 
+			this.columnHeader28.Text = "Đơn giá bán";
+			this.columnHeader28.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.columnHeader28.Width = 128;
+			// 
+			// columnHeader29
+			// 
+			this.columnHeader29.Text = "Đơn giá nhập";
+			this.columnHeader29.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.columnHeader29.Width = 159;
+			// 
+			// columnHeader30
+			// 
+			this.columnHeader30.Text = "Số lượng tồn kho";
+			this.columnHeader30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.columnHeader30.Width = 159;
+			// 
+			// columnHeader31
+			// 
+			this.columnHeader31.Text = "Thời gian bảo hành ";
+			this.columnHeader31.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.columnHeader31.Width = 161;
+			// 
+			// materialCard10
+			// 
+			this.materialCard10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.materialCard10.Controls.Add(this.TabPageSanPham_NhapMoiSanPham);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_RJDateTimePickerMax);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_RJDateTimePickerMin);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_ButtonXuatRaFileExcel);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_SoLuongTonKhoMax);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_DonGiaNhapMax);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_LabelThoiGianBaoHanh);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_LabelDonGiaNhap);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_SoLuongTonKhoMin);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_DonGiaNhapMin);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_DonGiaBanMax);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_TenSanPham);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_LabelSoLuongTonKho);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_LabelDonGiaBan);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_DonGiaBanMin);
+			this.materialCard10.Controls.Add(this.materialScrollBar2);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_ButtonXoaSanPham);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_ButtonThemSanPham);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_MaSanPham);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_ButtonSuaSanPham);
+			this.materialCard10.Controls.Add(this.TabPageSanPham_ButtonTimKiem);
+			this.materialCard10.Depth = 0;
+			this.materialCard10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.materialCard10.Location = new System.Drawing.Point(986, 6);
+			this.materialCard10.Margin = new System.Windows.Forms.Padding(14);
+			this.materialCard10.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialCard10.Name = "materialCard10";
+			this.materialCard10.Padding = new System.Windows.Forms.Padding(14);
+			this.materialCard10.Size = new System.Drawing.Size(487, 754);
+			this.materialCard10.TabIndex = 14;
+			// 
+			// TabPageSanPham_ButtonXuatRaFileExcel
+			// 
+			this.TabPageSanPham_ButtonXuatRaFileExcel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Depth = 0;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.HighEmphasis = true;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Icon = null;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Location = new System.Drawing.Point(17, 614);
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageSanPham_ButtonXuatRaFileExcel.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Name = "TabPageSanPham_ButtonXuatRaFileExcel";
+			this.TabPageSanPham_ButtonXuatRaFileExcel.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Size = new System.Drawing.Size(161, 36);
+			this.TabPageSanPham_ButtonXuatRaFileExcel.TabIndex = 28;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Text = "Xuất ra file excel";
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.UseAccentColor = false;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.UseVisualStyleBackColor = true;
+			// 
+			// TabPageSanPham_SoLuongTonKhoMax
+			// 
+			this.TabPageSanPham_SoLuongTonKhoMax.AnimateReadOnly = false;
+			this.TabPageSanPham_SoLuongTonKhoMax.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TabPageSanPham_SoLuongTonKhoMax.Depth = 0;
+			this.TabPageSanPham_SoLuongTonKhoMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.TabPageSanPham_SoLuongTonKhoMax.LeadingIcon = null;
+			this.TabPageSanPham_SoLuongTonKhoMax.Location = new System.Drawing.Point(263, 410);
+			this.TabPageSanPham_SoLuongTonKhoMax.MaxLength = 50;
+			this.TabPageSanPham_SoLuongTonKhoMax.MouseState = MaterialSkin.MouseState.OUT;
+			this.TabPageSanPham_SoLuongTonKhoMax.Multiline = false;
+			this.TabPageSanPham_SoLuongTonKhoMax.Name = "TabPageSanPham_SoLuongTonKhoMax";
+			this.TabPageSanPham_SoLuongTonKhoMax.Size = new System.Drawing.Size(216, 50);
+			this.TabPageSanPham_SoLuongTonKhoMax.TabIndex = 27;
+			this.TabPageSanPham_SoLuongTonKhoMax.Text = "Max";
+			this.TabPageSanPham_SoLuongTonKhoMax.TrailingIcon = null;
+			// 
+			// TabPageSanPham_DonGiaNhapMax
+			// 
+			this.TabPageSanPham_DonGiaNhapMax.AnimateReadOnly = false;
+			this.TabPageSanPham_DonGiaNhapMax.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TabPageSanPham_DonGiaNhapMax.Depth = 0;
+			this.TabPageSanPham_DonGiaNhapMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.TabPageSanPham_DonGiaNhapMax.LeadingIcon = null;
+			this.TabPageSanPham_DonGiaNhapMax.Location = new System.Drawing.Point(263, 300);
+			this.TabPageSanPham_DonGiaNhapMax.MaxLength = 50;
+			this.TabPageSanPham_DonGiaNhapMax.MouseState = MaterialSkin.MouseState.OUT;
+			this.TabPageSanPham_DonGiaNhapMax.Multiline = false;
+			this.TabPageSanPham_DonGiaNhapMax.Name = "TabPageSanPham_DonGiaNhapMax";
+			this.TabPageSanPham_DonGiaNhapMax.Size = new System.Drawing.Size(216, 50);
+			this.TabPageSanPham_DonGiaNhapMax.TabIndex = 27;
+			this.TabPageSanPham_DonGiaNhapMax.Text = "Max";
+			this.TabPageSanPham_DonGiaNhapMax.TrailingIcon = null;
+			// 
+			// TabPageSanPham_LabelThoiGianBaoHanh
+			// 
+			this.TabPageSanPham_LabelThoiGianBaoHanh.AutoSize = true;
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Depth = 0;
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Location = new System.Drawing.Point(14, 470);
+			this.TabPageSanPham_LabelThoiGianBaoHanh.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Name = "TabPageSanPham_LabelThoiGianBaoHanh";
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Size = new System.Drawing.Size(139, 19);
+			this.TabPageSanPham_LabelThoiGianBaoHanh.TabIndex = 26;
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Text = "Thời gian bảo hành";
+			// 
+			// TabPageSanPham_LabelDonGiaNhap
+			// 
+			this.TabPageSanPham_LabelDonGiaNhap.AutoSize = true;
+			this.TabPageSanPham_LabelDonGiaNhap.Depth = 0;
+			this.TabPageSanPham_LabelDonGiaNhap.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.TabPageSanPham_LabelDonGiaNhap.Location = new System.Drawing.Point(17, 278);
+			this.TabPageSanPham_LabelDonGiaNhap.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_LabelDonGiaNhap.Name = "TabPageSanPham_LabelDonGiaNhap";
+			this.TabPageSanPham_LabelDonGiaNhap.Size = new System.Drawing.Size(96, 19);
+			this.TabPageSanPham_LabelDonGiaNhap.TabIndex = 26;
+			this.TabPageSanPham_LabelDonGiaNhap.Text = "Đơn giá nhập";
+			// 
+			// TabPageSanPham_SoLuongTonKhoMin
+			// 
+			this.TabPageSanPham_SoLuongTonKhoMin.AnimateReadOnly = false;
+			this.TabPageSanPham_SoLuongTonKhoMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TabPageSanPham_SoLuongTonKhoMin.Depth = 0;
+			this.TabPageSanPham_SoLuongTonKhoMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.TabPageSanPham_SoLuongTonKhoMin.LeadingIcon = null;
+			this.TabPageSanPham_SoLuongTonKhoMin.Location = new System.Drawing.Point(17, 410);
+			this.TabPageSanPham_SoLuongTonKhoMin.MaxLength = 50;
+			this.TabPageSanPham_SoLuongTonKhoMin.MouseState = MaterialSkin.MouseState.OUT;
+			this.TabPageSanPham_SoLuongTonKhoMin.Multiline = false;
+			this.TabPageSanPham_SoLuongTonKhoMin.Name = "TabPageSanPham_SoLuongTonKhoMin";
+			this.TabPageSanPham_SoLuongTonKhoMin.Size = new System.Drawing.Size(216, 50);
+			this.TabPageSanPham_SoLuongTonKhoMin.TabIndex = 25;
+			this.TabPageSanPham_SoLuongTonKhoMin.Text = "Min";
+			this.TabPageSanPham_SoLuongTonKhoMin.TrailingIcon = null;
+			// 
+			// TabPageSanPham_DonGiaNhapMin
+			// 
+			this.TabPageSanPham_DonGiaNhapMin.AnimateReadOnly = false;
+			this.TabPageSanPham_DonGiaNhapMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TabPageSanPham_DonGiaNhapMin.Depth = 0;
+			this.TabPageSanPham_DonGiaNhapMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.TabPageSanPham_DonGiaNhapMin.LeadingIcon = null;
+			this.TabPageSanPham_DonGiaNhapMin.Location = new System.Drawing.Point(17, 300);
+			this.TabPageSanPham_DonGiaNhapMin.MaxLength = 50;
+			this.TabPageSanPham_DonGiaNhapMin.MouseState = MaterialSkin.MouseState.OUT;
+			this.TabPageSanPham_DonGiaNhapMin.Multiline = false;
+			this.TabPageSanPham_DonGiaNhapMin.Name = "TabPageSanPham_DonGiaNhapMin";
+			this.TabPageSanPham_DonGiaNhapMin.Size = new System.Drawing.Size(216, 50);
+			this.TabPageSanPham_DonGiaNhapMin.TabIndex = 25;
+			this.TabPageSanPham_DonGiaNhapMin.Text = "Min";
+			this.TabPageSanPham_DonGiaNhapMin.TrailingIcon = null;
+			// 
+			// TabPageSanPham_DonGiaBanMax
+			// 
+			this.TabPageSanPham_DonGiaBanMax.AnimateReadOnly = false;
+			this.TabPageSanPham_DonGiaBanMax.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TabPageSanPham_DonGiaBanMax.Depth = 0;
+			this.TabPageSanPham_DonGiaBanMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.TabPageSanPham_DonGiaBanMax.LeadingIcon = null;
+			this.TabPageSanPham_DonGiaBanMax.Location = new System.Drawing.Point(263, 195);
+			this.TabPageSanPham_DonGiaBanMax.MaxLength = 50;
+			this.TabPageSanPham_DonGiaBanMax.MouseState = MaterialSkin.MouseState.OUT;
+			this.TabPageSanPham_DonGiaBanMax.Multiline = false;
+			this.TabPageSanPham_DonGiaBanMax.Name = "TabPageSanPham_DonGiaBanMax";
+			this.TabPageSanPham_DonGiaBanMax.Size = new System.Drawing.Size(216, 50);
+			this.TabPageSanPham_DonGiaBanMax.TabIndex = 24;
+			this.TabPageSanPham_DonGiaBanMax.Text = "Max";
+			this.TabPageSanPham_DonGiaBanMax.TrailingIcon = null;
+			// 
+			// TabPageSanPham_TenSanPham
+			// 
+			this.TabPageSanPham_TenSanPham.AnimateReadOnly = false;
+			this.TabPageSanPham_TenSanPham.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TabPageSanPham_TenSanPham.Depth = 0;
+			this.TabPageSanPham_TenSanPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.TabPageSanPham_TenSanPham.LeadingIcon = null;
+			this.TabPageSanPham_TenSanPham.Location = new System.Drawing.Point(17, 94);
+			this.TabPageSanPham_TenSanPham.MaxLength = 50;
+			this.TabPageSanPham_TenSanPham.MouseState = MaterialSkin.MouseState.OUT;
+			this.TabPageSanPham_TenSanPham.Multiline = false;
+			this.TabPageSanPham_TenSanPham.Name = "TabPageSanPham_TenSanPham";
+			this.TabPageSanPham_TenSanPham.Size = new System.Drawing.Size(462, 50);
+			this.TabPageSanPham_TenSanPham.TabIndex = 23;
+			this.TabPageSanPham_TenSanPham.Text = "Tên sản phẩm";
+			this.TabPageSanPham_TenSanPham.TrailingIcon = null;
+			// 
+			// TabPageSanPham_LabelSoLuongTonKho
+			// 
+			this.TabPageSanPham_LabelSoLuongTonKho.AutoSize = true;
+			this.TabPageSanPham_LabelSoLuongTonKho.Depth = 0;
+			this.TabPageSanPham_LabelSoLuongTonKho.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.TabPageSanPham_LabelSoLuongTonKho.Location = new System.Drawing.Point(17, 388);
+			this.TabPageSanPham_LabelSoLuongTonKho.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_LabelSoLuongTonKho.Name = "TabPageSanPham_LabelSoLuongTonKho";
+			this.TabPageSanPham_LabelSoLuongTonKho.Size = new System.Drawing.Size(122, 19);
+			this.TabPageSanPham_LabelSoLuongTonKho.TabIndex = 20;
+			this.TabPageSanPham_LabelSoLuongTonKho.Text = "Số lượng tồn kho";
+			// 
+			// TabPageSanPham_LabelDonGiaBan
+			// 
+			this.TabPageSanPham_LabelDonGiaBan.AutoSize = true;
+			this.TabPageSanPham_LabelDonGiaBan.Depth = 0;
+			this.TabPageSanPham_LabelDonGiaBan.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.TabPageSanPham_LabelDonGiaBan.Location = new System.Drawing.Point(17, 173);
+			this.TabPageSanPham_LabelDonGiaBan.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_LabelDonGiaBan.Name = "TabPageSanPham_LabelDonGiaBan";
+			this.TabPageSanPham_LabelDonGiaBan.Size = new System.Drawing.Size(87, 19);
+			this.TabPageSanPham_LabelDonGiaBan.TabIndex = 19;
+			this.TabPageSanPham_LabelDonGiaBan.Text = "Đơn giá bán";
+			// 
+			// TabPageSanPham_DonGiaBanMin
+			// 
+			this.TabPageSanPham_DonGiaBanMin.AnimateReadOnly = false;
+			this.TabPageSanPham_DonGiaBanMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TabPageSanPham_DonGiaBanMin.Depth = 0;
+			this.TabPageSanPham_DonGiaBanMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.TabPageSanPham_DonGiaBanMin.LeadingIcon = null;
+			this.TabPageSanPham_DonGiaBanMin.Location = new System.Drawing.Point(17, 195);
+			this.TabPageSanPham_DonGiaBanMin.MaxLength = 50;
+			this.TabPageSanPham_DonGiaBanMin.MouseState = MaterialSkin.MouseState.OUT;
+			this.TabPageSanPham_DonGiaBanMin.Multiline = false;
+			this.TabPageSanPham_DonGiaBanMin.Name = "TabPageSanPham_DonGiaBanMin";
+			this.TabPageSanPham_DonGiaBanMin.Size = new System.Drawing.Size(216, 50);
+			this.TabPageSanPham_DonGiaBanMin.TabIndex = 16;
+			this.TabPageSanPham_DonGiaBanMin.Text = "Min";
+			this.TabPageSanPham_DonGiaBanMin.TrailingIcon = null;
+			// 
+			// materialScrollBar2
+			// 
+			this.materialScrollBar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+			this.materialScrollBar2.Depth = 0;
+			this.materialScrollBar2.Location = new System.Drawing.Point(521, 0);
+			this.materialScrollBar2.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialScrollBar2.Name = "materialScrollBar2";
+			this.materialScrollBar2.Orientation = MaterialSkin.Controls.MaterialScrollOrientation.Vertical;
+			this.materialScrollBar2.Size = new System.Drawing.Size(10, 757);
+			this.materialScrollBar2.TabIndex = 15;
+			this.materialScrollBar2.Text = "materialScrollBar2";
+			// 
+			// TabPageSanPham_ButtonXoaSanPham
+			// 
+			this.TabPageSanPham_ButtonXoaSanPham.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageSanPham_ButtonXoaSanPham.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageSanPham_ButtonXoaSanPham.Depth = 0;
+			this.TabPageSanPham_ButtonXoaSanPham.HighEmphasis = true;
+			this.TabPageSanPham_ButtonXoaSanPham.Icon = null;
+			this.TabPageSanPham_ButtonXoaSanPham.Location = new System.Drawing.Point(347, 687);
+			this.TabPageSanPham_ButtonXoaSanPham.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageSanPham_ButtonXoaSanPham.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_ButtonXoaSanPham.Name = "TabPageSanPham_ButtonXoaSanPham";
+			this.TabPageSanPham_ButtonXoaSanPham.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageSanPham_ButtonXoaSanPham.Size = new System.Drawing.Size(129, 36);
+			this.TabPageSanPham_ButtonXoaSanPham.TabIndex = 3;
+			this.TabPageSanPham_ButtonXoaSanPham.Text = "Xóa sản phẩm";
+			this.TabPageSanPham_ButtonXoaSanPham.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageSanPham_ButtonXoaSanPham.UseAccentColor = false;
+			this.TabPageSanPham_ButtonXoaSanPham.UseVisualStyleBackColor = true;
+			// 
+			// TabPageSanPham_ButtonThemSanPham
+			// 
+			this.TabPageSanPham_ButtonThemSanPham.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageSanPham_ButtonThemSanPham.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageSanPham_ButtonThemSanPham.Depth = 0;
+			this.TabPageSanPham_ButtonThemSanPham.HighEmphasis = true;
+			this.TabPageSanPham_ButtonThemSanPham.Icon = null;
+			this.TabPageSanPham_ButtonThemSanPham.Location = new System.Drawing.Point(20, 687);
+			this.TabPageSanPham_ButtonThemSanPham.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageSanPham_ButtonThemSanPham.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_ButtonThemSanPham.Name = "TabPageSanPham_ButtonThemSanPham";
+			this.TabPageSanPham_ButtonThemSanPham.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageSanPham_ButtonThemSanPham.Size = new System.Drawing.Size(141, 36);
+			this.TabPageSanPham_ButtonThemSanPham.TabIndex = 1;
+			this.TabPageSanPham_ButtonThemSanPham.Text = "Thêm sản phẩm";
+			this.TabPageSanPham_ButtonThemSanPham.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageSanPham_ButtonThemSanPham.UseAccentColor = false;
+			this.TabPageSanPham_ButtonThemSanPham.UseVisualStyleBackColor = true;
+			// 
+			// TabPageSanPham_MaSanPham
+			// 
+			this.TabPageSanPham_MaSanPham.AnimateReadOnly = false;
+			this.TabPageSanPham_MaSanPham.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.TabPageSanPham_MaSanPham.Depth = 0;
+			this.TabPageSanPham_MaSanPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.6F);
+			this.TabPageSanPham_MaSanPham.LeadingIcon = null;
+			this.TabPageSanPham_MaSanPham.Location = new System.Drawing.Point(17, 17);
+			this.TabPageSanPham_MaSanPham.MaxLength = 50;
+			this.TabPageSanPham_MaSanPham.MouseState = MaterialSkin.MouseState.OUT;
+			this.TabPageSanPham_MaSanPham.Multiline = false;
+			this.TabPageSanPham_MaSanPham.Name = "TabPageSanPham_MaSanPham";
+			this.TabPageSanPham_MaSanPham.Size = new System.Drawing.Size(462, 50);
+			this.TabPageSanPham_MaSanPham.TabIndex = 2;
+			this.TabPageSanPham_MaSanPham.Text = "Mã sản phẩm";
+			this.TabPageSanPham_MaSanPham.TrailingIcon = null;
+			// 
+			// TabPageSanPham_ButtonSuaSanPham
+			// 
+			this.TabPageSanPham_ButtonSuaSanPham.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageSanPham_ButtonSuaSanPham.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageSanPham_ButtonSuaSanPham.Depth = 0;
+			this.TabPageSanPham_ButtonSuaSanPham.HighEmphasis = true;
+			this.TabPageSanPham_ButtonSuaSanPham.Icon = null;
+			this.TabPageSanPham_ButtonSuaSanPham.Location = new System.Drawing.Point(193, 687);
+			this.TabPageSanPham_ButtonSuaSanPham.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageSanPham_ButtonSuaSanPham.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_ButtonSuaSanPham.Name = "TabPageSanPham_ButtonSuaSanPham";
+			this.TabPageSanPham_ButtonSuaSanPham.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageSanPham_ButtonSuaSanPham.Size = new System.Drawing.Size(129, 36);
+			this.TabPageSanPham_ButtonSuaSanPham.TabIndex = 6;
+			this.TabPageSanPham_ButtonSuaSanPham.Text = "Sửa sản phẩm";
+			this.TabPageSanPham_ButtonSuaSanPham.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageSanPham_ButtonSuaSanPham.UseAccentColor = false;
+			this.TabPageSanPham_ButtonSuaSanPham.UseVisualStyleBackColor = true;
+			// 
+			// TabPageSanPham_ButtonTimKiem
+			// 
+			this.TabPageSanPham_ButtonTimKiem.AutoSize = false;
+			this.TabPageSanPham_ButtonTimKiem.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageSanPham_ButtonTimKiem.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageSanPham_ButtonTimKiem.Depth = 0;
+			this.TabPageSanPham_ButtonTimKiem.HighEmphasis = true;
+			this.TabPageSanPham_ButtonTimKiem.Icon = null;
+			this.TabPageSanPham_ButtonTimKiem.Location = new System.Drawing.Point(350, 614);
+			this.TabPageSanPham_ButtonTimKiem.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageSanPham_ButtonTimKiem.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_ButtonTimKiem.Name = "TabPageSanPham_ButtonTimKiem";
+			this.TabPageSanPham_ButtonTimKiem.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageSanPham_ButtonTimKiem.Size = new System.Drawing.Size(129, 36);
+			this.TabPageSanPham_ButtonTimKiem.TabIndex = 5;
+			this.TabPageSanPham_ButtonTimKiem.Text = "Tìm kiếm";
+			this.TabPageSanPham_ButtonTimKiem.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageSanPham_ButtonTimKiem.UseAccentColor = false;
+			this.TabPageSanPham_ButtonTimKiem.UseVisualStyleBackColor = true;
+			// 
+			// TabPageSanPham_RJDateTimePickerMin
+			// 
+			this.TabPageSanPham_RJDateTimePickerMin.BorderColor = System.Drawing.Color.PaleVioletRed;
+			this.TabPageSanPham_RJDateTimePickerMin.BorderSize = 0;
+			this.TabPageSanPham_RJDateTimePickerMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+			this.TabPageSanPham_RJDateTimePickerMin.Location = new System.Drawing.Point(17, 492);
+			this.TabPageSanPham_RJDateTimePickerMin.MinimumSize = new System.Drawing.Size(0, 35);
+			this.TabPageSanPham_RJDateTimePickerMin.Name = "TabPageSanPham_RJDateTimePickerMin";
+			this.TabPageSanPham_RJDateTimePickerMin.Size = new System.Drawing.Size(219, 35);
+			this.TabPageSanPham_RJDateTimePickerMin.SkinColor = System.Drawing.Color.MediumSlateBlue;
+			this.TabPageSanPham_RJDateTimePickerMin.TabIndex = 29;
+			this.TabPageSanPham_RJDateTimePickerMin.TextColor = System.Drawing.Color.White;
+			// 
+			// TabPageSanPham_RJDateTimePickerMax
+			// 
+			this.TabPageSanPham_RJDateTimePickerMax.BorderColor = System.Drawing.Color.PaleVioletRed;
+			this.TabPageSanPham_RJDateTimePickerMax.BorderSize = 0;
+			this.TabPageSanPham_RJDateTimePickerMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+			this.TabPageSanPham_RJDateTimePickerMax.Location = new System.Drawing.Point(263, 492);
+			this.TabPageSanPham_RJDateTimePickerMax.MinimumSize = new System.Drawing.Size(0, 35);
+			this.TabPageSanPham_RJDateTimePickerMax.Name = "TabPageSanPham_RJDateTimePickerMax";
+			this.TabPageSanPham_RJDateTimePickerMax.Size = new System.Drawing.Size(216, 35);
+			this.TabPageSanPham_RJDateTimePickerMax.SkinColor = System.Drawing.Color.MediumSlateBlue;
+			this.TabPageSanPham_RJDateTimePickerMax.TabIndex = 30;
+			this.TabPageSanPham_RJDateTimePickerMax.TextColor = System.Drawing.Color.White;
+			// 
+			// pieChart2
+			// 
+			this.pieChart2.InitialRotation = 0D;
+			this.pieChart2.IsClockwise = true;
+			this.pieChart2.Location = new System.Drawing.Point(400, 180);
+			this.pieChart2.MaxAngle = 360D;
+			this.pieChart2.MaxValue = null;
+			this.pieChart2.MinValue = 0D;
+			this.pieChart2.Name = "pieChart2";
+			this.pieChart2.Size = new System.Drawing.Size(231, 175);
+			this.pieChart2.TabIndex = 19;
+			this.pieChart2.Total = null;
+			// 
+			// pieChart1
+			// 
+			this.pieChart1.InitialRotation = 0D;
+			this.pieChart1.IsClockwise = true;
+			this.pieChart1.Location = new System.Drawing.Point(850, 180);
+			this.pieChart1.MaxAngle = 360D;
+			this.pieChart1.MaxValue = null;
+			this.pieChart1.MinValue = 0D;
+			this.pieChart1.Name = "pieChart1";
+			this.pieChart1.Size = new System.Drawing.Size(238, 175);
+			this.pieChart1.TabIndex = 18;
+			this.pieChart1.Total = null;
+			// 
+			// TabPagePhanTich_HoaDonBan_ShowBTN
+			// 
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Depth = 0;
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageKey = "icons8-download-48.png";
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageList = this.imageList1;
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Location = new System.Drawing.Point(399, 61);
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Name = "TabPagePhanTich_HoaDonBan_ShowBTN";
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Size = new System.Drawing.Size(70, 70);
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.TabIndex = 10;
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Text = "materialFloatingActionButton1";
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.UseVisualStyleBackColor = false;
+			// 
+			// TabPagePhanTich_HoaDonNhap_ShowBTN
+			// 
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Depth = 0;
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.ImageKey = "icons8-download-48.png";
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.ImageList = this.imageList1;
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Location = new System.Drawing.Point(899, 61);
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Name = "TabPagePhanTich_HoaDonNhap_ShowBTN";
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Size = new System.Drawing.Size(70, 70);
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.TabIndex = 9;
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Text = "materialFloatingActionButton2";
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.UseVisualStyleBackColor = false;
+			// 
+			// cartesianChart2
+			// 
+			this.cartesianChart2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cartesianChart2.Location = new System.Drawing.Point(18, 18);
+			this.cartesianChart2.Name = "cartesianChart2";
+			this.cartesianChart2.Size = new System.Drawing.Size(594, 280);
+			this.cartesianChart2.TabIndex = 1;
+			// 
+			// cartesianChart1
+			// 
+			this.cartesianChart1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cartesianChart1.Location = new System.Drawing.Point(18, 18);
+			this.cartesianChart1.Name = "cartesianChart1";
+			this.cartesianChart1.Size = new System.Drawing.Size(648, 280);
+			this.cartesianChart1.TabIndex = 0;
+			// 
+			// TabPageSanPham_NhapMoiSanPham
+			// 
+			this.TabPageSanPham_NhapMoiSanPham.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageSanPham_NhapMoiSanPham.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageSanPham_NhapMoiSanPham.Depth = 0;
+			this.TabPageSanPham_NhapMoiSanPham.HighEmphasis = true;
+			this.TabPageSanPham_NhapMoiSanPham.Icon = null;
+			this.TabPageSanPham_NhapMoiSanPham.Location = new System.Drawing.Point(186, 571);
+			this.TabPageSanPham_NhapMoiSanPham.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageSanPham_NhapMoiSanPham.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_NhapMoiSanPham.Name = "TabPageSanPham_NhapMoiSanPham";
+			this.TabPageSanPham_NhapMoiSanPham.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageSanPham_NhapMoiSanPham.Size = new System.Drawing.Size(171, 36);
+			this.TabPageSanPham_NhapMoiSanPham.TabIndex = 31;
+			this.TabPageSanPham_NhapMoiSanPham.Text = "Nhập mới sản phẩm";
+			this.TabPageSanPham_NhapMoiSanPham.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageSanPham_NhapMoiSanPham.UseAccentColor = false;
+			this.TabPageSanPham_NhapMoiSanPham.UseVisualStyleBackColor = true;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2661,6 +3134,7 @@ namespace WinformWithExternalLibrary
 			this.TabPageHoaDonNhap.ResumeLayout(false);
 			this.TabPageKhachHang.ResumeLayout(false);
 			this.TabPageNhaCungCap.ResumeLayout(false);
+			this.TabPageSanPham.ResumeLayout(false);
 			this.TabPagePhanTich.ResumeLayout(false);
 			this.TabPagePhanTich.PerformLayout();
 			this.materialCard9.ResumeLayout(false);
@@ -2679,6 +3153,8 @@ namespace WinformWithExternalLibrary
 			this.materialCard4.ResumeLayout(false);
 			this.materialCard1.ResumeLayout(false);
 			this.materialCard1.PerformLayout();
+			this.materialCard10.ResumeLayout(false);
+			this.materialCard10.PerformLayout();
 			this.ResumeLayout(false);
 
         }
@@ -2870,5 +3346,35 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.ColumnHeader columnHeader22;
 		private System.Windows.Forms.ColumnHeader columnHeader24;
 		private System.Windows.Forms.ColumnHeader columnHeader23;
+		private MaterialSkin.Controls.MaterialListView materialListView2;
+		private System.Windows.Forms.ColumnHeader columnHeader25;
+		private System.Windows.Forms.ColumnHeader columnHeader26;
+		private System.Windows.Forms.ColumnHeader columnHeader27;
+		private System.Windows.Forms.ColumnHeader columnHeader28;
+		private System.Windows.Forms.ColumnHeader columnHeader29;
+		private System.Windows.Forms.ColumnHeader columnHeader30;
+		private System.Windows.Forms.ColumnHeader columnHeader31;
+		private MaterialSkin.Controls.MaterialCard materialCard10;
+		private _Utilities.RJDatePicker TabPageSanPham_RJDateTimePickerMax;
+		private _Utilities.RJDatePicker TabPageSanPham_RJDateTimePickerMin;
+		private MaterialSkin.Controls.MaterialButton TabPageSanPham_ButtonXuatRaFileExcel;
+		private MaterialSkin.Controls.MaterialTextBox TabPageSanPham_SoLuongTonKhoMax;
+		private MaterialSkin.Controls.MaterialTextBox TabPageSanPham_DonGiaNhapMax;
+		private MaterialSkin.Controls.MaterialLabel TabPageSanPham_LabelThoiGianBaoHanh;
+		private MaterialSkin.Controls.MaterialLabel TabPageSanPham_LabelDonGiaNhap;
+		private MaterialSkin.Controls.MaterialTextBox TabPageSanPham_SoLuongTonKhoMin;
+		private MaterialSkin.Controls.MaterialTextBox TabPageSanPham_DonGiaNhapMin;
+		private MaterialSkin.Controls.MaterialTextBox TabPageSanPham_DonGiaBanMax;
+		private MaterialSkin.Controls.MaterialTextBox TabPageSanPham_TenSanPham;
+		private MaterialSkin.Controls.MaterialLabel TabPageSanPham_LabelSoLuongTonKho;
+		private MaterialSkin.Controls.MaterialLabel TabPageSanPham_LabelDonGiaBan;
+		private MaterialSkin.Controls.MaterialTextBox TabPageSanPham_DonGiaBanMin;
+		private MaterialSkin.Controls.MaterialScrollBar materialScrollBar2;
+		private MaterialSkin.Controls.MaterialButton TabPageSanPham_ButtonXoaSanPham;
+		private MaterialSkin.Controls.MaterialButton TabPageSanPham_ButtonThemSanPham;
+		private MaterialSkin.Controls.MaterialTextBox TabPageSanPham_MaSanPham;
+		private MaterialSkin.Controls.MaterialButton TabPageSanPham_ButtonSuaSanPham;
+		private MaterialSkin.Controls.MaterialButton TabPageSanPham_ButtonTimKiem;
+		private MaterialSkin.Controls.MaterialButton TabPageSanPham_NhapMoiSanPham;
 	}
 }

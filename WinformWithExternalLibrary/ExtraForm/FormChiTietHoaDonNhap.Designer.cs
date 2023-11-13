@@ -41,8 +41,8 @@
 			this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.PhanTichDVO_HDN_DP = new WinformWithExternalLibrary._Utilities.RJDatePicker();
 			this.ChiTietHoaDonNhapExelBtn = new MaterialSkin.Controls.MaterialButton();
+			this.PhanTichDVO_HDN_DP = new WinformWithExternalLibrary._Utilities.RJDatePicker();
 			this.SuspendLayout();
 			// 
 			// PhanTichDVO_HDN_TimKiemIP
@@ -127,7 +127,7 @@
 			// columnHeader1
 			// 
 			this.columnHeader1.Text = "Mã hóa đơn nhập";
-			this.columnHeader1.Width = 150;
+			this.columnHeader1.Width = 300;
 			// 
 			// columnHeader2
 			// 
@@ -169,20 +169,6 @@
 			this.columnHeader9.Text = "Ngày nhập";
 			this.columnHeader9.Width = 140;
 			// 
-			// PhanTichDVO_HDN_DP
-			// 
-			this.PhanTichDVO_HDN_DP.BorderColor = System.Drawing.Color.PaleVioletRed;
-			this.PhanTichDVO_HDN_DP.BorderSize = 0;
-			this.PhanTichDVO_HDN_DP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-			this.PhanTichDVO_HDN_DP.Location = new System.Drawing.Point(198, 660);
-			this.PhanTichDVO_HDN_DP.Margin = new System.Windows.Forms.Padding(4);
-			this.PhanTichDVO_HDN_DP.MinimumSize = new System.Drawing.Size(4, 35);
-			this.PhanTichDVO_HDN_DP.Name = "PhanTichDVO_HDN_DP";
-			this.PhanTichDVO_HDN_DP.Size = new System.Drawing.Size(303, 35);
-			this.PhanTichDVO_HDN_DP.SkinColor = System.Drawing.Color.PaleVioletRed;
-			this.PhanTichDVO_HDN_DP.TabIndex = 15;
-			this.PhanTichDVO_HDN_DP.TextColor = System.Drawing.Color.WhiteSmoke;
-			// 
 			// ChiTietHoaDonNhapExelBtn
 			// 
 			this.ChiTietHoaDonNhapExelBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -204,6 +190,20 @@
 			this.ChiTietHoaDonNhapExelBtn.UseAccentColor = false;
 			this.ChiTietHoaDonNhapExelBtn.UseVisualStyleBackColor = true;
 			// 
+			// PhanTichDVO_HDN_DP
+			// 
+			this.PhanTichDVO_HDN_DP.BorderColor = System.Drawing.Color.PaleVioletRed;
+			this.PhanTichDVO_HDN_DP.BorderSize = 0;
+			this.PhanTichDVO_HDN_DP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+			this.PhanTichDVO_HDN_DP.Location = new System.Drawing.Point(198, 660);
+			this.PhanTichDVO_HDN_DP.Margin = new System.Windows.Forms.Padding(4);
+			this.PhanTichDVO_HDN_DP.MinimumSize = new System.Drawing.Size(4, 35);
+			this.PhanTichDVO_HDN_DP.Name = "PhanTichDVO_HDN_DP";
+			this.PhanTichDVO_HDN_DP.Size = new System.Drawing.Size(303, 35);
+			this.PhanTichDVO_HDN_DP.SkinColor = System.Drawing.Color.PaleVioletRed;
+			this.PhanTichDVO_HDN_DP.TabIndex = 15;
+			this.PhanTichDVO_HDN_DP.TextColor = System.Drawing.Color.WhiteSmoke;
+			// 
 			// FormChiTietHoaDonNhap
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -214,7 +214,7 @@
 			this.Controls.Add(this.PhanTichDVO_HDN_TimKiemIP);
 			this.Controls.Add(this.PhanTichDVO_HDN_TimKiemBtn);
 			this.Controls.Add(this.ChiTietHoaDonNhapLV);
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "FormChiTietHoaDonNhap";
 			this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
 			this.Text = "Danh sách hóa đơn nhập";

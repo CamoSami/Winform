@@ -110,21 +110,14 @@ namespace WinformWithExternalLibrary.ExtraForm
 		{
 			ChiTietHoaDonNhapExelBtn.Click += (object sender, EventArgs e) =>
 			{
-				try
-				{
-					DataTable dataTable = this.phanTichDAO.GetBillOfImportInfomationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
-					this.exportTableData.ExportToExcel(
-						dataTable: dataTable,
-						workSheetName: "Chi tiết hóa đơn nhập",
-						filePath: ""
-					);
+				DataTable dataTable = this.phanTichDAO.GetBillOfImportInfomationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
 
-					MaterialMessageBox.Show("Xuất dữ liệu thành công", "Message", UseRichTextBox: false);
-				}
-				catch (Exception)
-				{
-					MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error", UseRichTextBox: false);
-				}
+				this.exportTableData.ExportToExcel(
+					dataTable: dataTable,
+					workSheetName: "HoaDonNhap_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year,
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.HoaDonNhap
+				);
 			};
 		}
 	}

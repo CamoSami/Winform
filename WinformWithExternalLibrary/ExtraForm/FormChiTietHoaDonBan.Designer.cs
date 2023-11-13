@@ -84,7 +84,7 @@
 			this.PhanTichDVO_HDB_TimKiemIP.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.PhanTichDVO_HDB_TimKiemIP.Depth = 0;
 			this.PhanTichDVO_HDB_TimKiemIP.DetectUrls = false;
-			this.PhanTichDVO_HDB_TimKiemIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.PhanTichDVO_HDB_TimKiemIP.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.PhanTichDVO_HDB_TimKiemIP.LeadingIcon = null;
 			this.PhanTichDVO_HDB_TimKiemIP.Location = new System.Drawing.Point(23, 12);
 			this.PhanTichDVO_HDB_TimKiemIP.Margin = new System.Windows.Forms.Padding(4);
@@ -181,7 +181,7 @@
 			// columnHeader1
 			// 
 			this.columnHeader1.Text = "Mã hóa đơn bán";
-			this.columnHeader1.Width = 150;
+			this.columnHeader1.Width = 300;
 			// 
 			// columnHeader2
 			// 
@@ -210,8 +210,8 @@
 			// 
 			// columnHeader7
 			// 
-			this.columnHeader7.Text = "Giảm giá";
-			this.columnHeader7.Width = 130;
+			this.columnHeader7.Text = "Tên Giảm giá";
+			this.columnHeader7.Width = 175;
 			// 
 			// columnHeader8
 			// 
@@ -230,7 +230,7 @@
 			this.ClientSize = new System.Drawing.Size(1241, 729);
 			this.Controls.Add(this.materialCard1);
 			this.Controls.Add(this.ChiTietHoaDonBanLV);
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "FormChiTietHoaDonBan";
 			this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
 			this.Text = "Danh sách hóa đơn bán";
