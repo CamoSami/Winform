@@ -308,6 +308,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="_Utilities\GetDateTime.cs" />
     <Compile Include="_Utilities\RJDatePicker.cs">
       <SubType>Component</SubType>
     </Compile>

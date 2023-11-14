@@ -18,7 +18,12 @@ namespace WinformWithExternalLibrary._DataProvider
 	public class BogusAmogus
 	{
 
-		private string[] stringGioiTinh = new string[] { "Nam", "Nữ" };
+		private readonly string[] stringGioiTinh = new string[] { "Nam", "Nữ" };
+
+		private int soLuongSP_ChiTietHDBanDTO_Min = 1;
+		private int soLuongSP_ChiTietHDBanDTO_Max = 5;
+		private int soLuongSP_ChiTietHDNhapDTO_Min = 4;
+		private int soLuongSP_ChiTietHDNhapDTO_Max = 20;
 
 		public class ThuBongName
 		{
@@ -45,20 +50,24 @@ namespace WinformWithExternalLibrary._DataProvider
 			int soLuong_DMSanPhamDTO = 200;
 			int soLuong_NhanVienDTO = 40;
 			int soLuong_NhaCungCapDTO = 40;
-			int soLuong_HoaDonNhapDTO = 400;
 			int soLuong_KhachHangDTO = 200;
-			int soLuong_HoaDonBanDTO = 2000;
+			int soLuong_HoaDonNhapDTO_EachProvder_Min = 20;
+			int soLuong_HoaDonNhapDTO_EachProvder_Max = 50;
+			int soLuong_HoaDonBanDTO_EachCustomer_Min = 4;
+			int soLuong_HoaDonBanDTO_EachCustomer_Max = 10;
+			int soLuong_HoaDonBanDTO_NoCustomer = 1600;
 
 			this.Generate_CongViecDTO();
 			this.Generate_DMSanPhamDTO(soLuong_DMSanPhamDTO);
 			this.Generate_NhanVienDTO(soLuong_NhanVienDTO);
 			this.Generate_GiamGiaDTO();
 			this.Generate_NhaCungCapDTO(soLuong_NhaCungCapDTO);
-			this.Generate_HoaDonNhapDTO(soLuong_HoaDonNhapDTO);
 			this.Generate_KhachHangDTO(soLuong_KhachHangDTO);
-			this.Generate_HoaDonBanDTO(soLuong_HoaDonBanDTO);
-			this.Generate_ChiTietHDNhapDTO();
+			this.Generate_HoaDonNhapDTO_EachProvider(soLuong_HoaDonNhapDTO_EachProvder_Min, soLuong_HoaDonNhapDTO_EachProvder_Max);
+			this.Generate_HoaDonBanDTO_NoCustomer(soLuong_HoaDonBanDTO_NoCustomer);
+			this.Generate_HoaDonBanDTO_EachCustomer(soLuong_HoaDonBanDTO_EachCustomer_Min, soLuong_HoaDonBanDTO_EachCustomer_Max);
 			this.Generate_ChiTietHDBanDTO();
+			this.Generate_ChiTietHDNhapDTO();
 		}
 
 		private void Generate_DMSanPhamDTO(int soLuong)
@@ -450,7 +459,41 @@ namespace WinformWithExternalLibrary._DataProvider
 			faker.Generate(soLuong);
 		}
 
-		private void Generate_HoaDonNhapDTO(int soLuong)
+		private void Generate_KhachHangDTO(int soLuong)
+		{
+			Faker<KhachHangDTO> faker = new Faker<KhachHangDTO>(locale: "vi")
+				.StrictMode(true)
+				.RuleFor(DTO => DTO.KhachHangDTO_MaKhachHang, (f, DTO) => DTO.KhachHangDTO_MaKhachHang = Guid.NewGuid())
+					.RuleFor(u => u.KhachHangDTO_TenKhachHang, f => f.Name.LastName() + " " + f.Name.FirstName())
+					.RuleFor(u => u.KhachHangDTO_DienThoai, f => f.Phone.PhoneNumber(format: "##########"))
+					.RuleFor(u => u.KhachHangDTO_DiaChi, f => f.Address.StreetAddress())
+					.FinishWith((f, DTO) =>
+					{
+						string queryString = $"INSERT INTO {DataProvider.KHACHHANG_TABLE} " +
+						$"(MaKhachHang, TenKhachHang, DienThoai, DiaChi) VALUES (" +
+						$"{this.GetString(DTO.KhachHangDTO_MaKhachHang)}," +
+						$"{this.GetString(DTO.KhachHangDTO_TenKhachHang)}," +
+						$"{this.GetString(DTO.KhachHangDTO_DienThoai)}," +
+						$"{this.GetString(DTO.KhachHangDTO_DiaChi)}" +
+						$")";
+
+						DataProvider.Instance.ExecuteNonQuery(queryString);
+					});
+
+			faker.Generate(soLuong);
+
+			string queryStringXd = $"INSERT INTO {DataProvider.KHACHHANG_TABLE} " +
+						$"(MaKhachHang, TenKhachHang, DienThoai, DiaChi) VALUES (" +
+						$"{this.GetString(Guid.NewGuid())}," +
+						$"{this.GetString("Ngô Sách Minh Hiếu")}," +
+						$"{this.GetString("0977255636")}," +
+						$"{this.GetString("Làng Vòng, Cầu Giấy, Hà Nội")}" +
+						$")";
+
+			DataProvider.Instance.ExecuteNonQuery(queryStringXd);
+		}
+
+		private void Generate_HoaDonNhapDTO_EachProvider(int soLuongMin, int soLuongMax)
 		{
 			string queryStringMaNhaCungCap = $"SELECT MaNhaCungCap FROM {DataProvider.NHACUNGCAP_TABLE}";
 
@@ -487,14 +530,109 @@ namespace WinformWithExternalLibrary._DataProvider
 
 			DateTime dateTimeMin = new DateTime(year: 2023, month: 9, day: 1);
 
-			Faker<HoaDonNhapDTO> faker = new Faker<HoaDonNhapDTO>(locale: "vi")
-				.StrictMode(true)
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaHDNhap, (f, DTO) => DTO.HoaDonNhapDTO_MaHDNhap = Guid.NewGuid())
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhaCungCap, f => f.PickRandom(tempMaNhaCungCap))
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_NgayNhap, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
-				.RuleFor(DTO => DTO.HoaDonNhapDTO_TongTien, f => f.Random.Number(min: 5000, max: 50000))
+			Random random = new Random();
+
+			foreach (Guid maNhaCungCap in tempMaNhaCungCap)
+			{
+				Faker<HoaDonNhapDTO> faker = new Faker<HoaDonNhapDTO>(locale: "vi")
+					.StrictMode(true)
+					.RuleFor(DTO => DTO.HoaDonNhapDTO_MaHDNhap, (f, DTO) => DTO.HoaDonNhapDTO_MaHDNhap = Guid.NewGuid())
+					.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhaCungCap, (f, DTO) => DTO.HoaDonNhapDTO_MaNhaCungCap = maNhaCungCap)
+					.RuleFor(DTO => DTO.HoaDonNhapDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
+					.RuleFor(DTO => DTO.HoaDonNhapDTO_NgayNhap, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
+					.RuleFor(DTO => DTO.HoaDonNhapDTO_SoSanPham, f => f.Random.Number
+						(
+						min: this.soLuongSP_ChiTietHDNhapDTO_Min, 
+						max: this.soLuongSP_ChiTietHDNhapDTO_Max
+						))
+					.RuleFor(DTO => DTO.HoaDonNhapDTO_TongTien, f => f.Random.Number(min: 5000, max: 50000))
+					.FinishWith((f, DTO) =>
+					{
+						//Debug.WriteLine($"\n{this.GetString(DTO.HoaDonNhapDTO_MaNhaCungCap)}" +
+						//	$"\n{this.GetString(DTO.HoaDonNhapDTO_MaNhanVien)}" +
+						//	$"\n{this.GetString(DTO.HoaDonNhapDTO_NgayNhap)}" +
+						//	$"\n{DTO.HoaDonNhapDTO_GiamGia * 1000}" +
+						//	$"\n{DTO.HoaDonNhapDTO_TongTien * 1000}");
+
+						string queryString = $"INSERT INTO {DataProvider.HOADONNHAP_TABLE} " +
+						$"(MaHDNHap, MaNhaCungCap, MaNhanVien, NgayNhap, SoSanPham, TongTien) VALUES (" +
+						$"{this.GetString(DTO.HoaDonNhapDTO_MaHDNhap)}," +
+						$"{this.GetString(DTO.HoaDonNhapDTO_MaNhaCungCap)}," +
+						$"{this.GetString(DTO.HoaDonNhapDTO_MaNhanVien)}," +
+						$"{this.GetString(DTO.HoaDonNhapDTO_NgayNhap)}," +
+						$"{DTO.HoaDonNhapDTO_SoSanPham}," +
+						$"{DTO.HoaDonNhapDTO_TongTien * 100}" +
+						$")";
+
+						DataProvider.Instance.ExecuteNonQuery(queryString);
+					});
+
+				int genCount = random.Next(soLuongMin, soLuongMax);
+
+				faker.Generate(genCount);
+			}
+
+		}
+
+		private void Generate_HoaDonBanDTO_NoCustomer(int soLuong)
+		{
+			string queryStringMaGiamGia = $"SELECT MaGiamGia FROM {DataProvider.GIAMGIA_TABLE}";
+
+			DataTable dataTableMaGiamGia = DataProvider.Instance.ExecuteQuery(queryStringMaGiamGia);
+			List<Guid> tempMaGiamGia = new List<Guid>();
+
+			foreach (DataRow dataRow in dataTableMaGiamGia.Rows)
+			{
+				Guid.TryParse(dataRow[0].ToString(), out Guid tempGuid);
+
+				tempMaGiamGia.Add(tempGuid);
+			}
+
+			//Debug.WriteLine("\n\n");
+
+			string queryStringMaNhanVien = $"SELECT MaNhanVien FROM {DataProvider.NHANVIEN_TABLE} " +
+				$"JOIN {DataProvider.CONGVIEC_TABLE} " +
+				$"ON {DataProvider.NHANVIEN_TABLE}.MaCongViec = {DataProvider.CONGVIEC_TABLE}.MaCongViec " +
+				$"WHERE TenCongViec = N'Thu ngân'";
+
+			DataTable dataTableMaNhanVien = DataProvider.Instance.ExecuteQuery(queryStringMaNhanVien);
+			List<Guid> tempMaNhanVien = new List<Guid>();
+
+			foreach (DataRow dataRow in dataTableMaNhanVien.Rows)
+			{
+				Guid.TryParse(dataRow[0].ToString(), out Guid tempGuid);
+
+				tempMaNhanVien.Add(tempGuid);
+
+				//Debug.WriteLine(tempGuid);
+			}
+
+			DateTime dateTimeMin = new DateTime(year: 2023, month: 9, day: 1);
+
+			int[] tempChiaTongTien = new int[]
+			{
+				10,
+				20,
+				50,
+				100,
+				200,
+				500,
+				1000,
+				2000,
+				5000
+			};
+
+			Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
+				.RuleFor(DTO => DTO.HoaDonBanDTO_MaHDBan, (f, DTO) => DTO.HoaDonBanDTO_MaHDBan = Guid.NewGuid())
+				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, (f, DTO) => DTO.HoaDonBanDTO_MaKhachHang = null)
+				.RuleFor(DTO => DTO.HoaDonBanDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
+				.RuleFor(DTO => DTO.HoaDonBanDTO_NgayBan, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
+				.RuleFor(DTO => DTO.HoaDonBanDTO_SoSanPham, f => f.Random.Number
+					(
+					min: this.soLuongSP_ChiTietHDBanDTO_Min, 
+					max: this.soLuongSP_ChiTietHDBanDTO_Max
+					))
+				.RuleFor(DTO => DTO.HoaDonBanDTO_TongTien, f => f.Random.Number(min: 2000, max: 50000))
 				.FinishWith((f, DTO) =>
 				{
 					//Debug.WriteLine($"\n{this.GetString(DTO.HoaDonNhapDTO_MaNhaCungCap)}" +
@@ -503,57 +641,44 @@ namespace WinformWithExternalLibrary._DataProvider
 					//	$"\n{DTO.HoaDonNhapDTO_GiamGia * 1000}" +
 					//	$"\n{DTO.HoaDonNhapDTO_TongTien * 1000}");
 
-					string queryString = $"INSERT INTO {DataProvider.HOADONNHAP_TABLE} " +
-					$"(MaHDNHap, MaNhaCungCap, MaNhanVien, NgayNhap, SoSanPham, TongTien) VALUES (" +
-					$"{this.GetString(DTO.HoaDonNhapDTO_MaHDNhap)}," +
-					$"{this.GetString(DTO.HoaDonNhapDTO_MaNhaCungCap)}," +
-					$"{this.GetString(DTO.HoaDonNhapDTO_MaNhanVien)}," +
-					$"{this.GetString(DTO.HoaDonNhapDTO_NgayNhap)}," +
-					$"{DTO.HoaDonNhapDTO_SoSanPham}," +
-					$"{DTO.HoaDonNhapDTO_TongTien * 100}" +
-					$")";
+					int intPickRandom = f.PickRandom(tempChiaTongTien);
 
+					DTO.HoaDonBanDTO_TongTienKhachTra = (long)Math.Ceiling(DTO.HoaDonBanDTO_TongTien / (1.0f * intPickRandom)) * intPickRandom;
+					//Debug.WriteLine("\n\n" + DTO.HoaDonBanDTO_TongTienKhachTra);
+
+					DateTime minGiamGia1 = new DateTime(day: 20, month: 5, year: 2023);
+					DateTime maxGiamGia1 = new DateTime(day: 10, month: 6, year: 2023); 
+					DateTime minGiamGia2 = new DateTime(day: 1, month: 11, year: 2023);
+					DateTime maxGiamGia2 = new DateTime(day: 30, month: 11, year: 2023);
+
+					if (DTO.HoaDonBanDTO_NgayBan > minGiamGia1 && DTO.HoaDonBanDTO_NgayBan < maxGiamGia1)
+					{
+						DTO.HoaDonBanDTO_MaGiamGia = tempMaGiamGia[0];
+					}
+					else if (DTO.HoaDonBanDTO_NgayBan > minGiamGia2 && DTO.HoaDonBanDTO_NgayBan < maxGiamGia2)
+					{
+						DTO.HoaDonBanDTO_MaGiamGia = tempMaGiamGia[1];
+					}
+
+					string queryString = $"INSERT INTO {DataProvider.HOADONBAN_TABLE} " +
+							$"(MaHDBan, MaKhachHang, MaNhanVien, MaGiamGia, NgayBan, SoSanPham, TongTien, TongTienKhachTra) VALUES (" +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaHDBan)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaKhachHang)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaNhanVien)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_MaGiamGia)}," +
+							$"{this.GetString(DTO.HoaDonBanDTO_NgayBan)}," +
+							$"{DTO.HoaDonBanDTO_SoSanPham}," +
+							$"{DTO.HoaDonBanDTO_TongTien * 100}," +
+							$"{DTO.HoaDonBanDTO_TongTienKhachTra}" +
+							$")";
+		
 					DataProvider.Instance.ExecuteNonQuery(queryString);
 				});
 
 			faker.Generate(soLuong);
 		}
 
-		private void Generate_KhachHangDTO(int soLuong)
-		{
-			Faker<KhachHangDTO> faker = new Faker<KhachHangDTO>(locale: "vi")
-				.StrictMode(true)
-				.RuleFor(DTO => DTO.KhachHangDTO_MaKhachHang, (f, DTO) => DTO.KhachHangDTO_MaKhachHang = Guid.NewGuid())
-					.RuleFor(u => u.KhachHangDTO_TenKhachHang, f => f.Name.LastName() + " " + f.Name.FirstName())
-					.RuleFor(u => u.KhachHangDTO_DienThoai, f => f.Phone.PhoneNumber(format: "##########"))
-					.RuleFor(u => u.KhachHangDTO_DiaChi, f => f.Address.StreetAddress())
-					.FinishWith((f, DTO) =>
-					{
-						string queryString = $"INSERT INTO {DataProvider.KHACHHANG_TABLE} " +
-						$"(MaKhachHang, TenKhachHang, DienThoai, DiaChi) VALUES (" +
-						$"{this.GetString(DTO.KhachHangDTO_MaKhachHang)}," +
-						$"{this.GetString(DTO.KhachHangDTO_TenKhachHang)}," +
-						$"{this.GetString(DTO.KhachHangDTO_DienThoai)}," +
-						$"{this.GetString(DTO.KhachHangDTO_DiaChi)}" +
-						$")";
-
-						DataProvider.Instance.ExecuteNonQuery(queryString);
-					});
-
-			faker.Generate(soLuong);
-
-			string queryStringXd = $"INSERT INTO {DataProvider.KHACHHANG_TABLE} " +
-						$"(MaKhachHang, TenKhachHang, DienThoai, DiaChi) VALUES (" +
-						$"{this.GetString(Guid.NewGuid())}," +
-						$"{this.GetString("Ngô Sách Minh Hiếu")}," +
-						$"{this.GetString("0977255636")}," +
-						$"{this.GetString("Làng Vòng, Cầu Giấy, Hà Nội")}" +
-						$")";
-
-			DataProvider.Instance.ExecuteNonQuery(queryStringXd);
-		}
-
-		private void Generate_HoaDonBanDTO(int soLuong)
+		private void Generate_HoaDonBanDTO_EachCustomer(int soLuongMin, int soLuongMax)
 		{
 			string queryStringMaGiamGia = $"SELECT MaGiamGia FROM {DataProvider.GIAMGIA_TABLE}";
 
@@ -615,12 +740,20 @@ namespace WinformWithExternalLibrary._DataProvider
 				5000
 			};
 
-			Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
+			Random random = new Random();
+
+			foreach (Guid maKhachHang in tempMaKhachHang)
+			{
+				Faker<HoaDonBanDTO> faker = new Faker<HoaDonBanDTO>(locale: "vi")
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaHDBan, (f, DTO) => DTO.HoaDonBanDTO_MaHDBan = Guid.NewGuid())
-				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, f => f.PickRandom(tempMaKhachHang).OrNull(f: f, nullWeight: 0.9f))
+				.RuleFor(DTO => DTO.HoaDonBanDTO_MaKhachHang, (f, DTO) => DTO.HoaDonBanDTO_MaKhachHang = maKhachHang)
 				.RuleFor(DTO => DTO.HoaDonBanDTO_MaNhanVien, f => f.PickRandom(tempMaNhanVien))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_NgayBan, f => f.Date.Between(start: dateTimeMin, end: DateTime.Now))
-				.RuleFor(DTO => DTO.HoaDonBanDTO_SoSanPham, f => f.Random.Number(min: 1, max: 4))
+				.RuleFor(DTO => DTO.HoaDonBanDTO_SoSanPham, f => f.Random.Number
+					(
+					min: this.soLuongSP_ChiTietHDBanDTO_Min, 
+					max: this.soLuongSP_ChiTietHDBanDTO_Max
+					))
 				.RuleFor(DTO => DTO.HoaDonBanDTO_TongTien, f => f.Random.Number(min: 2000, max: 50000))
 				.FinishWith((f, DTO) =>
 				{
@@ -636,7 +769,7 @@ namespace WinformWithExternalLibrary._DataProvider
 					//Debug.WriteLine("\n\n" + DTO.HoaDonBanDTO_TongTienKhachTra);
 
 					DateTime minGiamGia1 = new DateTime(day: 20, month: 5, year: 2023);
-					DateTime maxGiamGia1 = new DateTime(day: 10, month: 6, year: 2023); 
+					DateTime maxGiamGia1 = new DateTime(day: 10, month: 6, year: 2023);
 					DateTime minGiamGia2 = new DateTime(day: 1, month: 11, year: 2023);
 					DateTime maxGiamGia2 = new DateTime(day: 30, month: 11, year: 2023);
 
@@ -660,11 +793,14 @@ namespace WinformWithExternalLibrary._DataProvider
 							$"{DTO.HoaDonBanDTO_TongTien * 100}," +
 							$"{DTO.HoaDonBanDTO_TongTienKhachTra}" +
 							$")";
-		
+
 					DataProvider.Instance.ExecuteNonQuery(queryString);
 				});
 
-			faker.Generate(soLuong);
+				int genCount = random.Next(soLuongMin, soLuongMax);
+
+				faker.Generate(genCount);
+			}
 		}
 
 		private void Generate_ChiTietHDNhapDTO()

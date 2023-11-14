@@ -16,32 +16,31 @@ namespace WinformWithExternalLibrary.ExtraForm
 {
 	public partial class FormListSellBill : MaterialForm
 	{
-		string KhachHang_MaKhachHang;
+		private string KhachHang_SoDienThoai;
+		private readonly ExportTableData exportTableData = new ExportTableData();
 
-		ExportTableData exportTableData = new ExportTableData();
-
-		public FormListSellBill(string KhachHang_MaKhachHang)
+		public FormListSellBill(string KhachHang_SoDienThoai)
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 
-			this.KhachHang_MaKhachHang = KhachHang_MaKhachHang;
+			this.KhachHang_SoDienThoai = KhachHang_SoDienThoai;
 
 			//Debug.WriteLine("FormListSellBill.MaKhachHang: " + KhachHang_MaKhachHang);
 
 			this.Load += (obj, e) =>
 			{
-				Process();
+				this.Process();
 			};
 
-			this.materialButton_SPTrongDonBan.Click += MaterialButton_SPTrongDonBan_Click;
+			this.materialButton_XuatLS.Click += this.MaterialButton_XuatLS_Click;
 
-			this.materialButton_XuatLS.Click += MaterialButton_XuatLS_Click;
+			this.materialButton_XuatBill.Click += this.MaterialButton_XuatBill_Click;
 
-			this.materialButton_XuatBill.Click += MaterialButton_XuatBill_Click;
+			this.materialListView_LichSuMuaHang.SelectedIndexChanged += this.MaterialListView_LichSuMuaHang_SelectedIndexChanged;
 
 			this.materialButton_Exit.Click += (obj, e) =>
 			{
-				if (ShowMessageBoxYesNo("Bạn có muốn thoát khỏi lịch sử khách hàng không?"))
+				if (this.ShowMessageBoxYesNo("Bạn có muốn thoát khỏi lịch sử khách hàng không?"))
 				{
 					this.Close();
 				}
@@ -60,100 +59,79 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 					string HoaDon_MaHoaDon = listViewItem.SubItems[1].Text;
 
-					try
-					{
-						DataTable Bill = ChiTietHDBanDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
-						this.exportTableData.ExportToExcel(
-							dataTable: Bill,
-							workSheetName: $"Lịch sử mua hàng - Khách hàng có mã {KhachHang_MaKhachHang}",
-							filePath: ""
-						);
+					DataTable Bill = ChiTietHDBanDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
 
-						MaterialMessageBox.Show("Xuất dữ liệu thành công", "Message", UseRichTextBox: false);
-					}
-					catch (Exception)
-					{
-						MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error", UseRichTextBox: false);
-					}
+					this.exportTableData.ExportToExcel(
+						dataTable: Bill,
+						workSheetName: $"ChiTietHDBan_{HoaDon_MaHoaDon.Split('-')[0]}",
+						filePath: ""
+					);
 				}
 			}
 			catch (Exception)
 			{
-				ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!");
+				this.ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!");
 			}
 		}
 
 		private void MaterialButton_XuatLS_Click(object sender, EventArgs e)
 		{
-			try
-			{
-				DataTable DTBill = HoaDonBanDAO.Instance.HoaDonBanInformationFromMaKhachHang(KhachHang_MaKhachHang);
-				
-				foreach (DataRow row in DTBill.Rows) 
-				{
-					foreach (object obj in row.ItemArray)
-					{
-						//Debug.WriteLine(obj.ToString());
-					}
-				}
+			DataTable DTBill = HoaDonBanDAO.Instance.HoaDonBanInformationFromSoDienThoai(KhachHang_SoDienThoai);
 
-				this.exportTableData.ExportToExcel(
-					dataTable: DTBill,
-					workSheetName: $"Lịch sử mua hàng - Khách hàng có mã {KhachHang_MaKhachHang}",
-					filePath: ""
-				);
+			//foreach (DataRow row in DTBill.Rows)
+			//{
+			//	foreach (object obj in row.ItemArray)
+			//	{
+			//		Debug.WriteLine(obj.ToString());
+			//	}
+			//}
 
-				MaterialMessageBox.Show("Xuất dữ liệu thành công", "Message", UseRichTextBox: false);
-			}
-			catch (Exception)
-			{
-				MaterialMessageBox.Show("Lỗi khi export dữ liệu", "Error", UseRichTextBox: false);
-			}
+			this.exportTableData.ExportToExcel(
+				dataTable: DTBill,
+				workSheetName: $"HoaDonBan_{KhachHang_SoDienThoai}",
+				filePath: ""
+			);
 
 		}
 
 
 
-		private void MaterialButton_SPTrongDonBan_Click(object sender, EventArgs e)
+		private void MaterialListView_LichSuMuaHang_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			try
+			this.materialListView_HangCoTrongBill.Items.Clear();
+
+			if (this.materialListView_LichSuMuaHang.SelectedIndices.Count <= 0)
 			{
-				this.materialListView_HangCoTrongBill.Items.Clear();
-
-				int index = this.materialListView_LichSuMuaHang.SelectedIndices[0];
-
-				if (index >= 0)
-				{
-					ListViewItem listViewItem = this.materialListView_LichSuMuaHang.Items[index];
-
-					string HoaDon_MaHoaDon = listViewItem.SubItems[1].Text;
-
-					DataTable Bill = ChiTietHDBanDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
-					ListViewItem item;
-
-					int cnt = 0;
-					foreach (DataRow row in Bill.Rows)
-					{
-						item = new ListViewItem();
-						cnt += 1;
-						item.SubItems[0].Text = cnt.ToString();
-						for (int i = 0; i < Bill.Columns.Count; i++)
-						{
-							item.SubItems.Add(row[i].ToString().Trim());
-						}
-						this.materialListView_HangCoTrongBill.Items.Add(item);
-					}
-				}
+				return;
 			}
-			catch (Exception)
+
+			int index = this.materialListView_LichSuMuaHang.SelectedIndices[0];
+
+			ListViewItem listViewItem = this.materialListView_LichSuMuaHang.Items[index];
+
+			string HoaDon_MaHoaDon = listViewItem.SubItems[1].Text;
+
+			DataTable Bill = ChiTietHDBanDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
+			ListViewItem item;
+
+			int cnt = 0;
+
+			foreach (DataRow row in Bill.Rows)
 			{
-				ShowMessageBox("Hãy chọn Bill có trên bảng trước khi xem chi tiết Bill!");
+				item = new ListViewItem();
+				cnt += 1;
+				item.SubItems[0].Text = cnt.ToString();
+				for (int i = 0; i < Bill.Columns.Count; i++)
+				{
+					item.SubItems.Add(row[i].ToString().Trim());
+				}
+				this.materialListView_HangCoTrongBill.Items.Add(item);
 			}
 		}
 
 		private void Process()
 		{
-			DataTable DTBill = HoaDonBanDAO.Instance.HoaDonBanInformationFromMaKhachHang(KhachHang_MaKhachHang);
+			DataTable DTBill = HoaDonBanDAO.Instance.HoaDonBanInformationFromSoDienThoai(KhachHang_SoDienThoai);
 			ListViewItem item;
 
 			int cnt = 0;

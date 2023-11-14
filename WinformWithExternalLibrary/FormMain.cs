@@ -38,14 +38,20 @@ namespace WinformWithExternalLibrary
 {
 	public partial class FormMain : MaterialForm
 	{
+		//		Instance
 		public static FormMain Instance { get; set; }
 
+		//		Sort
 		private readonly List<List<Control>> listOfControlsDVO = new List<List<Control>>();
 		private readonly List<List<Label>> listOfLabelsDVO = new List<List<Label>>();
 		private readonly List<List<bool>> isInterracted = new List<List<bool>>();
 
+		//		Utilities
 		private readonly FormatValues formatValues = new FormatValues();
+		private readonly GetDateTime getDateTime = new GetDateTime();
+		private readonly ExportTableData exportTableData = new ExportTableData();
 
+		//		Miscellaneous
 		private int lastTabPageIndex = 0;
 		private readonly DateTime dateTimeDefault = new DateTime
 			(
@@ -56,9 +62,6 @@ namespace WinformWithExternalLibrary
 
 		public FormMain()
 		{
-			//		TODO: Make Insert GiamGia
-			//		TODO: set up Event system for DAOs to update DataSource
-
 			//		NOTE: THIS ALWAYS GO FIRST
 			this.InitializeComponent();
 
@@ -100,14 +103,14 @@ namespace WinformWithExternalLibrary
 					//Debug.WriteLine(control.Name);
 
 					//		Label
-					if (control is Label tempLabel && control.Name.Contains("Validation"))
+					if (control is Label label && label.Name.Contains("Validation"))
 					{
 						//		Reset
-						tempLabel.Text = "";
+						label.Text = "";
 
 						//		For Validation
-						tempLabel.ForeColor = Color.Red;
-						tempLabel.Cursor = Cursors.Default;
+						label.ForeColor = Color.Red;
+						label.Cursor = Cursors.Default;
 					}
 					//		ComboBox
 					else if (control is ComboBox comboBox)
@@ -119,28 +122,34 @@ namespace WinformWithExternalLibrary
 						comboBox.SelectedIndex = -1;
 						comboBox.Text = "";
 					}
+					//		RJDatePicker
+					else if (control is RJDatePicker rJDatePicker)
+					{
+						rJDatePicker.SkinColor = System.Drawing.Color.PaleVioletRed;
+						rJDatePicker.BorderColor = System.Drawing.Color.PaleVioletRed;
+					}
 					//		DateTimePicker
-					else if (control is DateTimePicker tempDateTimePicker)
+					else if (control is DateTimePicker dateTimePicker)
 					{
 						//		Current Day = Now
-						tempDateTimePicker.Value = this.dateTimeDefault;
+						dateTimePicker.Value = this.dateTimeDefault;
 
 						//		Max Range = Now
-						tempDateTimePicker.MaxDate = this.dateTimeDefault;
+						dateTimePicker.MaxDate = this.dateTimeDefault;
 					}
 					//		MaterialListView
-					else if (control is MaterialListView tempMaterialListView)
+					else if (control is MaterialListView materialListView)
 					{
 						//		Selectable
-						tempMaterialListView.FullRowSelect = true;
-						tempMaterialListView.MultiSelect = true;
+						materialListView.FullRowSelect = true;
+						materialListView.MultiSelect = true;
 
 						//		Design
-						tempMaterialListView.GridLines = true;
-						tempMaterialListView.BorderStyle = BorderStyle.FixedSingle;
+						materialListView.GridLines = true;
+						materialListView.BorderStyle = BorderStyle.FixedSingle;
 
 						//		Extra
-						tempMaterialListView.Scrollable = true;
+						materialListView.Scrollable = true;
 					}
 				}
 			}
@@ -546,7 +555,7 @@ namespace WinformWithExternalLibrary
 				//		Nothing is picked isn't it
 				if (this.TabPageHoaDonNhap_MaterialListView.SelectedIndices.Count <= 0)
 				{
-					this.ShowMessageBox(message: "Xin vui lòng chọn sản phẩm cần xóa", this.GetTabPageControlSelectedIndex());
+					this.ShowMessageBox(message: "Xin vui lòng chọn sản phẩm cần xóa");
 
 					return;
 				}
@@ -582,7 +591,7 @@ namespace WinformWithExternalLibrary
 			//			TabPageHoaDonNhap_ButtonNhapMoiSanPham
 			this.TabPageHoaDonNhap_ButtonNhapMoiSanPham.Click += (obj, e) =>
 			{
-				if (this.ShowMessageBoxYesNo(message: "Bạn có muốn nhập mới sản phẩm không?", this.GetTabPageControlSelectedIndex()))
+				if (this.ShowMessageBoxYesNo(message: "Bạn có muốn nhập mới sản phẩm không?"))
 				{
 					this.ResetInputForControl(this.ChiTietHDNhapDVO_MaSanPham, false);
 
@@ -609,7 +618,7 @@ namespace WinformWithExternalLibrary
 					//		...Nothing?
 					if (this.TabPageHoaDonNhap_MaterialListView.Items.Count <= 0)
 					{
-						this.ShowMessageBox(message: "Chưa có sản phẩm trong đơn hàng", this.GetTabPageControlSelectedIndex());
+						this.ShowMessageBox(message: "Chưa có sản phẩm trong đơn hàng");
 
 						return;
 					}
@@ -634,7 +643,7 @@ namespace WinformWithExternalLibrary
 			//			TabPageHoaDonNhap_ButtonNhapMoiHoaDon
 			this.TabPageHoaDonNhap_ButtonNhapMoiHoaDon.Click += (obj, e) =>
 			{
-				if (this.ShowMessageBoxYesNo(message: "Bạn có chắc muốn nhập mới hóa đơn không?", this.GetTabPageControlSelectedIndex()))
+				if (this.ShowMessageBoxYesNo(message: "Bạn có chắc muốn nhập mới hóa đơn không?"))
 				{
 					this.ResetHoaDonNhapAndChiTietHDNhap();
 
@@ -836,7 +845,7 @@ namespace WinformWithExternalLibrary
 				//		Nothing is picked isn't it
 				if (this.TabPageHoaDonBan_MaterialListView.SelectedIndices.Count <= 0)
 				{
-					this.ShowMessageBox(message: "Xin vui lòng chọn sản phẩm cần xóa", this.GetTabPageControlSelectedIndex());
+					this.ShowMessageBox(message: "Xin vui lòng chọn sản phẩm cần xóa");
 
 					return;
 				}
@@ -872,7 +881,7 @@ namespace WinformWithExternalLibrary
 			//			TabPageHoaDonBan_ButtonTaoMoiSanPham
 			this.TabPageHoaDonBan_ButtonNhapMoiSanPham.Click += (obj, e) =>
 			{
-				if (this.ShowMessageBoxYesNo(message: "Bạn có muốn nhập mới sản phẩm không?", this.GetTabPageControlSelectedIndex()))
+				if (this.ShowMessageBoxYesNo(message: "Bạn có muốn nhập mới sản phẩm không?"))
 				{
 					this.ResetInputForControl(this.ChiTietHDBanDVO_MaSanPham, false);
 
@@ -902,7 +911,7 @@ namespace WinformWithExternalLibrary
 					//		...Nothing?
 					if (this.TabPageHoaDonBan_MaterialListView.Items.Count <= 0)
 					{
-						this.ShowMessageBox(message: "Chưa có sản phẩm trong đơn hàng", this.GetTabPageControlSelectedIndex());
+						this.ShowMessageBox(message: "Chưa có sản phẩm trong đơn hàng");
 
 						return;
 					}
@@ -915,7 +924,7 @@ namespace WinformWithExternalLibrary
 					FormConfirmHoaDonBan formConfirmHoaDonBan = new FormConfirmHoaDonBan(hoaDonBanDVO, nhanVienThuNganDVO);
 					formConfirmHoaDonBan.FormClosing += (_obj, _e) =>
 					{
-						this.ResetColorForLabel(this.GetTabPageControlSelectedIndex());
+						this.ResetColorForLabel();
 					};
 
 					formConfirmHoaDonBan.Show();
@@ -926,7 +935,7 @@ namespace WinformWithExternalLibrary
 			//			TabPageHoaDonBan_ButtonTaoMoiHoaDon
 			this.TabPageHoaDonBan_ButtonNhapMoiHoaDon.Click += (obj, e) =>
 			{
-				if (this.ShowMessageBoxYesNo(message: "Bạn có chắc muốn nhập mới hóa đơn không?", this.GetTabPageControlSelectedIndex()))
+				if (this.ShowMessageBoxYesNo(message: "Bạn có chắc muốn nhập mới hóa đơn không?"))
 				{
 					this.ResetHoaDonBanAndChiTietHDBan();
 
@@ -936,6 +945,8 @@ namespace WinformWithExternalLibrary
 		}
 
 		#endregion
+
+		#region Specialised Functions
 
 		//		Function
 
@@ -1040,7 +1051,7 @@ namespace WinformWithExternalLibrary
 
 				if (!DMSanPhamDAO.Instance.UpdateTruSoLuongTon(listViewItem.SubItems[1].Text, int.Parse(listViewItem.SubItems[3].Text)))
 				{
-					this.ShowMessageBox(message: "Trừ số lượng tồn bị lỗi", this.GetTabPageControlSelectedIndex());
+					this.ShowMessageBox(message: "Trừ số lượng tồn bị lỗi");
 				}
 			}
 
@@ -1272,7 +1283,7 @@ namespace WinformWithExternalLibrary
 
 			this.ActiveControl = this.HoaDonBanDVO_DienThoaiKhachHang;
 
-			this.ResetColorForLabel(this.GetTabPageControlSelectedIndex());
+			this.ResetColorForLabel();
 		}
 
 		public long TabPageHoaDonBan_GetThanhToan()
@@ -1284,6 +1295,8 @@ namespace WinformWithExternalLibrary
 
 			return tempThanhToan;
 		}
+
+		#endregion
 
 		#endregion
 
@@ -1663,211 +1676,48 @@ namespace WinformWithExternalLibrary
 
 		#region Nguyễn Hồng Sơn
 
-		ExportTableData exportTableData = new ExportTableData();
-
 		private void Initialize_NguyenHongSon()
 		{
 			Initialize_KhachHang();
+
 			Initialize_NhaCungCap();
 		}
 
 		#region Khách hàng
 		private void Initialize_KhachHang()
 		{
-			this.Load += FormMain_KhachHang_Load;
-
-			this.TabPageKhachHang_MaterialListView.SelectedIndexChanged += TabPageKhachHang_MaterialListView_SelectedIndexChanged;
-
-			this.KhachHangDVO_DienThoai.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
-
-			this.KhachHangDVO_DienThoai.KeyDown += (obj, e) =>
+			this.Load += (obj, e) =>
 			{
-				if (e.KeyCode == Keys.Enter)
+				System.Data.DataTable khachHang = KhachHangDAO.Instance.QueryFullKhachHang();
+
+				ListViewItem items;
+
+				int count = 0;
+				foreach (DataRow row in khachHang.Rows)
 				{
-					NewKhachHang();
+					items = new ListViewItem();
+					count += 1;
+					//Debug.Write(count);
+					items.SubItems[0].Text = count.ToString();
+					for (int i = 0; i < khachHang.Columns.Count; i++)
+					{
+						items.SubItems.Add(row[i].ToString().Trim());
+					}
+					//items.Remove();
+					this.TabPageKhachHang_MaterialListView.Items.Add(items);
 				}
 			};
 
-			this.materialButton_TaoKhachHang.Click += (obj, e) =>
+			this.TabPageKhachHang_MaterialListView.SelectedIndexChanged += (obj, e) =>
 			{
-				NewKhachHang();
-			};
-
-			this.materialButton_SuaKhachHang.Click += MaterialButton_SuaKhachHang_Click;
-
-			this.materialButton_SearchKH.Click += MaterialButton_SearchKH_Click;
-
-			this.materialButton_RefreshKhachHang.Click += (obj, e) =>
-			{
-				ResetKhachHangDVO();
-				LoadKhachHang();
-			};
-
-			this.materialButton_XuatExcelKH.Click += (obj, e) =>
-			{
-				try
+				// Nothing
+				if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
 				{
-					System.Data.DataTable dataTable = KhachHangDAO.Instance.QueryFullKhachHang();
-					this.exportTableData.ExportToExcel(
-						dataTable: dataTable,
-						workSheetName: "Danh sách khách hàng",
-						filePath: ""
-					);
-
-					this.ShowMessageBox("Xuất dữ liệu thành công", this.GetTabPageControlSelectedIndex());
+					return;
 				}
-				catch (Exception)
-				{
-					this.ShowMessageBox("Lỗi khi export dữ liệu", this.GetTabPageControlSelectedIndex());
-				}
-			};
 
-			this.materialButton_LichSuMuaHang.Click += MaterialButton_LichSuMuaHang_Click;
-		}
+				this.ResetValidationForControl(this.KhachHangDVO_TenKhachHang, onlyOneControl: false);
 
-		private void MaterialButton_LichSuMuaHang_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
-
-				if (index >= 0)
-				{
-					ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
-
-					string KhachHang_MaKhachHang = listViewItem.SubItems[1].Text;
-					FormListSellBill formListSellBill = new FormListSellBill(KhachHang_MaKhachHang);
-					formListSellBill.ShowDialog();
-				}
-			}
-			catch (Exception)
-			{
-				ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!", this.GetTabPageControlSelectedIndex());
-			}
-
-		}
-
-		private void LoadKhachHang()
-		{
-			System.Data.DataTable khachHangDT = KhachHangDAO.Instance.QueryFullKhachHang();
-
-			ListViewItem item;
-
-			int cnt = 0;
-			foreach (DataRow row in khachHangDT.Rows)
-			{
-				item = new ListViewItem();
-				cnt += 1;
-				item.SubItems[0].Text = cnt.ToString();
-				for (int i = 0; i < khachHangDT.Columns.Count; i++)
-				{
-					item.SubItems.Add(row[i].ToString().Trim());
-				}
-				this.TabPageKhachHang_MaterialListView.Items.Add(item);
-			}
-		}
-
-		private bool CheckNullKH()
-		{
-			return KhachHangDVO_DienThoai.Text.Equals("Số điện thoại") && KhachHangDVO_TenKhachHang.Text.Equals("Họ tên");
-		}
-
-		private void MaterialButton_SearchKH_Click(object sender, EventArgs e)
-		{
-			ResetValidationForControl(KhachHangDVO_DienThoai, true);
-			if (!CheckNullKH())
-			{
-				if (!KhachHangDVO_DienThoai.Text.Equals("Số điện thoại"))
-				{
-					System.Data.DataTable khachHang = KhachHangDAO.Instance.KhachHangInformationFromPhoneNumber(KhachHangDVO_DienThoai.Text.Trim());
-					this.TabPageKhachHang_MaterialListView.Items.Clear();
-					ListViewItem items;
-
-					this.KhachHangDVO_TenKhachHang.Text = "??????????????";
-					this.KhachHangDVO_DiaChi.Text = "??????????????";
-
-					int count = 0;
-					foreach (DataRow row in khachHang.Rows)
-					{
-						items = new ListViewItem();
-						count += 1;
-						//Debug.Write(count);
-						items.SubItems[0].Text = count.ToString();
-						for (int i = 0; i < khachHang.Columns.Count; i++)
-						{
-							items.SubItems.Add(row[i].ToString().Trim());
-						}
-						this.TabPageKhachHang_MaterialListView.Items.Add(items);
-					}
-
-
-					if (this.TabPageKhachHang_MaterialListView.Items.Count > 0)
-					{
-						ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[0];
-
-						this.KhachHangDVO_TenKhachHang.Text = listViewItem.SubItems[2].Text;
-						this.KhachHangDVO_DiaChi.Text = listViewItem.SubItems[3].Text;
-					}
-					else
-					{
-						ShowMessageBox("Khách hàng bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!", this.GetTabPageControlSelectedIndex());
-
-						LoadKhachHang();
-					}
-				}
-				else if (!KhachHangDVO_TenKhachHang.Text.Equals("Họ tên"))
-				{
-					System.Data.DataTable khachHang = KhachHangDAO.Instance.KhachHangInformationFromName(KhachHangDVO_TenKhachHang.Text.Trim());
-					this.TabPageKhachHang_MaterialListView.Items.Clear();
-					ListViewItem items;
-
-					this.KhachHangDVO_DienThoai.Text = "??????????????";
-					this.KhachHangDVO_DiaChi.Text = "??????????????";
-
-					int count = 0;
-					foreach (DataRow row in khachHang.Rows)
-					{
-						items = new ListViewItem();
-						count += 1;
-						//Debug.Write(count);
-						items.SubItems[0].Text = count.ToString();
-						for (int i = 0; i < khachHang.Columns.Count; i++)
-						{
-							items.SubItems.Add(row[i].ToString().Trim());
-						}
-						this.TabPageKhachHang_MaterialListView.Items.Add(items);
-					}
-
-
-					if (this.TabPageKhachHang_MaterialListView.Items.Count > 0)
-					{
-						ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[0];
-
-						this.KhachHangDVO_DiaChi.Text = listViewItem.SubItems[3].Text;
-						this.KhachHangDVO_DienThoai.Text = listViewItem.SubItems[4].Text;
-
-					}
-					else
-					{
-						ShowMessageBox("Khách hàng bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!", this.GetTabPageControlSelectedIndex());
-
-						LoadKhachHang();
-					}
-				}
-			}
-		}
-
-		private void MaterialButton_SuaKhachHang_Click(object sender, EventArgs e)
-		{
-			// Nothing
-			if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
-			{
-				return;
-			}
-
-			if (!this.TryValidationFromControl(this.KhachHangDVO_DienThoai, onlyOneControl: false, out dynamic baseDVO))
-			{
-				KhachHangDVO khachHangDVO = baseDVO as KhachHangDVO;
 				// Update Controls
 				int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
 
@@ -1875,161 +1725,240 @@ namespace WinformWithExternalLibrary
 				{
 					ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
 
-					string KhachHang_TenKhachHangTMP = listViewItem.SubItems[2].Text;
-					string KhachHang_DienThoaiTMP = listViewItem.SubItems[4].Text;
+					this.KhachHangDVO_TenKhachHang.Text = listViewItem.SubItems[2].Text;
+					this.KhachHangDVO_DiaChi.Text = listViewItem.SubItems[3].Text;
+					this.KhachHangDVO_DienThoai.Text = listViewItem.SubItems[4].Text;
+				}
+			};
 
-					if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi khách hàng {KhachHang_TenKhachHangTMP} có số điện thoại {KhachHang_DienThoaiTMP}?", this.GetTabPageControlSelectedIndex()))
+			this.TabPageKhachHang_MaterialListView.DoubleClick += (obj, e) =>
+			{
+				if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Hãy chọn khách hàng mà bạn muốn xem!");
+
+					return;
+				}
+
+				int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
+
+					string KhachHang_SoDienThoai = listViewItem.SubItems[4].Text;
+
+					if (!HoaDonBanDAO.Instance.IfHoaDonBanInformationFromSoDienThoai(KhachHang_SoDienThoai))
 					{
-						if (KhachHangDAO.Instance.UpdateKhachHangFull(khachHangDVO, KhachHang_DienThoaiTMP))
+						this.ShowMessageBox("Khách hàng chưa có đơn hàng nào cả!");
+
+						return;
+					}
+
+					FormListSellBill formListSellBill = new FormListSellBill(KhachHang_SoDienThoai);
+					formListSellBill.ShowDialog();
+				}
+			};
+
+			this.KhachHangDVO_DienThoai.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+
+			this.KhachHangDVO_DienThoai.KeyDown += (obj, e) =>
+			{
+				if (e.KeyCode == Keys.Enter)
+				{
+					this.SearchKhachHang();
+				}
+			};
+
+			this.KhachHangDVO_TenKhachHang.KeyDown += (obj, e) =>
+			{
+				if (e.KeyCode == Keys.Enter)
+				{
+					this.SearchKhachHang();
+				}
+			};
+
+			this.KhachHangDVO_DiaChi.KeyDown += (obj, e) =>
+			{
+				if (e.KeyCode == Keys.Enter)
+				{
+					this.SearchKhachHang();
+				}
+			};
+
+			this.TabPageKhachHang_TaoKhachHang.Click += (obj, e) =>
+			{
+				FormCreateKhachHang formCreateKhachHang = new FormCreateKhachHang(false);
+
+				formCreateKhachHang.Show();
+			};
+
+			this.TabPageKhachHang_SuaKhachHang.Click += (obj, e) =>
+			{
+				if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Bạn hãy chọn khách hàng bạn muốn cập nhật");
+
+					return;
+				}
+
+				if (this.TryValidationFromControl(this.KhachHangDVO_DiaChi, onlyOneControl: true, out dynamic baseDVO) &&
+					this.TryValidationFromControl(this.KhachHangDVO_TenKhachHang, onlyOneControl: true, out dynamic baseDVO1) &&
+					this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_DienThoai).Length == 10)
+				{
+					KhachHangDVO khachHangDVO = this.GetInputFromControl(this.KhachHangDVO_TenKhachHang) as KhachHangDVO;
+
+					int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
+
+					if (index >= 0)
+					{
+						ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
+
+						string KhachHang_TenKhachHangTMP = listViewItem.SubItems[2].Text;
+						string KhachHang_DienThoaiTMP = listViewItem.SubItems[4].Text;
+
+						if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi khách hàng {KhachHang_TenKhachHangTMP} có số điện thoại {KhachHang_DienThoaiTMP}?"))
 						{
-							ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
-							listViewItem.SubItems[2].Text = khachHangDVO.KhachHangDVO_TenKhachHang;
-							listViewItem.SubItems[3].Text = khachHangDVO.KhachHangDVO_DiaChi;
-							listViewItem.SubItems[4].Text = khachHangDVO.KhachHangDVO_DienThoai;
-						}
-						else
-						{
-							ShowMessageBox("Thay đổi thất bại!", this.GetTabPageControlSelectedIndex());
+							if (KhachHangDAO.Instance.UpdateKhachHangFull(khachHangDVO, KhachHang_DienThoaiTMP))
+							{
+								ShowMessageBox("Đã cập nhật thành công!");
+
+								listViewItem.SubItems[2].Text = khachHangDVO.KhachHangDVO_TenKhachHang;
+								listViewItem.SubItems[3].Text = khachHangDVO.KhachHangDVO_DiaChi;
+								listViewItem.SubItems[4].Text = khachHangDVO.KhachHangDVO_DienThoai;
+
+								this.LoadKhachHang();
+							}
+							else
+							{
+								ShowMessageBox("Thay đổi thất bại!");
+							}
 						}
 					}
 				}
+			};
 
+			this.TabPageKhachHang_SearchKH.Click += (obj, e) =>
+			{
+				this.SearchKhachHang();
+			};
+
+			this.TabPageKhachHang_RefreshKhachHang.Click += (obj, e) =>
+			{
+				this.ResetKhachHangDVO();
+
+				this.LoadKhachHang();
+			};
+
+			this.TabPageKhachHang_XuatExcelKH.Click += (obj, e) =>
+			{
+				System.Data.DataTable dataTable = KhachHangDAO.Instance.QueryFullKhachHang();
+
+				this.exportTableData.ExportToExcel(
+					dataTable: dataTable,
+					workSheetName: "KhachHang" + this.getDateTime.GetDateTimeNow_Date(),
+					filePath: ""
+				);
+
+				this.ResetColorForLabel();
+			};
+
+			this.TabPageKhachHang_LichSuMuaHang.Click += (obj, e) =>
+			{
+				if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Hãy chọn khách hàng mà bạn muốn xem!");
+
+					return;
+				}
+
+				int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
+
+					string KhachHang_SoDienThoai = listViewItem.SubItems[4].Text;
+
+					if (!HoaDonBanDAO.Instance.IfHoaDonBanInformationFromSoDienThoai(KhachHang_SoDienThoai))
+					{
+						this.ShowMessageBox("Khách hàng chưa có đơn hàng nào cả!");
+
+						return;
+					}
+
+					FormListSellBill formListSellBill = new FormListSellBill(KhachHang_SoDienThoai);
+					formListSellBill.ShowDialog();
+				}
+			};
+		}
+
+		private void LoadKhachHang()
+		{
+			System.Data.DataTable khachHangDT = KhachHangDAO.Instance.QueryFullKhachHang();
+
+			this.TabPageKhachHang_MaterialListView.Items.Clear();
+
+			ListViewItem item;
+
+			int cnt = 0;
+
+			foreach (DataRow row in khachHangDT.Rows)
+			{
+				item = new ListViewItem();
+				
+				cnt += 1;
+				
+				item.SubItems[0].Text = cnt.ToString();
+				
+				for (int i = 0; i < khachHangDT.Columns.Count; i++)
+				{
+					item.SubItems.Add(row[i].ToString().Trim());
+				}
+
+				this.TabPageKhachHang_MaterialListView.Items.Add(item);
 			}
-
 		}
 
 		private void ResetKhachHangDVO()
 		{
-			this.KhachHangDVO_TenKhachHang.Text = this.GetPlaceholderForControl(KhachHangDVO_TenKhachHang);
-			this.KhachHangDVO_DienThoai.Text = this.GetPlaceholderForControl(KhachHangDVO_DienThoai);
-			this.KhachHangDVO_DiaChi.Text = this.GetPlaceholderForControl(KhachHangDVO_DiaChi);
+			this.ResetInputForControl(this.KhachHangDVO_TenKhachHang, onlyOneControl: false);
+
+			this.ResetValidationForControl(this.KhachHangDVO_TenKhachHang, onlyOneControl: false);
 		}
 
-		private void NewKhachHang()
+		private void SearchKhachHang()
 		{
-			if (this.TryValidationFromControl(this.KhachHangDVO_DienThoai, onlyOneControl: false, out dynamic baseDVO))
+			KhachHangDVO khachHangDVO = this.GetInputFromControl(this.KhachHangDVO_DiaChi);
+
+			System.Data.DataTable khachHang = KhachHangDAO.Instance.KhachHangInformationFromSearch(khachHangDVO);
+
+			if (khachHang.Rows.Count <= 0)
 			{
-				KhachHangDVO khachHangDVO = baseDVO as KhachHangDVO;
-				if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
-				{
-					foreach (ListViewItem items in this.TabPageKhachHang_MaterialListView.Items)
-					{
-						// If the phone number already exists, update the customer information
-						string phoneNumber = items.SubItems[4].Text;
-						if (phoneNumber.Equals(this.KhachHangDVO_DienThoai.Text))
-						{
-							if (ShowMessageBoxYesNo($"Khách hàng có số điện thoại {phoneNumber} đã tồn tại, bạn có muốn cập nhật lại thông tin khách hàng không?", this.GetTabPageControlSelectedIndex()))
-							{
-								bool status = KhachHangDAO.Instance.UpdateKhachHang(
-									items.SubItems[2].Text,
-									items.SubItems[3].Text,
-									items.SubItems[4].Text);
-								if (status)
-								{
-									ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
-								}
-								else
-								{
-									ShowMessageBox("Cập nhật thất bại, hãy kiểm tra lại các thông tin!!", this.GetTabPageControlSelectedIndex());
-
-								}
-								ResetKhachHangDVO();
-								return;
-							}
-							else
-							{
-								return;
-							}
-						}
-					}
-				}
-				else
-				{
-
-					for (int i = 0; i < this.TabPageKhachHang_MaterialListView.Items.Count; i++)
-					{
-						this.TabPageKhachHang_MaterialListView.Items[i].SubItems[0].Text = (i + 1).ToString();
-					}
-				}
-
-				if (KhachHangDAO.Instance.InsertKhachHang(khachHangDVO))
-				{
-					ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
-					System.Data.DataTable dataTable = KhachHangDAO.Instance.KhachHangInformationFromPhoneNumber(KhachHangDVO_DienThoai.Text);
-
-					ListViewItem item = new ListViewItem();
-
-					item.SubItems[0].Text = (this.TabPageKhachHang_MaterialListView.Items.Count + 1).ToString();
-					//item.SubItems.Add()
-
-					foreach (DataRow row in dataTable.Rows)
-					{
-						for (int i = 0; i < dataTable.Columns.Count; i++)
-						{
-							item.SubItems.Add(row[i].ToString().Trim());
-						}
-					}
-
-					this.TabPageKhachHang_MaterialListView.Items.Add(item);
-				}
-				else
-				{
-					ShowMessageBox("Cập nhật thất bại, hãy kiểm tra lại các thông tin!!", this.GetTabPageControlSelectedIndex());
-				}
-
-
-				ResetKhachHangDVO();
+				this.ShowMessageBox("Khách hàng bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!");
 
 				return;
 			}
 
-		}
+			this.TabPageKhachHang_MaterialListView.Items.Clear();
 
-
-		private void FormMain_KhachHang_Load(object sender, EventArgs e)
-		{
-			System.Data.DataTable khachHang = KhachHangDAO.Instance.QueryFullKhachHang();
-
-			ListViewItem items;
-
-			int count = 0;
 			foreach (DataRow row in khachHang.Rows)
 			{
-				items = new ListViewItem();
-				count += 1;
-				//Debug.Write(count);
-				items.SubItems[0].Text = count.ToString();
+				ListViewItem items = new ListViewItem();
+
+				items.SubItems[0].Text = (this.TabPageKhachHang_MaterialListView.Items.Count + 1).ToString();
+
 				for (int i = 0; i < khachHang.Columns.Count; i++)
 				{
 					items.SubItems.Add(row[i].ToString().Trim());
 				}
-				//items.Remove();
+
 				this.TabPageKhachHang_MaterialListView.Items.Add(items);
 			}
 
+			this.ResetValidationForControl(this.KhachHangDVO_TenKhachHang, onlyOneControl: false);
 		}
 
-		private void TabPageKhachHang_MaterialListView_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			// Nothing
-			if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
-			{
-				return;
-			}
-
-			// Update Controls
-			int index = this.TabPageKhachHang_MaterialListView.SelectedIndices[0];
-
-			if (index >= 0)
-			{
-				ListViewItem listViewItem = this.TabPageKhachHang_MaterialListView.Items[index];
-
-				this.KhachHangDVO_TenKhachHang.Text = listViewItem.SubItems[2].Text;
-				this.KhachHangDVO_DiaChi.Text = listViewItem.SubItems[3].Text;
-				this.KhachHangDVO_DienThoai.Text = listViewItem.SubItems[4].Text;
-			}
-
-		}
 		#endregion
 
 		#region Nhà cung cấp
@@ -2064,21 +1993,14 @@ namespace WinformWithExternalLibrary
 
 			this.materialButton_XuatExcelNCC.Click += (obj, e) =>
 			{
-				try
-				{
-					System.Data.DataTable dataTable = NhaCungCapDAO.Instance.QueryAllNhaCungCap();
-					this.exportTableData.ExportToExcel(
-						dataTable: dataTable,
-						workSheetName: "Danh sách nhà cung cấp",
-						filePath: ""
-					);
+				System.Data.DataTable dataTable = NhaCungCapDAO.Instance.QueryAllNhaCungCap();
+				this.exportTableData.ExportToExcel(
+					dataTable: dataTable,
+					workSheetName: "Danh sách nhà cung cấp",
+					filePath: ""
+				);
 
-					this.ShowMessageBox("Xuất dữ liệu thành công", this.GetTabPageControlSelectedIndex());
-				}
-				catch (Exception)
-				{
-					this.ShowMessageBox("Lỗi khi export dữ liệu", this.GetTabPageControlSelectedIndex());
-				}
+				this.ResetColorForLabel();
 			};
 
 			this.materialButton_LichSuNhapHang.Click += MaterialButton_LichSuNhapHang_Click;
@@ -2101,13 +2023,14 @@ namespace WinformWithExternalLibrary
 			}
 			catch (Exception)
 			{
-				ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!", 4);
+				this.ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!", 4);
 			}
 		}
 
 		private bool CheckNullNCC()
 		{
-			return NhaCungCapDVO_DienThoai.Text.Equals("Số điện thoại") && NhaCungCapDVO_TenNhaCungCap.Text.Equals("Họ tên");
+			return this.CheckIfControlEmptyOrPlaceholder(this.NhaCungCapDVO_DienThoai) && 
+					this.CheckIfControlEmptyOrPlaceholder(this.NhaCungCapDVO_TenNhaCungCap);
 		}
 
 		private void LoadNhaCungCap()
@@ -2141,8 +2064,8 @@ namespace WinformWithExternalLibrary
 					this.TabPageNhaCungCap_MaterialListView.Items.Clear();
 					ListViewItem items;
 
-					this.NhaCungCapDVO_TenNhaCungCap.Text = "??????????????";
-					this.NhaCungCapDVO_DiaChi.Text = "??????????????";
+					this.NhaCungCapDVO_TenNhaCungCap.Text = this.GetPlaceholderForControl(this.NhaCungCapDVO_TenNhaCungCap);
+					this.NhaCungCapDVO_DiaChi.Text = this.GetPlaceholderForControl(this.NhaCungCapDVO_DiaChi);
 
 					int count = 0;
 					foreach (DataRow row in nhaCungCap.Rows)
@@ -2168,7 +2091,7 @@ namespace WinformWithExternalLibrary
 					}
 					else
 					{
-						this.ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!", this.GetTabPageControlSelectedIndex());
+						this.ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!");
 
 						LoadNhaCungCap();
 					}
@@ -2179,8 +2102,8 @@ namespace WinformWithExternalLibrary
 					this.TabPageNhaCungCap_MaterialListView.Items.Clear();
 					ListViewItem items;
 
-					this.NhaCungCapDVO_DienThoai.Text = "??????????????";
-					this.NhaCungCapDVO_DiaChi.Text = "??????????????";
+					this.NhaCungCapDVO_DienThoai.Text = this.GetPlaceholderForControl(this.NhaCungCapDVO_DienThoai);
+					this.NhaCungCapDVO_DiaChi.Text = this.GetPlaceholderForControl(this.NhaCungCapDVO_DiaChi);
 
 					int count = 0;
 					foreach (DataRow row in nhaCungCap.Rows)
@@ -2207,15 +2130,15 @@ namespace WinformWithExternalLibrary
 					}
 					else
 					{
-						ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!", this.GetTabPageControlSelectedIndex());
+						this.ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!");
 
-						LoadKhachHang();
+						this.LoadKhachHang();
 					}
 				}
 			}
 			else
 			{
-				ShowMessageBox("Vui lòng nhập một trong hai mục họ tên hoặc số điện thoại!", 4);
+				this.ShowMessageBox("Vui lòng nhập một trong hai mục họ tên hoặc số điện thoại!", 4);
 			}
 		}
 
@@ -2239,18 +2162,18 @@ namespace WinformWithExternalLibrary
 					string NhaCungCap_TenNhaCungCapTMP = listViewItem.SubItems[2].Text;
 					string NhaCungCap_DienThoaiTMP = listViewItem.SubItems[3].Text;
 
-					if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi khách hàng {NhaCungCap_TenNhaCungCapTMP} có số điện thoại {NhaCungCap_DienThoaiTMP}?", this.GetTabPageControlSelectedIndex()))
+					if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi khách hàng {NhaCungCap_TenNhaCungCapTMP} có số điện thoại {NhaCungCap_DienThoaiTMP}?"))
 					{
 						if (NhaCungCapDAO.Instance.UpdateNhaCungCapFull(nhaCungCapDVO, NhaCungCap_DienThoaiTMP))
 						{
-							ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+							ShowMessageBox("Đã cập nhật thành công!");
 							listViewItem.SubItems[2].Text = nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap;
 							listViewItem.SubItems[3].Text = nhaCungCapDVO.NhaCungCapDVO_DienThoai;
 							listViewItem.SubItems[4].Text = nhaCungCapDVO.NhaCungCapDVO_DiaChi;
 						}
 						else
 						{
-							ShowMessageBox("Thay đổi thất bại!", this.GetTabPageControlSelectedIndex());
+							ShowMessageBox("Thay đổi thất bại!");
 						}
 					}
 				}
@@ -2278,7 +2201,7 @@ namespace WinformWithExternalLibrary
 						string phoneNumber = items.SubItems[3].Text;
 						if (phoneNumber.Equals(this.NhaCungCapDVO_DienThoai.Text))
 						{
-							if (ShowMessageBoxYesNo($"Nhà cung cấp có số điện thoại {phoneNumber} đã tồn tại, bạn có muốn cập nhật lại thông tin khách hàng không?", this.GetTabPageControlSelectedIndex()))
+							if (ShowMessageBoxYesNo($"Nhà cung cấp có số điện thoại {phoneNumber} đã tồn tại, bạn có muốn cập nhật lại thông tin khách hàng không?"))
 							{
 								bool status = NhaCungCapDAO.Instance.UpdateNhaCungCap(
 									items.SubItems[2].Text,
@@ -2286,11 +2209,11 @@ namespace WinformWithExternalLibrary
 									items.SubItems[3].Text);
 								if (status)
 								{
-									ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+									ShowMessageBox("Đã cập nhật thành công!");
 								}
 								else
 								{
-									ShowMessageBox("Cập nhật thất bại, hãy kiểm tra lại các thông tin!!", this.GetTabPageControlSelectedIndex());
+									ShowMessageBox("Cập nhật thất bại, hãy kiểm tra lại các thông tin!!");
 								}
 								ResetNhaCungCapDVO();
 								return;
@@ -2312,7 +2235,7 @@ namespace WinformWithExternalLibrary
 
 				if (NhaCungCapDAO.Instance.InsertNhaCungCap(nhaCungCapDVO))
 				{
-					ShowMessageBox("Đã cập nhật thành công!", this.GetTabPageControlSelectedIndex());
+					ShowMessageBox("Đã cập nhật thành công!");
 					System.Data.DataTable dataTable = NhaCungCapDAO.Instance.NhaCungCapInformationFromPhoneNumber(NhaCungCapDVO_DienThoai.Text);
 
 					ListViewItem item = new ListViewItem();
@@ -2426,8 +2349,13 @@ namespace WinformWithExternalLibrary
 		}
 
 		//		Hiện MessageBox với các lựa chọn Yes No cho TabPage
-		private bool ShowMessageBoxYesNo(string message, int tabPageIndex)
+		private bool ShowMessageBoxYesNo(string message, int tabPageIndex = -1)
 		{
+			if (tabPageIndex == -1)
+			{
+				tabPageIndex = this.GetTabPageControlSelectedIndex();
+			}
+
 			bool ifYes = MaterialMessageBox.Show(
 							text: message,
 							caption: this.Text,
@@ -2444,8 +2372,13 @@ namespace WinformWithExternalLibrary
 		}
 
 		//		Hiện MessageBox cho TabPage
-		private void ShowMessageBox(string message, int tabPageIndex)
+		private void ShowMessageBox(string message, int tabPageIndex = -1)
 		{
+			if (tabPageIndex == -1)
+			{
+				tabPageIndex = this.GetTabPageControlSelectedIndex();
+			}
+
 			MaterialMessageBox.Show(
 					text: message,
 					caption: this.materialTabControl.SelectedTab.Text,
@@ -2458,8 +2391,13 @@ namespace WinformWithExternalLibrary
 		}
 
 		//		Sửa lại màu cho Label của TabPage
-		private void ResetColorForLabel(int tabPageIndex)
+		private void ResetColorForLabel(int tabPageIndex = -1)
 		{
+			if (tabPageIndex == -1)
+			{
+				tabPageIndex = this.GetTabPageControlSelectedIndex();
+			}
+
 			//		Workaround a bug
 			for (int i = 0; i < this.listOfLabelsDVO[tabPageIndex].Count; i++)
 			{
@@ -2846,9 +2784,9 @@ namespace WinformWithExternalLibrary
 						return nhanVienDVO;
 
 					case KhachHangDVO khachHangDVO:
-						khachHangDVO.KhachHangDVO_TenKhachHang = this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_TenKhachHang);
+						khachHangDVO.KhachHangDVO_TenKhachHang= this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_TenKhachHang);
 						khachHangDVO.KhachHangDVO_DiaChi = this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_DiaChi);
-						khachHangDVO.KhachHangDVO_DienThoai = this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_DienThoai);
+						khachHangDVO.KhachHangDVO_DienThoai= this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_DienThoai);
 
 						return khachHangDVO;
 						

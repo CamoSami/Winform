@@ -121,18 +121,6 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return rowChanged > 0;
 		}
 
-		public DataTable KhachHangInformationFromPhoneNumber(string KhachHangDVO_DienThoai)
-		{
-			string selectKhachHang = "SELECT * FROM " +
-							DataProvider.KHACHHANG_TABLE +
-							" WHERE DienThoai = " +
-							"'" + KhachHangDVO_DienThoai + "'";
-
-			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectKhachHang);
-
-			return dataTable;
-		}
-
 		public bool UpdateKhachHangFull(dynamic baseDTO, string DienThoai)
 		{
 			KhachHangDVO khachHangDVO = baseDTO as KhachHangDVO;
@@ -153,6 +141,64 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			}
 
 			return rowChanged > 0;
+		}
+
+		public DataTable KhachHangInformationFromSearch(KhachHangDVO khachHangDVO)
+		{
+			string temp = "";
+
+			if (khachHangDVO.KhachHangDVO_TenKhachHang != "")
+			{
+				if (temp != "")
+				{
+					temp += " AND";
+				}
+
+				temp += $" TenKhachHang LIKE N'%{khachHangDVO.KhachHangDVO_TenKhachHang}%'";
+			}
+			if (khachHangDVO.KhachHangDVO_DiaChi!= "")
+			{
+				if (temp != "")
+				{
+					temp += " AND";
+				}
+
+				temp += $" DiaChi LIKE N'%{khachHangDVO.KhachHangDVO_DiaChi}%'";
+			}
+			if (khachHangDVO.KhachHangDVO_DienThoai != "")
+			{
+				if (temp != "")
+				{
+					temp += " AND";
+				}
+
+				temp += $" DienThoai LIKE N'%{khachHangDVO.KhachHangDVO_DienThoai}%'";
+			}
+
+			if (temp == "")
+			{
+				return new DataTable();
+			}
+
+			string selectKhachHang = $"SELECT * FROM {DataProvider.KHACHHANG_TABLE} WHERE" + temp;
+
+			Debug.WriteLine(selectKhachHang);
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectKhachHang);
+
+			return dataTable;
+		}
+
+		public DataTable KhachHangInformationFromPhoneNumber(string KhachHangDVO_DienThoai)
+		{
+			string selectKhachHang = "SELECT * FROM " +
+							DataProvider.KHACHHANG_TABLE +
+							" WHERE DienThoai = " +
+							"'" + KhachHangDVO_DienThoai + "'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectKhachHang);
+
+			return dataTable;
 		}
 
 		public DataTable KhachHangInformationFromName(string KhachHangDVO_TenKhachHang)

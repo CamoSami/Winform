@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.materialButton_Exit = new MaterialSkin.Controls.MaterialButton();
-			this.materialButton_SPTrongDonBan = new MaterialSkin.Controls.MaterialButton();
 			this.materialButton_XuatBill = new MaterialSkin.Controls.MaterialButton();
 			this.materialListView_HangCoTrongBill = new MaterialSkin.Controls.MaterialListView();
 			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -53,7 +52,7 @@
 			this.materialButton_Exit.Depth = 0;
 			this.materialButton_Exit.HighEmphasis = true;
 			this.materialButton_Exit.Icon = null;
-			this.materialButton_Exit.Location = new System.Drawing.Point(1109, 807);
+			this.materialButton_Exit.Location = new System.Drawing.Point(1343, 807);
 			this.materialButton_Exit.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
 			this.materialButton_Exit.MouseState = MaterialSkin.MouseState.HOVER;
 			this.materialButton_Exit.Name = "materialButton_Exit";
@@ -66,27 +65,6 @@
 			this.materialButton_Exit.UseAccentColor = false;
 			this.materialButton_Exit.UseVisualStyleBackColor = true;
 			// 
-			// materialButton_SPTrongDonBan
-			// 
-			this.materialButton_SPTrongDonBan.AutoSize = false;
-			this.materialButton_SPTrongDonBan.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButton_SPTrongDonBan.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButton_SPTrongDonBan.Depth = 0;
-			this.materialButton_SPTrongDonBan.HighEmphasis = true;
-			this.materialButton_SPTrongDonBan.Icon = null;
-			this.materialButton_SPTrongDonBan.Location = new System.Drawing.Point(559, 807);
-			this.materialButton_SPTrongDonBan.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-			this.materialButton_SPTrongDonBan.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButton_SPTrongDonBan.Name = "materialButton_SPTrongDonBan";
-			this.materialButton_SPTrongDonBan.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButton_SPTrongDonBan.Size = new System.Drawing.Size(149, 44);
-			this.materialButton_SPTrongDonBan.TabIndex = 46;
-			this.materialButton_SPTrongDonBan.TabStop = false;
-			this.materialButton_SPTrongDonBan.Text = "Xem sản phẩm có trong đơn";
-			this.materialButton_SPTrongDonBan.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButton_SPTrongDonBan.UseAccentColor = false;
-			this.materialButton_SPTrongDonBan.UseVisualStyleBackColor = true;
-			// 
 			// materialButton_XuatBill
 			// 
 			this.materialButton_XuatBill.AutoSize = false;
@@ -95,7 +73,7 @@
 			this.materialButton_XuatBill.Depth = 0;
 			this.materialButton_XuatBill.HighEmphasis = true;
 			this.materialButton_XuatBill.Icon = null;
-			this.materialButton_XuatBill.Location = new System.Drawing.Point(928, 807);
+			this.materialButton_XuatBill.Location = new System.Drawing.Point(1162, 807);
 			this.materialButton_XuatBill.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
 			this.materialButton_XuatBill.MouseState = MaterialSkin.MouseState.HOVER;
 			this.materialButton_XuatBill.Name = "materialButton_XuatBill";
@@ -123,14 +101,14 @@
 			this.materialListView_HangCoTrongBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.materialListView_HangCoTrongBill.FullRowSelect = true;
 			this.materialListView_HangCoTrongBill.HideSelection = false;
-			this.materialListView_HangCoTrongBill.Location = new System.Drawing.Point(745, 98);
+			this.materialListView_HangCoTrongBill.Location = new System.Drawing.Point(745, 68);
 			this.materialListView_HangCoTrongBill.Margin = new System.Windows.Forms.Padding(4);
 			this.materialListView_HangCoTrongBill.MinimumSize = new System.Drawing.Size(267, 123);
 			this.materialListView_HangCoTrongBill.MouseLocation = new System.Drawing.Point(-1, -1);
 			this.materialListView_HangCoTrongBill.MouseState = MaterialSkin.MouseState.OUT;
 			this.materialListView_HangCoTrongBill.Name = "materialListView_HangCoTrongBill";
 			this.materialListView_HangCoTrongBill.OwnerDraw = true;
-			this.materialListView_HangCoTrongBill.Size = new System.Drawing.Size(999, 698);
+			this.materialListView_HangCoTrongBill.Size = new System.Drawing.Size(855, 728);
 			this.materialListView_HangCoTrongBill.TabIndex = 44;
 			this.materialListView_HangCoTrongBill.UseCompatibleStateImageBehavior = false;
 			this.materialListView_HangCoTrongBill.View = System.Windows.Forms.View.Details;
@@ -168,7 +146,7 @@
 			this.materialButton_XuatLS.Depth = 0;
 			this.materialButton_XuatLS.HighEmphasis = true;
 			this.materialButton_XuatLS.Icon = null;
-			this.materialButton_XuatLS.Location = new System.Drawing.Point(745, 807);
+			this.materialButton_XuatLS.Location = new System.Drawing.Point(979, 807);
 			this.materialButton_XuatLS.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
 			this.materialButton_XuatLS.MouseState = MaterialSkin.MouseState.HOVER;
 			this.materialButton_XuatLS.Name = "materialButton_XuatLS";
@@ -195,14 +173,14 @@
 			this.materialListView_LichSuMuaHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.materialListView_LichSuMuaHang.FullRowSelect = true;
 			this.materialListView_LichSuMuaHang.HideSelection = false;
-			this.materialListView_LichSuMuaHang.Location = new System.Drawing.Point(21, 98);
+			this.materialListView_LichSuMuaHang.Location = new System.Drawing.Point(21, 68);
 			this.materialListView_LichSuMuaHang.Margin = new System.Windows.Forms.Padding(4);
 			this.materialListView_LichSuMuaHang.MinimumSize = new System.Drawing.Size(267, 123);
 			this.materialListView_LichSuMuaHang.MouseLocation = new System.Drawing.Point(-1, -1);
 			this.materialListView_LichSuMuaHang.MouseState = MaterialSkin.MouseState.OUT;
 			this.materialListView_LichSuMuaHang.Name = "materialListView_LichSuMuaHang";
 			this.materialListView_LichSuMuaHang.OwnerDraw = true;
-			this.materialListView_LichSuMuaHang.Size = new System.Drawing.Size(703, 698);
+			this.materialListView_LichSuMuaHang.Size = new System.Drawing.Size(703, 783);
 			this.materialListView_LichSuMuaHang.TabIndex = 42;
 			this.materialListView_LichSuMuaHang.UseCompatibleStateImageBehavior = false;
 			this.materialListView_LichSuMuaHang.View = System.Windows.Forms.View.Details;
@@ -224,16 +202,15 @@
 			// 
 			// columnHeader3
 			// 
-			this.columnHeader3.Text = "Đơn Giá";
+			this.columnHeader3.Text = "Trị Giá";
 			this.columnHeader3.Width = 140;
 			// 
 			// FormListSellBill
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1764, 868);
+			this.ClientSize = new System.Drawing.Size(1607, 868);
 			this.Controls.Add(this.materialButton_Exit);
-			this.Controls.Add(this.materialButton_SPTrongDonBan);
 			this.Controls.Add(this.materialButton_XuatBill);
 			this.Controls.Add(this.materialListView_HangCoTrongBill);
 			this.Controls.Add(this.materialButton_XuatLS);
@@ -247,7 +224,6 @@
 		#endregion
 
 		private MaterialSkin.Controls.MaterialButton materialButton_Exit;
-		private MaterialSkin.Controls.MaterialButton materialButton_SPTrongDonBan;
 		private MaterialSkin.Controls.MaterialButton materialButton_XuatBill;
 		private MaterialSkin.Controls.MaterialListView materialListView_HangCoTrongBill;
 		private System.Windows.Forms.ColumnHeader columnHeader5;

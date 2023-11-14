@@ -53,17 +53,34 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return rowChanged > 0;
 		}
 
-		public DataTable HoaDonBanInformationFromMaKhachHang(string KhachHang_MaKhachHang)
+		public DataTable HoaDonBanInformationFromSoDienThoai(string KhachHang_SoDienThoai)
 		{
+			Guid maKhachHang = KhachHangDAO.Instance.GetMaKhachHangWithPhoneNumbers(KhachHang_SoDienThoai);
+
 			string query = $"SELECT MaHDBan, NgayBan, TongTienKhachTra " +
 				$"FROM {DataProvider.HOADONBAN_TABLE} " +
-				$"WHERE MaKhachHang = N'{KhachHang_MaKhachHang}'";
+				$"WHERE MaKhachHang = N'{maKhachHang}'";
 			
-			Debug.WriteLine(KhachHang_MaKhachHang);
+			Debug.WriteLine(maKhachHang);
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
 			return dataTable;
+		}
+
+		public bool IfHoaDonBanInformationFromSoDienThoai(string KhachHang_SoDienThoai)
+		{
+			Guid maKhachHang = KhachHangDAO.Instance.GetMaKhachHangWithPhoneNumbers(KhachHang_SoDienThoai);
+
+			string query = $"SELECT MaHDBan, NgayBan, TongTienKhachTra " +
+				$"FROM {DataProvider.HOADONBAN_TABLE} " +
+				$"WHERE MaKhachHang = N'{maKhachHang}'";
+
+			Debug.WriteLine(maKhachHang);
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable.Rows.Count > 0;
 		}
 
 

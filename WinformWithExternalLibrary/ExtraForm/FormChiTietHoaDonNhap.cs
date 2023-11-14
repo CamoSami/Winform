@@ -19,9 +19,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 		private string search { get; set; } = "";
 		private string dateConverted { get; set; } = "";
 
-		PhanTichDAO phanTichDAO = new PhanTichDAO();
-		FormatValues formatValues = new FormatValues();
-		ExportTableData exportTableData = new ExportTableData();
+		private FormatValues formatValues = new FormatValues();
+		private ExportTableData exportTableData = new ExportTableData();
+		private GetDateTime getDateTime = new GetDateTime();
 
 		public FormChiTietHoaDonNhap()
 		{
@@ -41,7 +41,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 		{
 			// Get data
 			List<BillOfImportInfoResponseDTO> billOfImportInfoResponseDTOs
-				= this.phanTichDAO.GetBillOfImportInformation(searchValue: search, dateTimeConverted: dateTimeConverted);
+				= PhanTichDAO.Instance.GetBillOfImportInformation(searchValue: search, dateTimeConverted: dateTimeConverted);
 
 			// Render
 			int stt = 0;
@@ -110,11 +110,11 @@ namespace WinformWithExternalLibrary.ExtraForm
 		{
 			ChiTietHoaDonNhapExelBtn.Click += (object sender, EventArgs e) =>
 			{
-				DataTable dataTable = this.phanTichDAO.GetBillOfImportInfomationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
+				DataTable dataTable = PhanTichDAO.Instance.GetBillOfImportInfomationDataTable(searchValue: this.search, dateTimeConverted: this.dateConverted);
 
 				this.exportTableData.ExportToExcel(
 					dataTable: dataTable,
-					workSheetName: "HoaDonNhap_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year,
+					workSheetName: "HoaDonNhap" + this.getDateTime.GetDateTimeNow_Date(),
 					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.HoaDonNhap
 				);
