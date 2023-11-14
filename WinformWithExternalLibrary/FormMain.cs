@@ -2796,6 +2796,45 @@ namespace WinformWithExternalLibrary
 						nhaCungCapDVO.NhaCungCapDVO_DienThoai = this.GetControlTextIfPlaceholderThenEmpty(this.NhaCungCapDVO_DienThoai);
 
 						return nhaCungCapDVO;
+
+					case DMSanPhamDVO dMSanPhamDVO:
+						if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_DonGiaBanMin), out int tempDonGianBanMin))
+						{
+							tempDonGianBanMin = 0;
+						}
+						if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_DonGiaBanMax), out int tempDonGianBanMax))
+						{
+							tempDonGianBanMax = 0;
+						}
+						if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_DonGiaNhapMin), out int tempDonGianNhapMin))
+						{
+							tempDonGianNhapMin = 0;
+						}
+						if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_DonGiaNhapMax), out int tempDonGianNhapMax))
+						{
+							tempDonGianNhapMax = 0;
+						}
+						if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_SoLuongTonKhoMin), out int tempSoLuongTonKhoMin))
+						{
+							tempSoLuongTonKhoMin = 0;
+						}
+						if (!int.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_SoLuongTonKhoMax), out int tempSoLuongTonKhoMax))
+						{
+							tempSoLuongTonKhoMax = 0;
+						}
+
+						dMSanPhamDVO.DMSanPhamDVO_MaSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_MaSanPham);
+						dMSanPhamDVO.DMSanPhamDVO_TenSanPham = this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_TenSanPham);
+						dMSanPhamDVO.DMSanPhamDVO_DonGiaBanMin = tempDonGianBanMin;
+						dMSanPhamDVO.DMSanPhamDVO_DonGiaBanMax = tempDonGianBanMax;
+						dMSanPhamDVO.DMSanPhamDVO_DonGiaNhapMin = tempDonGianNhapMin;
+						dMSanPhamDVO.DMSanPhamDVO_DonGiaNhapMax = tempDonGianNhapMax;
+						dMSanPhamDVO.DMSanPhamDVO_SoLuongTonKhoMin = tempSoLuongTonKhoMin;
+						dMSanPhamDVO.DMSanPhamDVO_SoLuongTonKhoMax = tempSoLuongTonKhoMax;
+						dMSanPhamDVO.DMSanPhamDVO_ThoiGianBaoHanhMin = this.DMSanPhamDVO_ThoiGianBaoHanhMin.Value;
+						dMSanPhamDVO.DMSanPhamDVO_ThoiGianBaoHanhMax = this.DMSanPhamDVO_ThoiGianBaoHanhMax.Value;
+
+						return dMSanPhamDVO;
 				}
 
 				return obj;

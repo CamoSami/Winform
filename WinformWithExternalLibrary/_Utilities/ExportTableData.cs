@@ -43,6 +43,16 @@ namespace WinformWithExternalLibrary._Utilities
 
 				switch (typeOfFile)
 				{
+					case TypeOfExcel.ChiTietHDBan:
+					case TypeOfExcel.ChiTietHDNhap:
+
+						workSheet.Column(1).Width = 37.5;
+						workSheet.Column(2).Width = 60;
+						workSheet.Column(3).Width = 2.5;
+						workSheet.Column(4).Width = 12.5;
+
+						break;
+
 					case TypeOfExcel.HoaDonBan:
 
 						workSheet.Column(1).Width = 37.5;
