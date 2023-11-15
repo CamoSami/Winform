@@ -257,6 +257,12 @@
     <Compile Include="ExtraForm\FormConfirmHoaDonBan.Designer.cs">
       <DependentUpon>FormConfirmHoaDonBan.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExtraForm\FormConfirmHoaDonNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormConfirmHoaDonNhap.Designer.cs">
+      <DependentUpon>FormConfirmHoaDonNhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExtraForm\FormCreateSanPham.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormConfirmHoaDonBan.resx">
       <DependentUpon>FormConfirmHoaDonBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormConfirmHoaDonNhap.resx">
+      <DependentUpon>FormConfirmHoaDonNhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateKhachHang.resx">
       <DependentUpon>FormCreateKhachHang.cs</DependentUpon>

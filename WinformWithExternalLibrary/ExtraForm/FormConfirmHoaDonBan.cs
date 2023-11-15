@@ -46,7 +46,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 		{
 			if (keyData == Keys.Enter)
 			{
-				this.TrySubmittingInput();
+				this.TrySubmittingInput(false);
 			}
 
 			return base.ProcessCmdKey(ref msg, keyData);
@@ -58,10 +58,10 @@ namespace WinformWithExternalLibrary.ExtraForm
 			this.LabelForFocus.Text = "";
 
 			//		Text
-			this.FormConfirmHoaDonBan_NhanVien.Text = "Nhân viên: " + nhanVienThuNganDVO.NhanVienThuNganHDBanDVO_NhanVien;
-			this.FormConfirmHoaDonBan_KhachHang.Text = "Khách hàng: " + hoaDonBanDVO.HoaDonBanDVO_TenKhachHang;
-			this.FormConfirmHoaDonBan_TongTien.Text = "Tồng tiền: " + hoaDonBanDVO.HoaDonBanDVO_TongTien.ToString();
-			this.FormConfirmHoaDonBan_ThanhToan.Text = "Thanh toán: " + hoaDonBanDVO.HoaDonBanDVO_ThanhToan.ToString();
+			this.FormConfirmHoaDonBan_NhanVien.Text = "Nhân viên: " + this.nhanVienThuNganDVO.NhanVienThuNganHDBanDVO_NhanVien;
+			this.FormConfirmHoaDonBan_KhachHang.Text = "Khách hàng: " + this.hoaDonBanDVO.HoaDonBanDVO_TenKhachHang;
+			this.FormConfirmHoaDonBan_TongTien.Text = "Tồng tiền: " + this.hoaDonBanDVO.HoaDonBanDVO_TongTien.ToString();
+			this.FormConfirmHoaDonBan_ThanhToan.Text = "Thanh toán: " + this.hoaDonBanDVO.HoaDonBanDVO_ThanhToan.ToString();
 
 			//		Form
 			this.Font = FormLogin.Instance.GetFont();
@@ -138,12 +138,12 @@ namespace WinformWithExternalLibrary.ExtraForm
 			//			Submit
 			this.materialButtonSubmit.Click += (obj, e) =>
 			{
-				this.TrySubmittingInput();
+				this.TrySubmittingInput(false);
 			};
 
 			this.materialButtonExport.Click += (obj, e) =>
 			{
-
+				this.TrySubmittingInput(true);
 			};
 
 			//		Form
@@ -175,41 +175,25 @@ namespace WinformWithExternalLibrary.ExtraForm
 					return;
 				}
 
-				//		Check if unsaved data
-				bool ifDirtyData = false;
-
-				foreach (TextBoxBase tempTextBox in this.listOfTextboxes)
-				{
-					if (!this.CheckIfTextboxEmptyOrPlaceholder(tempTextBox))
-					{
-						ifDirtyData = true;
-
-						break;
-					}
-					//Debug.WriteLine(temp);
-				}
-
-				if (ifDirtyData)
-				{
-					if (MaterialMessageBox.Show(
-							text: "Bạn còn thông tin nhập dở, bạn muốn rời không?",
-							caption: this.Text,
-							buttons: MessageBoxButtons.YesNo,
-							icon: MessageBoxIcon.Question,
-							UseRichTextBox: false,
-							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-							)
-						== DialogResult.Yes
+				//		DirtyData
+				if (MaterialMessageBox.Show(
+						text: "Bạn còn thông tin nhập dở, bạn muốn rời không?",
+						caption: this.Text,
+						buttons: MessageBoxButtons.YesNo,
+						icon: MessageBoxIcon.Question,
+						UseRichTextBox: false,
+						buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
 						)
-					{
+					== DialogResult.Yes
+					)
+				{
 
-					}
-					else
-					{
-						this.TongTienKhachTraDVO_TongTienKhachTra_Validation.ForeColor = Color.Red;
+				}
+				else
+				{
+					this.TongTienKhachTraDVO_TongTienKhachTra_Validation.ForeColor = Color.Red;
 
-						e.Cancel = true;
-					}
+					e.Cancel = true;
 				}
 
 				//		No DirtyData OR confirmed Leave
@@ -286,7 +270,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		#region Generalist Function
 
-		private void TrySubmittingInput()
+		private void TrySubmittingInput(bool inHoaDonBan)
 		{
 			//		Form is completed -> Interaction = true
 			for (int i = 0; i < this.isInterracted.Count; i++)
@@ -302,7 +286,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 			//		Send Query
 			//			TODO: Nhập HoaDonban
-			FormMain.Instance.NhapHoaDonBan(this.hoaDonBanDVO, this.nhanVienThuNganDVO, baseDVO as TongTienKhachTraDVO);
+			FormMain.Instance.NhapHoaDonBan(this.hoaDonBanDVO, this.nhanVienThuNganDVO, baseDVO as TongTienKhachTraDVO, inHoaDonBan);
 
 			this.hasDone = true;
 

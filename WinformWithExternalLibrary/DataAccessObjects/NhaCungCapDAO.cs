@@ -20,7 +20,28 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public NhaCungCapDAO() { }
 
-        public string GetNameWithPhoneNumber(string phoneNumber)
+		public Guid GetMaNhaCungCapWithPhoneNumber(string phoneNumber)
+		{
+			string selectSupplier = $"SELECT MaNhaCungCap FROM " +
+				$"{DataProvider.NHACUNGCAP_TABLE} " +
+				$"WHERE DienThoai = '{phoneNumber}'";
+
+			object supplier = DataProvider.Instance.ExecuteScalar(selectSupplier);
+
+			if (supplier == null)
+			{
+				return Guid.Empty;
+			}
+
+			if (!Guid.TryParse(supplier.ToString(), out Guid result))
+			{
+				result = Guid.Empty;
+			}
+
+			return result;
+		}
+
+		public string GetNameWithPhoneNumber(string phoneNumber)
         {
 			if (phoneNumber == null)
 			{

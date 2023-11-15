@@ -30,7 +30,15 @@ namespace WinformWithExternalLibrary
 			unit: GraphicsUnit.Point,
 			gdiCharSet: ((byte)(128))
 			);
-		private readonly ColorScheme colorScheme = new ColorScheme
+		private readonly ColorScheme colorSchemeBlack = new ColorScheme
+				(
+				primary: Primary.Pink200,
+				darkPrimary: Primary.Pink400,
+				lightPrimary: Primary.Pink400,
+				accent: Accent.Pink100,
+				textShade: TextShade.BLACK
+				);
+		private readonly ColorScheme colorSchemeWhite = new ColorScheme
 				(
 				primary: Primary.Pink200,
 				darkPrimary: Primary.Pink400,
@@ -95,11 +103,10 @@ namespace WinformWithExternalLibrary
 			this.Font = mainFont;
 
 			//		Initiate MaterialSkinManager
-			MaterialSkinManager.Instance.EnforceBackcolorOnAllComponents = true;
 			MaterialSkinManager.Instance.AddFormToManage(this);
-			MaterialSkinManager.Instance.RemoveFormToManage(this);
+			MaterialSkinManager.Instance.EnforceBackcolorOnAllComponents = true;
 			MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.LIGHT;
-			MaterialSkinManager.Instance.ColorScheme = this.colorScheme;
+			MaterialSkinManager.Instance.ColorScheme = this.colorSchemeWhite;
 
 			//		Control
 			foreach (Control control in this.Controls)
@@ -445,6 +452,11 @@ namespace WinformWithExternalLibrary
 		public Font GetFont()
 		{
 			return this.mainFont;
+		}
+
+		public ColorScheme GetColorScheme(bool isDark)
+		{
+			return isDark ? this.colorSchemeBlack : this.colorSchemeWhite;
 		}
 
 		#endregion

@@ -52,6 +52,9 @@ namespace WinformWithExternalLibrary
 		private readonly ExportTableData exportTableData = new ExportTableData();
 
 		//		Miscellaneous
+		//			For Settings
+		private bool IfAutoValidate = false;
+		//			For DirtyData Check
 		private int lastTabPageIndex = 0;
 		private readonly DateTime dateTimeDefault = new DateTime
 			(
@@ -72,6 +75,7 @@ namespace WinformWithExternalLibrary
 			this.InitializeAutomaticEventAndList();
 			this.InitializeSpecializedEvent();
 			this.InitializeAutoDataSourceUpdate();
+			this.InitializeContextMenuStrip();
 
 			//		Specific
 			this.Initialize_NgoSachMinhHieu();
@@ -84,6 +88,39 @@ namespace WinformWithExternalLibrary
 		#region Initialize
 
 		//		Initializing
+		private void InitializeContextMenuStrip()
+		{
+			this.ContextMenuStrip = this.contextMenuStrip;
+
+			foreach (TabPage tabPage in this.materialTabControl.TabPages)
+			{
+				tabPage.ContextMenuStrip = this.contextMenuStrip;
+			}
+
+			this.darkModeToolStripMenuItem.Click += (obj, e) =>
+			{
+				if (this.darkModeToolStripMenuItem.Checked == true)
+				{
+					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(true);
+					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.DARK;
+
+					this.contextMenuStrip.ForeColor = Color.White;
+				}
+				else
+				{
+					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(false);
+					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.LIGHT;
+
+					this.contextMenuStrip.ForeColor = Color.Black;
+				}
+			};
+
+			this.autoValidationToolStripMenuItem.Click += (obj, e) =>
+			{
+				this.IfAutoValidate = this.autoValidationToolStripMenuItem.Checked;
+			};
+		}
+
 		private void InitializeHardCodedAttributes()
 		{
 			//		Material Skin Manager
@@ -125,6 +162,12 @@ namespace WinformWithExternalLibrary
 					//		RJDatePicker
 					else if (control is RJDatePicker rJDatePicker)
 					{
+						//		Current Day = Now
+						rJDatePicker.Value = this.dateTimeDefault;
+
+						//		Max Range = Now
+						rJDatePicker.MaxDate = this.dateTimeDefault;
+
 						rJDatePicker.SkinColor = System.Drawing.Color.PaleVioletRed;
 						rJDatePicker.BorderColor = System.Drawing.Color.PaleVioletRed;
 					}
@@ -360,10 +403,13 @@ namespace WinformWithExternalLibrary
 
 			control.Text = this.GetControlTextIfEmptyThenPlaceholder(control);
 
-			this.TryValidationFromControl(
+			if (this.IfAutoValidate)
+			{
+				this.TryValidationFromControl(
 						control: control,
 						onlyOneControl: true,
 						out _);
+			}
 		}
 
 		private void TextBoxBase_KeyPress_AlphabetOnly(object sender, KeyPressEventArgs e)
@@ -607,13 +653,16 @@ namespace WinformWithExternalLibrary
 			};
 
 			//			TabPageHoaDonNhap_ButtonNhapHoaDon
-			//				TODO: finish
 			this.TabPageHoaDonNhap_ButtonNhapHoaDon.Click += (obj, e) =>
 			{
-				if (this.TryValidationFromControl(this.HoaDonNhapDVO_TongTien, onlyOneControl: false, out dynamic baseHoaDonNhap) &&
+				Debug.WriteLine("TabPageHoaDonNhap_ButtonNhapHoaDon Triggered!");
+
+				if (this.TryValidationFromControl(this.HoaDonNhapDVO_DienThoaiNhaCungCap, onlyOneControl: false, out dynamic baseHoaDonNhap) &&
 					this.TryValidationFromControl(this.NhanVienThuNganHDNhapDVO_NhanVien, onlyOneControl: false, out dynamic baseNhanVienThuNgan))
 				{
 					//		Validated!
+
+					Debug.WriteLine("TabPageHoaDonNhap_ButtonNhapHoaDon Validated!");
 
 					//		...Nothing?
 					if (this.TabPageHoaDonNhap_MaterialListView.Items.Count <= 0)
@@ -628,15 +677,14 @@ namespace WinformWithExternalLibrary
 					HoaDonNhapDVO hoaDonNhapDVO = baseHoaDonNhap as HoaDonNhapDVO;
 
 					//		Show another Confirmation Form
-					//			TODO:
-					//FormConfirmHoaDonBan formConfirmHoaDonBan = new FormConfirmHoaDonBan(hoaDonNhapDVO, nhanVienThuNganDVO);
-					//formConfirmHoaDonBan.FormClosing += (_obj, _e) =>
-					//{
-					//	this.ResetColorForLabel(this.GetTabPageControlSelectedIndex());
-					//};
+					FormConfirmHoaDonNhap formConfirmHoaDonNhap = new FormConfirmHoaDonNhap(hoaDonNhapDVO, nhanVienThuNganDVO);
+					formConfirmHoaDonNhap.FormClosing += (_obj, _e) =>
+					{
+						this.ResetColorForLabel(this.GetTabPageControlSelectedIndex());
+					};
 
-					//formConfirmHoaDonBan.Show();
-					//formConfirmHoaDonBan.Activate();
+					formConfirmHoaDonNhap.Show();
+					formConfirmHoaDonNhap.Activate();
 				}
 			};
 
@@ -958,13 +1006,11 @@ namespace WinformWithExternalLibrary
 			if (tongTienNew == 0)
 			{
 				this.ResetInputForControl(this.HoaDonNhapDVO_TongTien, true);
-				this.ResetInputForControl(this.HoaDonNhapDVO_ThanhToan, true);
 
 				return;
 			}
 
 			this.HoaDonNhapDVO_TongTien.Text = tongTienNew.ToString();
-			this.HoaDonNhapDVO_ThanhToan.Text = tongTienNew.ToString();
 		}
 
 		private void UpdateTongTienHDBan(long tien, bool biTru)
@@ -988,10 +1034,12 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_ThanhToan.Text = thanhToanFinal.ToString();
 		}
 
-		public void NhapHoaDonBan(HoaDonBanDVO hoaDonBanDVO, NhanVienThuNganHDBanDVO nhanVienThuNganDVO, TongTienKhachTraDVO tongTienKhachTraDVO)
+		public void NhapHoaDonBan(HoaDonBanDVO hoaDonBanDVO, NhanVienThuNganHDBanDVO nhanVienThuNganDVO, TongTienKhachTraDVO tongTienKhachTraDVO, bool inHoaDonBan)
 		{
+			Guid maHoaDonBan = Guid.NewGuid();
+
 			HoaDonBanDTO hoaDonBanDTO = new HoaDonBanDTO(
-				hoaDonBanDTO_MaHDBan: Guid.NewGuid(),
+				hoaDonBanDTO_MaHDBan: maHoaDonBan,
 				hoaDonBanDTO_MaKhachHang: KhachHangDAO.Instance.GetMaKhachHangWithPhoneNumbers(hoaDonBanDVO.HoaDonBanDVO_DienThoaiKhachHang),
 				hoaDonBanDTO_MaNhanVien: NhanVienDAO.Instance.GetMaNhanVienByTenNhanVienAndNgaySinh(nhanVienThuNganDVO.NhanVienThuNganHDBanDVO_NhanVien),
 				hoaDonBanDTO_NgayBan: DateTime.Now,
@@ -1055,8 +1103,103 @@ namespace WinformWithExternalLibrary
 				}
 			}
 
+			if (inHoaDonBan)
+			{
+				System.Data.DataTable Bill = ChiTietHDBanDAO.Instance.HoaDonInformationFromMaHoaDon(maHoaDonBan.ToString());
+
+				this.exportTableData.ExportToExcel(
+					dataTable: Bill,
+					workSheetName: $"ChiTietHDBan_{maHoaDonBan.ToString().Split('-')[0]}",
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.ChiTietHDBan
+				);
+			}
+
 			//		Reset Input
 			this.ResetHoaDonBanAndChiTietHDBan();
+		}
+
+		public void NhapHoaDonNhap(HoaDonNhapDVO hoaDonNhapDVO, NhanVienThuNganHDNhapDVO nhanVienThuNganDVO, bool inHoaDonNhap)
+		{
+			Guid maHoaDonNhap = Guid.NewGuid();
+
+			HoaDonNhapDTO hoaDonNhapDTO = new HoaDonNhapDTO(
+				hoaDonNhapDTO_MaHDNhap: maHoaDonNhap,
+				hoaDonNhapDTO_MaNhaCungCap: NhaCungCapDAO.Instance.GetMaNhaCungCapWithPhoneNumber(hoaDonNhapDVO.HoaDonNhapDVO_DienThoaiNhaCungCap),
+				hoaDonNhapDTO_MaNhanVien: NhanVienDAO.Instance.GetMaNhanVienByTenNhanVienAndNgaySinh(nhanVienThuNganDVO.NhanVienThuNganHDNhapDVO_NhanVien),
+				hoaDonNhapDTO_NgayNhap: DateTime.Now,
+				hoaDonNhapDTO_SoSanPham: this.TabPageHoaDonBan_MaterialListView.Items.Count,
+				hoaDonNhapDTO_TongTien: hoaDonNhapDVO.HoaDonNhapDVO_TongTien
+				);
+
+			if (!HoaDonNhapDAO.Instance.InsertHoaDonNhap(hoaDonNhapDTO))
+			{
+				MaterialMessageBox.Show(
+					text: "Có lỗi gì đó vừa xảy ra",
+					caption: "!HoaDonNhapDAO",
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+				);
+
+				return;
+			}
+
+			foreach (ListViewItem listViewItem in this.TabPageHoaDonNhap_MaterialListView.Items)
+			{
+				//		Get MaDMSanPham
+				Guid maDMSanPhamTemp = DMSanPhamDAO.Instance.GetMaDMSanPhamFromMaSanPham(listViewItem.SubItems[1].Text);
+
+				if (maDMSanPhamTemp == Guid.Empty)
+				{
+					MaterialMessageBox.Show(
+					text: "Có lỗi gì đó vừa xảy ra",
+					caption: "maDMSanPhamTemp == Guid.Empty",
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+
+					return;
+				}
+
+				ChiTietHDNhapDTO chiTietHDNhapDTO = new ChiTietHDNhapDTO(
+					chiTietHDNhapDTO_MaHDNhap: maHoaDonNhap,
+					chiTietHDNhapDTO_MaDMSanPham: maDMSanPhamTemp,
+					chiTietHDNhapDTO_SoLuong: int.Parse(listViewItem.SubItems[3].Text),
+					chiTietHDNhapDTO_ThanhTien: long.Parse(listViewItem.SubItems[5].Text)
+					);
+
+				if (!ChiTietHDNhapDAO.Instance.InsertChiTietHDNhap(chiTietHDNhapDTO))
+				{
+					MaterialMessageBox.Show(
+					text: "Có lỗi gì đó vừa xảy ra",
+					caption: "!ChiTietHDNhapDAO",
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+
+					return;
+				}
+
+				if (!DMSanPhamDAO.Instance.UpdateCongSoLuongTon(listViewItem.SubItems[1].Text, int.Parse(listViewItem.SubItems[3].Text)))
+				{
+					this.ShowMessageBox(message: "Cộng số lượng tồn bị lỗi");
+				}
+			}
+
+			if (inHoaDonNhap)
+			{
+				System.Data.DataTable Bill = ChiTietHDNhapDAO.Instance.HoaDonInformationFromMaHoaDon(maHoaDonNhap.ToString());
+
+				this.exportTableData.ExportToExcel(
+					dataTable: Bill,
+					workSheetName: $"ChiTietHDNhap_{maHoaDonNhap.ToString().Split('-')[0]}",
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.ChiTietHDNhap
+				);
+			}
+
+			//		Reset Input
+			this.ResetHoaDonNhapAndChiTietHDNhap();
 		}
 
 		private void ResetHoaDonNhapAndChiTietHDNhap()
@@ -2735,15 +2878,9 @@ namespace WinformWithExternalLibrary
 							tempTongTien_hoaDonNhapDVO = 0;
 						}
 
-						if (!long.TryParse(this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_ThanhToan), out long tempThanhToan_hoaDonNhapDVO))
-						{
-							tempThanhToan_hoaDonNhapDVO = 0;
-						}
-
 						hoaDonNhapDVO.HoaDonNhapDVO_DienThoaiNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_DienThoaiNhaCungCap);
 						hoaDonNhapDVO.HoaDonNhapDVO_TenNhaCungCap = this.GetControlTextIfPlaceholderThenEmpty(this.HoaDonNhapDVO_TenNhaCungCap);
 						hoaDonNhapDVO.HoaDonNhapDVO_TongTien = tempTongTien_hoaDonNhapDVO;
-						hoaDonNhapDVO.HoaDonNhapDVO_ThanhToan = tempThanhToan_hoaDonNhapDVO;
 
 						return hoaDonNhapDVO;
 
@@ -2885,6 +3022,16 @@ namespace WinformWithExternalLibrary
 				if (control is DateTimePicker dateTimePicker)
 				{
 					if (dateTimePicker.Value != this.dateTimeDefault)
+					{
+						//Debug.WriteLine(control.Name);
+
+						return true;
+					}
+				}
+				//		Check DirtyData for DateTimePicker is different
+				else if (control is RJDatePicker rjDatePicker)
+				{
+					if (rjDatePicker.Value != this.dateTimeDefault)
 					{
 						//Debug.WriteLine(control.Name);
 

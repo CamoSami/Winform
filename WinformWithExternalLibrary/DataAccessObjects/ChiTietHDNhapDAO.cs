@@ -25,7 +25,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_MaHDNhap)}," +
 				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_MaDMSanPham)}," +
 				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_SoLuong)}," +
-				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_ThanhTien)}," +
+				$"{this.GetString(chiTietHDNhapDTO.ChiTietHDNhapDTO_ThanhTien)}" +
 				$")";
 
 			int temp = DataProvider.Instance.ExecuteNonQuery(queryString);

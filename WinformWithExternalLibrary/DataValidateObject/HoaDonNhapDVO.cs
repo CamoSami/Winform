@@ -30,19 +30,13 @@ namespace WinformWithExternalLibrary.DataValidateObject
 		[DisplayName("Tổng tiền")]
 		public long HoaDonNhapDVO_TongTien { get; set; }
 
-
-
-		[DisplayName("Thanh toán")]
-		public long HoaDonNhapDVO_ThanhToan { get; set; }
-
 		public HoaDonNhapDVO() { }
 
-		public HoaDonNhapDVO(string hoaDonNhapDVO_DienThoaiNhaCungCap, string hoaDonNhapDVO_TenNhaCungCap, long hoaDonNhapDVO_TongTien, long hoaDonNhapDVO_ThanhToan)
+		public HoaDonNhapDVO(string hoaDonNhapDVO_DienThoaiNhaCungCap, string hoaDonNhapDVO_TenNhaCungCap, long hoaDonNhapDVO_TongTien)
 		{
 			this.HoaDonNhapDVO_DienThoaiNhaCungCap = hoaDonNhapDVO_DienThoaiNhaCungCap;
 			this.HoaDonNhapDVO_TenNhaCungCap = hoaDonNhapDVO_TenNhaCungCap;
 			this.HoaDonNhapDVO_TongTien = hoaDonNhapDVO_TongTien;
-			this.HoaDonNhapDVO_ThanhToan = hoaDonNhapDVO_ThanhToan;
 		}
 	}
 }

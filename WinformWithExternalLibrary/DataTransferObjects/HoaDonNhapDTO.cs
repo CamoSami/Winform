@@ -27,7 +27,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 			this.HoaDonNhapDTO_MaHDNhap = Guid.NewGuid();
 		}
 
-		public HoaDonNhapDTO(Guid hoaDonNhapDTO_MaHDNhap, Guid hoaDonNhapDTO_MaNhaCungCap, Guid hoaDonNhapDTO_MaNhanVien, DateTime hoaDonNhapDTO_NgayNhap, int hoaDonNhapDTO_SoSanPham, int hoaDonNhapDTO_TongTien)
+		public HoaDonNhapDTO(Guid hoaDonNhapDTO_MaHDNhap, Guid hoaDonNhapDTO_MaNhaCungCap, Guid hoaDonNhapDTO_MaNhanVien, DateTime hoaDonNhapDTO_NgayNhap, int hoaDonNhapDTO_SoSanPham, long hoaDonNhapDTO_TongTien)
 		{
 			this.HoaDonNhapDTO_MaHDNhap = hoaDonNhapDTO_MaHDNhap;
 			this.HoaDonNhapDTO_MaNhaCungCap = hoaDonNhapDTO_MaNhaCungCap;
