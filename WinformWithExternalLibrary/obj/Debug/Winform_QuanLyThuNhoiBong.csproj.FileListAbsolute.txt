@@ -346,3 +346,4 @@ D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormListSellBill.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormCreateSanPham.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonNhap.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormCreateNhaCungCap.resources

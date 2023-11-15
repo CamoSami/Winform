@@ -29,6 +29,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 		{
 			InitializeComponent();
 
+			//		Material Skin Manager
+			MaterialSkinManager.Instance.AddFormToManage(this);
+
 			// Bill of seller information List View
 			this.FormChiTietHoaDonBan_ListView(search: this.search, dateTimeConverted: this.dateConverted);
 

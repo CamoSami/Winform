@@ -105,6 +105,8 @@ namespace WinformWithExternalLibrary
 					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.DARK;
 
 					this.contextMenuStrip.ForeColor = Color.White;
+
+					this.ResetColorForLabel(-1, ifAllTabPage: true);
 				}
 				else
 				{
@@ -112,6 +114,8 @@ namespace WinformWithExternalLibrary
 					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.LIGHT;
 
 					this.contextMenuStrip.ForeColor = Color.Black;
+
+					this.ResetColorForLabel(-1, ifAllTabPage: true);
 				}
 			};
 
@@ -1125,7 +1129,7 @@ namespace WinformWithExternalLibrary
 
 			HoaDonNhapDTO hoaDonNhapDTO = new HoaDonNhapDTO(
 				hoaDonNhapDTO_MaHDNhap: maHoaDonNhap,
-				hoaDonNhapDTO_MaNhaCungCap: NhaCungCapDAO.Instance.GetMaNhaCungCapWithPhoneNumber(hoaDonNhapDVO.HoaDonNhapDVO_DienThoaiNhaCungCap),
+				hoaDonNhapDTO_MaNhaCungCap: NhaCungCapDAO.Instance.GetMaNhaCungCapWithPhoneNumbers(hoaDonNhapDVO.HoaDonNhapDVO_DienThoaiNhaCungCap),
 				hoaDonNhapDTO_MaNhanVien: NhanVienDAO.Instance.GetMaNhanVienByTenNhanVienAndNgaySinh(nhanVienThuNganDVO.NhanVienThuNganHDNhapDVO_NhanVien),
 				hoaDonNhapDTO_NgayNhap: DateTime.Now,
 				hoaDonNhapDTO_SoSanPham: this.TabPageHoaDonBan_MaterialListView.Items.Count,
@@ -2000,7 +2004,8 @@ namespace WinformWithExternalLibrary
 				this.exportTableData.ExportToExcel(
 					dataTable: dataTable,
 					workSheetName: "KhachHang" + this.getDateTime.GetDateTimeNow_Date(),
-					filePath: ""
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.KhachHang
 				);
 
 				this.ResetColorForLabel();
@@ -2049,11 +2054,11 @@ namespace WinformWithExternalLibrary
 			foreach (DataRow row in khachHangDT.Rows)
 			{
 				item = new ListViewItem();
-				
+
 				cnt += 1;
-				
+
 				item.SubItems[0].Text = cnt.ToString();
-				
+
 				for (int i = 0; i < khachHangDT.Columns.Count; i++)
 				{
 					item.SubItems.Add(row[i].ToString().Trim());
@@ -2121,16 +2126,79 @@ namespace WinformWithExternalLibrary
 
 			this.materialButton_TaoNhaCungCap.Click += (obj, e) =>
 			{
-				NewNhaCungCap();
+				FormCreateNhaCungCap formCreateNhaCungCap = new FormCreateNhaCungCap(false);
+
+				formCreateNhaCungCap.Show();
+				//NewNhaCungCap();
+			};
+
+			this.TabPageNhaCungCap_MaterialListView.DoubleClick += (obj, e) =>
+			{
+				if (this.TabPageNhaCungCap_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Hãy chọn nhà cung cấp mà bạn muốn xem!");
+
+					return;
+				}
+
+				int index = this.TabPageNhaCungCap_MaterialListView.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[index];
+
+					string NhaCungCap_SoDienThoai = listViewItem.SubItems[3].Text;
+
+					if (!HoaDonNhapDAO.Instance.IfHoaDonNhapInformationFromSoDienThoai(NhaCungCap_SoDienThoai))
+					{
+						this.ShowMessageBox("Nhà cung cấp chưa có đơn hàng nào cả!");
+
+						return;
+					}
+
+					FormListImportBill formListImportlBill = new FormListImportBill(NhaCungCap_SoDienThoai);
+					formListImportlBill.ShowDialog();
+				}
+			};
+
+
+			this.NhaCungCapDVO_DienThoai.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+
+			this.NhaCungCapDVO_DienThoai.KeyDown += (obj, e) =>
+			{
+				if (e.KeyCode == Keys.Enter)
+				{
+					this.SearchNhaCungCap();
+				}
+			};
+
+			this.NhaCungCapDVO_TenNhaCungCap.KeyDown += (obj, e) =>
+			{
+				if (e.KeyCode == Keys.Enter)
+				{
+					this.SearchNhaCungCap();
+				}
+			};
+
+			this.NhaCungCapDVO_DiaChi.KeyDown += (obj, e) =>
+			{
+				if (e.KeyCode == Keys.Enter)
+				{
+					this.SearchNhaCungCap();
+				}
 			};
 
 			this.materialButton_SuaNCC.Click += MaterialButton_SuaNCC_Click;
 
-			this.materialButton_SearchNCC.Click += MaterialButton_SearchNCC_Click;
+			this.materialButton_SearchNCC.Click += (obj, e) =>
+			{
+				this.SearchNhaCungCap();
+			};
 
 			this.materialButton_RefreshNhaCungCap.Click += (obj, e) =>
 			{
 				ResetNhaCungCapDVO();
+
 				LoadNhaCungCap();
 			};
 
@@ -2139,8 +2207,9 @@ namespace WinformWithExternalLibrary
 				System.Data.DataTable dataTable = NhaCungCapDAO.Instance.QueryAllNhaCungCap();
 				this.exportTableData.ExportToExcel(
 					dataTable: dataTable,
-					workSheetName: "Danh sách nhà cung cấp",
-					filePath: ""
+					workSheetName: "NhaCungCap" + this.getDateTime.GetDateTimeNow_Date(),
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.NhaCungCap
 				);
 
 				this.ResetColorForLabel();
@@ -2151,28 +2220,36 @@ namespace WinformWithExternalLibrary
 
 		private void MaterialButton_LichSuNhapHang_Click(object sender, EventArgs e)
 		{
-			try
+			if (this.TabPageNhaCungCap_MaterialListView.SelectedIndices.Count <= 0)
 			{
-				int index = this.TabPageNhaCungCap_MaterialListView.SelectedIndices[0];
+				this.ShowMessageBox("Hãy chọn nhà cung cấp mà bạn muốn xem!");
 
-				if (index >= 0)
-				{
-					ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[index];
-
-					string NhaCungCap_MaNhaCungCap = listViewItem.SubItems[1].Text;
-					FormListImportBill formListSellBill = new FormListImportBill(NhaCungCap_MaNhaCungCap);
-					formListSellBill.ShowDialog();
-				}
+				return;
 			}
-			catch (Exception)
+
+			int index = this.TabPageNhaCungCap_MaterialListView.SelectedIndices[0];
+
+			if (index >= 0)
 			{
-				this.ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!", 4);
+				ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[index];
+
+				string nhaCungCap_SoDienThoai = listViewItem.SubItems[3].Text;
+
+				if (!HoaDonNhapDAO.Instance.IfHoaDonNhapInformationFromSoDienThoai(nhaCungCap_SoDienThoai))
+				{
+					this.ShowMessageBox("Nhà cung cấp chưa có đơn hàng nào cả!");
+
+					return;
+				}
+
+				FormListImportBill formListImportBill = new FormListImportBill(nhaCungCap_SoDienThoai);
+				formListImportBill.ShowDialog();
 			}
 		}
 
 		private bool CheckNullNCC()
 		{
-			return this.CheckIfControlEmptyOrPlaceholder(this.NhaCungCapDVO_DienThoai) && 
+			return this.CheckIfControlEmptyOrPlaceholder(this.NhaCungCapDVO_DienThoai) &&
 					this.CheckIfControlEmptyOrPlaceholder(this.NhaCungCapDVO_TenNhaCungCap);
 		}
 
@@ -2196,103 +2273,50 @@ namespace WinformWithExternalLibrary
 			}
 		}
 
-		private void MaterialButton_SearchNCC_Click(object sender, EventArgs e)
+		private void SearchNhaCungCap()
 		{
-			ResetValidationForControl(NhaCungCapDVO_DienThoai, true);
-			if (!CheckNullNCC())
+			NhaCungCapDVO nhaCungCapDVO = this.GetInputFromControl(this.NhaCungCapDVO_DiaChi);
+
+			System.Data.DataTable nhaCungCap = NhaCungCapDAO.Instance.NhaCungCapInformationFromSearch(nhaCungCapDVO);
+
+			if (nhaCungCap.Rows.Count <= 0)
 			{
-				if (!NhaCungCapDVO_DienThoai.Text.Equals("Số điện thoại"))
-				{
-					System.Data.DataTable nhaCungCap = NhaCungCapDAO.Instance.NhaCungCapInformationFromPhoneNumber(NhaCungCapDVO_DienThoai.Text.Trim());
-					this.TabPageNhaCungCap_MaterialListView.Items.Clear();
-					ListViewItem items;
+				this.ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!");
 
-					this.NhaCungCapDVO_TenNhaCungCap.Text = this.GetPlaceholderForControl(this.NhaCungCapDVO_TenNhaCungCap);
-					this.NhaCungCapDVO_DiaChi.Text = this.GetPlaceholderForControl(this.NhaCungCapDVO_DiaChi);
-
-					int count = 0;
-					foreach (DataRow row in nhaCungCap.Rows)
-					{
-						items = new ListViewItem();
-						count += 1;
-						//Debug.Write(count);
-						items.SubItems[0].Text = count.ToString();
-						for (int i = 0; i < nhaCungCap.Columns.Count; i++)
-						{
-							items.SubItems.Add(row[i].ToString().Trim());
-						}
-						this.TabPageNhaCungCap_MaterialListView.Items.Add(items);
-					}
-
-
-					if (this.TabPageNhaCungCap_MaterialListView.Items.Count > 0)
-					{
-						ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[0];
-
-						this.NhaCungCapDVO_TenNhaCungCap.Text = listViewItem.SubItems[2].Text;
-						this.NhaCungCapDVO_DiaChi.Text = listViewItem.SubItems[4].Text;
-					}
-					else
-					{
-						this.ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!");
-
-						LoadNhaCungCap();
-					}
-				}
-				else if (!NhaCungCapDVO_TenNhaCungCap.Text.Equals("Họ tên"))
-				{
-					System.Data.DataTable nhaCungCap = NhaCungCapDAO.Instance.NhaCungCapInformationFromName(NhaCungCapDVO_TenNhaCungCap.Text.Trim());
-					this.TabPageNhaCungCap_MaterialListView.Items.Clear();
-					ListViewItem items;
-
-					this.NhaCungCapDVO_DienThoai.Text = this.GetPlaceholderForControl(this.NhaCungCapDVO_DienThoai);
-					this.NhaCungCapDVO_DiaChi.Text = this.GetPlaceholderForControl(this.NhaCungCapDVO_DiaChi);
-
-					int count = 0;
-					foreach (DataRow row in nhaCungCap.Rows)
-					{
-						items = new ListViewItem();
-						count += 1;
-						//Debug.Write(count);
-						items.SubItems[0].Text = count.ToString();
-						for (int i = 0; i < nhaCungCap.Columns.Count; i++)
-						{
-							items.SubItems.Add(row[i].ToString().Trim());
-						}
-						this.TabPageNhaCungCap_MaterialListView.Items.Add(items);
-					}
-
-
-					if (this.TabPageNhaCungCap_MaterialListView.Items.Count > 0)
-					{
-						ListViewItem listViewItem = this.TabPageNhaCungCap_MaterialListView.Items[0];
-
-						this.NhaCungCapDVO_DiaChi.Text = listViewItem.SubItems[4].Text;
-						this.NhaCungCapDVO_DienThoai.Text = listViewItem.SubItems[3].Text;
-
-					}
-					else
-					{
-						this.ShowMessageBox("Nhà cung cấp bạn tìm kiếm không tồn tại, hãy kiểm tra kỹ đầu vào!");
-
-						this.LoadKhachHang();
-					}
-				}
+				return;
 			}
-			else
+
+			this.TabPageNhaCungCap_MaterialListView.Items.Clear();
+
+			foreach (DataRow row in nhaCungCap.Rows)
 			{
-				this.ShowMessageBox("Vui lòng nhập một trong hai mục họ tên hoặc số điện thoại!", 4);
+				ListViewItem items = new ListViewItem();
+
+				items.SubItems[0].Text = (this.TabPageNhaCungCap_MaterialListView.Items.Count + 1).ToString();
+
+				for (int i = 0; i < nhaCungCap.Columns.Count; i++)
+				{
+					items.SubItems.Add(row[i].ToString().Trim());
+				}
+
+				this.TabPageNhaCungCap_MaterialListView.Items.Add(items);
 			}
+
+			this.ResetValidationForControl(this.NhaCungCapDVO_TenNhaCungCap, onlyOneControl: false);
 		}
 
 		private void MaterialButton_SuaNCC_Click(object sender, EventArgs e)
 		{
 			if (this.TabPageNhaCungCap_MaterialListView.SelectedIndices.Count <= 0)
 			{
+				this.ShowMessageBox("Bạn hãy chọn nhà cung cấp bạn muốn cập nhật");
+
 				return;
 			}
 
-			if (this.TryValidationFromControl(this.NhaCungCapDVO_DienThoai, onlyOneControl: false, out dynamic baseDVO))
+			if (this.TryValidationFromControl(this.NhaCungCapDVO_DiaChi, onlyOneControl: true, out dynamic baseDVO) &&
+					this.TryValidationFromControl(this.NhaCungCapDVO_TenNhaCungCap, onlyOneControl: true, out dynamic baseDVO1) &&
+					this.GetControlTextIfPlaceholderThenEmpty(this.NhaCungCapDVO_DienThoai).Length == 10)
 			{
 				NhaCungCapDVO nhaCungCapDVO = baseDVO as NhaCungCapDVO;
 				// Update Controls
@@ -2305,7 +2329,7 @@ namespace WinformWithExternalLibrary
 					string NhaCungCap_TenNhaCungCapTMP = listViewItem.SubItems[2].Text;
 					string NhaCungCap_DienThoaiTMP = listViewItem.SubItems[3].Text;
 
-					if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi khách hàng {NhaCungCap_TenNhaCungCapTMP} có số điện thoại {NhaCungCap_DienThoaiTMP}?"))
+					if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi nhà cung cấp {NhaCungCap_TenNhaCungCapTMP} có số điện thoại {NhaCungCap_DienThoaiTMP}?"))
 					{
 						if (NhaCungCapDAO.Instance.UpdateNhaCungCapFull(nhaCungCapDVO, NhaCungCap_DienThoaiTMP))
 						{
@@ -2326,9 +2350,11 @@ namespace WinformWithExternalLibrary
 
 		private void ResetNhaCungCapDVO()
 		{
-			this.NhaCungCapDVO_TenNhaCungCap.Text = this.GetPlaceholderForControl(NhaCungCapDVO_TenNhaCungCap);
-			this.NhaCungCapDVO_DienThoai.Text = this.GetPlaceholderForControl(NhaCungCapDVO_DienThoai);
-			this.NhaCungCapDVO_DiaChi.Text = this.GetPlaceholderForControl(NhaCungCapDVO_DiaChi);
+			this.TabPageNhaCungCap_MaterialListView.Items.Clear();
+
+			this.ResetInputForControl(this.NhaCungCapDVO_TenNhaCungCap, onlyOneControl: false);
+
+			this.ResetValidationForControl(this.NhaCungCapDVO_TenNhaCungCap, onlyOneControl: false);
 		}
 
 		private void NewNhaCungCap()
@@ -2358,7 +2384,9 @@ namespace WinformWithExternalLibrary
 								{
 									ShowMessageBox("Cập nhật thất bại, hãy kiểm tra lại các thông tin!!");
 								}
+
 								ResetNhaCungCapDVO();
+
 								return;
 							}
 							else
@@ -2534,8 +2562,17 @@ namespace WinformWithExternalLibrary
 		}
 
 		//		Sửa lại màu cho Label của TabPage
-		private void ResetColorForLabel(int tabPageIndex = -1)
+		private void ResetColorForLabel(int tabPageIndex = -1, bool ifAllTabPage = false)
 		{
+			if (ifAllTabPage)
+			{
+				foreach (List<Label> list in this.listOfLabelsDVO) {
+					foreach (Label label in list)
+					{
+						label.ForeColor = Color.Red;
+					}
+				}
+			}
 			if (tabPageIndex == -1)
 			{
 				tabPageIndex = this.GetTabPageControlSelectedIndex();

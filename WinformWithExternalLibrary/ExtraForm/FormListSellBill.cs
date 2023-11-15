@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 		public FormListSellBill(string KhachHang_SoDienThoai)
 		{
 			this.InitializeComponent();
+
+			//		Material Skin Manager
+			MaterialSkinManager.Instance.AddFormToManage(this);
 
 			this.KhachHang_SoDienThoai = KhachHang_SoDienThoai;
 
@@ -49,28 +53,29 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private void MaterialButton_XuatBill_Click(object sender, EventArgs e)
 		{
-			try
-			{
-				int index = this.materialListView_LichSuMuaHang.SelectedIndices[0];
-
-				if (index >= 0)
-				{
-					ListViewItem listViewItem = this.materialListView_LichSuMuaHang.Items[index];
-
-					string HoaDon_MaHoaDon = listViewItem.SubItems[1].Text;
-
-					DataTable Bill = ChiTietHDBanDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
-
-					this.exportTableData.ExportToExcel(
-						dataTable: Bill,
-						workSheetName: $"ChiTietHDBan_{HoaDon_MaHoaDon.Split('-')[0]}",
-						filePath: ""
-					);
-				}
-			}
-			catch (Exception)
+			if (this.materialListView_LichSuMuaHang.SelectedIndices.Count <= 0)
 			{
 				this.ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!");
+
+				return;
+			}
+
+			int index = this.materialListView_LichSuMuaHang.SelectedIndices[0];
+
+			if (index >= 0)
+			{
+				ListViewItem listViewItem = this.materialListView_LichSuMuaHang.Items[index];
+
+				string HoaDon_MaHoaDon = listViewItem.SubItems[1].Text;
+
+				DataTable Bill = ChiTietHDBanDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
+
+				this.exportTableData.ExportToExcel(
+					dataTable: Bill,
+					workSheetName: $"ChiTietHDBan_{HoaDon_MaHoaDon.Split('-')[0]}",
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.ChiTietHDBan
+				);
 			}
 		}
 
@@ -89,7 +94,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 			this.exportTableData.ExportToExcel(
 				dataTable: DTBill,
 				workSheetName: $"HoaDonBan_{KhachHang_SoDienThoai}",
-				filePath: ""
+				filePath: "",
+				typeOfFile: ExportTableData.TypeOfExcel.HoaDonBan
 			);
 
 		}

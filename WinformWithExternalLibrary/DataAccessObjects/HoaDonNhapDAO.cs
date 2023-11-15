@@ -41,15 +41,34 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return rowChanged > 0;
 		}
 
-		public DataTable HoaDonBanInformationFromMaNhaCungCap(string NhaCungCap_MaNhaCungCap)
+		public DataTable HoaDonNhapInformationFromSoDienThoai(string NhaCungCap_SoDienThoai)
 		{
+			Guid maNhaCungCap = NhaCungCapDAO.Instance.GetMaNhaCungCapWithPhoneNumbers(NhaCungCap_SoDienThoai);
+
 			string query = $"SELECT MaHDNhap, NgayNhap, TongTien " +
 				$"FROM {DataProvider.HOADONNHAP_TABLE} " +
-				$"WHERE MaNhaCungCap = N'{NhaCungCap_MaNhaCungCap}'";
-			Debug.WriteLine(query);
+				$"WHERE MaNhaCungCap = N'{maNhaCungCap}'";
+
+			//Debug.WriteLine(query);
+
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
 			return dataTable;
+		}
+
+		public bool IfHoaDonNhapInformationFromSoDienThoai(string NhaCungCap_SoDienThoai)
+		{
+			Guid maNhaCungCap = NhaCungCapDAO.Instance.GetMaNhaCungCapWithPhoneNumbers(NhaCungCap_SoDienThoai);
+
+			string query = $"SELECT MaHDNhap, NgayNhap, TongTien " +
+				$"FROM {DataProvider.HOADONNHAP_TABLE} " +
+				$"WHERE MaNhaCungCap = N'{maNhaCungCap}'";
+
+			//Debug.WriteLine(query);
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable.Rows.Count > 0;
 		}
 
 

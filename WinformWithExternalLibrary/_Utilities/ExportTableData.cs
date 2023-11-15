@@ -19,6 +19,8 @@ namespace WinformWithExternalLibrary._Utilities
 			HoaDonNhap,
 			ChiTietHDBan,
 			ChiTietHDNhap,
+			KhachHang,
+			NhaCungCap,
 			Empty
 		} 
 
@@ -43,6 +45,16 @@ namespace WinformWithExternalLibrary._Utilities
 
 				switch (typeOfFile)
 				{
+					case TypeOfExcel.KhachHang:
+					case TypeOfExcel.NhaCungCap:
+
+						workSheet.Column(1).Width = 37.5;
+						workSheet.Column(2).Width = 25;
+						workSheet.Column(3).Width = 40;
+						workSheet.Column(4).Width = 12.5;
+
+						break;
+
 					case TypeOfExcel.ChiTietHDBan:
 					case TypeOfExcel.ChiTietHDNhap:
 

@@ -45,7 +45,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 					$"ON {DataProvider.CHITIETHDNHAP_TABLE}.MaDMSanPham = {DataProvider.DMSANPHAM_TABLE}.MaDMSanPham " +
 				$"WHERE {DataProvider.CHITIETHDNHAP_TABLE}.MaHDNhap = N'{MaHoaDonNhap}'";
 
-			//Debug.WriteLine(query);
+			Debug.WriteLine(query);
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 

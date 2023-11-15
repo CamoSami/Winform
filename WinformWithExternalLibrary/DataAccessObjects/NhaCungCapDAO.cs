@@ -20,11 +20,13 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public NhaCungCapDAO() { }
 
-		public Guid GetMaNhaCungCapWithPhoneNumber(string phoneNumber)
+		public Guid GetMaNhaCungCapWithPhoneNumbers(string phoneNumber)
 		{
 			string selectSupplier = $"SELECT MaNhaCungCap FROM " +
 				$"{DataProvider.NHACUNGCAP_TABLE} " +
 				$"WHERE DienThoai = '{phoneNumber}'";
+
+			//Debug.WriteLine(selectSupplier);
 
 			object supplier = DataProvider.Instance.ExecuteScalar(selectSupplier);
 
@@ -169,6 +171,52 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			}
 
 			return rowChanged > 0;
+		}
+
+		public DataTable NhaCungCapInformationFromSearch(NhaCungCapDVO nhaCungCapDVO)
+		{
+			string temp = "";
+
+			if (nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap != "")
+			{
+				if (temp != "")
+				{
+					temp += " AND";
+				}
+
+				temp += $" TenNhaCungCap LIKE N'%{nhaCungCapDVO.NhaCungCapDVO_TenNhaCungCap}%'";
+			}
+			if (nhaCungCapDVO.NhaCungCapDVO_DiaChi != "")
+			{
+				if (temp != "")
+				{
+					temp += " AND";
+				}
+
+				temp += $" DiaChi LIKE N'%{nhaCungCapDVO.NhaCungCapDVO_DiaChi}%'";
+			}
+			if (nhaCungCapDVO.NhaCungCapDVO_DienThoai != "")
+			{
+				if (temp != "")
+				{
+					temp += " AND";
+				}
+
+				temp += $" DienThoai LIKE N'%{nhaCungCapDVO.NhaCungCapDVO_DienThoai}%'";
+			}
+
+			if (temp == "")
+			{
+				return new DataTable();
+			}
+
+			string selectNhaCungCap = $"SELECT * FROM {DataProvider.NHACUNGCAP_TABLE} WHERE" + temp;
+
+			Debug.WriteLine(selectNhaCungCap);
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectNhaCungCap);
+
+			return dataTable;
 		}
 
 		public DataTable NhaCungCapInformationFromName(string NhaCungCapDVO_TenNhaCungCap)

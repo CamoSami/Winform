@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using WinformWithExternalLibrary.DataAccessObjects;
 using WinformWithExternalLibrary._Utilities;
 using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
+using MaterialSkin;
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
@@ -26,6 +27,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 		public FormChiTietHoaDonNhap()
 		{
 			InitializeComponent();
+
+			//		Material Skin Manager
+			MaterialSkinManager.Instance.AddFormToManage(this);
 
 			// Bill of import information List View
 			this.FormChiTietHoaDonNhap_ListView(search: this.search, dateTimeConverted: this.dateConverted);

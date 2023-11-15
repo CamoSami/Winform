@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,9 +30,11 @@ namespace WinformWithExternalLibrary
 			//		Assigning value
 			this.onlyOnceFromFormMain = onlyOnce;
 
-
 			//		Componenets
 			this.InitializeComponent();
+
+			//		Material Skin Manager
+			MaterialSkinManager.Instance.AddFormToManage(this);
 
 			//		Attributes
 			this.InitializeHardCodedAttributes();

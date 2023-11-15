@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,21 +16,72 @@ namespace WinformWithExternalLibrary.ExtraForm
 {
 	public partial class FormListImportBill : MaterialForm
 	{
-		string NhaCungCap_MaNhaCungCap;
+		string NhaCungCap_DienThoaiCungCap;
 
 		ExportTableData exportTableData = new ExportTableData();
-		public FormListImportBill(string NhaCungCap_MaNhaCungCap)
+		public FormListImportBill(string NhaCungCap_DienThoaiCungCap)
 		{
 			InitializeComponent();
 
-			this.NhaCungCap_MaNhaCungCap = NhaCungCap_MaNhaCungCap;
+			//		Material Skin Manager
+			MaterialSkinManager.Instance.AddFormToManage(this);
+
+			this.NhaCungCap_DienThoaiCungCap = NhaCungCap_DienThoaiCungCap;
 
 			this.Load += (obj, e) =>
 			{
 				Process();
 			};
 
-			this.materialButton_SPTrongDonBan.Click += MaterialButton_SPTrongDonBan_Click;
+			this.materialButton_XuatBill.Click += (obj, e) =>
+			{
+				if (this.materialListView_LichSuNhapHang.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Hãy chọn khách hàng trên bảng trước khi xem lịch sử!");
+
+					return;
+				}
+
+				int index = this.materialListView_LichSuNhapHang.SelectedIndices[0];
+
+				if (index >= 0)
+				{
+					ListViewItem listViewItem = this.materialListView_LichSuNhapHang.Items[index];
+
+					string HoaDon_MaHoaDon = listViewItem.SubItems[1].Text;
+
+					DataTable Bill = ChiTietHDNhapDAO.Instance.HoaDonInformationFromMaHoaDon(HoaDon_MaHoaDon);
+
+					this.exportTableData.ExportToExcel(
+						dataTable: Bill,
+						workSheetName: $"ChiTietHDNhap_{HoaDon_MaHoaDon.Split('-')[0]}",
+						filePath: "",
+						typeOfFile: ExportTableData.TypeOfExcel.ChiTietHDNhap
+					);
+				}
+			};
+
+			this.materialButton_XuatLS.Click += (obj, e) =>
+			{
+				DataTable DTBill = HoaDonNhapDAO.Instance.HoaDonNhapInformationFromSoDienThoai(this.NhaCungCap_DienThoaiCungCap);
+
+				//foreach (DataRow row in DTBill.Rows)
+				//{
+				//	foreach (object obj in row.ItemArray)
+				//	{
+				//		Debug.WriteLine(obj.ToString());
+				//	}
+				//}
+
+				this.exportTableData.ExportToExcel(
+					dataTable: DTBill,
+					workSheetName: $"HoaDonNhap_{this.NhaCungCap_DienThoaiCungCap}",
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.HoaDonNhap
+				);
+			};
+
+			this.materialListView_LichSuNhapHang.SelectedIndexChanged += materialListView_LichSuNhapHang_SelectedIndexChanged;
 
 			this.materialButton_Exit.Click += (obj, e) =>
 			{
@@ -40,8 +92,13 @@ namespace WinformWithExternalLibrary.ExtraForm
 			};
 		}
 
-		private void MaterialButton_SPTrongDonBan_Click(object sender, EventArgs e)
+		private void materialListView_LichSuNhapHang_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			if (this.materialListView_LichSuNhapHang.SelectedIndices.Count <= 0)
+			{
+				return;
+			}
+
 			try
 			{
 				int index = this.materialListView_LichSuNhapHang.SelectedIndices[0];
@@ -79,7 +136,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private void Process()
 		{
-			DataTable DTBill = HoaDonNhapDAO.Instance.HoaDonBanInformationFromMaNhaCungCap(NhaCungCap_MaNhaCungCap);
+			DataTable DTBill = HoaDonNhapDAO.Instance.HoaDonNhapInformationFromSoDienThoai(NhaCungCap_DienThoaiCungCap);
 			ListViewItem item;
 
 			int cnt = 0;

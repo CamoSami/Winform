@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using WinformWithExternalLibrary.DataAccessObjects;
 using WinformWithExternalLibrary._Utilities;
 using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
+using MaterialSkin;
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
@@ -27,8 +28,11 @@ namespace WinformWithExternalLibrary.ExtraForm
 
             InitializeComponent();
 
-            // List View
-            this.FormChiTietHoaDonNhapInfo_ListView();
+			//		Material Skin Manager
+			MaterialSkinManager.Instance.AddFormToManage(this);
+
+			// List View
+			this.FormChiTietHoaDonNhapInfo_ListView();
         }
 
         private void FormChiTietHoaDonNhapInfo_ListView()

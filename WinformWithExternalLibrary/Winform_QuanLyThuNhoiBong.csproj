@@ -210,6 +210,7 @@
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_EligibleTenGiamGia.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
     <Compile Include="DataValidateObject\CustomValidation\HoaDonNhapDVO_ExistedDienThoaiNhaCungCap.cs" />
+    <Compile Include="DataValidateObject\CustomValidation\NhaCungCapDVO_UniqueDienThoaiAttribute.cs" />
     <Compile Include="DataValidateObject\DMSanPhamDVO.cs" />
     <Compile Include="DataValidateObject\FormCreateSanPhamDVO.cs" />
     <Compile Include="DataValidateObject\NhaCungCapDVO.cs" />
@@ -262,6 +263,12 @@
     </Compile>
     <Compile Include="ExtraForm\FormConfirmHoaDonNhap.Designer.cs">
       <DependentUpon>FormConfirmHoaDonNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtraForm\FormCreateNhaCungCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormCreateNhaCungCap.Designer.cs">
+      <DependentUpon>FormCreateNhaCungCap.cs</DependentUpon>
     </Compile>
     <Compile Include="ExtraForm\FormCreateSanPham.cs">
       <SubType>Form</SubType>
@@ -339,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateKhachHang.resx">
       <DependentUpon>FormCreateKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormCreateNhaCungCap.resx">
+      <DependentUpon>FormCreateNhaCungCap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateSanPham.resx">
       <DependentUpon>FormCreateSanPham.cs</DependentUpon>

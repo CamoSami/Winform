@@ -148,18 +148,12 @@ namespace WinformWithExternalLibrary
 			this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.TabPageNhaCungCap = new System.Windows.Forms.TabPage();
-			this.materialButton_RefreshNhaCungCap = new MaterialSkin.Controls.MaterialButton();
-			this.materialButton_SuaNCC = new MaterialSkin.Controls.MaterialButton();
-			this.materialButton_LichSuNhapHang = new MaterialSkin.Controls.MaterialButton();
-			this.materialButton_SearchNCC = new MaterialSkin.Controls.MaterialButton();
-			this.materialButton_XuatExcelNCC = new MaterialSkin.Controls.MaterialButton();
 			this.NhaCungCapDVO_DienThoai_Validation = new System.Windows.Forms.Label();
 			this.NhaCungCapDVO_DienThoai = new MaterialSkin.Controls.MaterialTextBox();
 			this.NhaCungCapDVO_DiaChi_Validation = new System.Windows.Forms.Label();
 			this.NhaCungCapDVO_TenNhaCungCap_Validation = new System.Windows.Forms.Label();
 			this.NhaCungCapDVO_DiaChi = new MaterialSkin.Controls.MaterialTextBox();
 			this.NhaCungCapDVO_TenNhaCungCap = new MaterialSkin.Controls.MaterialTextBox();
-			this.materialButton_TaoNhaCungCap = new MaterialSkin.Controls.MaterialButton();
 			this.TabPageNhaCungCap_MaterialListView = new MaterialSkin.Controls.MaterialListView();
 			this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -168,8 +162,6 @@ namespace WinformWithExternalLibrary
 			this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.TabPageSanPham = new System.Windows.Forms.TabPage();
 			this.TabPageSanPham_NhapMoiSanPham = new MaterialSkin.Controls.MaterialButton();
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax = new WinformWithExternalLibrary._Utilities.RJDatePicker();
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin = new WinformWithExternalLibrary._Utilities.RJDatePicker();
 			this.TabPageSanPham_ButtonXuatRaFileExcel = new MaterialSkin.Controls.MaterialButton();
 			this.DMSanPhamDVO_SoLuongTonKhoMax = new MaterialSkin.Controls.MaterialTextBox();
 			this.DMSanPhamDVO_DonGiaNhapMax = new MaterialSkin.Controls.MaterialTextBox();
@@ -222,9 +214,7 @@ namespace WinformWithExternalLibrary
 			this.label11 = new System.Windows.Forms.Label();
 			this.TabPagePhanTich_HoaDonNhap_SoLuong_LB = new System.Windows.Forms.Label();
 			this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
-			this.cartesianChart2 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
 			this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
-			this.cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
 			this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
 			this.TabPagePhanTich_HoaDonBan_GiamGiaLB = new System.Windows.Forms.Label();
 			this.TabPagePhanTich_HoaDonBan_GiamGiaPB = new MaterialSkin.Controls.MaterialProgressBar();
@@ -233,14 +223,24 @@ namespace WinformWithExternalLibrary
 			this.label4 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.pieChart2 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
-			this.pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
-			this.TabPagePhanTich_HoaDonBan_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.darkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.autoValidationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.cartesianChart2 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
+			this.cartesianChart1 = new LiveChartsCore.SkiaSharpView.WinForms.CartesianChart();
+			this.pieChart2 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+			this.pieChart1 = new LiveChartsCore.SkiaSharpView.WinForms.PieChart();
+			this.TabPagePhanTich_HoaDonBan_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN = new MaterialSkin.Controls.MaterialFloatingActionButton();
+			this.materialButton_RefreshNhaCungCap = new MaterialSkin.Controls.MaterialButton();
+			this.materialButton_SuaNCC = new MaterialSkin.Controls.MaterialButton();
+			this.materialButton_LichSuNhapHang = new MaterialSkin.Controls.MaterialButton();
+			this.materialButton_SearchNCC = new MaterialSkin.Controls.MaterialButton();
+			this.materialButton_XuatExcelNCC = new MaterialSkin.Controls.MaterialButton();
+			this.materialButton_TaoNhaCungCap = new MaterialSkin.Controls.MaterialButton();
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax = new WinformWithExternalLibrary._Utilities.RJDatePicker();
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin = new WinformWithExternalLibrary._Utilities.RJDatePicker();
 			this.materialTabControl.SuspendLayout();
 			this.TabPageNhanVien.SuspendLayout();
 			this.TabPageHoaDonBan.SuspendLayout();
@@ -333,7 +333,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_Email.AnimateReadOnly = false;
 			this.NhanVienDVO_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_Email.Depth = 0;
-			this.NhanVienDVO_Email.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_Email.LeadingIcon = null;
 			this.NhanVienDVO_Email.Location = new System.Drawing.Point(1057, 523);
 			this.NhanVienDVO_Email.MaxLength = 50;
@@ -350,7 +350,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_DiaChi.AnimateReadOnly = false;
 			this.NhanVienDVO_DiaChi.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_DiaChi.Depth = 0;
-			this.NhanVienDVO_DiaChi.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_DiaChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_DiaChi.LeadingIcon = null;
 			this.NhanVienDVO_DiaChi.Location = new System.Drawing.Point(1057, 393);
 			this.NhanVienDVO_DiaChi.MaxLength = 50;
@@ -367,7 +367,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_SoDienThoai.AnimateReadOnly = false;
 			this.NhanVienDVO_SoDienThoai.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_SoDienThoai.Depth = 0;
-			this.NhanVienDVO_SoDienThoai.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_SoDienThoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_SoDienThoai.LeadingIcon = null;
 			this.NhanVienDVO_SoDienThoai.Location = new System.Drawing.Point(1056, 261);
 			this.NhanVienDVO_SoDienThoai.MaxLength = 50;
@@ -384,7 +384,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_TenNhanVien.AnimateReadOnly = false;
 			this.NhanVienDVO_TenNhanVien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_TenNhanVien.Depth = 0;
-			this.NhanVienDVO_TenNhanVien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_TenNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_TenNhanVien.LeadingIcon = null;
 			this.NhanVienDVO_TenNhanVien.Location = new System.Drawing.Point(1056, 125);
 			this.NhanVienDVO_TenNhanVien.MaxLength = 50;
@@ -401,7 +401,7 @@ namespace WinformWithExternalLibrary
 			this.NhanVienDVO_SelectNhanVien.AnimateReadOnly = false;
 			this.NhanVienDVO_SelectNhanVien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhanVienDVO_SelectNhanVien.Depth = 0;
-			this.NhanVienDVO_SelectNhanVien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhanVienDVO_SelectNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhanVienDVO_SelectNhanVien.LeadingIcon = null;
 			this.NhanVienDVO_SelectNhanVien.Location = new System.Drawing.Point(6, 12);
 			this.NhanVienDVO_SelectNhanVien.MaxLength = 50;
@@ -739,7 +739,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_ThanhToan.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonBanDVO_ThanhToan.Depth = 0;
 			this.HoaDonBanDVO_ThanhToan.Enabled = false;
-			this.HoaDonBanDVO_ThanhToan.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonBanDVO_ThanhToan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonBanDVO_ThanhToan.LeadingIcon = null;
 			this.HoaDonBanDVO_ThanhToan.Location = new System.Drawing.Point(1112, 628);
 			this.HoaDonBanDVO_ThanhToan.MaxLength = 50;
@@ -891,7 +891,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_TongTien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonBanDVO_TongTien.Depth = 0;
 			this.HoaDonBanDVO_TongTien.Enabled = false;
-			this.HoaDonBanDVO_TongTien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonBanDVO_TongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonBanDVO_TongTien.LeadingIcon = null;
 			this.HoaDonBanDVO_TongTien.Location = new System.Drawing.Point(1112, 549);
 			this.HoaDonBanDVO_TongTien.MaxLength = 50;
@@ -929,7 +929,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_TenGiamGia.AnimateReadOnly = false;
 			this.HoaDonBanDVO_TenGiamGia.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonBanDVO_TenGiamGia.Depth = 0;
-			this.HoaDonBanDVO_TenGiamGia.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonBanDVO_TenGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonBanDVO_TenGiamGia.LeadingIcon = null;
 			this.HoaDonBanDVO_TenGiamGia.Location = new System.Drawing.Point(1112, 470);
 			this.HoaDonBanDVO_TenGiamGia.MaxLength = 50;
@@ -975,7 +975,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonBanDVO_TenKhachHang.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonBanDVO_TenKhachHang.Depth = 0;
 			this.HoaDonBanDVO_TenKhachHang.Enabled = false;
-			this.HoaDonBanDVO_TenKhachHang.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonBanDVO_TenKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonBanDVO_TenKhachHang.LeadingIcon = null;
 			this.HoaDonBanDVO_TenKhachHang.Location = new System.Drawing.Point(1112, 391);
 			this.HoaDonBanDVO_TenKhachHang.MaxLength = 50;
@@ -1043,7 +1043,7 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDBanDVO_SoLuong.AnimateReadOnly = false;
 			this.ChiTietHDBanDVO_SoLuong.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ChiTietHDBanDVO_SoLuong.Depth = 0;
-			this.ChiTietHDBanDVO_SoLuong.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ChiTietHDBanDVO_SoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.ChiTietHDBanDVO_SoLuong.LeadingIcon = null;
 			this.ChiTietHDBanDVO_SoLuong.Location = new System.Drawing.Point(1112, 205);
 			this.ChiTietHDBanDVO_SoLuong.MaxLength = 50;
@@ -1125,7 +1125,7 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDBanDVO_TenSanPham.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ChiTietHDBanDVO_TenSanPham.Depth = 0;
 			this.ChiTietHDBanDVO_TenSanPham.Enabled = false;
-			this.ChiTietHDBanDVO_TenSanPham.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ChiTietHDBanDVO_TenSanPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.ChiTietHDBanDVO_TenSanPham.LeadingIcon = null;
 			this.ChiTietHDBanDVO_TenSanPham.Location = new System.Drawing.Point(1112, 126);
 			this.ChiTietHDBanDVO_TenSanPham.MaxLength = 50;
@@ -1302,7 +1302,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonNhapDVO_TongTien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonNhapDVO_TongTien.Depth = 0;
 			this.HoaDonNhapDVO_TongTien.Enabled = false;
-			this.HoaDonNhapDVO_TongTien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonNhapDVO_TongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonNhapDVO_TongTien.LeadingIcon = null;
 			this.HoaDonNhapDVO_TongTien.Location = new System.Drawing.Point(1111, 632);
 			this.HoaDonNhapDVO_TongTien.MaxLength = 50;
@@ -1369,7 +1369,7 @@ namespace WinformWithExternalLibrary
 			this.HoaDonNhapDVO_TenNhaCungCap.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.HoaDonNhapDVO_TenNhaCungCap.Depth = 0;
 			this.HoaDonNhapDVO_TenNhaCungCap.Enabled = false;
-			this.HoaDonNhapDVO_TenNhaCungCap.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.HoaDonNhapDVO_TenNhaCungCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.HoaDonNhapDVO_TenNhaCungCap.LeadingIcon = null;
 			this.HoaDonNhapDVO_TenNhaCungCap.Location = new System.Drawing.Point(1112, 391);
 			this.HoaDonNhapDVO_TenNhaCungCap.MaxLength = 50;
@@ -1428,7 +1428,7 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDNhapDVO_SoLuong.AnimateReadOnly = false;
 			this.ChiTietHDNhapDVO_SoLuong.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ChiTietHDNhapDVO_SoLuong.Depth = 0;
-			this.ChiTietHDNhapDVO_SoLuong.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ChiTietHDNhapDVO_SoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.ChiTietHDNhapDVO_SoLuong.LeadingIcon = null;
 			this.ChiTietHDNhapDVO_SoLuong.Location = new System.Drawing.Point(1112, 205);
 			this.ChiTietHDNhapDVO_SoLuong.MaxLength = 50;
@@ -1510,7 +1510,7 @@ namespace WinformWithExternalLibrary
 			this.ChiTietHDNhapDVO_TenSanPham.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ChiTietHDNhapDVO_TenSanPham.Depth = 0;
 			this.ChiTietHDNhapDVO_TenSanPham.Enabled = false;
-			this.ChiTietHDNhapDVO_TenSanPham.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.ChiTietHDNhapDVO_TenSanPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.ChiTietHDNhapDVO_TenSanPham.LeadingIcon = null;
 			this.ChiTietHDNhapDVO_TenSanPham.Location = new System.Drawing.Point(1112, 126);
 			this.ChiTietHDNhapDVO_TenSanPham.MaxLength = 50;
@@ -1554,7 +1554,7 @@ namespace WinformWithExternalLibrary
 			this.TabPageKhachHang_RefreshKhachHang.Depth = 0;
 			this.TabPageKhachHang_RefreshKhachHang.HighEmphasis = true;
 			this.TabPageKhachHang_RefreshKhachHang.Icon = null;
-			this.TabPageKhachHang_RefreshKhachHang.Location = new System.Drawing.Point(1312, 701);
+			this.TabPageKhachHang_RefreshKhachHang.Location = new System.Drawing.Point(1312, 719);
 			this.TabPageKhachHang_RefreshKhachHang.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.TabPageKhachHang_RefreshKhachHang.MouseState = MaterialSkin.MouseState.HOVER;
 			this.TabPageKhachHang_RefreshKhachHang.Name = "TabPageKhachHang_RefreshKhachHang";
@@ -1575,7 +1575,7 @@ namespace WinformWithExternalLibrary
 			this.TabPageKhachHang_SuaKhachHang.Depth = 0;
 			this.TabPageKhachHang_SuaKhachHang.HighEmphasis = true;
 			this.TabPageKhachHang_SuaKhachHang.Icon = null;
-			this.TabPageKhachHang_SuaKhachHang.Location = new System.Drawing.Point(1113, 701);
+			this.TabPageKhachHang_SuaKhachHang.Location = new System.Drawing.Point(1113, 719);
 			this.TabPageKhachHang_SuaKhachHang.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.TabPageKhachHang_SuaKhachHang.MouseState = MaterialSkin.MouseState.HOVER;
 			this.TabPageKhachHang_SuaKhachHang.Name = "TabPageKhachHang_SuaKhachHang";
@@ -1596,7 +1596,7 @@ namespace WinformWithExternalLibrary
 			this.TabPageKhachHang_LichSuMuaHang.Depth = 0;
 			this.TabPageKhachHang_LichSuMuaHang.HighEmphasis = true;
 			this.TabPageKhachHang_LichSuMuaHang.Icon = null;
-			this.TabPageKhachHang_LichSuMuaHang.Location = new System.Drawing.Point(1314, 605);
+			this.TabPageKhachHang_LichSuMuaHang.Location = new System.Drawing.Point(1314, 623);
 			this.TabPageKhachHang_LichSuMuaHang.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.TabPageKhachHang_LichSuMuaHang.MouseState = MaterialSkin.MouseState.HOVER;
 			this.TabPageKhachHang_LichSuMuaHang.Name = "TabPageKhachHang_LichSuMuaHang";
@@ -1617,7 +1617,7 @@ namespace WinformWithExternalLibrary
 			this.TabPageKhachHang_SearchKH.Depth = 0;
 			this.TabPageKhachHang_SearchKH.HighEmphasis = true;
 			this.TabPageKhachHang_SearchKH.Icon = null;
-			this.TabPageKhachHang_SearchKH.Location = new System.Drawing.Point(1113, 653);
+			this.TabPageKhachHang_SearchKH.Location = new System.Drawing.Point(1113, 671);
 			this.TabPageKhachHang_SearchKH.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.TabPageKhachHang_SearchKH.MouseState = MaterialSkin.MouseState.HOVER;
 			this.TabPageKhachHang_SearchKH.Name = "TabPageKhachHang_SearchKH";
@@ -1638,7 +1638,7 @@ namespace WinformWithExternalLibrary
 			this.TabPageKhachHang_XuatExcelKH.Depth = 0;
 			this.TabPageKhachHang_XuatExcelKH.HighEmphasis = true;
 			this.TabPageKhachHang_XuatExcelKH.Icon = null;
-			this.TabPageKhachHang_XuatExcelKH.Location = new System.Drawing.Point(1314, 653);
+			this.TabPageKhachHang_XuatExcelKH.Location = new System.Drawing.Point(1314, 671);
 			this.TabPageKhachHang_XuatExcelKH.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.TabPageKhachHang_XuatExcelKH.MouseState = MaterialSkin.MouseState.HOVER;
 			this.TabPageKhachHang_XuatExcelKH.Name = "TabPageKhachHang_XuatExcelKH";
@@ -1664,7 +1664,7 @@ namespace WinformWithExternalLibrary
 			this.KhachHangDVO_DienThoai.AnimateReadOnly = false;
 			this.KhachHangDVO_DienThoai.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.KhachHangDVO_DienThoai.Depth = 0;
-			this.KhachHangDVO_DienThoai.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.KhachHangDVO_DienThoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.KhachHangDVO_DienThoai.LeadingIcon = null;
 			this.KhachHangDVO_DienThoai.Location = new System.Drawing.Point(1113, 167);
 			this.KhachHangDVO_DienThoai.MaxLength = 50;
@@ -1697,7 +1697,7 @@ namespace WinformWithExternalLibrary
 			this.KhachHangDVO_DiaChi.AnimateReadOnly = false;
 			this.KhachHangDVO_DiaChi.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.KhachHangDVO_DiaChi.Depth = 0;
-			this.KhachHangDVO_DiaChi.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.KhachHangDVO_DiaChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.KhachHangDVO_DiaChi.LeadingIcon = null;
 			this.KhachHangDVO_DiaChi.Location = new System.Drawing.Point(1113, 88);
 			this.KhachHangDVO_DiaChi.MaxLength = 50;
@@ -1714,7 +1714,7 @@ namespace WinformWithExternalLibrary
 			this.KhachHangDVO_TenKhachHang.AnimateReadOnly = false;
 			this.KhachHangDVO_TenKhachHang.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.KhachHangDVO_TenKhachHang.Depth = 0;
-			this.KhachHangDVO_TenKhachHang.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.KhachHangDVO_TenKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.KhachHangDVO_TenKhachHang.LeadingIcon = null;
 			this.KhachHangDVO_TenKhachHang.Location = new System.Drawing.Point(1113, 9);
 			this.KhachHangDVO_TenKhachHang.MaxLength = 50;
@@ -1734,7 +1734,7 @@ namespace WinformWithExternalLibrary
 			this.TabPageKhachHang_TaoKhachHang.Depth = 0;
 			this.TabPageKhachHang_TaoKhachHang.HighEmphasis = true;
 			this.TabPageKhachHang_TaoKhachHang.Icon = null;
-			this.TabPageKhachHang_TaoKhachHang.Location = new System.Drawing.Point(1113, 605);
+			this.TabPageKhachHang_TaoKhachHang.Location = new System.Drawing.Point(1113, 623);
 			this.TabPageKhachHang_TaoKhachHang.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.TabPageKhachHang_TaoKhachHang.MouseState = MaterialSkin.MouseState.HOVER;
 			this.TabPageKhachHang_TaoKhachHang.Name = "TabPageKhachHang_TaoKhachHang";
@@ -1805,13 +1805,13 @@ namespace WinformWithExternalLibrary
 			this.TabPageNhaCungCap.Controls.Add(this.materialButton_LichSuNhapHang);
 			this.TabPageNhaCungCap.Controls.Add(this.materialButton_SearchNCC);
 			this.TabPageNhaCungCap.Controls.Add(this.materialButton_XuatExcelNCC);
+			this.TabPageNhaCungCap.Controls.Add(this.materialButton_TaoNhaCungCap);
 			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DienThoai_Validation);
 			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DienThoai);
 			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DiaChi_Validation);
 			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_TenNhaCungCap_Validation);
 			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_DiaChi);
 			this.TabPageNhaCungCap.Controls.Add(this.NhaCungCapDVO_TenNhaCungCap);
-			this.TabPageNhaCungCap.Controls.Add(this.materialButton_TaoNhaCungCap);
 			this.TabPageNhaCungCap.Controls.Add(this.TabPageNhaCungCap_MaterialListView);
 			this.TabPageNhaCungCap.ImageKey = "icons8-administrator-male-32.png";
 			this.TabPageNhaCungCap.Location = new System.Drawing.Point(4, 39);
@@ -1821,111 +1821,6 @@ namespace WinformWithExternalLibrary
 			this.TabPageNhaCungCap.TabIndex = 5;
 			this.TabPageNhaCungCap.Text = "Nhà Cung Cấp";
 			this.TabPageNhaCungCap.UseVisualStyleBackColor = true;
-			// 
-			// materialButton_RefreshNhaCungCap
-			// 
-			this.materialButton_RefreshNhaCungCap.AutoSize = false;
-			this.materialButton_RefreshNhaCungCap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButton_RefreshNhaCungCap.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButton_RefreshNhaCungCap.Depth = 0;
-			this.materialButton_RefreshNhaCungCap.HighEmphasis = true;
-			this.materialButton_RefreshNhaCungCap.Icon = null;
-			this.materialButton_RefreshNhaCungCap.Location = new System.Drawing.Point(1319, 345);
-			this.materialButton_RefreshNhaCungCap.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButton_RefreshNhaCungCap.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButton_RefreshNhaCungCap.Name = "materialButton_RefreshNhaCungCap";
-			this.materialButton_RefreshNhaCungCap.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButton_RefreshNhaCungCap.Size = new System.Drawing.Size(112, 36);
-			this.materialButton_RefreshNhaCungCap.TabIndex = 72;
-			this.materialButton_RefreshNhaCungCap.TabStop = false;
-			this.materialButton_RefreshNhaCungCap.Text = "Refresh";
-			this.materialButton_RefreshNhaCungCap.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButton_RefreshNhaCungCap.UseAccentColor = false;
-			this.materialButton_RefreshNhaCungCap.UseVisualStyleBackColor = true;
-			// 
-			// materialButton_SuaNCC
-			// 
-			this.materialButton_SuaNCC.AutoSize = false;
-			this.materialButton_SuaNCC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButton_SuaNCC.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButton_SuaNCC.Depth = 0;
-			this.materialButton_SuaNCC.HighEmphasis = true;
-			this.materialButton_SuaNCC.Icon = null;
-			this.materialButton_SuaNCC.Location = new System.Drawing.Point(1144, 345);
-			this.materialButton_SuaNCC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButton_SuaNCC.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButton_SuaNCC.Name = "materialButton_SuaNCC";
-			this.materialButton_SuaNCC.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButton_SuaNCC.Size = new System.Drawing.Size(112, 36);
-			this.materialButton_SuaNCC.TabIndex = 69;
-			this.materialButton_SuaNCC.TabStop = false;
-			this.materialButton_SuaNCC.Text = "Sửa thông tin";
-			this.materialButton_SuaNCC.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButton_SuaNCC.UseAccentColor = false;
-			this.materialButton_SuaNCC.UseVisualStyleBackColor = true;
-			// 
-			// materialButton_LichSuNhapHang
-			// 
-			this.materialButton_LichSuNhapHang.AutoSize = false;
-			this.materialButton_LichSuNhapHang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButton_LichSuNhapHang.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButton_LichSuNhapHang.Depth = 0;
-			this.materialButton_LichSuNhapHang.HighEmphasis = true;
-			this.materialButton_LichSuNhapHang.Icon = null;
-			this.materialButton_LichSuNhapHang.Location = new System.Drawing.Point(1319, 249);
-			this.materialButton_LichSuNhapHang.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButton_LichSuNhapHang.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButton_LichSuNhapHang.Name = "materialButton_LichSuNhapHang";
-			this.materialButton_LichSuNhapHang.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButton_LichSuNhapHang.Size = new System.Drawing.Size(112, 36);
-			this.materialButton_LichSuNhapHang.TabIndex = 71;
-			this.materialButton_LichSuNhapHang.TabStop = false;
-			this.materialButton_LichSuNhapHang.Text = "Lịch sử nhập hàng";
-			this.materialButton_LichSuNhapHang.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButton_LichSuNhapHang.UseAccentColor = false;
-			this.materialButton_LichSuNhapHang.UseVisualStyleBackColor = true;
-			// 
-			// materialButton_SearchNCC
-			// 
-			this.materialButton_SearchNCC.AutoSize = false;
-			this.materialButton_SearchNCC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButton_SearchNCC.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButton_SearchNCC.Depth = 0;
-			this.materialButton_SearchNCC.HighEmphasis = true;
-			this.materialButton_SearchNCC.Icon = null;
-			this.materialButton_SearchNCC.Location = new System.Drawing.Point(1144, 297);
-			this.materialButton_SearchNCC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButton_SearchNCC.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButton_SearchNCC.Name = "materialButton_SearchNCC";
-			this.materialButton_SearchNCC.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButton_SearchNCC.Size = new System.Drawing.Size(112, 36);
-			this.materialButton_SearchNCC.TabIndex = 67;
-			this.materialButton_SearchNCC.TabStop = false;
-			this.materialButton_SearchNCC.Text = "Tìm kiếm";
-			this.materialButton_SearchNCC.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButton_SearchNCC.UseAccentColor = false;
-			this.materialButton_SearchNCC.UseVisualStyleBackColor = true;
-			// 
-			// materialButton_XuatExcelNCC
-			// 
-			this.materialButton_XuatExcelNCC.AutoSize = false;
-			this.materialButton_XuatExcelNCC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButton_XuatExcelNCC.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButton_XuatExcelNCC.Depth = 0;
-			this.materialButton_XuatExcelNCC.HighEmphasis = true;
-			this.materialButton_XuatExcelNCC.Icon = null;
-			this.materialButton_XuatExcelNCC.Location = new System.Drawing.Point(1319, 297);
-			this.materialButton_XuatExcelNCC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButton_XuatExcelNCC.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButton_XuatExcelNCC.Name = "materialButton_XuatExcelNCC";
-			this.materialButton_XuatExcelNCC.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButton_XuatExcelNCC.Size = new System.Drawing.Size(112, 36);
-			this.materialButton_XuatExcelNCC.TabIndex = 70;
-			this.materialButton_XuatExcelNCC.TabStop = false;
-			this.materialButton_XuatExcelNCC.Text = "Xuất Excel";
-			this.materialButton_XuatExcelNCC.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButton_XuatExcelNCC.UseAccentColor = false;
-			this.materialButton_XuatExcelNCC.UseVisualStyleBackColor = true;
 			// 
 			// NhaCungCapDVO_DienThoai_Validation
 			// 
@@ -1940,7 +1835,7 @@ namespace WinformWithExternalLibrary
 			this.NhaCungCapDVO_DienThoai.AnimateReadOnly = false;
 			this.NhaCungCapDVO_DienThoai.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhaCungCapDVO_DienThoai.Depth = 0;
-			this.NhaCungCapDVO_DienThoai.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhaCungCapDVO_DienThoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhaCungCapDVO_DienThoai.LeadingIcon = null;
 			this.NhaCungCapDVO_DienThoai.Location = new System.Drawing.Point(1109, 167);
 			this.NhaCungCapDVO_DienThoai.MaxLength = 50;
@@ -1973,7 +1868,7 @@ namespace WinformWithExternalLibrary
 			this.NhaCungCapDVO_DiaChi.AnimateReadOnly = false;
 			this.NhaCungCapDVO_DiaChi.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhaCungCapDVO_DiaChi.Depth = 0;
-			this.NhaCungCapDVO_DiaChi.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhaCungCapDVO_DiaChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhaCungCapDVO_DiaChi.LeadingIcon = null;
 			this.NhaCungCapDVO_DiaChi.Location = new System.Drawing.Point(1109, 88);
 			this.NhaCungCapDVO_DiaChi.MaxLength = 50;
@@ -1990,7 +1885,7 @@ namespace WinformWithExternalLibrary
 			this.NhaCungCapDVO_TenNhaCungCap.AnimateReadOnly = false;
 			this.NhaCungCapDVO_TenNhaCungCap.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhaCungCapDVO_TenNhaCungCap.Depth = 0;
-			this.NhaCungCapDVO_TenNhaCungCap.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhaCungCapDVO_TenNhaCungCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhaCungCapDVO_TenNhaCungCap.LeadingIcon = null;
 			this.NhaCungCapDVO_TenNhaCungCap.Location = new System.Drawing.Point(1109, 9);
 			this.NhaCungCapDVO_TenNhaCungCap.MaxLength = 50;
@@ -2001,27 +1896,6 @@ namespace WinformWithExternalLibrary
 			this.NhaCungCapDVO_TenNhaCungCap.TabIndex = 61;
 			this.NhaCungCapDVO_TenNhaCungCap.Text = "";
 			this.NhaCungCapDVO_TenNhaCungCap.TrailingIcon = null;
-			// 
-			// materialButton_TaoNhaCungCap
-			// 
-			this.materialButton_TaoNhaCungCap.AutoSize = false;
-			this.materialButton_TaoNhaCungCap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.materialButton_TaoNhaCungCap.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.materialButton_TaoNhaCungCap.Depth = 0;
-			this.materialButton_TaoNhaCungCap.HighEmphasis = true;
-			this.materialButton_TaoNhaCungCap.Icon = null;
-			this.materialButton_TaoNhaCungCap.Location = new System.Drawing.Point(1144, 249);
-			this.materialButton_TaoNhaCungCap.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.materialButton_TaoNhaCungCap.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialButton_TaoNhaCungCap.Name = "materialButton_TaoNhaCungCap";
-			this.materialButton_TaoNhaCungCap.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButton_TaoNhaCungCap.Size = new System.Drawing.Size(112, 36);
-			this.materialButton_TaoNhaCungCap.TabIndex = 66;
-			this.materialButton_TaoNhaCungCap.TabStop = false;
-			this.materialButton_TaoNhaCungCap.Text = "Tạo nhà cung cấp";
-			this.materialButton_TaoNhaCungCap.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.materialButton_TaoNhaCungCap.UseAccentColor = false;
-			this.materialButton_TaoNhaCungCap.UseVisualStyleBackColor = true;
 			// 
 			// TabPageNhaCungCap_MaterialListView
 			// 
@@ -2077,8 +1951,6 @@ namespace WinformWithExternalLibrary
 			// TabPageSanPham
 			// 
 			this.TabPageSanPham.Controls.Add(this.TabPageSanPham_NhapMoiSanPham);
-			this.TabPageSanPham.Controls.Add(this.DMSanPhamDVO_ThoiGianBaoHanhMax);
-			this.TabPageSanPham.Controls.Add(this.DMSanPhamDVO_ThoiGianBaoHanhMin);
 			this.TabPageSanPham.Controls.Add(this.TabPageSanPham_ButtonXuatRaFileExcel);
 			this.TabPageSanPham.Controls.Add(this.DMSanPhamDVO_SoLuongTonKhoMax);
 			this.TabPageSanPham.Controls.Add(this.DMSanPhamDVO_DonGiaNhapMax);
@@ -2096,6 +1968,8 @@ namespace WinformWithExternalLibrary
 			this.TabPageSanPham.Controls.Add(this.DMSanPhamDVO_MaSanPham);
 			this.TabPageSanPham.Controls.Add(this.TabPageSanPham_ButtonSuaSanPham);
 			this.TabPageSanPham.Controls.Add(this.TabPageSanPham_ButtonTimKiem);
+			this.TabPageSanPham.Controls.Add(this.DMSanPhamDVO_ThoiGianBaoHanhMax);
+			this.TabPageSanPham.Controls.Add(this.DMSanPhamDVO_ThoiGianBaoHanhMin);
 			this.TabPageSanPham.Controls.Add(this.materialListView2);
 			this.TabPageSanPham.ImageKey = "icons8-new-product-32.png";
 			this.TabPageSanPham.Location = new System.Drawing.Point(4, 39);
@@ -2125,32 +1999,6 @@ namespace WinformWithExternalLibrary
 			this.TabPageSanPham_NhapMoiSanPham.UseAccentColor = false;
 			this.TabPageSanPham_NhapMoiSanPham.UseVisualStyleBackColor = true;
 			// 
-			// DMSanPhamDVO_ThoiGianBaoHanhMax
-			// 
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.BorderColor = System.Drawing.Color.PaleVioletRed;
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.BorderSize = 0;
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.Location = new System.Drawing.Point(1251, 481);
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.MinimumSize = new System.Drawing.Size(0, 35);
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.Name = "DMSanPhamDVO_ThoiGianBaoHanhMax";
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.Size = new System.Drawing.Size(216, 35);
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.SkinColor = System.Drawing.Color.MediumSlateBlue;
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.TabIndex = 50;
-			this.DMSanPhamDVO_ThoiGianBaoHanhMax.TextColor = System.Drawing.Color.White;
-			// 
-			// DMSanPhamDVO_ThoiGianBaoHanhMin
-			// 
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.BorderColor = System.Drawing.Color.PaleVioletRed;
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.BorderSize = 0;
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.Location = new System.Drawing.Point(1005, 481);
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.MinimumSize = new System.Drawing.Size(0, 35);
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.Name = "DMSanPhamDVO_ThoiGianBaoHanhMin";
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.Size = new System.Drawing.Size(219, 35);
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.SkinColor = System.Drawing.Color.MediumSlateBlue;
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.TabIndex = 49;
-			this.DMSanPhamDVO_ThoiGianBaoHanhMin.TextColor = System.Drawing.Color.White;
-			// 
 			// TabPageSanPham_ButtonXuatRaFileExcel
 			// 
 			this.TabPageSanPham_ButtonXuatRaFileExcel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -2175,7 +2023,7 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_SoLuongTonKhoMax.AnimateReadOnly = false;
 			this.DMSanPhamDVO_SoLuongTonKhoMax.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DMSanPhamDVO_SoLuongTonKhoMax.Depth = 0;
-			this.DMSanPhamDVO_SoLuongTonKhoMax.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DMSanPhamDVO_SoLuongTonKhoMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.DMSanPhamDVO_SoLuongTonKhoMax.LeadingIcon = null;
 			this.DMSanPhamDVO_SoLuongTonKhoMax.Location = new System.Drawing.Point(1251, 399);
 			this.DMSanPhamDVO_SoLuongTonKhoMax.MaxLength = 50;
@@ -2192,7 +2040,7 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_DonGiaNhapMax.AnimateReadOnly = false;
 			this.DMSanPhamDVO_DonGiaNhapMax.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DMSanPhamDVO_DonGiaNhapMax.Depth = 0;
-			this.DMSanPhamDVO_DonGiaNhapMax.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DMSanPhamDVO_DonGiaNhapMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.DMSanPhamDVO_DonGiaNhapMax.LeadingIcon = null;
 			this.DMSanPhamDVO_DonGiaNhapMax.Location = new System.Drawing.Point(1251, 289);
 			this.DMSanPhamDVO_DonGiaNhapMax.MaxLength = 50;
@@ -2233,7 +2081,7 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_SoLuongTonKhoMin.AnimateReadOnly = false;
 			this.DMSanPhamDVO_SoLuongTonKhoMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DMSanPhamDVO_SoLuongTonKhoMin.Depth = 0;
-			this.DMSanPhamDVO_SoLuongTonKhoMin.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DMSanPhamDVO_SoLuongTonKhoMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.DMSanPhamDVO_SoLuongTonKhoMin.LeadingIcon = null;
 			this.DMSanPhamDVO_SoLuongTonKhoMin.Location = new System.Drawing.Point(1005, 399);
 			this.DMSanPhamDVO_SoLuongTonKhoMin.MaxLength = 50;
@@ -2250,7 +2098,7 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_DonGiaNhapMin.AnimateReadOnly = false;
 			this.DMSanPhamDVO_DonGiaNhapMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DMSanPhamDVO_DonGiaNhapMin.Depth = 0;
-			this.DMSanPhamDVO_DonGiaNhapMin.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DMSanPhamDVO_DonGiaNhapMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.DMSanPhamDVO_DonGiaNhapMin.LeadingIcon = null;
 			this.DMSanPhamDVO_DonGiaNhapMin.Location = new System.Drawing.Point(1005, 289);
 			this.DMSanPhamDVO_DonGiaNhapMin.MaxLength = 50;
@@ -2267,7 +2115,7 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_DonGiaBanMax.AnimateReadOnly = false;
 			this.DMSanPhamDVO_DonGiaBanMax.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DMSanPhamDVO_DonGiaBanMax.Depth = 0;
-			this.DMSanPhamDVO_DonGiaBanMax.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DMSanPhamDVO_DonGiaBanMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.DMSanPhamDVO_DonGiaBanMax.LeadingIcon = null;
 			this.DMSanPhamDVO_DonGiaBanMax.Location = new System.Drawing.Point(1251, 184);
 			this.DMSanPhamDVO_DonGiaBanMax.MaxLength = 50;
@@ -2284,7 +2132,7 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_TenSanPham.AnimateReadOnly = false;
 			this.DMSanPhamDVO_TenSanPham.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DMSanPhamDVO_TenSanPham.Depth = 0;
-			this.DMSanPhamDVO_TenSanPham.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DMSanPhamDVO_TenSanPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.DMSanPhamDVO_TenSanPham.LeadingIcon = null;
 			this.DMSanPhamDVO_TenSanPham.Location = new System.Drawing.Point(1005, 83);
 			this.DMSanPhamDVO_TenSanPham.MaxLength = 50;
@@ -2325,7 +2173,7 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_DonGiaBanMin.AnimateReadOnly = false;
 			this.DMSanPhamDVO_DonGiaBanMin.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DMSanPhamDVO_DonGiaBanMin.Depth = 0;
-			this.DMSanPhamDVO_DonGiaBanMin.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DMSanPhamDVO_DonGiaBanMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.DMSanPhamDVO_DonGiaBanMin.LeadingIcon = null;
 			this.DMSanPhamDVO_DonGiaBanMin.Location = new System.Drawing.Point(1005, 184);
 			this.DMSanPhamDVO_DonGiaBanMin.MaxLength = 50;
@@ -2380,7 +2228,7 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_MaSanPham.AnimateReadOnly = false;
 			this.DMSanPhamDVO_MaSanPham.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.DMSanPhamDVO_MaSanPham.Depth = 0;
-			this.DMSanPhamDVO_MaSanPham.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.DMSanPhamDVO_MaSanPham.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.DMSanPhamDVO_MaSanPham.LeadingIcon = null;
 			this.DMSanPhamDVO_MaSanPham.Location = new System.Drawing.Point(1005, 6);
 			this.DMSanPhamDVO_MaSanPham.MaxLength = 50;
@@ -2851,14 +2699,6 @@ namespace WinformWithExternalLibrary
 			this.materialCard5.Size = new System.Drawing.Size(630, 316);
 			this.materialCard5.TabIndex = 7;
 			// 
-			// cartesianChart2
-			// 
-			this.cartesianChart2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cartesianChart2.Location = new System.Drawing.Point(18, 18);
-			this.cartesianChart2.Name = "cartesianChart2";
-			this.cartesianChart2.Size = new System.Drawing.Size(594, 280);
-			this.cartesianChart2.TabIndex = 1;
-			// 
 			// materialCard4
 			// 
 			this.materialCard4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -2872,14 +2712,6 @@ namespace WinformWithExternalLibrary
 			this.materialCard4.Padding = new System.Windows.Forms.Padding(18);
 			this.materialCard4.Size = new System.Drawing.Size(684, 316);
 			this.materialCard4.TabIndex = 6;
-			// 
-			// cartesianChart1
-			// 
-			this.cartesianChart1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.cartesianChart1.Location = new System.Drawing.Point(18, 18);
-			this.cartesianChart1.Name = "cartesianChart1";
-			this.cartesianChart1.Size = new System.Drawing.Size(648, 280);
-			this.cartesianChart1.TabIndex = 0;
 			// 
 			// materialCard1
 			// 
@@ -2978,6 +2810,65 @@ namespace WinformWithExternalLibrary
 			this.label2.TabIndex = 2;
 			this.label2.Text = "Số lượng";
 			// 
+			// imageList1
+			// 
+			this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+			this.imageList1.TransparentColor = System.Drawing.Color.White;
+			this.imageList1.Images.SetKeyName(0, "icons8-boxes-32.png");
+			this.imageList1.Images.SetKeyName(1, "icons8-create-order-32.png");
+			this.imageList1.Images.SetKeyName(2, "icons8-favorite-package-32.png");
+			this.imageList1.Images.SetKeyName(3, "icons8-intelligence-32.png");
+			this.imageList1.Images.SetKeyName(4, "icons8-new-product-32.png");
+			this.imageList1.Images.SetKeyName(5, "icons8-package-delivery-logistics-32.png");
+			this.imageList1.Images.SetKeyName(6, "icons8-store-front-32.png");
+			this.imageList1.Images.SetKeyName(7, "icons8-warehouse-32.png");
+			this.imageList1.Images.SetKeyName(8, "icons8-invoice-32 (1).png");
+			this.imageList1.Images.SetKeyName(9, "icons8-purchase-order-32.png");
+			this.imageList1.Images.SetKeyName(10, "icons8-administrator-male-32.png");
+			this.imageList1.Images.SetKeyName(11, "icons8-male-user-32.png");
+			this.imageList1.Images.SetKeyName(12, "icons8-people-32.png");
+			this.imageList1.Images.SetKeyName(13, "icons8-user-32.png");
+			this.imageList1.Images.SetKeyName(14, "icons8-download-64.png");
+			// 
+			// contextMenuStrip
+			// 
+			this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.darkModeToolStripMenuItem,
+            this.autoValidationToolStripMenuItem});
+			this.contextMenuStrip.Name = "contextMenuStrip1";
+			this.contextMenuStrip.Size = new System.Drawing.Size(182, 52);
+			// 
+			// darkModeToolStripMenuItem
+			// 
+			this.darkModeToolStripMenuItem.CheckOnClick = true;
+			this.darkModeToolStripMenuItem.Name = "darkModeToolStripMenuItem";
+			this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(181, 24);
+			this.darkModeToolStripMenuItem.Text = "Dark Mode";
+			// 
+			// autoValidationToolStripMenuItem
+			// 
+			this.autoValidationToolStripMenuItem.CheckOnClick = true;
+			this.autoValidationToolStripMenuItem.Name = "autoValidationToolStripMenuItem";
+			this.autoValidationToolStripMenuItem.Size = new System.Drawing.Size(181, 24);
+			this.autoValidationToolStripMenuItem.Text = "Auto Validation";
+			// 
+			// cartesianChart2
+			// 
+			this.cartesianChart2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cartesianChart2.Location = new System.Drawing.Point(18, 18);
+			this.cartesianChart2.Name = "cartesianChart2";
+			this.cartesianChart2.Size = new System.Drawing.Size(594, 280);
+			this.cartesianChart2.TabIndex = 1;
+			// 
+			// cartesianChart1
+			// 
+			this.cartesianChart1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cartesianChart1.Location = new System.Drawing.Point(18, 18);
+			this.cartesianChart1.Name = "cartesianChart1";
+			this.cartesianChart1.Size = new System.Drawing.Size(648, 280);
+			this.cartesianChart1.TabIndex = 0;
+			// 
 			// pieChart2
 			// 
 			this.pieChart2.InitialRotation = 0D;
@@ -3022,26 +2913,6 @@ namespace WinformWithExternalLibrary
 			this.TabPagePhanTich_HoaDonBan_ShowBTN.Text = "materialFloatingActionButton1";
 			this.TabPagePhanTich_HoaDonBan_ShowBTN.UseVisualStyleBackColor = false;
 			// 
-			// imageList1
-			// 
-			this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-			this.imageList1.TransparentColor = System.Drawing.Color.White;
-			this.imageList1.Images.SetKeyName(0, "icons8-boxes-32.png");
-			this.imageList1.Images.SetKeyName(1, "icons8-create-order-32.png");
-			this.imageList1.Images.SetKeyName(2, "icons8-favorite-package-32.png");
-			this.imageList1.Images.SetKeyName(3, "icons8-intelligence-32.png");
-			this.imageList1.Images.SetKeyName(4, "icons8-new-product-32.png");
-			this.imageList1.Images.SetKeyName(5, "icons8-package-delivery-logistics-32.png");
-			this.imageList1.Images.SetKeyName(6, "icons8-store-front-32.png");
-			this.imageList1.Images.SetKeyName(7, "icons8-warehouse-32.png");
-			this.imageList1.Images.SetKeyName(8, "icons8-invoice-32 (1).png");
-			this.imageList1.Images.SetKeyName(9, "icons8-purchase-order-32.png");
-			this.imageList1.Images.SetKeyName(10, "icons8-administrator-male-32.png");
-			this.imageList1.Images.SetKeyName(11, "icons8-male-user-32.png");
-			this.imageList1.Images.SetKeyName(12, "icons8-people-32.png");
-			this.imageList1.Images.SetKeyName(13, "icons8-user-32.png");
-			this.imageList1.Images.SetKeyName(14, "icons8-download-64.png");
-			// 
 			// TabPagePhanTich_HoaDonNhap_ShowBTN
 			// 
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -3060,28 +2931,157 @@ namespace WinformWithExternalLibrary
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Text = "materialFloatingActionButton2";
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.UseVisualStyleBackColor = false;
 			// 
-			// contextMenuStrip
+			// materialButton_RefreshNhaCungCap
 			// 
-			this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.darkModeToolStripMenuItem,
-            this.autoValidationToolStripMenuItem});
-			this.contextMenuStrip.Name = "contextMenuStrip1";
-			this.contextMenuStrip.Size = new System.Drawing.Size(211, 80);
+			this.materialButton_RefreshNhaCungCap.AutoSize = false;
+			this.materialButton_RefreshNhaCungCap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.materialButton_RefreshNhaCungCap.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.materialButton_RefreshNhaCungCap.Depth = 0;
+			this.materialButton_RefreshNhaCungCap.HighEmphasis = true;
+			this.materialButton_RefreshNhaCungCap.Icon = null;
+			this.materialButton_RefreshNhaCungCap.Location = new System.Drawing.Point(1310, 716);
+			this.materialButton_RefreshNhaCungCap.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.materialButton_RefreshNhaCungCap.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialButton_RefreshNhaCungCap.Name = "materialButton_RefreshNhaCungCap";
+			this.materialButton_RefreshNhaCungCap.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.materialButton_RefreshNhaCungCap.Size = new System.Drawing.Size(153, 36);
+			this.materialButton_RefreshNhaCungCap.TabIndex = 78;
+			this.materialButton_RefreshNhaCungCap.TabStop = false;
+			this.materialButton_RefreshNhaCungCap.Text = "Refresh";
+			this.materialButton_RefreshNhaCungCap.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.materialButton_RefreshNhaCungCap.UseAccentColor = false;
+			this.materialButton_RefreshNhaCungCap.UseVisualStyleBackColor = true;
 			// 
-			// darkModeToolStripMenuItem
+			// materialButton_SuaNCC
 			// 
-			this.darkModeToolStripMenuItem.CheckOnClick = true;
-			this.darkModeToolStripMenuItem.Name = "darkModeToolStripMenuItem";
-			this.darkModeToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-			this.darkModeToolStripMenuItem.Text = "Dark Mode";
+			this.materialButton_SuaNCC.AutoSize = false;
+			this.materialButton_SuaNCC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.materialButton_SuaNCC.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.materialButton_SuaNCC.Depth = 0;
+			this.materialButton_SuaNCC.HighEmphasis = true;
+			this.materialButton_SuaNCC.Icon = null;
+			this.materialButton_SuaNCC.Location = new System.Drawing.Point(1109, 716);
+			this.materialButton_SuaNCC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.materialButton_SuaNCC.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialButton_SuaNCC.Name = "materialButton_SuaNCC";
+			this.materialButton_SuaNCC.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.materialButton_SuaNCC.Size = new System.Drawing.Size(151, 36);
+			this.materialButton_SuaNCC.TabIndex = 75;
+			this.materialButton_SuaNCC.TabStop = false;
+			this.materialButton_SuaNCC.Text = "Sửa thông tin";
+			this.materialButton_SuaNCC.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.materialButton_SuaNCC.UseAccentColor = false;
+			this.materialButton_SuaNCC.UseVisualStyleBackColor = true;
 			// 
-			// autoValidationToolStripMenuItem
+			// materialButton_LichSuNhapHang
 			// 
-			this.autoValidationToolStripMenuItem.CheckOnClick = true;
-			this.autoValidationToolStripMenuItem.Name = "autoValidationToolStripMenuItem";
-			this.autoValidationToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-			this.autoValidationToolStripMenuItem.Text = "Auto Validation";
+			this.materialButton_LichSuNhapHang.AutoSize = false;
+			this.materialButton_LichSuNhapHang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.materialButton_LichSuNhapHang.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.materialButton_LichSuNhapHang.Depth = 0;
+			this.materialButton_LichSuNhapHang.HighEmphasis = true;
+			this.materialButton_LichSuNhapHang.Icon = null;
+			this.materialButton_LichSuNhapHang.Location = new System.Drawing.Point(1310, 620);
+			this.materialButton_LichSuNhapHang.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.materialButton_LichSuNhapHang.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialButton_LichSuNhapHang.Name = "materialButton_LichSuNhapHang";
+			this.materialButton_LichSuNhapHang.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.materialButton_LichSuNhapHang.Size = new System.Drawing.Size(153, 36);
+			this.materialButton_LichSuNhapHang.TabIndex = 77;
+			this.materialButton_LichSuNhapHang.TabStop = false;
+			this.materialButton_LichSuNhapHang.Text = "Lịch sử nhập hàng";
+			this.materialButton_LichSuNhapHang.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.materialButton_LichSuNhapHang.UseAccentColor = false;
+			this.materialButton_LichSuNhapHang.UseVisualStyleBackColor = true;
+			// 
+			// materialButton_SearchNCC
+			// 
+			this.materialButton_SearchNCC.AutoSize = false;
+			this.materialButton_SearchNCC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.materialButton_SearchNCC.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.materialButton_SearchNCC.Depth = 0;
+			this.materialButton_SearchNCC.HighEmphasis = true;
+			this.materialButton_SearchNCC.Icon = null;
+			this.materialButton_SearchNCC.Location = new System.Drawing.Point(1109, 668);
+			this.materialButton_SearchNCC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.materialButton_SearchNCC.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialButton_SearchNCC.Name = "materialButton_SearchNCC";
+			this.materialButton_SearchNCC.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.materialButton_SearchNCC.Size = new System.Drawing.Size(151, 36);
+			this.materialButton_SearchNCC.TabIndex = 74;
+			this.materialButton_SearchNCC.TabStop = false;
+			this.materialButton_SearchNCC.Text = "Tìm kiếm";
+			this.materialButton_SearchNCC.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.materialButton_SearchNCC.UseAccentColor = false;
+			this.materialButton_SearchNCC.UseVisualStyleBackColor = true;
+			// 
+			// materialButton_XuatExcelNCC
+			// 
+			this.materialButton_XuatExcelNCC.AutoSize = false;
+			this.materialButton_XuatExcelNCC.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.materialButton_XuatExcelNCC.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.materialButton_XuatExcelNCC.Depth = 0;
+			this.materialButton_XuatExcelNCC.HighEmphasis = true;
+			this.materialButton_XuatExcelNCC.Icon = null;
+			this.materialButton_XuatExcelNCC.Location = new System.Drawing.Point(1310, 668);
+			this.materialButton_XuatExcelNCC.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.materialButton_XuatExcelNCC.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialButton_XuatExcelNCC.Name = "materialButton_XuatExcelNCC";
+			this.materialButton_XuatExcelNCC.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.materialButton_XuatExcelNCC.Size = new System.Drawing.Size(153, 36);
+			this.materialButton_XuatExcelNCC.TabIndex = 76;
+			this.materialButton_XuatExcelNCC.TabStop = false;
+			this.materialButton_XuatExcelNCC.Text = "Xuất Excel";
+			this.materialButton_XuatExcelNCC.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.materialButton_XuatExcelNCC.UseAccentColor = false;
+			this.materialButton_XuatExcelNCC.UseVisualStyleBackColor = true;
+			// 
+			// materialButton_TaoNhaCungCap
+			// 
+			this.materialButton_TaoNhaCungCap.AutoSize = false;
+			this.materialButton_TaoNhaCungCap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.materialButton_TaoNhaCungCap.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.materialButton_TaoNhaCungCap.Depth = 0;
+			this.materialButton_TaoNhaCungCap.HighEmphasis = true;
+			this.materialButton_TaoNhaCungCap.Icon = null;
+			this.materialButton_TaoNhaCungCap.Location = new System.Drawing.Point(1109, 620);
+			this.materialButton_TaoNhaCungCap.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.materialButton_TaoNhaCungCap.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialButton_TaoNhaCungCap.Name = "materialButton_TaoNhaCungCap";
+			this.materialButton_TaoNhaCungCap.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.materialButton_TaoNhaCungCap.Size = new System.Drawing.Size(151, 36);
+			this.materialButton_TaoNhaCungCap.TabIndex = 73;
+			this.materialButton_TaoNhaCungCap.TabStop = false;
+			this.materialButton_TaoNhaCungCap.Text = "Tạo nhà cung cấp";
+			this.materialButton_TaoNhaCungCap.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.materialButton_TaoNhaCungCap.UseAccentColor = false;
+			this.materialButton_TaoNhaCungCap.UseVisualStyleBackColor = true;
+			// 
+			// DMSanPhamDVO_ThoiGianBaoHanhMax
+			// 
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.BorderColor = System.Drawing.Color.PaleVioletRed;
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.BorderSize = 0;
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.Location = new System.Drawing.Point(1251, 481);
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.MinimumSize = new System.Drawing.Size(0, 35);
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.Name = "DMSanPhamDVO_ThoiGianBaoHanhMax";
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.Size = new System.Drawing.Size(216, 35);
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.SkinColor = System.Drawing.Color.MediumSlateBlue;
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.TabIndex = 50;
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.TextColor = System.Drawing.Color.White;
+			// 
+			// DMSanPhamDVO_ThoiGianBaoHanhMin
+			// 
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.BorderColor = System.Drawing.Color.PaleVioletRed;
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.BorderSize = 0;
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.Location = new System.Drawing.Point(1005, 481);
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.MinimumSize = new System.Drawing.Size(0, 35);
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.Name = "DMSanPhamDVO_ThoiGianBaoHanhMin";
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.Size = new System.Drawing.Size(219, 35);
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.SkinColor = System.Drawing.Color.MediumSlateBlue;
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.TabIndex = 49;
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.TextColor = System.Drawing.Color.White;
 			// 
 			// FormMain
 			// 
@@ -3293,18 +3293,12 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.ColumnHeader columnHeader17;
 		private System.Windows.Forms.ColumnHeader columnHeader18;
 		private System.Windows.Forms.ColumnHeader columnHeader19;
-		private MaterialSkin.Controls.MaterialButton materialButton_RefreshNhaCungCap;
-		private MaterialSkin.Controls.MaterialButton materialButton_SuaNCC;
-		private MaterialSkin.Controls.MaterialButton materialButton_LichSuNhapHang;
-		private MaterialSkin.Controls.MaterialButton materialButton_SearchNCC;
-		private MaterialSkin.Controls.MaterialButton materialButton_XuatExcelNCC;
 		private System.Windows.Forms.Label NhaCungCapDVO_DienThoai_Validation;
 		private MaterialSkin.Controls.MaterialTextBox NhaCungCapDVO_DienThoai;
 		private System.Windows.Forms.Label NhaCungCapDVO_DiaChi_Validation;
 		private System.Windows.Forms.Label NhaCungCapDVO_TenNhaCungCap_Validation;
 		private MaterialSkin.Controls.MaterialTextBox NhaCungCapDVO_DiaChi;
 		private MaterialSkin.Controls.MaterialTextBox NhaCungCapDVO_TenNhaCungCap;
-		private MaterialSkin.Controls.MaterialButton materialButton_TaoNhaCungCap;
 		private MaterialSkin.Controls.MaterialListView TabPageNhaCungCap_MaterialListView;
 		private System.Windows.Forms.ColumnHeader columnHeader20;
 		private System.Windows.Forms.ColumnHeader columnHeader21;
@@ -3342,5 +3336,11 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem darkModeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem autoValidationToolStripMenuItem;
+		private MaterialSkin.Controls.MaterialButton materialButton_RefreshNhaCungCap;
+		private MaterialSkin.Controls.MaterialButton materialButton_SuaNCC;
+		private MaterialSkin.Controls.MaterialButton materialButton_LichSuNhapHang;
+		private MaterialSkin.Controls.MaterialButton materialButton_SearchNCC;
+		private MaterialSkin.Controls.MaterialButton materialButton_XuatExcelNCC;
+		private MaterialSkin.Controls.MaterialButton materialButton_TaoNhaCungCap;
 	}
 }

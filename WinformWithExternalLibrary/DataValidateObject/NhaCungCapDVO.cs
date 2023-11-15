@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinformWithExternalLibrary.DataValidateObject.CustomValidation;
 
 namespace WinformWithExternalLibrary.DataValidateObject
 {
@@ -33,7 +34,10 @@ namespace WinformWithExternalLibrary.DataValidateObject
             MinimumLength = 10,
             ErrorMessage = "Số điện thoại phải có độ dài 10 chữ số"
             )]
-        [DisplayName(
+		[NhaCungCapDVO_UniqueDienThoai(
+			ErrorMessage = "Số điện thoại vừa nhập đã tồn tại"
+			)]
+		[DisplayName(
             "Số điện thoại"
             )]
         public string NhaCungCapDVO_DienThoai { get; set; }
