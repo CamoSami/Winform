@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
-using WinformWithExternalLibrary.DataValidateObject;
+using WinformWithExternalLibrary.DataValidateObjects;
 using WinformWithExternalLibrary._DataProvider;
 
 namespace WinformWithExternalLibrary.DataAccessObjects

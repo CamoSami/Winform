@@ -61,6 +61,7 @@ namespace WinformWithExternalLibrary
 
 			//		Assigning Essential
 			this.InitializeHardCodedAttributes();
+			this.InitiateDataObjects();
 
 			//		Event
 			this.InitializeAutomaticEvent();
@@ -77,6 +78,24 @@ namespace WinformWithExternalLibrary
 			}
 
 			return base.ProcessCmdKey(ref msg, keyData);
+		}
+
+		private void InitiateDataObjects()
+		{
+			//		Data Access Objects
+			DataProvider.Instance = new DataProvider();
+
+			ChiTietHDBanDAO.Instance = new ChiTietHDBanDAO();
+			ChiTietHDNhapDAO.Instance = new ChiTietHDNhapDAO();
+			CongViecDAO.Instance = new CongViecDAO();
+			DMSanPhamDAO.Instance = new DMSanPhamDAO();
+			GiamGiaDAO.Instance = new GiamGiaDAO();
+			HoaDonBanDAO.Instance = new HoaDonBanDAO();
+			HoaDonNhapDAO.Instance = new HoaDonNhapDAO();
+			KhachHangDAO.Instance = new KhachHangDAO();
+			NhaCungCapDAO.Instance = new NhaCungCapDAO();
+			NhanVienDAO.Instance = new NhanVienDAO();
+			PhanTichDAO.Instance = new PhanTichDAO();
 		}
 
 		private void RemoveDataObjects()
@@ -243,6 +262,8 @@ namespace WinformWithExternalLibrary
 					else
 					{
 						e.Cancel = true;
+
+						this.ResetColorForLabel();
 					}
 				}
 
@@ -351,6 +372,16 @@ namespace WinformWithExternalLibrary
 					UseRichTextBox: false,
 					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
 					);
+
+				this.ResetColorForLabel();
+			}
+		}
+
+		private void ResetColorForLabel()
+		{
+			foreach (Label label in this.listOfLabels)
+			{
+				label.ForeColor = Color.Red;
 			}
 		}
 

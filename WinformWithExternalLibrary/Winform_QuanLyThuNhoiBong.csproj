@@ -201,33 +201,33 @@
     <Compile Include="DataAccessObjects\NhaCungCapDAO.cs" />
     <Compile Include="DataAccessObjects\NhanVienDAO.cs" />
     <Compile Include="DataAccessObjects\PhanTichDAO.cs" />
-    <Compile Include="DataTransferObjects\CustomDTO\PhanTichDTO.cs" />
+    <Compile Include="DataTransferObjects\PhanTichDTO.cs" />
     <Compile Include="DataTransferObjects\GiamGiaDTO.cs" />
-    <Compile Include="DataValidateObject\ChiTietHDNhapDVO.cs" />
-    <Compile Include="DataValidateObject\ChiTietHDBanDVO.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\ChiTietHDBanDVO_EligibleSoLuongAttribute.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\ChiTietHDDVO_ExistedMaSanPhamAttribute.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_EligibleTenGiamGia.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\HoaDonNhapDVO_ExistedDienThoaiNhaCungCap.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\NhaCungCapDVO_UniqueDienThoaiAttribute.cs" />
-    <Compile Include="DataValidateObject\DMSanPhamDVO.cs" />
-    <Compile Include="DataValidateObject\FormCreateSanPhamDVO.cs" />
-    <Compile Include="DataValidateObject\NhaCungCapDVO.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\NhanVienThuNganDVO_ExistedNhanVienAttribute.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\HoaDonBanDVO_ExistedTenGiamGia.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\TongTienKhachTraDVO_EligibleTongTienKhachTra.cs" />
-    <Compile Include="DataValidateObject\HoaDonNhapDVO.cs" />
-    <Compile Include="DataValidateObject\HoaDonBanDVO.cs" />
-    <Compile Include="DataValidateObject\NhanVienDVO.cs" />
-    <Compile Include="DataValidateObject\NhanVienThuNganHDNhapDVO.cs" />
-    <Compile Include="DataValidateObject\NhanVienThuNganHDBanDVO.cs" />
-    <Compile Include="DataValidateObject\TongTienKhachTraDVO.cs" />
-    <Compile Include="DataValidateObject\_Reference\CongViecDVO.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\DivisibleBy100Attribute.cs" />
-    <Compile Include="DataValidateObject\CustomValidation\KhachHangDVO_UniqueDienThoaiAttribute.cs" />
-    <Compile Include="DataValidateObject\KhachHangDVO.cs" />
-    <Compile Include="DataValidateObject\LoginDVO.cs" />
+    <Compile Include="DataValidateObjects\ChiTietHDNhapDVO.cs" />
+    <Compile Include="DataValidateObjects\ChiTietHDBanDVO.cs" />
+    <Compile Include="DataValidateObjects\CongViecDVO.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\ChiTietHDBanDVO_EligibleSoLuongAttribute.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\ChiTietHDDVO_ExistedMaSanPhamAttribute.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\HoaDonBanDVO_EligibleTenGiamGia.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\HoaDonNhapDVO_ExistedDienThoaiNhaCungCap.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\NhaCungCapDVO_UniqueDienThoaiAttribute.cs" />
+    <Compile Include="DataValidateObjects\DMSanPhamDVO.cs" />
+    <Compile Include="DataValidateObjects\FormCreateSanPhamDVO.cs" />
+    <Compile Include="DataValidateObjects\NhaCungCapDVO.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\NhanVienThuNganDVO_ExistedNhanVienAttribute.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\HoaDonBanDVO_ExistedTenGiamGia.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\TongTienKhachTraDVO_EligibleTongTienKhachTra.cs" />
+    <Compile Include="DataValidateObjects\HoaDonNhapDVO.cs" />
+    <Compile Include="DataValidateObjects\HoaDonBanDVO.cs" />
+    <Compile Include="DataValidateObjects\NhanVienDVO.cs" />
+    <Compile Include="DataValidateObjects\NhanVienThuNganHDNhapDVO.cs" />
+    <Compile Include="DataValidateObjects\NhanVienThuNganHDBanDVO.cs" />
+    <Compile Include="DataValidateObjects\TongTienKhachTraDVO.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\DivisibleBy100Attribute.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\KhachHangDVO_UniqueDienThoaiAttribute.cs" />
+    <Compile Include="DataValidateObjects\KhachHangDVO.cs" />
+    <Compile Include="DataValidateObjects\LoginDVO.cs" />
     <Compile Include="ExtraForm\FormChiTietHoaDonBan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +263,12 @@
     </Compile>
     <Compile Include="ExtraForm\FormConfirmHoaDonNhap.Designer.cs">
       <DependentUpon>FormConfirmHoaDonNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtraForm\FormCreateCongViec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormCreateCongViec.Designer.cs">
+      <DependentUpon>FormCreateCongViec.cs</DependentUpon>
     </Compile>
     <Compile Include="ExtraForm\FormCreateNhaCungCap.cs">
       <SubType>Form</SubType>
@@ -323,6 +329,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Utilities\GetDateTime.cs" />
+    <Compile Include="DataTransferObjects\CustomNhanVienDTO.cs" />
+    <Compile Include="_Utilities\GetRandom.cs" />
     <Compile Include="_Utilities\RJDatePicker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -343,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormConfirmHoaDonNhap.resx">
       <DependentUpon>FormConfirmHoaDonNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormCreateCongViec.resx">
+      <DependentUpon>FormCreateCongViec.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateKhachHang.resx">
       <DependentUpon>FormCreateKhachHang.cs</DependentUpon>

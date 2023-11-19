@@ -12,7 +12,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
     {
 		public Guid CongViecDTO_MaCongViec { get; set; }
 
-        public int CongViecDTO_MucLuong { get; set; }
+        public long CongViecDTO_MucLuong { get; set; }
 
         public string CongViecDTO_TenCongViec { get; set; }
 
@@ -21,7 +21,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 			this.CongViecDTO_MaCongViec = Guid.NewGuid();
 		}
 
-        public CongViecDTO(Guid congViecDTO_MaCongViec, int congViecDTO_MucLuong, string congViecDTO_TenCongViec)
+        public CongViecDTO(Guid congViecDTO_MaCongViec, long congViecDTO_MucLuong, string congViecDTO_TenCongViec)
         {
 			this.CongViecDTO_MaCongViec = congViecDTO_MaCongViec;
             this.CongViecDTO_MucLuong = congViecDTO_MucLuong;

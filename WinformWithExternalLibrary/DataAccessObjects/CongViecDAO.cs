@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary._DataProvider;
 using System.Data;
+using System.Diagnostics;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -17,7 +18,29 @@ namespace WinformWithExternalLibrary.DataAccessObjects
         public CongViecDAO() { }
 
 		//		Hieu Add
-		public List<string> GetTenCongViec()
+		public Guid GetMaCongViecFromTenCongViec(string tenCongViec)
+		{
+			string queryGetTenCongViec = $"SELECT MaCongViec FROM {DataProvider.CONGVIEC_TABLE} WHERE TenCongViec = N'{tenCongViec}'";
+
+			object obj = DataProvider.Instance.ExecuteScalar(queryGetTenCongViec);
+			Debug.WriteLine(queryGetTenCongViec);
+			Debug.WriteLine(obj);
+
+			if (obj == null)
+			{
+				return Guid.Empty;
+			}
+
+			if (!Guid.TryParse(obj.ToString(), out Guid result))
+			{
+				result = Guid.Empty;
+			}
+
+			return result;
+		}
+
+		//		Hieu Add
+		public List<string> GetTenCongViecList()
 		{
 			string queryGetTenCongViec = $"SELECT TenCongViec FROM {DataProvider.CONGVIEC_TABLE} ";
 
@@ -40,7 +63,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             string insertCongViec = "Insert into " +
                                 DataProvider.NHANVIEN_TABLE +
                                 " (MaCongViec, MucLuong, TenCongViec) VALUES (" +
-                                    "N'" + CongViecDTO.CongViecDTO_MucLuong + "'" +
+                                    "N'" + CongViecDTO.CongViecDTO_MaCongViec + "'" +
+									"N'" + CongViecDTO.CongViecDTO_MucLuong + "'" +
                                     "N'" + CongViecDTO.CongViecDTO_TenCongViec + "'" +        
                                     ")";
             
@@ -53,6 +77,5 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             
 			return rowChanged > 0;
         }
-
     }
 }

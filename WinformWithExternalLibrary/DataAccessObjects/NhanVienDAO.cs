@@ -12,7 +12,6 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using WinformWithExternalLibrary.DataValidateObjects;
 using MaterialSkin.Controls;
-using WinformWithExternalLibrary.DataValidateObject;
 using WinformWithExternalLibrary._DataProvider;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
@@ -24,6 +23,137 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		public static NhanVienDAO Instance { get; set; }
 
         public NhanVienDAO() { }
+
+		//Lấy thông tin nhân viên
+		public List<NhanVienDTO> getListNV()
+		{
+			string querylistNV = $"SELECT  MaNhanVien,TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email FROM {DataProvider.NHANVIEN_TABLE}";
+
+			//Debug.WriteLine(querylistNV);
+
+			DataTable dtNV = DataProvider.Instance.ExecuteQuery(querylistNV);
+
+			List<NhanVienDTO> listNVs = new List<NhanVienDTO>();
+
+			foreach (DataRow dr in dtNV.Rows)
+			{
+				//Debug.WriteLine("new NhanVienDTO");
+
+				NhanVienDTO nhanVienDTO = new NhanVienDTO();
+				nhanVienDTO.NhanVienDTO_MaNhanVien = (Guid)dr[0];
+				nhanVienDTO.NhanVienDTO_TenNhanVien = dr[1].ToString();
+				nhanVienDTO.NhanVienDTO_NgaySinh = (DateTime)dr[2];
+				nhanVienDTO.NhanVienDTO_GioiTinh = dr[3].ToString();
+				nhanVienDTO.NhanVienDTO_DienThoai = dr[4].ToString();
+				nhanVienDTO.NhanVienDTO_DiaChi = dr[5].ToString();
+				nhanVienDTO.NhanVienDTO_Email = dr[6].ToString();
+
+				listNVs.Add(nhanVienDTO);
+			}
+
+			return listNVs;
+		}
+
+		// Xóa nhân viên dựa vào mã nhân viên
+		public bool XoaNhanVienTheoMa(string maNhanVien)
+		{
+			string query = $"DELETE FROM {DataProvider.NHANVIEN_TABLE} WHERE MaNhanVien = '{maNhanVien}'";
+			int rowsAffected = DataProvider.Instance.ExecuteNonQuery(query);
+
+			if (rowsAffected > 0)
+			{
+				// Gửi sự kiện thông báo rằng cơ sở dữ liệu đã thay đổi
+				OnDAODatabaseChanged?.Invoke(this, new EventArgs());
+				return true; // Xóa thành công
+			}
+
+			return false; // Xóa không thành công
+		}
+
+		// Lấy nhân viên bằng mã nhân viên 
+		public CustomNhanVienDTO getNhanVienbyID(string id)
+		{
+			string query = $"SELECT MaNhanVien,TenNhanVien, NgaySinh, DienThoai, GioiTinh, DiaChi, TenCongViec, Email " +
+						   $"FROM {DataProvider.NHANVIEN_TABLE} " +
+						   $"JOIN {DataProvider.CONGVIEC_TABLE} ON {DataProvider.NHANVIEN_TABLE}.MaCongViec = {DataProvider.CONGVIEC_TABLE}.MaCongViec " +
+						   $"WHERE {DataProvider.NHANVIEN_TABLE}.MaNhanVien = '{id}'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			if (dataTable.Rows.Count > 0)
+			{
+				DataRow dataRow = dataTable.Rows[0];
+
+				// Tạo đối tượng NhanVienDTOcustom và gán giá trị từ dòng dữ liệu
+				CustomNhanVienDTO nhanVienDTOcustom = new CustomNhanVienDTO
+				{
+					NhanVienDTO_MaNhanVien = (Guid)dataRow["MaNhanVien"],
+					NhanVienDTO_TenNhanVien = dataRow["TenNhanVien"].ToString(),
+					NhanVienDTO_NgaySinh = DateTime.Parse(dataRow["NgaySinh"].ToString()),
+					NhanVienDTO_DienThoai = dataRow["DienThoai"].ToString(),
+					NhanVienDTO_GioiTinh = dataRow["GioiTinh"].ToString(),
+					NhanVienDTO_DiaChi = dataRow["DiaChi"].ToString(),
+					NhanVienDTO_TenCongViec = dataRow["TenCongViec"].ToString(),
+					NhanVienDTO_Email = dataRow["Email"].ToString(),
+				};
+
+				// Trả về đối tượng NhanVienDTOcustom
+				return nhanVienDTOcustom;
+			}
+
+			// Trả về null nếu không tìm thấy nhân viên có mã tương ứng
+			return null;
+
+
+		}
+
+		// Update bảng nhân viên 
+		public bool updateNhanVien(NhanVienDTO nhanVienDTO)
+		{
+
+			string query = $"UPDATE {DataProvider.NHANVIEN_TABLE} " +
+						   $"SET TenNhanVien = N'{nhanVienDTO.NhanVienDTO_TenNhanVien}', " +
+						   $"NgaySinh = '{nhanVienDTO.NhanVienDTO_NgaySinh.ToString("yyyy-MM-dd")}', " +
+						   $"DienThoai = N'{nhanVienDTO.NhanVienDTO_DienThoai}', " +
+						   $"GioiTinh = N'{nhanVienDTO.NhanVienDTO_GioiTinh}', " +
+						   $"DiaChi = N'{nhanVienDTO.NhanVienDTO_DiaChi}', " +
+						   $"Email = N'{nhanVienDTO.NhanVienDTO_Email}' " +
+						   $"WHERE MaNhanVien = '{nhanVienDTO.NhanVienDTO_MaNhanVien}'";
+
+			int rowsAffected = DataProvider.Instance.ExecuteNonQuery(query);
+
+			return rowsAffected > 0;
+
+
+		}
+
+		// Tìm Nhân Viên theo  tên nhân viên
+		public List<NhanVienDTO> TimNhanVienTheoMaNhanVienHoacTenNhanVien(string input)
+		{
+			string query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, EMail" +
+				$" FROM {DataProvider.NHANVIEN_TABLE} WHERE  TenNhanVien = N'{input}'";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			List<NhanVienDTO> listNhanVien = new List<NhanVienDTO>();
+
+			foreach (DataRow row in dataTable.Rows)
+			{
+				NhanVienDTO nhanVien = new NhanVienDTO();
+				nhanVien.NhanVienDTO_MaNhanVien = (Guid)row["MaNhanVien"];
+				nhanVien.NhanVienDTO_TenNhanVien = row["TenNhanVien"].ToString();
+				nhanVien.NhanVienDTO_NgaySinh = DateTime.Parse(row["NgaySinh"].ToString());
+				nhanVien.NhanVienDTO_GioiTinh = row["GioiTinh"].ToString();
+				nhanVien.NhanVienDTO_DienThoai = row["DienThoai"].ToString();
+				nhanVien.NhanVienDTO_DiaChi = row["DiaChi"].ToString();
+				nhanVien.NhanVienDTO_Email = row["EMail"].ToString();
+
+				listNhanVien.Add(nhanVien);
+			}
+
+			return listNhanVien;
+		}
+
 
 		//		MinhHieu Add: Lấy danh sách TenNhanVien và NgaySinh nhân viên
 		public List<string> GetTenNhanVienAndNgaySinhList()

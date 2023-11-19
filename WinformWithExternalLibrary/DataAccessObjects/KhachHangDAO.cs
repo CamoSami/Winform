@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
-using WinformWithExternalLibrary.DataValidateObject;
+using WinformWithExternalLibrary.DataValidateObjects;
 using WinformWithExternalLibrary._DataProvider;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
@@ -182,7 +182,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 			string selectKhachHang = $"SELECT * FROM {DataProvider.KHACHHANG_TABLE} WHERE" + temp;
 
-			Debug.WriteLine(selectKhachHang);
+			//Debug.WriteLine(selectKhachHang);
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectKhachHang);
 

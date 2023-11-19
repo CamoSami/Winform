@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WinformWithExternalLibrary.DataValidateObject;
+using WinformWithExternalLibrary.DataValidateObjects;
 
 namespace WinformWithExternalLibrary.ExtraForm
 {

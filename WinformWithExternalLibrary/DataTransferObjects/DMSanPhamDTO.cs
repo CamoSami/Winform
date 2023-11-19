@@ -25,10 +25,7 @@ namespace WinformWithExternalLibrary.DataTransferObjects
 
 		public DateTime DMSanPhamDTO_ThoiGianBaoHanh { get; set; }
 
-        public DMSanPhamDTO() 
-		{
-			this.DMSanPhamDTO_MaDMSanPham = Guid.NewGuid();
-		}
+        public DMSanPhamDTO() { }
         
 		public DMSanPhamDTO(Guid dMSanPhamDTO_MaDMSanPham, string dMSanPhamDTO_MaSanPham, string dMSanPhamDTO_TenSanPham, int dMSanPhamDTO_GiaBan, int dMSanPhamDTO_GiaNhap, DateTime dMSanPhamDTO_TgBaoHanh)
         {

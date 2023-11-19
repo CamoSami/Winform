@@ -10,7 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WinformWithExternalLibrary.DataValidateObject;
+using WinformWithExternalLibrary.DataAccessObjects;
+using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary.DataValidateObjects;
 
 namespace WinformWithExternalLibrary.ExtraForm
@@ -21,7 +22,10 @@ namespace WinformWithExternalLibrary.ExtraForm
 		private readonly List<Label> listOfLabels = new List<Label>();
 		private readonly List<bool> isInterracted = new List<bool>();
 
-		public FormCreateSanPham()
+		private bool isUpdate;
+		private Guid maDMSanPham;
+
+		public FormCreateSanPham(FormCreateSanPhamDVO formCreateSanPhamDVO = null, Guid maDMSanPham = new Guid(), bool isUpdate = false)
 		{
 			InitializeComponent();
 
@@ -34,6 +38,19 @@ namespace WinformWithExternalLibrary.ExtraForm
 			//		Events
 			this.InitializeAutomaticEventAndList();
 			this.InitializeSpecializedEvent();
+
+			this.isUpdate = isUpdate;
+			this.maDMSanPham = maDMSanPham;
+
+			if (this.isUpdate)
+			{
+				//this.FormCreateSanPhamDVO_MaSanPham.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_MaSanPham;
+				//this.FormCreateSanPhamDVO_TenSanPham.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_TenSanPham;
+				//this.FormCreateSanPhamDVO_DonGiaBan =
+				//this.FormCreateSanPhamDVO_DonGiaNhap =
+				//this.FormCreateSanPhamDVO_SoLuongTonKho =
+				//this.FormCreateSanPhamDVO_ThoiGianBaoHanh = 
+			}
 		}
 
 		#region Initialize
@@ -112,7 +129,51 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private void InitializeSpecializedEvent()
 		{
-			
+			this.Load += (obj, e) =>
+			{
+				this.ResetColorForLabel();
+			};
+
+			this.materialButtonThemSanPham.Click += (obj, e) =>
+			{
+				if (this.TryValidation())
+				{
+					FormCreateSanPhamDVO formCreateSanPhamDVO = this.GetInput();
+
+					DMSanPhamDTO dMSanPhamDTO = new DMSanPhamDTO();
+
+					dMSanPhamDTO.DMSanPhamDTO_MaDMSanPham = Guid.NewGuid();
+					dMSanPhamDTO.DMSanPhamDTO_MaSanPham = formCreateSanPhamDVO.FormCreateSanPhamDVO_MaSanPham;
+					dMSanPhamDTO.DMSanPhamDTO_TenSanPham = formCreateSanPhamDVO.FormCreateSanPhamDVO_TenSanPham;
+					dMSanPhamDTO.DMSanPhamDTO_DonGiaBan = formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaBan;
+					dMSanPhamDTO.DMSanPhamDTO_DonGiaNhap = formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaNhap;
+					dMSanPhamDTO.DMSanPhamDTO_SoLuongTonKho = formCreateSanPhamDVO.FormCreateSanPhamDVO_SoLuongTonKho;
+					dMSanPhamDTO.DMSanPhamDTO_ThoiGianBaoHanh = formCreateSanPhamDVO.FormCreateSanPhamDVO_ThoiGianBaoHanh;
+
+					if (this.isUpdate)
+					{
+						//if (DMSanPhamDAO.Instance.UpdateSanPham(dMSanPhamDTO, this.maDMSanPham))
+						//{
+						//	this.ShowMessageBox("Cập nhật sản phẩm thành công!");
+						//}
+						//else
+						//{
+						//	this.ShowMessageBox("Đã xảy ra lỗi gì đó", "!UpdateSanPham");
+						//}
+
+						//return;
+					}
+
+					if (DMSanPhamDAO.Instance.InsertSanPham(dMSanPhamDTO))
+					{
+						this.ShowMessageBox("Nhập sản phẩm thành công!");
+					}
+					else
+					{
+						this.ShowMessageBox("Đã xảy ra lỗi gì đó", "!InsertSanPham");
+					}
+				}
+			};
 		}
 
 		#endregion
@@ -159,6 +220,52 @@ namespace WinformWithExternalLibrary.ExtraForm
 		#endregion
 
 		#region Generalist Function
+
+		//		Hiện MessageBox với các lựa chọn Yes No cho TabPage
+		private bool ShowMessageBoxYesNo(string message, string title = "")
+		{
+			bool ifYes = MaterialMessageBox.Show(
+							text: message,
+							caption: this.Text,
+							buttons: MessageBoxButtons.YesNo,
+							icon: MessageBoxIcon.Question,
+							UseRichTextBox: false,
+							buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+							)
+						== DialogResult.Yes;
+
+			this.ResetColorForLabel();
+
+			return ifYes;
+		}
+
+		//		Hiện MessageBox cho TabPage
+		private void ShowMessageBox(string message, string title = "")
+		{
+
+			if (title == "")
+			{
+				title = this.Text;
+			}
+
+			MaterialMessageBox.Show(
+					text: message,
+					caption: title,
+					UseRichTextBox: false,
+					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
+					);
+
+			//		Workaround a bug
+			this.ResetColorForLabel();
+		}
+
+		private void ResetColorForLabel()
+		{
+			foreach (Label label in this.listOfLabels)
+			{
+				label.ForeColor = Color.Red;
+			}
+		}
 
 		private bool TryValidation()
 		{

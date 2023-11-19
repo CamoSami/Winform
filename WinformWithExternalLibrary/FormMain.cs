@@ -22,10 +22,9 @@ using System.Collections.ObjectModel;
 using LiveChartsCore.SkiaSharpView.WinForms;
 using LiveChartsCore.Measure;
 using WinformWithExternalLibrary.DataTransferObjects;
+using static WinformWithExternalLibrary.DataTransferObjects.PhanTichDTO;
 using System.Diagnostics;
-using WinformWithExternalLibrary.DataValidateObject;
 using System.Windows.Controls.Primitives;
-using static WinformWithExternalLibrary.DataTransferObjects.CustomDTO.PhanTichDTO;
 using WinformWithExternalLibrary._Utilities;
 using WinformWithExternalLibrary.ExtraForm;
 using System.Runtime.Remoting.Channels;
@@ -1055,12 +1054,7 @@ namespace WinformWithExternalLibrary
 
 			if (!HoaDonBanDAO.Instance.InsertHoaDonBan(hoaDonBanDTO))
 			{
-				MaterialMessageBox.Show(
-					text: "Có lỗi gì đó vừa xảy ra",
-					caption: "!HoaDonBanDAO",
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-				);
+				this.ShowMessageBox("Có lỗi gì đó vừa xảy ra", "!HoaDonBanDAO");
 
 				return;
 			}
@@ -1072,18 +1066,13 @@ namespace WinformWithExternalLibrary
 
 				if (maDMSanPhamTemp == Guid.Empty)
 				{
-					MaterialMessageBox.Show(
-					text: "Có lỗi gì đó vừa xảy ra",
-					caption: "maDMSanPhamTemp == Guid.Empty",
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-					);
+					this.ShowMessageBox("Có lỗi gì đó vừa xảy ra", "maDMSanPhamTemp == Guid.Empty");
 
 					return;
 				}
 
 				ChiTietHDBanDTO chiTietHDBanDTO = new ChiTietHDBanDTO(
-					chiTietHDBanDTO_MaHDBan: hoaDonBanDTO.HoaDonBanDTO_MaHDBan,
+					chiTietHDBanDTO_MaHDBan: maHoaDonBan,
 					chiTietHDBanDTO_MaDMSanPham: maDMSanPhamTemp,
 					chiTietHDBanDTO_SoLuong: int.Parse(listViewItem.SubItems[3].Text),
 					chiTietHDBanDTO_ThanhTien: long.Parse(listViewItem.SubItems[5].Text)
@@ -1091,19 +1080,14 @@ namespace WinformWithExternalLibrary
 
 				if (!ChiTietHDBanDAO.Instance.InsertChiTietHDBan(chiTietHDBanDTO))
 				{
-					MaterialMessageBox.Show(
-					text: "Có lỗi gì đó vừa xảy ra",
-					caption: "!ChiTietHDBanDAO",
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-					);
+					this.ShowMessageBox("Có lỗi gì đó vừa xảy ra", "!ChiTietHDBanDAO");
 
 					return;
 				}
 
 				if (!DMSanPhamDAO.Instance.UpdateTruSoLuongTon(listViewItem.SubItems[1].Text, int.Parse(listViewItem.SubItems[3].Text)))
 				{
-					this.ShowMessageBox(message: "Trừ số lượng tồn bị lỗi");
+					this.ShowMessageBox("Trừ số lượng tồn bị lỗi");
 				}
 			}
 
@@ -1138,12 +1122,7 @@ namespace WinformWithExternalLibrary
 
 			if (!HoaDonNhapDAO.Instance.InsertHoaDonNhap(hoaDonNhapDTO))
 			{
-				MaterialMessageBox.Show(
-					text: "Có lỗi gì đó vừa xảy ra",
-					caption: "!HoaDonNhapDAO",
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-				);
+				this.ShowMessageBox("Có lỗi gì đó vừa xảy ra", "!HoaDonNhapDAO");
 
 				return;
 			}
@@ -1155,12 +1134,7 @@ namespace WinformWithExternalLibrary
 
 				if (maDMSanPhamTemp == Guid.Empty)
 				{
-					MaterialMessageBox.Show(
-					text: "Có lỗi gì đó vừa xảy ra",
-					caption: "maDMSanPhamTemp == Guid.Empty",
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-					);
+					this.ShowMessageBox("Có lỗi gì đó vừa xảy ra", "maDMSanPhamTemp == Guid.Empty");
 
 					return;
 				}
@@ -1174,19 +1148,14 @@ namespace WinformWithExternalLibrary
 
 				if (!ChiTietHDNhapDAO.Instance.InsertChiTietHDNhap(chiTietHDNhapDTO))
 				{
-					MaterialMessageBox.Show(
-					text: "Có lỗi gì đó vừa xảy ra",
-					caption: "!ChiTietHDNhapDAO",
-					UseRichTextBox: false,
-					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
-					);
+					this.ShowMessageBox("Có lỗi gì đó vừa xảy ra", "!ChiTietHDNhapDAO");
 
 					return;
 				}
 
 				if (!DMSanPhamDAO.Instance.UpdateCongSoLuongTon(listViewItem.SubItems[1].Text, int.Parse(listViewItem.SubItems[3].Text)))
 				{
-					this.ShowMessageBox(message: "Cộng số lượng tồn bị lỗi");
+					this.ShowMessageBox("Cộng số lượng tồn bị lỗi");
 				}
 			}
 
@@ -2461,7 +2430,7 @@ namespace WinformWithExternalLibrary
 			foreach (DataRow row in nhaCungCap.Rows)
 			{
 				items = new ListViewItem();
-				Console.WriteLine(count);
+				//Console.WriteLine(count);
 				count += 1;
 				//Debug.Write(count);
 
@@ -2481,13 +2450,328 @@ namespace WinformWithExternalLibrary
 
 		#region Bùi Thị Thanh Trúc
 
+		private string maNhanVien;
+
 		private void Initialize_BuiThiThanhTruc()
 		{
-			this.NhanVienDVO_TenCongViec.DataSource = CongViecDAO.Instance.GetTenCongViec();
+			//this.NhanVienDVO_TenCongViec.DataSource = CongViecDAO.Instance.GetTenCongViec();
 
-			this.NhanVienDVO_TenCongViec.SelectedIndex = -1;
+			//this.NhanVienDVO_TenCongViec.SelectedIndex = -1;
 
-			this.NhanVienDVO_TenCongViec.Text = this.GetPlaceholderForControl(this.NhanVienDVO_TenCongViec);
+			//this.NhanVienDVO_TenCongViec.Text = this.GetPlaceholderForControl(this.NhanVienDVO_TenCongViec);
+			this.AddItemToComBoBox();
+			this.CallData();
+			this.LoadThongtin();
+			this.CreateNew();
+			this.Delete();
+			this.Edit();
+			this.Search();
+			this.CreateNewWork();
+		}
+		private void AddItemToComBoBox()
+		{
+
+			List<string> tenCongViecList = CongViecDAO.Instance.GetTenCongViecList();
+
+			// Thêm danh sách vào ComboBox
+			NhanVienDVO_TenCongViec.Items.AddRange(tenCongViecList.ToArray());
+
+		}
+		// Hiện thông tin lên ListView
+		private void LoadThongtin()
+		{
+			materialTabControl.SelectedIndexChanged += (object sender, EventArgs e) =>
+			{
+				if (materialTabControl.SelectedIndex == 0)
+				{
+					this.CallData();
+				}
+
+			};
+		}
+		//Tạo mới một Nhân Viên 
+		private void CreateNew()
+		{
+			TabPageNV_btnThem.Click += (object sender, EventArgs e) =>
+			{
+				if (this.ShowMessageBoxYesNo("Bạn có muốn thêm không?", this.GetTabPageControlSelectedIndex()))
+				{
+					if (!this.TryValidationFromControl(this.NhanVienDVO_GioiTinh, onlyOneControl: false, out dynamic baseDVO))
+					{
+						return;
+					}
+
+					NhanVienDVO nhanVienDVO = baseDVO as NhanVienDVO;
+
+					NhanVienDTO nhanVienDTO = new NhanVienDTO();
+					GetRandom random = new GetRandom();
+
+					nhanVienDTO.NhanVienDTO_MaNhanVien = Guid.NewGuid();
+					nhanVienDTO.NhanVienDTO_MaCongViec = CongViecDAO.Instance.GetMaCongViecFromTenCongViec(this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_TenCongViec));
+					nhanVienDTO.NhanVienDTO_TenNhanVien = nhanVienDVO.NhanVienDVO_TenNhanVien;
+					nhanVienDTO.NhanVienDTO_DiaChi = nhanVienDVO.NhanVienDVO_DiaChi;
+					nhanVienDTO.NhanVienDTO_DienThoai = nhanVienDVO.NhanVienDVO_SoDienThoai;
+					nhanVienDTO.NhanVienDTO_NgaySinh = nhanVienDVO.NhanVienDVO_NgaySinh;
+					nhanVienDTO.NhanVienDTO_Email = nhanVienDVO.NhanVienDVO_Email;
+					nhanVienDTO.NhanVienDTO_GioiTinh = nhanVienDVO.NhanVienDVO_GioiTinh;
+					nhanVienDTO.NhanVienDTO_MatKhau = random.GenerateRandomString(5);
+					// Thực hiện kiểm tra hợp lệ
+					List<ValidationResult> validationResults = new List<ValidationResult>();
+					ValidationContext validationContext = new ValidationContext(nhanVienDVO, null, null);
+					bool isValid = Validator.TryValidateObject(nhanVienDVO, validationContext, validationResults, true);
+
+					if (isValid)
+					{
+						// Dữ liệu hợp lệ, tiếp tục xử lý
+						bool res = NhanVienDAO.Instance.InsertNhanVien(nhanVienDTO);
+
+						if (res)
+						{
+							// Thêm thành công, cập nhật ListView và làm sạch dữ liệu
+							ListView.Items.Clear();
+							this.CallData();
+							this.ClearFormData();
+
+							// Thực hiện sự kiện sau khi thêm nhân viên thành công
+							// Ví dụ: Hiển thị thông báo hoặc thực hiện một hành động nào đó
+							MessageBox.Show("Thêm nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						}
+						else
+						{
+							// Thêm không thành công, hiển thị thông báo lỗi
+							MessageBox.Show("Thêm nhân viên không thành công!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+					}
+					else
+					{
+						// Dữ liệu không hợp lệ, hiển thị thông báo lỗi
+						StringBuilder errorMessage = new StringBuilder();
+						foreach (var validationResult in validationResults)
+						{
+							errorMessage.AppendLine(validationResult.ErrorMessage);
+						}
+
+						MessageBox.Show(errorMessage.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			};
+		}
+		// Xóa Nhân Viên Hiện Có
+		private void Delete()
+		{
+			TabPageNV_btnXoa.Click += (object sender, EventArgs e) =>
+			{
+				NhanVienDAO nhanVienDAO = new NhanVienDAO();
+
+				if (ListView.SelectedItems.Count > 0)
+				{
+					DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa dữ liệu đã chọn?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+					if (result == DialogResult.Yes)
+					{
+						foreach (ListViewItem item in ListView.SelectedItems)
+						{
+							// Lấy giá trị của mã nhân viên từ SubItems[1], cột mã nhân viên là cột thứ 1
+							string maNhanVien = item.SubItems[1].Text;
+
+							// Gọi hàm xóa dữ liệu dựa trên mã nhân viên
+							nhanVienDAO.XoaNhanVienTheoMa(maNhanVien);
+
+
+
+						}
+						ListView.Items.Clear();
+						this.CallData();
+						MessageBox.Show("Dữ liệu đã được xóa thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					}
+				}
+				else
+				{
+					MessageBox.Show("Vui lòng chọn ít nhất một mục để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+			};
+		}
+		// Tìm Kiếm Nhân Viên
+		private void Search()
+		{
+			TabPageNV_btnSearch.Click += (object sender, EventArgs e) =>
+			{
+				string searchInput = NhanVienDVO_SelectNhanVien.Text;
+
+				if (string.IsNullOrEmpty(searchInput))
+				{
+					MessageBox.Show("Vui lòng nhập thông tin tìm kiếm.", "Thông báo");
+					return;
+				}
+
+				// Gọi phương thức để tìm kiếm nhân viên theo tên
+				List<NhanVienDTO> ketQua = NhanVienDAO.Instance.TimNhanVienTheoMaNhanVienHoacTenNhanVien(searchInput);
+				ListView.Items.Clear();
+
+				// Hiện Kết Quả lên ListView
+				int stt = 0;
+				foreach (NhanVienDTO nhanVienDTO in ketQua)
+				{
+					ListViewItem item = new ListViewItem();
+
+					item.SubItems[0].Text = (++stt).ToString();
+					item.SubItems.Add(nhanVienDTO.NhanVienDTO_MaNhanVien.ToString());
+					item.SubItems.Add(nhanVienDTO.NhanVienDTO_TenNhanVien);
+					item.SubItems.Add(nhanVienDTO.NhanVienDTO_NgaySinh.ToString());
+					item.SubItems.Add(nhanVienDTO.NhanVienDTO_GioiTinh);
+					item.SubItems.Add(nhanVienDTO.NhanVienDTO_DienThoai);
+					item.SubItems.Add(nhanVienDTO.NhanVienDTO_DiaChi);
+					item.SubItems.Add(nhanVienDTO.NhanVienDTO_Email);
+
+					ListView.Items.Add(item);
+				}
+
+			};
+			TabPageNV_btnMacDinh.Click += (object sender, EventArgs e) =>
+			{
+				ListView.Items.Clear();
+				this.CallData();
+			};
+		}
+		// Sửa thông tin Nhân Viên
+		private void Edit()
+		{
+
+			TabpageNV_btnSua.Click += (object sender, EventArgs e) =>
+			{
+				// Kiểm tra xem đã chọn nhân viên nào chưa
+				if (ListView.SelectedItems.Count > 0)
+				{
+					// Lấy thông tin nhân viên được chọn
+					ListViewItem item = ListView.SelectedItems[0];
+
+					this.maNhanVien = item.SubItems[1].Text;
+
+					CustomNhanVienDTO customNhanVienDTO = NhanVienDAO.Instance.getNhanVienbyID(this.maNhanVien);
+					
+					Debug.WriteLine(this.maNhanVien);
+					Debug.WriteLine(customNhanVienDTO.NhanVienDTO_TenNhanVien);
+
+					//Hiện thông tin lên form
+					NhanVienDVO_TenNhanVien.Text = customNhanVienDTO.NhanVienDTO_TenNhanVien;
+					NhanVienDVO_NgaySinh.Value = customNhanVienDTO.NhanVienDTO_NgaySinh;
+					NhanVienDVO_SoDienThoai.Text = customNhanVienDTO.NhanVienDTO_DienThoai;
+					NhanVienDVO_GioiTinh.Text = customNhanVienDTO.NhanVienDTO_GioiTinh;
+					NhanVienDVO_DiaChi.Text = customNhanVienDTO.NhanVienDTO_DiaChi;
+					NhanVienDVO_TenCongViec.Text = customNhanVienDTO.NhanVienDTO_TenCongViec;
+					NhanVienDVO_Email.Text = customNhanVienDTO.NhanVienDTO_Email;
+
+				}
+				else
+				{
+					MessageBox.Show("Vui lòng chọn một nhân viên để sửa.");
+				}
+			};
+
+			TabPageNhanVien_btnLuu.Click += (object sender, EventArgs e) =>
+			{
+				if (this.ShowMessageBoxYesNo("Bạn có muốn sửa không?", this.GetTabPageControlSelectedIndex()))
+				{
+					NhanVienDTO data = new NhanVienDTO
+					{
+						NhanVienDTO_MaNhanVien = Guid.Parse(this.maNhanVien),
+						NhanVienDTO_TenNhanVien = NhanVienDVO_TenNhanVien.Text,
+						NhanVienDTO_Email = NhanVienDVO_Email.Text,
+						NhanVienDTO_NgaySinh = NhanVienDVO_NgaySinh.Value,
+						NhanVienDTO_GioiTinh = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_GioiTinh),
+						NhanVienDTO_DienThoai = NhanVienDVO_SoDienThoai.Text,
+						NhanVienDTO_DiaChi = NhanVienDVO_DiaChi.Text,
+						NhanVienDTO_MaCongViec = CongViecDAO.Instance.GetMaCongViecFromTenCongViec(this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_TenCongViec))
+
+					};
+					NhanVienDVO validator = new NhanVienDVO
+					{
+						NhanVienDVO_TenNhanVien = data.NhanVienDTO_TenNhanVien,
+						NhanVienDVO_DiaChi = data.NhanVienDTO_DiaChi,
+						NhanVienDVO_SoDienThoai = data.NhanVienDTO_DienThoai,
+						NhanVienDVO_NgaySinh = data.NhanVienDTO_NgaySinh,
+						NhanVienDVO_Email = data.NhanVienDTO_Email,
+						NhanVienDVO_GioiTinh = data.NhanVienDTO_GioiTinh
+					};
+
+					// Kiểm tra tính hợp lệ của dữ liệu
+					List<ValidationResult> validationResults = new List<ValidationResult>();
+					ValidationContext validationContext = new ValidationContext(validator, null, null);
+					bool isValid = Validator.TryValidateObject(validator, validationContext, validationResults, true);
+					if (isValid)
+					{
+						// Cập nhật nhân viên trong database
+						bool updateResult = NhanVienDAO.Instance.updateNhanVien(data);
+
+
+						if (updateResult)
+						{
+							this.ClearFormData();
+							ListView.Items.Clear();
+							this.CallData();
+							// Cập nhật thành công
+							MessageBox.Show("Cập nhật thông tin nhân viên thành công!");
+
+						}
+					}
+					else
+					{
+						// Cập nhật thất bại
+						MessageBox.Show("Sửa thất bại ! Vui Lòng thử lại ");
+					}
+
+				}
+			};
+		}
+		private void CallData()
+		{
+			NhanVienDAO nhanVienDAO = new NhanVienDAO();
+
+			// Lay du lieu 
+			List<NhanVienDTO> nhanvienDTOs = nhanVienDAO.getListNV();
+
+			// load du lieu len 
+			int stt = 0;
+			foreach (NhanVienDTO nhanVienDTO in nhanvienDTOs)
+			{
+				ListViewItem item = new ListViewItem();
+
+				item.SubItems[0].Text = (++stt).ToString();
+				item.SubItems.Add(nhanVienDTO.NhanVienDTO_MaNhanVien.ToString());
+				item.SubItems.Add(nhanVienDTO.NhanVienDTO_TenNhanVien);
+				item.SubItems.Add(nhanVienDTO.NhanVienDTO_NgaySinh.ToString());
+				item.SubItems.Add(nhanVienDTO.NhanVienDTO_GioiTinh);
+				item.SubItems.Add(nhanVienDTO.NhanVienDTO_DienThoai);
+				item.SubItems.Add(nhanVienDTO.NhanVienDTO_DiaChi);
+				item.SubItems.Add(nhanVienDTO.NhanVienDTO_Email);
+
+				ListView.Items.Add(item);
+			}
+		}
+
+		// Xóa dữ liệu trong form
+		private void ClearFormData()
+		{
+			NhanVienDVO_TenNhanVien.Text = string.Empty;
+			NhanVienDVO_Email.Text = string.Empty;
+			NhanVienDVO_NgaySinh.Value = this.dateTimeDefault;
+			NhanVienDVO_GioiTinh.SelectedIndex = -1;
+			NhanVienDVO_SoDienThoai.Text = string.Empty;
+			NhanVienDVO_DiaChi.Text = string.Empty;
+			NhanVienDVO_TenCongViec.Text = string.Empty;
+		}
+		// Tạo mới một côn
+		// g việc 
+		private void CreateNewWork()
+		{
+			TabPageNV_btnTaoMoiCongViec.Click += (object sender, EventArgs e) =>
+			{
+				FormCreateCongViec formCreateCongViec = new FormCreateCongViec();
+
+				// Show the form as a modeless dialog
+				formCreateCongViec.Show();
+
+			};
 		}
 
 		#endregion
@@ -2543,16 +2827,21 @@ namespace WinformWithExternalLibrary
 		}
 
 		//		Hiện MessageBox cho TabPage
-		private void ShowMessageBox(string message, int tabPageIndex = -1)
+		private void ShowMessageBox(string message, string title = "", int tabPageIndex = -1)
 		{
 			if (tabPageIndex == -1)
 			{
 				tabPageIndex = this.GetTabPageControlSelectedIndex();
 			}
 
+			if (title == "")
+			{
+				title = this.materialTabControl.SelectedTab.Text;
+			}
+
 			MaterialMessageBox.Show(
 					text: message,
-					caption: this.materialTabControl.SelectedTab.Text,
+					caption: title,
 					UseRichTextBox: false,
 					buttonsPosition: FlexibleMaterialForm.ButtonsPosition.Center
 					);
@@ -2946,7 +3235,6 @@ namespace WinformWithExternalLibrary
 						return chiTietHDNhapDVO;
 
 					case NhanVienDVO nhanVienDVO:
-						nhanVienDVO.NhanVienDVO_SelectNhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_SelectNhanVien);
 						nhanVienDVO.NhanVienDVO_TenNhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_TenNhanVien);
 						nhanVienDVO.NhanVienDVO_NgaySinh = this.NhanVienDVO_NgaySinh.Value;
 						nhanVienDVO.NhanVienDVO_GioiTinh = this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_GioiTinh);
