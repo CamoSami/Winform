@@ -24,10 +24,22 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public NhanVienDAO() { }
 
-		//Lấy thông tin nhân viên
-		public List<NhanVienDTO> getListNV()
+		//		Check MatKhau
+		public bool CheckMatKhauNhanVien(Guid maNhanVien, string matKhau)
 		{
-			string querylistNV = $"SELECT  MaNhanVien,TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email FROM {DataProvider.NHANVIEN_TABLE}";
+			string queryListNV = $"SELECT MaNhanVien FROM {DataProvider.NHANVIEN_TABLE} " +
+				$"WHERE MaNhanVien = {maNhanVien} " +
+				$"AND MatKhau = {matKhau}";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryListNV);
+
+			return dataTable.Rows.Count > 0;
+		}
+
+		//Lấy thông tin nhân viên
+		public List<NhanVienDTO> GetListNV()
+		{
+			string querylistNV = $"SELECT  MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email FROM {DataProvider.NHANVIEN_TABLE}";
 
 			//Debug.WriteLine(querylistNV);
 
@@ -40,6 +52,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 				//Debug.WriteLine("new NhanVienDTO");
 
 				NhanVienDTO nhanVienDTO = new NhanVienDTO();
+
 				nhanVienDTO.NhanVienDTO_MaNhanVien = (Guid)dr[0];
 				nhanVienDTO.NhanVienDTO_TenNhanVien = dr[1].ToString();
 				nhanVienDTO.NhanVienDTO_NgaySinh = (DateTime)dr[2];
@@ -63,7 +76,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			if (rowsAffected > 0)
 			{
 				// Gửi sự kiện thông báo rằng cơ sở dữ liệu đã thay đổi
-				OnDAODatabaseChanged?.Invoke(this, new EventArgs());
+				this.OnDAODatabaseChanged?.Invoke(this, new EventArgs());
+
 				return true; // Xóa thành công
 			}
 
@@ -71,7 +85,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		}
 
 		// Lấy nhân viên bằng mã nhân viên 
-		public CustomNhanVienDTO getNhanVienbyID(string id)
+		public CustomNhanVienDTO GetNhanVienByID(Guid id)
 		{
 			string query = $"SELECT MaNhanVien,TenNhanVien, NgaySinh, DienThoai, GioiTinh, DiaChi, TenCongViec, Email " +
 						   $"FROM {DataProvider.NHANVIEN_TABLE} " +
@@ -108,7 +122,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		}
 
 		// Update bảng nhân viên 
-		public bool updateNhanVien(NhanVienDTO nhanVienDTO)
+		public bool UpdateNhanVien(NhanVienDTO nhanVienDTO)
 		{
 
 			string query = $"UPDATE {DataProvider.NHANVIEN_TABLE} " +

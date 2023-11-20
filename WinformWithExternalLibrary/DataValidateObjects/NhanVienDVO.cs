@@ -40,6 +40,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 		public string NhanVienDVO_DiaChi { get; set; }
 
 		[Required(ErrorMessage = "Vui lòng nhập tên công việc.")]
+		[CongViecDVO_ExistedTenCongViec(ErrorMessage = "Công việc không tồn tại")]
 		[DisplayName("Tên công việc")]
 		public string NhanVienDVO_TenCongViec { get; set; }
 
@@ -48,17 +49,13 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 		[DisplayName("Email")]
 		public string NhanVienDVO_Email { get; set; }
 
-		public NhanVienDVO(string nhanVienDVO_TenNhanVien, DateTime nhanVienDVO_NgaySinh, string nhanVienDVO_GioiTinh, string nhanVienDVO_SoDienThoai, string nhanVienDVO_DiaChi, string nhanVienDVO_MaCongViec, string nhanVienDVO_Email)
-		{
-			this.NhanVienDVO_TenNhanVien = nhanVienDVO_TenNhanVien;
-			this.NhanVienDVO_NgaySinh = nhanVienDVO_NgaySinh;
-			this.NhanVienDVO_GioiTinh = nhanVienDVO_GioiTinh;
-			this.NhanVienDVO_SoDienThoai = nhanVienDVO_SoDienThoai;
-			this.NhanVienDVO_DiaChi = nhanVienDVO_DiaChi;
-			this.NhanVienDVO_TenCongViec = nhanVienDVO_MaCongViec;
-			this.NhanVienDVO_Email = nhanVienDVO_Email;
-		}
+		[Required(ErrorMessage = "Vui lòng nhập mật khẩu.")]
+		[DisplayName("Mật khẩu")]
+		public string NhanVienDVO_MatKhau { get; set; }
 
-		public NhanVienDVO() {}
+		[Required(ErrorMessage = "Vui lòng nhập lại mật khẩu.")]
+		[Compare("NhanVienDVO_MatKhau", ErrorMessage = "Mật khẩu nhập lại không khớp")]
+		[DisplayName("Nhập lại mật khẩu")]
+		public string NhanVienDVO_NhapLaiMatKhau { get; set; }
 	}
 }

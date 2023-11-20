@@ -208,6 +208,7 @@
     <Compile Include="DataValidateObjects\CongViecDVO.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\ChiTietHDBanDVO_EligibleSoLuongAttribute.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\ChiTietHDDVO_ExistedMaSanPhamAttribute.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\CongViecDVO_ExistedTenCongViec.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\HoaDonBanDVO_EligibleTenGiamGia.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\HoaDonNhapDVO_ExistedDienThoaiNhaCungCap.cs" />

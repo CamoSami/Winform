@@ -23,8 +23,9 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			string queryGetTenCongViec = $"SELECT MaCongViec FROM {DataProvider.CONGVIEC_TABLE} WHERE TenCongViec = N'{tenCongViec}'";
 
 			object obj = DataProvider.Instance.ExecuteScalar(queryGetTenCongViec);
-			Debug.WriteLine(queryGetTenCongViec);
-			Debug.WriteLine(obj);
+
+			//Debug.WriteLine(queryGetTenCongViec);
+			//Debug.WriteLine(obj);
 
 			if (obj == null)
 			{
@@ -37,6 +38,15 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			}
 
 			return result;
+		}
+
+		public bool CheckIfTenCongViecExist(string tenCongViec)
+		{
+			string queryGetTenCongViec = $"SELECT MaCongViec FROM {DataProvider.CONGVIEC_TABLE} WHERE TenCongViec = N'{tenCongViec}'";
+
+			object obj = DataProvider.Instance.ExecuteScalar(queryGetTenCongViec);
+
+			return obj != null;
 		}
 
 		//		Hieu Add

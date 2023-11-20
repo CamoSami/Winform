@@ -52,13 +52,13 @@ namespace WinformWithExternalLibrary.ExtraForm
 					bool res = CongViecDAO.Instance.InsertCongViec(congViecDTO);
 					if (res)
 					{
-						FormMain formMain = FormMain.Instance;
-						formMain.AddItemToComBoBox();
+						FormMain.Instance.AddItemToComboBox();
+						
 						// Sau đó, có thể thực hiện các hành động khác như làm mới giao diện, hiển thị thông báo, ...
 						this.ClearForm();
+
 						this.ShowSuccessMessage("Công việc đã được thêm mới thành công!");
 					}
-
 					else
 					{
 						this.ShowSuccessMessage("Công việc đã được thêm mới không thành công.Hãy thử lại!");
