@@ -21,6 +21,8 @@ namespace WinformWithExternalLibrary._Utilities
 			ChiTietHDNhap,
 			KhachHang,
 			NhaCungCap,
+			NhanVien,
+			DMSanPham,
 			Empty
 		} 
 
@@ -43,8 +45,17 @@ namespace WinformWithExternalLibrary._Utilities
 
 				IXLWorksheet workSheet = workBook.Worksheet(1);
 
+				//		TODO
 				switch (typeOfFile)
 				{
+					case TypeOfExcel.DMSanPham:
+
+						break;
+
+					case TypeOfExcel.NhanVien:
+
+						break;
+
 					case TypeOfExcel.KhachHang:
 					case TypeOfExcel.NhaCungCap:
 

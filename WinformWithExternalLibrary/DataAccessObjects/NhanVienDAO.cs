@@ -141,10 +141,30 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		}
 
+		public DataTable GetNhanVienWithInput(string input)
+		{
+			string query;
+
+			if (input != "")
+			{
+				query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email" +
+					$" FROM {DataProvider.NHANVIEN_TABLE} WHERE TenNhanVien LIKE N'%{input}%'";
+			}
+			else
+			{
+				query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email" +
+					$" FROM {DataProvider.NHANVIEN_TABLE}";
+			}
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable;
+		}
+
 		// Tìm Nhân Viên theo  tên nhân viên
 		public List<NhanVienDTO> TimNhanVienTheoMaNhanVienHoacTenNhanVien(string input)
 		{
-			string query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, EMail" +
+			string query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email" +
 				$" FROM {DataProvider.NHANVIEN_TABLE} WHERE  TenNhanVien LIKE N'%{input}%'";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
@@ -154,6 +174,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			foreach (DataRow row in dataTable.Rows)
 			{
 				NhanVienDTO nhanVien = new NhanVienDTO();
+
 				nhanVien.NhanVienDTO_MaNhanVien = (Guid)row["MaNhanVien"];
 				nhanVien.NhanVienDTO_TenNhanVien = row["TenNhanVien"].ToString();
 				nhanVien.NhanVienDTO_NgaySinh = DateTime.Parse(row["NgaySinh"].ToString());

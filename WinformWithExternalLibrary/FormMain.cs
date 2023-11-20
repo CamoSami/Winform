@@ -2093,7 +2093,7 @@ namespace WinformWithExternalLibrary
 				}
 			};
 
-			this.materialButton_TaoNhaCungCap.Click += (obj, e) =>
+			this.TabPageNhaCungCap_TaoNhaCungCap.Click += (obj, e) =>
 			{
 				FormCreateNhaCungCap formCreateNhaCungCap = new FormCreateNhaCungCap(false);
 
@@ -2157,21 +2157,21 @@ namespace WinformWithExternalLibrary
 				}
 			};
 
-			this.materialButton_SuaNCC.Click += MaterialButton_SuaNCC_Click;
+			this.TabPageNhaCungCap_SuaNCC.Click += MaterialButton_SuaNCC_Click;
 
-			this.materialButton_SearchNCC.Click += (obj, e) =>
+			this.TabPageNhaCungCap_SearchNhaCungCap.Click += (obj, e) =>
 			{
 				this.SearchNhaCungCap();
 			};
 
-			this.materialButton_RefreshNhaCungCap.Click += (obj, e) =>
+			this.TabPageNhaCungCap_RefreshNhaCungCap.Click += (obj, e) =>
 			{
 				ResetNhaCungCapDVO();
 
 				LoadNhaCungCap();
 			};
 
-			this.materialButton_XuatExcelNCC.Click += (obj, e) =>
+			this.TabPageNhaCungCap_XuatExcelNCC.Click += (obj, e) =>
 			{
 				System.Data.DataTable dataTable = NhaCungCapDAO.Instance.QueryAllNhaCungCap();
 				this.exportTableData.ExportToExcel(
@@ -2184,7 +2184,7 @@ namespace WinformWithExternalLibrary
 				this.ResetColorForLabel();
 			};
 
-			this.materialButton_LichSuNhapHang.Click += MaterialButton_LichSuNhapHang_Click;
+			this.TabPageNhaCungCap_LichSuNhapHang.Click += MaterialButton_LichSuNhapHang_Click;
 		}
 
 		private void MaterialButton_LichSuNhapHang_Click(object sender, EventArgs e)
@@ -2478,6 +2478,27 @@ namespace WinformWithExternalLibrary
 				}
 			};
 
+			this.TabPageNhanVien_btnExcel.Click += (obj, e) =>
+			{
+				System.Data.DataTable dataTable = NhanVienDAO.Instance.GetNhanVienWithInput(this.TabPageNhanVien_TextboxSelectNhanVien.Text);
+
+				if (dataTable.Rows.Count <= 0)
+				{
+					this.ShowMessageBox("Không tìm được nhân viên");
+
+					return;
+				}
+
+				this.exportTableData.ExportToExcel(
+					dataTable: dataTable,
+					workSheetName: "NhanVien" + this.getDateTime.GetDateTimeNow_Date(),
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.NhanVien
+				);
+
+				this.ResetColorForLabel();
+			};
+
 			this.AddItemToComboBox();
 			this.CallDataNhanVien();
 			this.LoadThongTinNhanVien();
@@ -2539,7 +2560,7 @@ namespace WinformWithExternalLibrary
 					if (NhanVienDAO.Instance.InsertNhanVien(nhanVienDTO))
 					{
 						// Thêm thành công, cập nhật ListView và làm sạch dữ liệu
-						this.TabPageNhanVien_ListView.Items.Clear();
+						this.TabPageNhanVien_MaterialListView.Items.Clear();
 
 						this.CallDataNhanVien();
 
@@ -2566,11 +2587,11 @@ namespace WinformWithExternalLibrary
 			{
 				NhanVienDAO nhanVienDAO = new NhanVienDAO();
 
-				if (TabPageNhanVien_ListView.SelectedItems.Count > 0)
+				if (TabPageNhanVien_MaterialListView.SelectedItems.Count > 0)
 				{
 					if (this.ShowMessageBoxYesNo("Bạn có chắc chắn muốn xóa dữ liệu đã chọn?"))
 					{
-						foreach (ListViewItem item in TabPageNhanVien_ListView.SelectedItems)
+						foreach (ListViewItem item in TabPageNhanVien_MaterialListView.SelectedItems)
 						{
 							// Lấy giá trị của mã nhân viên từ SubItems[1], cột mã nhân viên là cột thứ 1
 							string maNhanVien = item.SubItems[1].Text;
@@ -2579,8 +2600,10 @@ namespace WinformWithExternalLibrary
 							nhanVienDAO.XoaNhanVienTheoMa(maNhanVien);
 						}
 
-						TabPageNhanVien_ListView.Items.Clear();
+						TabPageNhanVien_MaterialListView.Items.Clear();
+
 						this.CallDataNhanVien();
+						
 						this.ShowMessageBox("Dữ liệu đã được xóa thành công.", "Thông báo");
 					}
 				}
@@ -2596,19 +2619,19 @@ namespace WinformWithExternalLibrary
 		{
 			TabPageNhanVien_btnSearch.Click += (object sender, EventArgs e) =>
 			{
-				if (this.CheckIfControlEmptyOrPlaceholder(this.TabPageNhanVien_TextboxSelectNhanVien))
+				if (this.TabPageNhanVien_TextboxSelectNhanVien.Text == "")
 				{
 					this.ShowMessageBox("Vui lòng nhập thông tin tìm kiếm.", "Thông báo");
 
 					return;
 				}
 
-				string timNhanVien = this.GetControlTextIfPlaceholderThenEmpty(this.TabPageNhanVien_TextboxSelectNhanVien);
+				string timNhanVien = this.TabPageNhanVien_TextboxSelectNhanVien.Text;
 
 				// Gọi phương thức để tìm kiếm nhân viên theo tên
 				List<NhanVienDTO> ketQua = NhanVienDAO.Instance.TimNhanVienTheoMaNhanVienHoacTenNhanVien(timNhanVien);
 
-				this.TabPageNhanVien_ListView.Items.Clear();
+				this.TabPageNhanVien_MaterialListView.Items.Clear();
 
 				// Hiện Kết Quả lên ListView
 				int stt = 0;
@@ -2626,13 +2649,14 @@ namespace WinformWithExternalLibrary
 					item.SubItems.Add(nhanVienDTO.NhanVienDTO_DiaChi);
 					item.SubItems.Add(nhanVienDTO.NhanVienDTO_Email);
 
-					TabPageNhanVien_ListView.Items.Add(item);
+					TabPageNhanVien_MaterialListView.Items.Add(item);
 				}
 			};
 
 			TabPageNhanVien_btnMacDinh.Click += (object sender, EventArgs e) =>
 			{
-				TabPageNhanVien_ListView.Items.Clear();
+				TabPageNhanVien_MaterialListView.Items.Clear();
+
 				this.CallDataNhanVien();
 			};
 		}
@@ -2643,10 +2667,10 @@ namespace WinformWithExternalLibrary
 			TabPageNhanVien_btnSua.Click += (object sender, EventArgs e) =>
 			{
 				// Kiểm tra xem đã chọn nhân viên nào chưa
-				if (this.TabPageNhanVien_ListView.SelectedItems.Count > 0)
+				if (this.TabPageNhanVien_MaterialListView.SelectedItems.Count > 0)
 				{
 					// Lấy thông tin nhân viên được chọn
-					ListViewItem item = this.TabPageNhanVien_ListView.SelectedItems[0];
+					ListViewItem item = this.TabPageNhanVien_MaterialListView.SelectedItems[0];
 
 					this.maNhanVien = Guid.Parse(item.SubItems[1].Text);
 
@@ -2715,7 +2739,7 @@ namespace WinformWithExternalLibrary
 					{
 						this.ClearFormData();
 
-						this.TabPageNhanVien_ListView.Items.Clear();
+						this.TabPageNhanVien_MaterialListView.Items.Clear();
 
 						this.CallDataNhanVien();
 
@@ -2747,7 +2771,7 @@ namespace WinformWithExternalLibrary
 				item.SubItems.Add(nhanVienDTO.NhanVienDTO_DiaChi);
 				item.SubItems.Add(nhanVienDTO.NhanVienDTO_Email);
 
-				TabPageNhanVien_ListView.Items.Add(item);
+				TabPageNhanVien_MaterialListView.Items.Add(item);
 			}
 		}
 
