@@ -19,10 +19,6 @@ namespace WinformWithExternalLibrary
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			//		Generate Data
-			//BogusAmogus bogusAmogus = new BogusAmogus();
-			//bogusAmogus.GenerateFakeData();
-
 			//		Form
 			FormLogin.Instance = new FormLogin();
 

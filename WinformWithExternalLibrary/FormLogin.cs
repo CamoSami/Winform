@@ -63,6 +63,9 @@ namespace WinformWithExternalLibrary
 			this.InitializeHardCodedAttributes();
 			this.InitiateDataObjects();
 
+			//		Generate Data
+			this.InitiateFakeDataGeneration();
+
 			//		Event
 			this.InitializeAutomaticEvent();
 			this.InitializeSpecializedEvent();
@@ -78,6 +81,12 @@ namespace WinformWithExternalLibrary
 			}
 
 			return base.ProcessCmdKey(ref msg, keyData);
+		}
+
+		private void InitiateFakeDataGeneration()
+		{
+			BogusAmogus bogusAmogus = new BogusAmogus();
+			bogusAmogus.GenerateFakeData();
 		}
 
 		private void InitiateDataObjects()
