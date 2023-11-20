@@ -55,7 +55,7 @@ namespace WinformWithExternalLibrary
 		private bool IfAutoValidate = false;
 		//			For DirtyData Check
 		private int lastTabPageIndex = 0;
-		private readonly DateTime dateTimeDefault = new DateTime
+		private readonly DateTime defaultDateTime = new DateTime
 			(
 				day: DateTime.Now.Day,
 				month: DateTime.Now.Month,
@@ -100,7 +100,7 @@ namespace WinformWithExternalLibrary
 			{
 				if (this.darkModeToolStripMenuItem.Checked == true)
 				{
-					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(true);
+					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(isDark: true);
 					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.DARK;
 
 					this.contextMenuStrip.ForeColor = Color.White;
@@ -109,7 +109,7 @@ namespace WinformWithExternalLibrary
 				}
 				else
 				{
-					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(false);
+					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(isDark: false);
 					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.LIGHT;
 
 					this.contextMenuStrip.ForeColor = Color.Black;
@@ -166,10 +166,7 @@ namespace WinformWithExternalLibrary
 					else if (control is RJDatePicker rJDatePicker)
 					{
 						//		Current Day = Now
-						rJDatePicker.Value = this.dateTimeDefault;
-
-						//		Max Range = Now
-						rJDatePicker.MaxDate = this.dateTimeDefault;
+						rJDatePicker.Value = this.defaultDateTime;
 
 						rJDatePicker.SkinColor = System.Drawing.Color.PaleVioletRed;
 						rJDatePicker.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -178,10 +175,10 @@ namespace WinformWithExternalLibrary
 					else if (control is DateTimePicker dateTimePicker)
 					{
 						//		Current Day = Now
-						dateTimePicker.Value = this.dateTimeDefault;
+						dateTimePicker.Value = this.defaultDateTime;
 
 						//		Max Range = Now
-						dateTimePicker.MaxDate = this.dateTimeDefault;
+						dateTimePicker.MaxDate = this.defaultDateTime;
 					}
 					//		MaterialListView
 					else if (control is MaterialListView materialListView)
@@ -2839,15 +2836,286 @@ namespace WinformWithExternalLibrary
 
 		#region Vũ Hồng Hạnh
 
+		//		HieuNote: Winform bên t chạy bình thường, bên m chậm có thể là do m bật quá nhiều tác vụ cùng một lúc
 		private void Initialize_VuHongHanh()
 		{
 			//Debug.WriteLine(DMSanPhamDAO.Instance.UpdateCongSoLuongTon("469075421580", 2));
 
-			this.TabPageSanPham_ButtonThemSanPham.Click += (obj, e) =>
+			this.Load += TabPageSanPham_materialListView_Load;
+
+			this.TabPageSanPham_MaterialListView.SelectedIndexChanged += TabPageSanPham_materialListView_SelectedIndexChanged;
+			this.TabPageSanPham_ButtonThemSanPham.Click += TabPageSanPham_ButtonThemSanPham_Click;
+			this.TabPageSanPham_ButtonSuaSanPham.Click += TabPageSanPham_ButtonSuaSanPham_Click;
+			this.TabPageSanPham_NhapMoiTimKiem.Click += TabPageSanPham_NhapMoiTimKiem_Click;
+			this.TabPageSanPham_ButtonXoaSanPham.Click += TabPageSanPham_ButtonXoaSanPham_Click;
+			this.TabPageSanPham_ButtonXuatRaFileExcel.Click += TabPageSanPham_ButtonXuatRaFileExcel_Click;
+			this.TabPageSanPham_ButtonTimKiem.Click += TabPageSanPham_ButtonTimKiem_Click;
+			this.TabPageSanPham_ButtonLoadSP.Click += TabPageSanPham_ButtonLoadSP_Click;
+			this.TabPageSanPham_ButtonDSKM.Click += TabPageSanPham_ButtonDSKM_Click;
+		}
+
+		private void TabPageSanPham_ButtonDSKM_Click(object sender, EventArgs e)
+		{
+			if (this.ShowMessageBoxYesNo("Bạn có muốn xem danh sách khuyến mại không ?"))
+			{
+				FormDanhSachGiamGia formDanhSachGiamGia = new FormDanhSachGiamGia();
+				
+				formDanhSachGiamGia.Show();
+			}
+		}
+
+		private void TabPageSanPham_ButtonLoadSP_Click(object sender, EventArgs e)
+		{
+			if (this.ShowMessageBoxYesNo("Bạn có muốn load lại dữ liệu tất cả các sản phẩm không?"))
+			{
+				System.Data.DataTable sanPham = DMSanPhamDAO.Instance.GetAllSanPham();
+				LoadSanPham(sanPham);
+			}
+		}
+
+		private void TabPageSanPham_ButtonTimKiem_Click(object sender, EventArgs e)
+		{
+			System.Data.DataTable sanPham;
+
+			//		HieuNote: cái lúc trước của m là check null là không đúng, check bằng "" sẽ chuẩn hơn, t ở đây cứ dùng phương thức có sẵn
+			if (!this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_MaSanPham))
+			{
+				sanPham = DMSanPhamDAO.Instance.GetSanPhamFromMSP(this.GetControlTextIfPlaceholderThenEmpty(DMSanPhamDVO_MaSanPham));
+			}
+			else
+			{
+				long DonGiaBanMin, DonGiaBanMax, DonGiaNhapMin, DonGiaNhapMax;
+				int SoLuongTonKhoMin, SoLuongTonKhoMax;
+				DateTime ThoiGianBaoHanhMin, ThoiGianBaoHanhMax, ThoiGianBaoHanhDefault;
+
+				//		HieuNote: t sửa để dùng các phương thức có sẵn, m ko hiểu cũng ko sao
+				if (this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_DonGiaBanMin)) DonGiaBanMin = 0;
+				else DonGiaBanMin = long.Parse(DMSanPhamDVO_DonGiaBanMin.Text.Trim());
+
+				if (this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_DonGiaBanMax)) DonGiaBanMax = 0;
+				else DonGiaBanMax = long.Parse(DMSanPhamDVO_DonGiaBanMax.Text.Trim());
+
+				if (this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_DonGiaNhapMin)) DonGiaNhapMin = 0;
+				else DonGiaNhapMin = long.Parse(DMSanPhamDVO_DonGiaNhapMin.Text.Trim());
+
+				if (this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_DonGiaNhapMax)) DonGiaNhapMax = 0;
+				else DonGiaNhapMax = long.Parse(DMSanPhamDVO_DonGiaNhapMax.Text.Trim());
+
+				if (this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_SoLuongTonKhoMin)) SoLuongTonKhoMin = 0;
+				else SoLuongTonKhoMin = int.Parse(DMSanPhamDVO_SoLuongTonKhoMin.Text.Trim());
+
+				if (this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_SoLuongTonKhoMax)) SoLuongTonKhoMax = 0;
+				else SoLuongTonKhoMax = int.Parse(DMSanPhamDVO_SoLuongTonKhoMax.Text.Trim());
+
+				ThoiGianBaoHanhMin = DMSanPhamDVO_ThoiGianBaoHanhMin.Value;
+
+				ThoiGianBaoHanhMax = DMSanPhamDVO_ThoiGianBaoHanhMax.Value;
+
+				sanPham = DMSanPhamDAO.Instance.GetSanPham(
+												this.GetControlTextIfPlaceholderThenEmpty(this.DMSanPhamDVO_TenSanPham),
+												DonGiaBanMin,
+												DonGiaBanMax,
+												DonGiaNhapMin,
+												DonGiaNhapMax,
+												SoLuongTonKhoMin,
+												SoLuongTonKhoMax,
+												ThoiGianBaoHanhMin,
+												ThoiGianBaoHanhMax
+												);
+
+			}
+
+			//		HieuNote: lúc trước m cho check null, nhưng mà phương thức ExecuteQuery luôn trả về một biến DataTable
+			//					dù có dữ liệu hay không, nên giờ check xem .Rows.Count > 0
+			if (sanPham.Rows.Count > 0)
+			{
+				this.LoadSanPham(sanPham);
+			}
+			else
+			{
+				this.ShowMessageBox("Không tìm thấy sản phẩm cần tìm kiếm");
+			}
+		}
+
+		private void TabPageSanPham_ButtonXuatRaFileExcel_Click(object sender, EventArgs e)
+		{
+			System.Data.DataTable dataTable = new System.Data.DataTable();
+
+			dataTable.Columns.Add("STT");
+			dataTable.Columns.Add("Mã sản phẩm");
+			dataTable.Columns.Add("Tên sản phẩm");
+			dataTable.Columns.Add("Đơn giá bán");
+			dataTable.Columns.Add("Đơn giá nhập");
+			dataTable.Columns.Add("Số lượng tồn kho");
+			dataTable.Columns.Add("Thời gian bảo hành");
+
+			foreach (ListViewItem item in TabPageSanPham_MaterialListView.Items)
+			{
+				DataRow row = dataTable.NewRow();
+				row["STT"] = item.SubItems[0].Text;
+				row["Mã sản phẩm"] = item.SubItems[1].Text;
+				row["Tên sản phẩm"] = item.SubItems[2].Text;
+				row["Đơn giá bán"] = item.SubItems[3].Text;
+				row["Đơn giá nhập"] = item.SubItems[4].Text;
+				row["Số lượng tồn kho"] = item.SubItems[5].Text;
+				row["Thời gian bảo hành"] = item.SubItems[6].Text;
+				dataTable.Rows.Add(row);//Thêm dataRow vào dataTable
+			}
+
+			this.exportTableData.ExportToExcel(
+				dataTable: dataTable,
+				workSheetName: "DMSanPham" + this.getDateTime.GetDateTimeNow_Date(),
+				filePath: ""
+			);
+
+			this.ResetColorForLabel();
+		}
+
+		private void TabPageSanPham_ButtonXoaSanPham_Click(object sender, EventArgs e)
+		{
+			if (this.ShowMessageBoxYesNo("Bạn có chắc chắn muốn xóa sản phẩm này không?"))
+			{
+				if (TabPageSanPham_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Hãy chọn sản phẩm muốn xóa");
+
+					return;
+				}
+				int selectedIndex = TabPageSanPham_MaterialListView.SelectedIndices[0];
+
+				ListViewItem listViewItem = this.TabPageSanPham_MaterialListView.Items[selectedIndex];
+
+				string MSP;
+
+				MSP = listViewItem.SubItems[1].Text;
+				Debug.WriteLine(MSP);
+				if (DMSanPhamDAO.Instance.DeleteSanPham(MSP))
+				{
+					this.ShowMessageBox("Đã xóa sản phẩm thành công");
+					System.Data.DataTable sanPham = DMSanPhamDAO.Instance.GetAllSanPham();
+					LoadSanPham(sanPham);
+				}
+			}
+		}
+
+		private void TabPageSanPham_NhapMoiTimKiem_Click(object sender, EventArgs e)
+		{
+			this.ResetInputForTabPage();
+		}
+
+		private void TabPageSanPham_materialListView_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ListView.SelectedIndexCollection selectedIndices = TabPageSanPham_MaterialListView.SelectedIndices;
+			if (selectedIndices.Count > 0)
+			{
+				int selectedIndex = TabPageSanPham_MaterialListView.SelectedIndices[0];
+				ListViewItem listViewItem = this.TabPageSanPham_MaterialListView.Items[selectedIndex];
+				DMSanPhamDVO_MaSanPham.Text = listViewItem.SubItems[1].Text;
+				DMSanPhamDVO_TenSanPham.Text = listViewItem.SubItems[2].Text;
+				DMSanPhamDVO_DonGiaBanMin.Text = listViewItem.SubItems[3].Text;
+				DMSanPhamDVO_DonGiaBanMax.Text = "";
+				DMSanPhamDVO_DonGiaNhapMin.Text = listViewItem.SubItems[4].Text;
+				DMSanPhamDVO_DonGiaNhapMax.Text = "";
+				DMSanPhamDVO_SoLuongTonKhoMin.Text = listViewItem.SubItems[5].Text;
+				DMSanPhamDVO_SoLuongTonKhoMax.Text = "";
+				DMSanPhamDVO_ThoiGianBaoHanhMin.Text = listViewItem.SubItems[6].Text;
+				DMSanPhamDVO_ThoiGianBaoHanhMax.Text = "";
+			}
+		}
+
+		private void TabPageSanPham_materialListView_Load(object sender, EventArgs e)
+		{
+			System.Data.DataTable sanPham = DMSanPhamDAO.Instance.GetAllSanPham();
+			LoadSanPham(sanPham);
+		}
+
+		private void TabPageSanPham_ButtonSuaSanPham_Click(object sender, EventArgs e)
+		{
+			if (this.ShowMessageBoxYesNo("Bạn có chắc chắn muốn thay đổi không?"))
+			{
+				if (TabPageSanPham_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Hãy chọn sản phẩm muốn thay đổi");
+
+					return;
+				}
+				int selectedIndex = TabPageSanPham_MaterialListView.SelectedIndices[0];
+				ListViewItem listViewItem = this.TabPageSanPham_MaterialListView.Items[selectedIndex];
+				string MSP;
+				Guid MDMSP;
+				MSP = listViewItem.SubItems[1].Text;
+				MDMSP = DMSanPhamDAO.Instance.GetMaDMSanPhamFromMaSanPham(MSP);
+				FormCreateSanPhamDVO formCreateSanPhamDVO = new FormCreateSanPhamDVO();
+				formCreateSanPhamDVO.FormCreateSanPhamDVO_MaSanPham = MSP;
+				foreach (object obj in listViewItem.SubItems)
+				{
+					Debug.WriteLine(obj.ToString());
+				}
+				formCreateSanPhamDVO.FormCreateSanPhamDVO_TenSanPham = listViewItem.SubItems[2].Text;
+				formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaBan = long.Parse(listViewItem.SubItems[3].Text);
+				formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaNhap = long.Parse(listViewItem.SubItems[4].Text);
+				formCreateSanPhamDVO.FormCreateSanPhamDVO_SoLuongTonKho = int.Parse(listViewItem.SubItems[5].Text);
+				formCreateSanPhamDVO.FormCreateSanPhamDVO_ThoiGianBaoHanh = DateTime.Parse(listViewItem.SubItems[6].Text);
+				FormCreateSanPham formCreateSanPham = new FormCreateSanPham(formCreateSanPhamDVO, MDMSP, true);
+				formCreateSanPham.Show();
+				System.Data.DataTable sanPham = DMSanPhamDAO.Instance.GetAllSanPham();
+				LoadSanPham(sanPham);
+			}
+		}
+
+		private void TabPageSanPham_ButtonThemSanPham_Click(object sender, EventArgs e)
+		{
+			if (this.ShowMessageBoxYesNo("Bạn có muốn thêm sản phẩm mới không?"))
 			{
 				FormCreateSanPham formCreateSanPham = new FormCreateSanPham();
 				formCreateSanPham.Show();
+			}
+		}
+		private void LoadSanPham(System.Data.DataTable sanPham)
+		{
+			TabPageSanPham_MaterialListView.Items.Clear();
+			ListViewItem items;
+
+			int Count = 0;
+
+			foreach (DataRow row in sanPham.Rows)
+			{
+				items = new ListViewItem();
+
+				Count++;
+
+				items.SubItems[0].Text = Count.ToString();
+
+				for (int i = 0; i < sanPham.Columns.Count; i++)
+				{
+					items.SubItems.Add(row[i].ToString().Trim());
+				}
+				this.TabPageSanPham_MaterialListView.Items.Add(items);
+			}
+		}
+
+		private void DateTimePickerLimit()
+		{
+			this.DMSanPhamDVO_ThoiGianBaoHanhMin.ValueChanged += (object obj, EventArgs e) =>
+			{
+				if (this.DMSanPhamDVO_ThoiGianBaoHanhMin.Value > this.DMSanPhamDVO_ThoiGianBaoHanhMax.Value)
+				{
+					this.ShowMessageBox("Thời gian bảo hành mà bạn vừa chọn chưa thỏa mãn");
+					this.DMSanPhamDVO_ThoiGianBaoHanhMax.Value = DMSanPhamDAO.Instance.GetThoiGianBaoHanhMax();
+					this.DMSanPhamDVO_ThoiGianBaoHanhMin.Value = DMSanPhamDAO.Instance.GetThoiGianBaoHanhMin();
+				}
 			};
+
+			this.DMSanPhamDVO_ThoiGianBaoHanhMax.ValueChanged += (object obj, EventArgs e) =>
+			{
+				if (this.DMSanPhamDVO_ThoiGianBaoHanhMax.Value < this.DMSanPhamDVO_ThoiGianBaoHanhMax.Value)
+				{
+					this.ShowMessageBox("Thời gian bảo hành mà bạn vừa chọn chưa thỏa mãn");
+					this.DMSanPhamDVO_ThoiGianBaoHanhMax.Value = DMSanPhamDAO.Instance.GetThoiGianBaoHanhMax();
+					this.DMSanPhamDVO_ThoiGianBaoHanhMin.Value = DMSanPhamDAO.Instance.GetThoiGianBaoHanhMin();
+				}
+			};
+
 		}
 
 		#endregion
@@ -3071,7 +3339,7 @@ namespace WinformWithExternalLibrary
 			{
 				if (controlTemp is DateTimePicker dateTimePicker)
 				{
-					dateTimePicker.Value = this.dateTimeDefault;
+					dateTimePicker.Value = this.defaultDateTime;
 
 					return;
 				}
@@ -3419,7 +3687,7 @@ namespace WinformWithExternalLibrary
 				//		Check DirtyData for DateTimePicker is different
 				if (control is DateTimePicker dateTimePicker)
 				{
-					if (dateTimePicker.Value != this.dateTimeDefault)
+					if (dateTimePicker.Value != this.defaultDateTime)
 					{
 						//Debug.WriteLine(control.Name);
 
@@ -3429,7 +3697,7 @@ namespace WinformWithExternalLibrary
 				//		Check DirtyData for DateTimePicker is different
 				else if (control is RJDatePicker rjDatePicker)
 				{
-					if (rjDatePicker.Value != this.dateTimeDefault)
+					if (rjDatePicker.Value != this.defaultDateTime)
 					{
 						//Debug.WriteLine(control.Name);
 

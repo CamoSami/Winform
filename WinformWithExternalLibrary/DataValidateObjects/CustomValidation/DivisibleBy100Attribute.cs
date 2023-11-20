@@ -26,8 +26,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 				this.ErrorMessage, 
 				new List<string>() { 
 					"TongTienKhachTraDVO_TongTienKhachTra",
-					"FormCreateSanPhamDVO_DonGiaBan",
-					"FormCreateSanPhamDVO_DonGiaNhap"
+					"FormCreateSanPhamDVO_DonGiaBan"
 					}
 				);
 		}

@@ -209,11 +209,13 @@
     <Compile Include="DataValidateObjects\CustomValidation\ChiTietHDBanDVO_EligibleSoLuongAttribute.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\ChiTietHDDVO_ExistedMaSanPhamAttribute.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\CongViecDVO_ExistedTenCongViec.cs" />
+    <Compile Include="DataValidateObjects\CustomValidation\DivisibleBy100DGNAttribute.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\HoaDonBanDVO_EligibleTenGiamGia.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\HoaDonBanDVO_ExistedDienThoaiKhachHangAttribute.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\HoaDonNhapDVO_ExistedDienThoaiNhaCungCap.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\NhaCungCapDVO_UniqueDienThoaiAttribute.cs" />
     <Compile Include="DataValidateObjects\DMSanPhamDVO.cs" />
+    <Compile Include="DataValidateObjects\FormCreateGiamGiaDVO.cs" />
     <Compile Include="DataValidateObjects\FormCreateSanPhamDVO.cs" />
     <Compile Include="DataValidateObjects\NhaCungCapDVO.cs" />
     <Compile Include="DataValidateObjects\CustomValidation\NhanVienThuNganDVO_ExistedNhanVienAttribute.cs" />
@@ -271,6 +273,12 @@
     <Compile Include="ExtraForm\FormCreateCongViec.Designer.cs">
       <DependentUpon>FormCreateCongViec.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExtraForm\FormCreateGiamGia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormCreateGiamGia.Designer.cs">
+      <DependentUpon>FormCreateGiamGia.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExtraForm\FormCreateNhaCungCap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -282,6 +290,12 @@
     </Compile>
     <Compile Include="ExtraForm\FormCreateSanPham.Designer.cs">
       <DependentUpon>FormCreateSanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ExtraForm\FormDanhSachGiamGia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExtraForm\FormDanhSachGiamGia.Designer.cs">
+      <DependentUpon>FormDanhSachGiamGia.cs</DependentUpon>
     </Compile>
     <Compile Include="ExtraForm\FormListImportBill.cs">
       <SubType>Form</SubType>
@@ -356,6 +370,9 @@
     <EmbeddedResource Include="ExtraForm\FormCreateCongViec.resx">
       <DependentUpon>FormCreateCongViec.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormCreateGiamGia.resx">
+      <DependentUpon>FormCreateGiamGia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateKhachHang.resx">
       <DependentUpon>FormCreateKhachHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -364,6 +381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormCreateSanPham.resx">
       <DependentUpon>FormCreateSanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExtraForm\FormDanhSachGiamGia.resx">
+      <DependentUpon>FormDanhSachGiamGia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExtraForm\FormListImportBill.resx">
       <DependentUpon>FormListImportBill.cs</DependentUpon>

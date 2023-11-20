@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,20 +16,21 @@ using WinformWithExternalLibrary.DataValidateObjects;
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
-	public partial class FormCreateSanPham : MaterialForm
+	public partial class FormCreateGiamGia : MaterialForm
 	{
 		private readonly List<TextBoxBase> listOfTextboxes = new List<TextBoxBase>();
 		private readonly List<Label> listOfLabels = new List<Label>();
 		private readonly List<bool> isInterracted = new List<bool>();
 
 		private bool isUpdate;
-		private Guid maDMSanPham;
-		private FormCreateSanPhamDVO formCreateSanPhamDVO;
-		public FormCreateSanPham(FormCreateSanPhamDVO formCreateSanPhamDVO = null,
-								Guid maDMSanPham = new Guid(),
+		private Guid maGiamGia;
+		private FormCreateGiamGiaDVO formCreateGiamGiaDVO;
+
+		public FormCreateGiamGia(FormCreateGiamGiaDVO formCreateGiamGiaDVO = null,
+								Guid maGiamGia = new Guid(),
 								bool isUpdate = false)
 		{
-			InitializeComponent();
+			this.InitializeComponent();
 
 			//		Attributes
 			this.InitializeHardCodedAttributes();
@@ -40,17 +40,16 @@ namespace WinformWithExternalLibrary.ExtraForm
 			this.InitializeSpecializedEvent();
 
 			this.isUpdate = isUpdate;
-			this.maDMSanPham = maDMSanPham;
-			this.formCreateSanPhamDVO = formCreateSanPhamDVO;
+			this.maGiamGia = maGiamGia;
+			this.formCreateGiamGiaDVO = formCreateGiamGiaDVO;
 
 			if (this.isUpdate)
 			{
-				this.FormCreateSanPhamDVO_MaSanPham.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_MaSanPham;
-				this.FormCreateSanPhamDVO_TenSanPham.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_TenSanPham;
-				this.FormCreateSanPhamDVO_DonGiaBan.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaBan.ToString();
-				this.FormCreateSanPhamDVO_DonGiaNhap.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaNhap.ToString();
-				this.FormCreateSanPhamDVO_SoLuongTonKho.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_SoLuongTonKho.ToString();
-				this.FormCreateSanPhamDVO_ThoiGianBaoHanh.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_ThoiGianBaoHanh.ToString();
+				this.FormCreateGiamGiaDVO_TenGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_TenGiamGia;
+				this.FormCreateGiamGiaDVO_PhanTramGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_PhanTramGiamGia.ToString();
+				this.FormCreateGiamGiaDVO_MaxGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_MaxGiamGia.ToString();
+				this.FormCreateGiamGiaDVO_NgayBatDau.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayBatDau.ToString();
+				this.FormCreateGiamGiaDVO_NgayKetThuc.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayKetThuc.ToString();
 			}
 		}
 
@@ -90,7 +89,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 					//		Get the DisplayName attribute
 					tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
-
 				}
 			}
 		}
@@ -134,74 +132,81 @@ namespace WinformWithExternalLibrary.ExtraForm
 				this.ResetColorForLabel();
 			};
 
-			this.FormCreateSanPham_btnThemSanPham.Click += FormCreateSanPham_btnThemSanPham_Click;
-			this.FormCreateSanPham_btnThietLapVeBanDau.Click += FormCreateSanPham_btnThietLapVeBanDau_Click;
-
+			this.FormCreateGiamGia_btnTaoGiamGia.Click += FormCreateGiamGia_btnTaoGiamGia_Click;
+			this.FormCreateGiamGia_btnThietLapVeBanDau.Click += FormCreateGiamGia_btnThietLapVeBanDau_Click;
+			this.FormCreateGiamGiaDVO_NgayKetThuc.ValueChanged += FormCreateGiamGiaDVO_NgayKetThuc_ValueChanged;
 		}
 
-		private void FormCreateSanPham_btnThietLapVeBanDau_Click(object sender, EventArgs e)
+		private void FormCreateGiamGiaDVO_NgayKetThuc_ValueChanged(object sender, EventArgs e)
+		{
+			if (FormCreateGiamGiaDVO_NgayKetThuc.Value < FormCreateGiamGiaDVO_NgayBatDau.Value)
+			{
+				this.ShowMessageBox("Ngày kết thúc đang trước ngày bắt đầu");
+				this.FormCreateGiamGiaDVO_NgayKetThuc.Focus();
+			}
+		}
+
+		private void FormCreateGiamGia_btnThietLapVeBanDau_Click(object sender, EventArgs e)
 		{
 			if (this.ShowMessageBoxYesNo("Bạn có muốn thiết lập về giá trị ban đầu không ?", "Thông báo"))
 			{
 				if (!this.isUpdate)
 				{
-					this.FormCreateSanPhamDVO_MaSanPham.Text = "";
-					this.FormCreateSanPhamDVO_TenSanPham.Text = "";
-					this.FormCreateSanPhamDVO_DonGiaBan.Text = "";
-					this.FormCreateSanPhamDVO_DonGiaNhap.Text = "";
-					this.FormCreateSanPhamDVO_SoLuongTonKho.Text = "";
-					this.FormCreateSanPhamDVO_ThoiGianBaoHanh.Text = "";
+					this.FormCreateGiamGiaDVO_TenGiamGia.Text = "";
+					this.FormCreateGiamGiaDVO_PhanTramGiamGia.Text = "";
+					this.FormCreateGiamGiaDVO_MaxGiamGia.Text = "";
+					this.FormCreateGiamGiaDVO_NgayBatDau.Text = "";
+					this.FormCreateGiamGiaDVO_NgayKetThuc.Text = "";
 				}
 				else
 				{
-					this.FormCreateSanPhamDVO_MaSanPham.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_MaSanPham;
-					this.FormCreateSanPhamDVO_TenSanPham.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_TenSanPham;
-					this.FormCreateSanPhamDVO_DonGiaBan.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaBan.ToString();
-					this.FormCreateSanPhamDVO_DonGiaNhap.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaNhap.ToString();
-					this.FormCreateSanPhamDVO_SoLuongTonKho.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_SoLuongTonKho.ToString();
-					this.FormCreateSanPhamDVO_ThoiGianBaoHanh.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_ThoiGianBaoHanh.ToString();
+					this.FormCreateGiamGiaDVO_TenGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_TenGiamGia;
+					this.FormCreateGiamGiaDVO_PhanTramGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_PhanTramGiamGia.ToString();
+					this.FormCreateGiamGiaDVO_MaxGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_MaxGiamGia.ToString();
+					this.FormCreateGiamGiaDVO_NgayBatDau.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayBatDau.ToString();
+					this.FormCreateGiamGiaDVO_NgayKetThuc.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayKetThuc.ToString();
 				}
 			}
-
 		}
 
-		private void FormCreateSanPham_btnThemSanPham_Click(object sender, EventArgs e)
+		private void FormCreateGiamGia_btnTaoGiamGia_Click(object sender, EventArgs e)
 		{
 			if (this.ShowMessageBoxYesNo("Bạn có muốn lưu thay đổi không ?"))
 			{
 				if (this.TryValidation())
 				{
-					FormCreateSanPhamDVO formCreateSPDVO = this.GetInput();
-					DMSanPhamDTO dMSanPhamDTO = new DMSanPhamDTO();
+					FormCreateGiamGiaDVO formCreateGiamGiaDVO = this.GetInput();
+					GiamGiaDTO giamGiaDTO = new GiamGiaDTO();
 					if (!this.isUpdate)
 					{
-						dMSanPhamDTO.DMSanPhamDTO_MaDMSanPham = Guid.NewGuid();
+						giamGiaDTO.GiamGiaDTO_MaGiamGia = Guid.NewGuid();
 					}
 					else
 					{
-						dMSanPhamDTO.DMSanPhamDTO_MaDMSanPham = maDMSanPham;
+						giamGiaDTO.GiamGiaDTO_MaGiamGia = maGiamGia;
 					}
-					dMSanPhamDTO.DMSanPhamDTO_MaSanPham = formCreateSPDVO.FormCreateSanPhamDVO_MaSanPham;
-					dMSanPhamDTO.DMSanPhamDTO_TenSanPham = formCreateSPDVO.FormCreateSanPhamDVO_TenSanPham;
-					dMSanPhamDTO.DMSanPhamDTO_DonGiaBan = formCreateSPDVO.FormCreateSanPhamDVO_DonGiaBan;
-					dMSanPhamDTO.DMSanPhamDTO_DonGiaNhap = formCreateSPDVO.FormCreateSanPhamDVO_DonGiaNhap;
-					dMSanPhamDTO.DMSanPhamDTO_SoLuongTonKho = formCreateSPDVO.FormCreateSanPhamDVO_SoLuongTonKho;
-					dMSanPhamDTO.DMSanPhamDTO_ThoiGianBaoHanh = formCreateSPDVO.FormCreateSanPhamDVO_ThoiGianBaoHanh;
+					giamGiaDTO.GiamGiaDTO_TenGiamGia = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_TenGiamGia;
+					giamGiaDTO.GiamGiaDTO_PhanTramGiamGia = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_PhanTramGiamGia;
+					giamGiaDTO.GiamGiaDTO_MaxGiamGia = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_MaxGiamGia;
+					giamGiaDTO.GiamGiaDTO_NgayBatDau = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayBatDau;
+					giamGiaDTO.GiamGiaDTO_NgayKetThuc = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayKetThuc;
+
+
 
 					if (this.isUpdate)
 					{
-						if (DMSanPhamDAO.Instance.UpdateSanPham(dMSanPhamDTO, this.maDMSanPham))
+						if (GiamGiaDAO.Instance.UpdateGiamGia(giamGiaDTO, this.maGiamGia))
 						{
-							this.ShowMessageBox("Cập nhật sản phẩm thành công!");
+							this.ShowMessageBox("Cập nhật khuyến mạithành công!");
 						}
 						else
 						{
-							this.ShowMessageBox("Đã xảy ra lỗi gì đó", "!UpdateSanPham");
+							this.ShowMessageBox("Đã xảy ra lỗi gì đó", "!UpdateGiamGia");
 						}
 						this.Hide();
 						return;
 					}
-					if (DMSanPhamDAO.Instance.InsertSanPham(dMSanPhamDTO))
+					if (DMSanPhamDAO.Instance.InsertSanPham(giamGiaDTO))
 					{
 						this.ShowMessageBox("Nhập sản phẩm thành công!");
 					}
@@ -213,6 +218,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 				this.Hide();
 			}
 		}
+
+
+
 
 		#endregion
 
@@ -304,30 +312,23 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private dynamic GetInput()
 		{
-			if (!int.TryParse(this.GetTextboxTextIfPlaceholderThenEmpty(this.FormCreateSanPhamDVO_DonGiaBan), out int tempDonGiaBan))
+			if (!float.TryParse(this.GetTextboxTextIfPlaceholderThenEmpty(this.FormCreateGiamGiaDVO_PhanTramGiamGia), out float tempPhanTramGiamGia))
 			{
-				tempDonGiaBan = 0;
+				tempPhanTramGiamGia = 0;
 			}
 
-			if (!int.TryParse(this.GetTextboxTextIfPlaceholderThenEmpty(this.FormCreateSanPhamDVO_DonGiaNhap), out int tempDonGiaNhap))
+			if (!long.TryParse(this.GetTextboxTextIfPlaceholderThenEmpty(this.FormCreateGiamGiaDVO_MaxGiamGia), out long tempMaxGiamGia))
 			{
-				tempDonGiaNhap = 0;
+				tempMaxGiamGia = 0;
 			}
 
-			if (!int.TryParse(this.GetTextboxTextIfPlaceholderThenEmpty(this.FormCreateSanPhamDVO_SoLuongTonKho), out int tempSoLuongTonKho))
+			return new FormCreateGiamGiaDVO
 			{
-				tempSoLuongTonKho = 0;
-			}
-
-
-			return new FormCreateSanPhamDVO
-			{
-				FormCreateSanPhamDVO_MaSanPham = this.GetTextboxTextIfPlaceholderThenEmpty(this.FormCreateSanPhamDVO_MaSanPham),
-				FormCreateSanPhamDVO_TenSanPham = this.GetTextboxTextIfPlaceholderThenEmpty(this.FormCreateSanPhamDVO_TenSanPham),
-				FormCreateSanPhamDVO_DonGiaBan = tempDonGiaBan,
-				FormCreateSanPhamDVO_DonGiaNhap = tempDonGiaNhap,
-				FormCreateSanPhamDVO_SoLuongTonKho = tempSoLuongTonKho,
-				FormCreateSanPhamDVO_ThoiGianBaoHanh = this.FormCreateSanPhamDVO_ThoiGianBaoHanh.Value,
+				FormCreateGiamGiaDVO_TenGiamGia = this.GetTextboxTextIfPlaceholderThenEmpty(this.FormCreateGiamGiaDVO_TenGiamGia),
+				FormCreateGiamGiaDVO_PhanTramGiamGia = tempPhanTramGiamGia,
+				FormCreateGiamGiaDVO_MaxGiamGia = tempMaxGiamGia,
+				FormCreateGiamGiaDVO_NgayBatDau = this.FormCreateGiamGiaDVO_NgayBatDau.Value,
+				FormCreateGiamGiaDVO_NgayKetThuc = this.FormCreateGiamGiaDVO_NgayKetThuc.Value,
 			};
 		}
 
@@ -359,7 +360,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private string GetPlaceholder(TextBoxBase textBox)
 		{
-			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(typeof(FormCreateSanPhamDVO))[textBox.Name];
+			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(typeof(FormCreateGiamGiaDVO))[textBox.Name];
 			DisplayNameAttribute displayNameAttribute = (DisplayNameAttribute)propertyDescriptor.Attributes[typeof(DisplayNameAttribute)];
 
 			return displayNameAttribute.DisplayName;

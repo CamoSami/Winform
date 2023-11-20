@@ -34,6 +34,15 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return obj != null ? obj.ToString() : "";
 		}
 
+		//Hạnh add
+		public DataTable GetAllGiamGia()
+		{
+			string query = $"SELECT MaGiamGia, TenGiamGia, PhanTramGiamGia, MaxGiamGia, NgayBatDau, NgayKetThuc " +
+				$"FROM {DataProvider.GIAMGIA_TABLE} ";
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+			return dataTable;
+		}
+
 		public Guid GetMaGiamGia(string tenGiamGia)
 		{
 			string queryString = $"SELECT MaGiamGia FROM {DataProvider.GIAMGIA_TABLE} WHERE TenGiamGia = {this.GetString(tenGiamGia)}";
@@ -100,6 +109,23 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			{
 				this.OnDAODatabaseChanged?.Invoke(this, EventArgs.Empty);
 			}
+
+			return rowChanged > 0;
+		}
+
+		//Hạnh add
+		public bool UpdateGiamGia(GiamGiaDTO giamGiaDTO, Guid MaGiamGia)
+		{
+			string updateGG = $"UPDATE {DataProvider.GIAMGIA_TABLE} " +
+				$"SET " +
+				$"TenGiamGia = {this.GetString(giamGiaDTO.GiamGiaDTO_TenGiamGia)}, " +
+				$"PhanTramGiamGia = {this.GetString(giamGiaDTO.GiamGiaDTO_PhanTramGiamGia)}, " +
+				$"MaxGiamGia = {this.GetString(giamGiaDTO.GiamGiaDTO_MaxGiamGia)}, " +
+				$"NgayBatDau = {this.GetString(giamGiaDTO.GiamGiaDTO_NgayBatDau)}, " +
+				$"NgayKetThuc = {this.GetString(giamGiaDTO.GiamGiaDTO_NgayKetThuc)} " +
+				$"WHERE MaGiamGia = {this.GetString(MaGiamGia)}";
+			
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(updateGG);
 
 			return rowChanged > 0;
 		}

@@ -32,10 +32,10 @@ namespace WinformWithExternalLibrary
 			);
 		private readonly ColorScheme colorSchemeBlack = new ColorScheme
 				(
-				primary: Primary.Pink200,
-				darkPrimary: Primary.Pink400,
-				lightPrimary: Primary.Pink400,
-				accent: Accent.Pink100,
+				primary: Primary.Pink400,
+				darkPrimary: Primary.Pink500,
+				lightPrimary: Primary.Pink500,
+				accent: Accent.Pink200,
 				textShade: TextShade.BLACK
 				);
 		private readonly ColorScheme colorSchemeWhite = new ColorScheme
