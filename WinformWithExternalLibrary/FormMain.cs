@@ -2596,7 +2596,7 @@ namespace WinformWithExternalLibrary
 		{
 			TabPageNV_btnSearch.Click += (object sender, EventArgs e) =>
 			{
-				string searchInput = NhanVienDVO_SelectNhanVien.Text;
+				string searchInput = TabPageNhanVien_TextboxSelectNhanVien.Text;
 
 				if (string.IsNullOrEmpty(searchInput))
 				{
@@ -2971,6 +2971,8 @@ namespace WinformWithExternalLibrary
 			Type propertyType = this.GetBaseDVOFromControl(control);
 			string propertyName = control.Name;
 
+			//Debug.WriteLine(control.Name);
+
 			//		Get DisplayName
 			PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(propertyType)[propertyName];
 			DisplayNameAttribute displayNameAttribute = (DisplayNameAttribute)propertyDescriptor.Attributes[typeof(DisplayNameAttribute)];
@@ -3159,9 +3161,7 @@ namespace WinformWithExternalLibrary
 		//		Lấy DVO đã nhập từ Control và các Control liên quan tới nó
 		private dynamic GetInputFromControl(Control control)
 		{
-			string getClassName = "WinformWithExternalLibrary.DataValidateObject." + control.Name.Split('_')[0];
-
-			Type type = Type.GetType(getClassName);
+			Type type = this.GetBaseDVOFromControl(control);
 
 			if (type != null)
 			{
@@ -3303,7 +3303,7 @@ namespace WinformWithExternalLibrary
 			}
 			else
 			{
-				Debug.WriteLine("GetInputFromControl failed: " + getClassName);
+				Debug.WriteLine("GetInputFromControl failed");
 
 				return null;
 			}
@@ -3312,7 +3312,7 @@ namespace WinformWithExternalLibrary
 		//		Lấy kiểu DVO từ Control
 		private Type GetBaseDVOFromControl(Control control)
 		{
-			string getClassName = "WinformWithExternalLibrary.DataValidateObject." + control.Name.Split('_')[0];
+			string getClassName = "WinformWithExternalLibrary.DataValidateObjects." + control.Name.Split('_')[0];
 
 			Type type = Type.GetType(getClassName);
 

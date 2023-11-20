@@ -64,7 +64,7 @@ namespace WinformWithExternalLibrary
 			this.InitiateDataObjects();
 
 			//		Generate Data
-			this.InitiateFakeDataGeneration();
+			//this.InitiateFakeDataGeneration();
 
 			//		Event
 			this.InitializeAutomaticEvent();
