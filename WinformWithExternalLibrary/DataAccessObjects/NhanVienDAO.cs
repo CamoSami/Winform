@@ -131,7 +131,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		public List<NhanVienDTO> TimNhanVienTheoMaNhanVienHoacTenNhanVien(string input)
 		{
 			string query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, EMail" +
-				$" FROM {DataProvider.NHANVIEN_TABLE} WHERE  TenNhanVien = N'{input}'";
+				$" FROM {DataProvider.NHANVIEN_TABLE} WHERE  TenNhanVien LIKE N'%{input}%'";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 

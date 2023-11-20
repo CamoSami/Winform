@@ -45,10 +45,6 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 
 		[Required(ErrorMessage = "Vui lòng nhập địa chỉ email.")]
 		[EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ.")]
-		[RegularExpression(
-			@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
-			ErrorMessage = ""
-			)]
 		[DisplayName("Email")]
 		public string NhanVienDVO_Email { get; set; }
 

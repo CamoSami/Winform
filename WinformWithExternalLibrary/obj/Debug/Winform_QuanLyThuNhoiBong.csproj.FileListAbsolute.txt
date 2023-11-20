@@ -245,7 +245,6 @@ E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNho
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\Winform_QuanLyThuNhoiBong.csproj.SuggestedBindingRedirects.cache
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.exe.config
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBan.resources
-E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBanFormInfo.resources
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormCreateKhachHang.resources
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormLogin.resources
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.FormMain.resources
@@ -348,3 +347,10 @@ D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\Winform
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonNhap.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormCreateNhaCungCap.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormCreateCongViec.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormChiTietHoaDonBanInfo.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormConfirmHoaDonNhap.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormCreateCongViec.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormCreateNhaCungCap.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormCreateSanPham.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormListImportBill.resources
+E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormListSellBill.resources

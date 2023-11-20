@@ -2468,10 +2468,13 @@ namespace WinformWithExternalLibrary
 			this.Search();
 			this.CreateNewWork();
 		}
-		private void AddItemToComBoBox()
+		public void AddItemToComBoBox()
 		{
 
 			List<string> tenCongViecList = CongViecDAO.Instance.GetTenCongViecList();
+
+			// Xóa danh sách combobox hiện tại trên UI
+			NhanVienDVO_TenCongViec.Items.Clear();
 
 			// Thêm danh sách vào ComboBox
 			NhanVienDVO_TenCongViec.Items.AddRange(tenCongViecList.ToArray());
@@ -2672,6 +2675,13 @@ namespace WinformWithExternalLibrary
 			{
 				if (this.ShowMessageBoxYesNo("Bạn có muốn sửa không?", this.GetTabPageControlSelectedIndex()))
 				{
+					if (!this.TryValidationFromControl(this.NhanVienDVO_GioiTinh, onlyOneControl: false, out dynamic baseDVO))
+					{
+						return;
+					}
+
+					NhanVienDVO nhanVienDVO = baseDVO as NhanVienDVO;
+
 					NhanVienDTO data = new NhanVienDTO
 					{
 						NhanVienDTO_MaNhanVien = Guid.Parse(this.maNhanVien),
@@ -2684,20 +2694,11 @@ namespace WinformWithExternalLibrary
 						NhanVienDTO_MaCongViec = CongViecDAO.Instance.GetMaCongViecFromTenCongViec(this.GetControlTextIfPlaceholderThenEmpty(this.NhanVienDVO_TenCongViec))
 
 					};
-					NhanVienDVO validator = new NhanVienDVO
-					{
-						NhanVienDVO_TenNhanVien = data.NhanVienDTO_TenNhanVien,
-						NhanVienDVO_DiaChi = data.NhanVienDTO_DiaChi,
-						NhanVienDVO_SoDienThoai = data.NhanVienDTO_DienThoai,
-						NhanVienDVO_NgaySinh = data.NhanVienDTO_NgaySinh,
-						NhanVienDVO_Email = data.NhanVienDTO_Email,
-						NhanVienDVO_GioiTinh = data.NhanVienDTO_GioiTinh
-					};
 
 					// Kiểm tra tính hợp lệ của dữ liệu
 					List<ValidationResult> validationResults = new List<ValidationResult>();
-					ValidationContext validationContext = new ValidationContext(validator, null, null);
-					bool isValid = Validator.TryValidateObject(validator, validationContext, validationResults, true);
+					ValidationContext validationContext = new ValidationContext(nhanVienDVO, null, null);
+					bool isValid = Validator.TryValidateObject(nhanVienDVO, validationContext, validationResults, true);
 					if (isValid)
 					{
 						// Cập nhật nhân viên trong database

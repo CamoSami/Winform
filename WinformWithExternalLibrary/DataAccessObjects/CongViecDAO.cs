@@ -61,10 +61,10 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             CongViecDTO CongViecDTO = baseDTO as CongViecDTO;
 
             string insertCongViec = "Insert into " +
-                                DataProvider.NHANVIEN_TABLE +
+                                DataProvider.CONGVIEC_TABLE +
                                 " (MaCongViec, MucLuong, TenCongViec) VALUES (" +
-                                    "N'" + CongViecDTO.CongViecDTO_MaCongViec + "'" +
-									"N'" + CongViecDTO.CongViecDTO_MucLuong + "'" +
+                                    "N'" + CongViecDTO.CongViecDTO_MaCongViec + "'," +
+									"N'" + CongViecDTO.CongViecDTO_MucLuong + "'," +
                                     "N'" + CongViecDTO.CongViecDTO_TenCongViec + "'" +        
                                     ")";
             
