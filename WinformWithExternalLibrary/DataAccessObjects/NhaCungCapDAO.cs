@@ -115,7 +115,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public DataTable QueryAllNhaCungCap()
 		{
-			string query = $"SELECT * FROM {DataProvider.NHACUNGCAP_TABLE}";
+			string query = $"SELECT * FROM {DataProvider.NHACUNGCAP_TABLE} ORDER BY TenNhaCungCap";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
@@ -210,7 +210,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 				return new DataTable();
 			}
 
-			string selectNhaCungCap = $"SELECT * FROM {DataProvider.NHACUNGCAP_TABLE} WHERE" + temp;
+			string selectNhaCungCap = $"SELECT * FROM {DataProvider.NHACUNGCAP_TABLE} WHERE" + temp + " ORDER BY TenNhaCungCap";
 
 			Debug.WriteLine(selectNhaCungCap);
 
@@ -224,7 +224,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			string selectNhaCungCap = "SELECT * FROM " +
 							DataProvider.NHACUNGCAP_TABLE +
 							" WHERE TenNhaCungCap = " +
-							"N'" + NhaCungCapDVO_TenNhaCungCap + "'";
+							"N'" + NhaCungCapDVO_TenNhaCungCap + "' ORDER BY TenNhaCungCap";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(selectNhaCungCap);
 

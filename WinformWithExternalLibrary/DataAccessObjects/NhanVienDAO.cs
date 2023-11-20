@@ -39,7 +39,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		//Lấy thông tin nhân viên
 		public List<NhanVienDTO> GetListNV()
 		{
-			string querylistNV = $"SELECT  MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email FROM {DataProvider.NHANVIEN_TABLE}";
+			string querylistNV = $"SELECT  MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email FROM {DataProvider.NHANVIEN_TABLE} ORDER BY TenNhanVien";
 
 			//Debug.WriteLine(querylistNV);
 
@@ -148,12 +148,12 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			if (input != "")
 			{
 				query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email" +
-					$" FROM {DataProvider.NHANVIEN_TABLE} WHERE TenNhanVien LIKE N'%{input}%'";
+					$" FROM {DataProvider.NHANVIEN_TABLE} WHERE TenNhanVien LIKE N'%{input}%' ORDER BY TenNhanVien";
 			}
 			else
 			{
 				query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email" +
-					$" FROM {DataProvider.NHANVIEN_TABLE}";
+					$" FROM {DataProvider.NHANVIEN_TABLE} ORDER BY TenNhanVien";
 			}
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
@@ -165,7 +165,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		public List<NhanVienDTO> TimNhanVienTheoMaNhanVienHoacTenNhanVien(string input)
 		{
 			string query = $"SELECT MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, DienThoai, DiaChi, Email" +
-				$" FROM {DataProvider.NHANVIEN_TABLE} WHERE  TenNhanVien LIKE N'%{input}%'";
+				$" FROM {DataProvider.NHANVIEN_TABLE} WHERE TenNhanVien LIKE N'%{input}%' ORDER BY TenNhanVien";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
@@ -193,7 +193,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		//		MinhHieu Add: Lấy danh sách TenNhanVien và NgaySinh nhân viên
 		public List<string> GetTenNhanVienAndNgaySinhList()
 		{
-			string queryListNV = $"SELECT TenNhanVien, NgaySinh FROM {DataProvider.NHANVIEN_TABLE}";
+			string queryListNV = $"SELECT TenNhanVien, NgaySinh FROM {DataProvider.NHANVIEN_TABLE} ORDER BY TenNhanVien";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryListNV);
 
@@ -294,7 +294,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             List<NhanVienDTO> danhSachNhanVien = new List<NhanVienDTO>();
 
             string query = "SELECT MaNhanVien, MaCongViec, TenNhanVien, NgaySinh, DiaChi, DienThoai, GioiTinh " +
-							"FROM " + DataProvider.NHANVIEN_TABLE;
+							"FROM " + DataProvider.NHANVIEN_TABLE + " ORDER BY TenNhanVien";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 

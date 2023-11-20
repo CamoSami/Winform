@@ -1794,9 +1794,9 @@ namespace WinformWithExternalLibrary
 
 		private void Initialize_NguyenHongSon()
 		{
-			Initialize_KhachHang();
+			this.Initialize_KhachHang();
 
-			Initialize_NhaCungCap();
+			this.Initialize_NhaCungCap();
 		}
 
 		#region Khách hàng
@@ -1899,6 +1899,43 @@ namespace WinformWithExternalLibrary
 				if (e.KeyCode == Keys.Enter)
 				{
 					this.SearchKhachHang();
+				}
+			};
+
+			this.TabPageKhachHang_XoaKhachHang.Click += (obj, e) =>
+			{
+				if (this.TabPageKhachHang_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Bạn hãy chọn khách hàng cần xóa!");
+
+					return;
+				}
+
+				Guid maKhachHang = Guid.Parse(this.TabPageKhachHang_MaterialListView.SelectedItems[0].SubItems[1].Text);
+
+				if (KhachHangDAO.Instance.CheckIfKhachHangHasHDBan(maKhachHang))
+				{
+					this.ShowMessageBox("Khách hàng đã có dữ liệu trong cơ sở, không được phép xóa!");
+
+					return;
+				}
+				else
+				{
+					if (!this.ShowMessageBoxYesNo("Bạn có muốn xóa dữ liệu khách hàng này?"))
+					{
+						return;
+					}
+
+					if (KhachHangDAO.Instance.DeleteKhachHang(maKhachHang))
+					{
+						this.ShowMessageBox("Khách hàng đã được xóa!");
+
+						this.LoadKhachHang();
+					}
+					else
+					{
+						this.ShowMessageBox("Có lỗi gì đó đã xảy ra");
+					}
 				}
 			};
 
@@ -2585,9 +2622,7 @@ namespace WinformWithExternalLibrary
 		{
 			TabPageNhanVien_btnXoa.Click += (object sender, EventArgs e) =>
 			{
-				NhanVienDAO nhanVienDAO = new NhanVienDAO();
-
-				if (TabPageNhanVien_MaterialListView.SelectedItems.Count > 0)
+				if (this.TabPageNhanVien_MaterialListView.SelectedItems.Count > 0)
 				{
 					if (this.ShowMessageBoxYesNo("Bạn có chắc chắn muốn xóa dữ liệu đã chọn?"))
 					{
@@ -2597,10 +2632,10 @@ namespace WinformWithExternalLibrary
 							string maNhanVien = item.SubItems[1].Text;
 
 							// Gọi hàm xóa dữ liệu dựa trên mã nhân viên
-							nhanVienDAO.XoaNhanVienTheoMa(maNhanVien);
+							NhanVienDAO.Instance.XoaNhanVienTheoMa(maNhanVien);
 						}
 
-						TabPageNhanVien_MaterialListView.Items.Clear();
+						this.TabPageNhanVien_MaterialListView.Items.Clear();
 
 						this.CallDataNhanVien();
 						

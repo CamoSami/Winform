@@ -246,6 +246,7 @@ namespace WinformWithExternalLibrary
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.darkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.autoValidationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.TabPageKhachHang_XoaKhachHang = new MaterialSkin.Controls.MaterialButton();
 			this.materialTabControl.SuspendLayout();
 			this.TabPageNhanVien.SuspendLayout();
 			this.TabPageHoaDonBan.SuspendLayout();
@@ -1620,6 +1621,7 @@ namespace WinformWithExternalLibrary
 			// 
 			// TabPageKhachHang
 			// 
+			this.TabPageKhachHang.Controls.Add(this.TabPageKhachHang_XoaKhachHang);
 			this.TabPageKhachHang.Controls.Add(this.TabPageKhachHang_RefreshKhachHang);
 			this.TabPageKhachHang.Controls.Add(this.TabPageKhachHang_SuaKhachHang);
 			this.TabPageKhachHang.Controls.Add(this.TabPageKhachHang_LichSuMuaHang);
@@ -3179,6 +3181,27 @@ namespace WinformWithExternalLibrary
 			this.autoValidationToolStripMenuItem.Size = new System.Drawing.Size(181, 24);
 			this.autoValidationToolStripMenuItem.Text = "Auto Validation";
 			// 
+			// TabPageKhachHang_XoaKhachHang
+			// 
+			this.TabPageKhachHang_XoaKhachHang.AutoSize = false;
+			this.TabPageKhachHang_XoaKhachHang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageKhachHang_XoaKhachHang.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageKhachHang_XoaKhachHang.Depth = 0;
+			this.TabPageKhachHang_XoaKhachHang.HighEmphasis = true;
+			this.TabPageKhachHang_XoaKhachHang.Icon = null;
+			this.TabPageKhachHang_XoaKhachHang.Location = new System.Drawing.Point(1113, 575);
+			this.TabPageKhachHang_XoaKhachHang.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageKhachHang_XoaKhachHang.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageKhachHang_XoaKhachHang.Name = "TabPageKhachHang_XoaKhachHang";
+			this.TabPageKhachHang_XoaKhachHang.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageKhachHang_XoaKhachHang.Size = new System.Drawing.Size(151, 36);
+			this.TabPageKhachHang_XoaKhachHang.TabIndex = 62;
+			this.TabPageKhachHang_XoaKhachHang.TabStop = false;
+			this.TabPageKhachHang_XoaKhachHang.Text = "Xóa Khách Hàng";
+			this.TabPageKhachHang_XoaKhachHang.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageKhachHang_XoaKhachHang.UseAccentColor = false;
+			this.TabPageKhachHang_XoaKhachHang.UseVisualStyleBackColor = true;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -3443,5 +3466,6 @@ namespace WinformWithExternalLibrary
 		private System.Windows.Forms.Label NhanVienDVO_MatKhau_Validation;
 		private MaterialSkin.Controls.MaterialTextBox NhanVienDVO_NhapLaiMatKhau;
 		private System.Windows.Forms.Label NhanVienDVO_NhapLaiMatKhau_Validation;
+		private MaterialSkin.Controls.MaterialButton TabPageKhachHang_XoaKhachHang;
 	}
 }

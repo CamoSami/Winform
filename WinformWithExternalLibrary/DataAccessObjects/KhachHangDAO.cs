@@ -20,6 +20,24 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public KhachHangDAO() { }
 
+		public bool DeleteKhachHang(Guid maKhachHang)
+		{
+			string xoaKhachHang = $"DELETE FROM {DataProvider.KHACHHANG_TABLE} WHERE MaKhachHang = '{maKhachHang}'";
+
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(xoaKhachHang);
+
+			return rowChanged > 0;
+		}
+
+		public bool CheckIfKhachHangHasHDBan(Guid maKhachHang)
+		{
+			string check = $"SELECT MaHDBan FROM {DataProvider.HOADONBAN_TABLE} WHERE MaKhachHang = '{maKhachHang}'";
+
+			object temp = DataProvider.Instance.ExecuteScalar(check);
+
+			return temp != null;
+		}
+
 		public Guid GetMaKhachHangWithPhoneNumbers(string dienThoai)
 		{
 			string selectMaKhachHang = $"SELECT MaKhachHang FROM " +
@@ -98,7 +116,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
 		public DataTable QueryFullKhachHang()
 		{
-			string query = $"SELECT * FROM {DataProvider.KHACHHANG_TABLE}";
+			string query = $"SELECT * FROM {DataProvider.KHACHHANG_TABLE} ORDER BY TenKhachHang";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
