@@ -259,10 +259,11 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             "ON tHoaDonBan.MaNhanVien = tNhanVien.MaNhanVien " +
             "LEFT JOIN tGiamGia " +
             "ON tHoaDonBan.MaGiamGia = tGiamGia.MaGiamGia" +
-            (searchValue == "" && dateTimeConverted == "" ? ";" :
+            (searchValue == "" && dateTimeConverted == "" ? "\n" :
                 searchQuery
                 + dateQuery
-            );
+            ) + 
+			" ORDER BY NgayBan DESC";
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 
@@ -374,10 +375,11 @@ namespace WinformWithExternalLibrary.DataAccessObjects
                 "ON tHoaDonNhap.MaNhaCungCap = tNhaCungCap.MaNhaCungCap " +
                 "INNER JOIN tNhanVien " +
                 "ON tHoaDonNhap.MaNhanVien = tNhanVien.MaNhanVien" +
-                (searchValue == "" && dateTimeConverted == "" ? ";" :
+                (searchValue == "" && dateTimeConverted == "" ? "\n" :
                 searchQuery
                 + dateQuery
-                );
+                ) + 
+				" ORDER BY NgayNhap DESC";
 
             DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
 

@@ -2135,6 +2135,43 @@ namespace WinformWithExternalLibrary
 				//NewNhaCungCap();
 			};
 
+			this.TabPageNhaCungCap_XoaNhaCungCap.Click += (obj, e) =>
+			{
+				if (this.TabPageNhaCungCap_MaterialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Hãy chọn nhà cung cấp mà bạn cần xóa!");
+
+					return;
+				}
+
+				Guid maNhaCungCap = Guid.Parse(this.TabPageNhaCungCap_MaterialListView.SelectedItems[0].SubItems[1].Text);
+
+				if (NhaCungCapDAO.Instance.CheckIfNhaCungCapHasHDNhap(maNhaCungCap))
+				{
+					this.ShowMessageBox("Nhà cung cấp đã có trong cơ sở dữ liệu, không được phép xóa!");
+
+					return;
+				}
+				else
+				{
+					if (!this.ShowMessageBoxYesNo("Bạn có muốn xóa nhà cung cấp này không?"))
+					{
+						return;
+					}
+
+					if (NhaCungCapDAO.Instance.DeleteNhaCungCap(maNhaCungCap))
+					{
+						this.ShowMessageBox("Nhà cung cấp đã đã đợc xóa!");
+
+						this.LoadNhaCungCap();
+					}
+					else
+					{
+						this.ShowMessageBox("Có lỗi gì đó đã xẩy ra, hãy đợi chúng tôi bảo trì code!");
+					}
+				}
+			};
+
 			this.TabPageNhaCungCap_MaterialListView.DoubleClick += (obj, e) =>
 			{
 				if (this.TabPageNhaCungCap_MaterialListView.SelectedIndices.Count <= 0)
@@ -3714,6 +3751,13 @@ namespace WinformWithExternalLibrary
 			}
 
 			return false;
+		}
+
+
+
+		public bool IsAutoValidate()
+		{
+			return this.IfAutoValidate;
 		}
 
 		#endregion

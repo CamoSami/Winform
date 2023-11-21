@@ -125,6 +125,12 @@ namespace WinformWithExternalLibrary.ExtraForm
 			this.NhaCungCapDVO_TenNhaCungCap.KeyPress += this.TextBoxBase_KeyPress_AlphabetOnly;
 
 			//		Button
+			//			Reset
+			this.materialButtonReset.Click += (obj, e) =>
+			{
+				this.ResetInput();
+			};
+
 			//			Submit
 			this.materialButtonSubmit.Click += (obj, e) =>
 			{
@@ -143,6 +149,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 				//		Send Query
 				if (NhaCungCapDAO.Instance.InsertNhaCungCap(this.GetInput() as NhaCungCapDVO))
 				{
+					this.ResetInput();
+
 					MaterialMessageBox.Show(
 						text: "Dữ liệu nhà cung cấp đã được nhập",
 						caption: this.Text,
@@ -283,6 +291,17 @@ namespace WinformWithExternalLibrary.ExtraForm
 		#endregion
 
 		#region Generalist Function
+
+		private void ResetInput()
+		{
+			foreach (TextBoxBase textBox in this.listOfTextboxes)
+			{
+				textBox.Text = this.GetPlaceholder(textBox);
+				
+				this.SetStringLabelForTextbox(textBox, "");
+			}
+
+		}
 
 		private bool TryValidation()
 		{

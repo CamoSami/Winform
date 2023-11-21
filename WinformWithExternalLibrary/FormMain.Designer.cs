@@ -172,6 +172,12 @@ namespace WinformWithExternalLibrary
 			this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.TabPageSanPham = new System.Windows.Forms.TabPage();
+			this.TabPageSanPham_ButtonDSKM = new MaterialSkin.Controls.MaterialButton();
+			this.TabPageSanPham_ButtonLoadSP = new MaterialSkin.Controls.MaterialButton();
+			this.TabPageSanPham_LabelThoiGianBaoHanh = new System.Windows.Forms.Label();
+			this.TabPageSanPham_LabelSoLuongTonKho = new System.Windows.Forms.Label();
+			this.TabPageSanPham_LabelDonGiaNhap = new System.Windows.Forms.Label();
+			this.TabPageSanPham_LabelDonGiaBan = new System.Windows.Forms.Label();
 			this.TabPageSanPham_NhapMoiTimKiem = new MaterialSkin.Controls.MaterialButton();
 			this.TabPageSanPham_ButtonXuatRaFileExcel = new MaterialSkin.Controls.MaterialButton();
 			this.DMSanPhamDVO_SoLuongTonKhoMax = new MaterialSkin.Controls.MaterialTextBox();
@@ -240,15 +246,10 @@ namespace WinformWithExternalLibrary
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.darkModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.autoValidationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.TabPageNhaCungCap_XoaNhaCungCap = new MaterialSkin.Controls.MaterialButton();
 			this.NhanVienDVO_NgaySinh = new WinformWithExternalLibrary._Utilities.RJDatePicker();
 			this.DMSanPhamDVO_ThoiGianBaoHanhMax = new WinformWithExternalLibrary._Utilities.RJDatePicker();
 			this.DMSanPhamDVO_ThoiGianBaoHanhMin = new WinformWithExternalLibrary._Utilities.RJDatePicker();
-			this.TabPageSanPham_LabelDonGiaBan = new System.Windows.Forms.Label();
-			this.TabPageSanPham_LabelDonGiaNhap = new System.Windows.Forms.Label();
-			this.TabPageSanPham_LabelSoLuongTonKho = new System.Windows.Forms.Label();
-			this.TabPageSanPham_LabelThoiGianBaoHanh = new System.Windows.Forms.Label();
-			this.TabPageSanPham_ButtonDSKM = new MaterialSkin.Controls.MaterialButton();
-			this.TabPageSanPham_ButtonLoadSP = new MaterialSkin.Controls.MaterialButton();
 			this.materialTabControl.SuspendLayout();
 			this.TabPageNhanVien.SuspendLayout();
 			this.TabPageHoaDonBan.SuspendLayout();
@@ -1908,6 +1909,7 @@ namespace WinformWithExternalLibrary
 			// 
 			// TabPageNhaCungCap
 			// 
+			this.TabPageNhaCungCap.Controls.Add(this.TabPageNhaCungCap_XoaNhaCungCap);
 			this.TabPageNhaCungCap.Controls.Add(this.TabPageNhaCungCap_RefreshNhaCungCap);
 			this.TabPageNhaCungCap.Controls.Add(this.TabPageNhaCungCap_SuaNCC);
 			this.TabPageNhaCungCap.Controls.Add(this.TabPageNhaCungCap_LichSuNhapHang);
@@ -2215,6 +2217,78 @@ namespace WinformWithExternalLibrary
 			this.TabPageSanPham.TabIndex = 6;
 			this.TabPageSanPham.Text = "Sản Phẩm";
 			this.TabPageSanPham.UseVisualStyleBackColor = true;
+			// 
+			// TabPageSanPham_ButtonDSKM
+			// 
+			this.TabPageSanPham_ButtonDSKM.AutoSize = false;
+			this.TabPageSanPham_ButtonDSKM.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageSanPham_ButtonDSKM.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageSanPham_ButtonDSKM.Depth = 0;
+			this.TabPageSanPham_ButtonDSKM.HighEmphasis = true;
+			this.TabPageSanPham_ButtonDSKM.Icon = null;
+			this.TabPageSanPham_ButtonDSKM.Location = new System.Drawing.Point(1005, 715);
+			this.TabPageSanPham_ButtonDSKM.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageSanPham_ButtonDSKM.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_ButtonDSKM.Name = "TabPageSanPham_ButtonDSKM";
+			this.TabPageSanPham_ButtonDSKM.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageSanPham_ButtonDSKM.Size = new System.Drawing.Size(160, 36);
+			this.TabPageSanPham_ButtonDSKM.TabIndex = 71;
+			this.TabPageSanPham_ButtonDSKM.Text = "Danh sách giảm giá";
+			this.TabPageSanPham_ButtonDSKM.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageSanPham_ButtonDSKM.UseAccentColor = false;
+			this.TabPageSanPham_ButtonDSKM.UseVisualStyleBackColor = true;
+			// 
+			// TabPageSanPham_ButtonLoadSP
+			// 
+			this.TabPageSanPham_ButtonLoadSP.AutoSize = false;
+			this.TabPageSanPham_ButtonLoadSP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageSanPham_ButtonLoadSP.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageSanPham_ButtonLoadSP.Depth = 0;
+			this.TabPageSanPham_ButtonLoadSP.HighEmphasis = true;
+			this.TabPageSanPham_ButtonLoadSP.Icon = null;
+			this.TabPageSanPham_ButtonLoadSP.Location = new System.Drawing.Point(1304, 715);
+			this.TabPageSanPham_ButtonLoadSP.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageSanPham_ButtonLoadSP.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageSanPham_ButtonLoadSP.Name = "TabPageSanPham_ButtonLoadSP";
+			this.TabPageSanPham_ButtonLoadSP.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageSanPham_ButtonLoadSP.Size = new System.Drawing.Size(160, 36);
+			this.TabPageSanPham_ButtonLoadSP.TabIndex = 70;
+			this.TabPageSanPham_ButtonLoadSP.Text = "Danh sách tất cả sản phẩm";
+			this.TabPageSanPham_ButtonLoadSP.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageSanPham_ButtonLoadSP.UseAccentColor = false;
+			this.TabPageSanPham_ButtonLoadSP.UseVisualStyleBackColor = true;
+			// 
+			// TabPageSanPham_LabelThoiGianBaoHanh
+			// 
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Location = new System.Drawing.Point(1005, 455);
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Name = "TabPageSanPham_LabelThoiGianBaoHanh";
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Size = new System.Drawing.Size(459, 23);
+			this.TabPageSanPham_LabelThoiGianBaoHanh.TabIndex = 69;
+			this.TabPageSanPham_LabelThoiGianBaoHanh.Text = "Thời gian bảo hành";
+			// 
+			// TabPageSanPham_LabelSoLuongTonKho
+			// 
+			this.TabPageSanPham_LabelSoLuongTonKho.Location = new System.Drawing.Point(1005, 373);
+			this.TabPageSanPham_LabelSoLuongTonKho.Name = "TabPageSanPham_LabelSoLuongTonKho";
+			this.TabPageSanPham_LabelSoLuongTonKho.Size = new System.Drawing.Size(459, 23);
+			this.TabPageSanPham_LabelSoLuongTonKho.TabIndex = 68;
+			this.TabPageSanPham_LabelSoLuongTonKho.Text = "Số lượng tồn kho";
+			// 
+			// TabPageSanPham_LabelDonGiaNhap
+			// 
+			this.TabPageSanPham_LabelDonGiaNhap.Location = new System.Drawing.Point(1005, 263);
+			this.TabPageSanPham_LabelDonGiaNhap.Name = "TabPageSanPham_LabelDonGiaNhap";
+			this.TabPageSanPham_LabelDonGiaNhap.Size = new System.Drawing.Size(459, 23);
+			this.TabPageSanPham_LabelDonGiaNhap.TabIndex = 67;
+			this.TabPageSanPham_LabelDonGiaNhap.Text = "Đơn giá nhập";
+			// 
+			// TabPageSanPham_LabelDonGiaBan
+			// 
+			this.TabPageSanPham_LabelDonGiaBan.Location = new System.Drawing.Point(1005, 158);
+			this.TabPageSanPham_LabelDonGiaBan.Name = "TabPageSanPham_LabelDonGiaBan";
+			this.TabPageSanPham_LabelDonGiaBan.Size = new System.Drawing.Size(459, 23);
+			this.TabPageSanPham_LabelDonGiaBan.TabIndex = 66;
+			this.TabPageSanPham_LabelDonGiaBan.Text = "Đơn giá bán";
 			// 
 			// TabPageSanPham_NhapMoiTimKiem
 			// 
@@ -2553,8 +2627,6 @@ namespace WinformWithExternalLibrary
 			this.TabPagePhanTich.Controls.Add(this.materialCard1);
 			this.TabPagePhanTich.Controls.Add(this.pieChart2);
 			this.TabPagePhanTich.Controls.Add(this.pieChart1);
-			this.TabPagePhanTich.Controls.Add(this.TabPagePhanTich_HoaDonBan_ShowBTN);
-			this.TabPagePhanTich.Controls.Add(this.TabPagePhanTich_HoaDonNhap_ShowBTN);
 			this.TabPagePhanTich.ImageKey = "icons8-intelligence-32.png";
 			this.TabPagePhanTich.Location = new System.Drawing.Point(4, 39);
 			this.TabPagePhanTich.Name = "TabPagePhanTich";
@@ -2790,6 +2862,7 @@ namespace WinformWithExternalLibrary
 			this.materialCard2.Controls.Add(this.label10);
 			this.materialCard2.Controls.Add(this.label11);
 			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_SoLuong_LB);
+			this.materialCard2.Controls.Add(this.TabPagePhanTich_HoaDonNhap_ShowBTN);
 			this.materialCard2.Depth = 0;
 			this.materialCard2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.materialCard2.Location = new System.Drawing.Point(557, 11);
@@ -2931,6 +3004,7 @@ namespace WinformWithExternalLibrary
 			this.materialCard1.Controls.Add(this.label4);
 			this.materialCard1.Controls.Add(this.label3);
 			this.materialCard1.Controls.Add(this.label2);
+			this.materialCard1.Controls.Add(this.TabPagePhanTich_HoaDonBan_ShowBTN);
 			this.materialCard1.Depth = 0;
 			this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.materialCard1.Location = new System.Drawing.Point(52, 11);
@@ -3053,7 +3127,7 @@ namespace WinformWithExternalLibrary
 			this.TabPagePhanTich_HoaDonBan_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
 			this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageKey = "icons8-download-48.png";
 			this.TabPagePhanTich_HoaDonBan_ShowBTN.ImageList = this.imageList1;
-			this.TabPagePhanTich_HoaDonBan_ShowBTN.Location = new System.Drawing.Point(399, 61);
+			this.TabPagePhanTich_HoaDonBan_ShowBTN.Location = new System.Drawing.Point(300, 15);
 			this.TabPagePhanTich_HoaDonBan_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
 			this.TabPagePhanTich_HoaDonBan_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
 			this.TabPagePhanTich_HoaDonBan_ShowBTN.Name = "TabPagePhanTich_HoaDonBan_ShowBTN";
@@ -3091,7 +3165,7 @@ namespace WinformWithExternalLibrary
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Icon = global::WinformWithExternalLibrary.Properties.Resources.icons8_download_641;
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.ImageKey = "icons8-download-48.png";
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.ImageList = this.imageList1;
-			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Location = new System.Drawing.Point(899, 61);
+			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Location = new System.Drawing.Point(300, 15);
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Margin = new System.Windows.Forms.Padding(4);
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.MouseState = MaterialSkin.MouseState.HOVER;
 			this.TabPagePhanTich_HoaDonNhap_ShowBTN.Name = "TabPagePhanTich_HoaDonNhap_ShowBTN";
@@ -3122,6 +3196,27 @@ namespace WinformWithExternalLibrary
 			this.autoValidationToolStripMenuItem.Name = "autoValidationToolStripMenuItem";
 			this.autoValidationToolStripMenuItem.Size = new System.Drawing.Size(181, 24);
 			this.autoValidationToolStripMenuItem.Text = "Auto Validation";
+			// 
+			// TabPageNhaCungCap_XoaNhaCungCap
+			// 
+			this.TabPageNhaCungCap_XoaNhaCungCap.AutoSize = false;
+			this.TabPageNhaCungCap_XoaNhaCungCap.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TabPageNhaCungCap_XoaNhaCungCap.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.TabPageNhaCungCap_XoaNhaCungCap.Depth = 0;
+			this.TabPageNhaCungCap_XoaNhaCungCap.HighEmphasis = true;
+			this.TabPageNhaCungCap_XoaNhaCungCap.Icon = null;
+			this.TabPageNhaCungCap_XoaNhaCungCap.Location = new System.Drawing.Point(1109, 572);
+			this.TabPageNhaCungCap_XoaNhaCungCap.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.TabPageNhaCungCap_XoaNhaCungCap.MouseState = MaterialSkin.MouseState.HOVER;
+			this.TabPageNhaCungCap_XoaNhaCungCap.Name = "TabPageNhaCungCap_XoaNhaCungCap";
+			this.TabPageNhaCungCap_XoaNhaCungCap.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.TabPageNhaCungCap_XoaNhaCungCap.Size = new System.Drawing.Size(151, 36);
+			this.TabPageNhaCungCap_XoaNhaCungCap.TabIndex = 80;
+			this.TabPageNhaCungCap_XoaNhaCungCap.TabStop = false;
+			this.TabPageNhaCungCap_XoaNhaCungCap.Text = "Xóa Nhà Cung Cấp";
+			this.TabPageNhaCungCap_XoaNhaCungCap.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.TabPageNhaCungCap_XoaNhaCungCap.UseAccentColor = false;
+			this.TabPageNhaCungCap_XoaNhaCungCap.UseVisualStyleBackColor = true;
 			// 
 			// NhanVienDVO_NgaySinh
 			// 
@@ -3161,78 +3256,6 @@ namespace WinformWithExternalLibrary
 			this.DMSanPhamDVO_ThoiGianBaoHanhMin.SkinColor = System.Drawing.Color.MediumSlateBlue;
 			this.DMSanPhamDVO_ThoiGianBaoHanhMin.TabIndex = 49;
 			this.DMSanPhamDVO_ThoiGianBaoHanhMin.TextColor = System.Drawing.Color.White;
-			// 
-			// TabPageSanPham_LabelDonGiaBan
-			// 
-			this.TabPageSanPham_LabelDonGiaBan.Location = new System.Drawing.Point(1005, 158);
-			this.TabPageSanPham_LabelDonGiaBan.Name = "TabPageSanPham_LabelDonGiaBan";
-			this.TabPageSanPham_LabelDonGiaBan.Size = new System.Drawing.Size(459, 23);
-			this.TabPageSanPham_LabelDonGiaBan.TabIndex = 66;
-			this.TabPageSanPham_LabelDonGiaBan.Text = "Đơn giá bán";
-			// 
-			// TabPageSanPham_LabelDonGiaNhap
-			// 
-			this.TabPageSanPham_LabelDonGiaNhap.Location = new System.Drawing.Point(1005, 263);
-			this.TabPageSanPham_LabelDonGiaNhap.Name = "TabPageSanPham_LabelDonGiaNhap";
-			this.TabPageSanPham_LabelDonGiaNhap.Size = new System.Drawing.Size(459, 23);
-			this.TabPageSanPham_LabelDonGiaNhap.TabIndex = 67;
-			this.TabPageSanPham_LabelDonGiaNhap.Text = "Đơn giá nhập";
-			// 
-			// TabPageSanPham_LabelSoLuongTonKho
-			// 
-			this.TabPageSanPham_LabelSoLuongTonKho.Location = new System.Drawing.Point(1005, 373);
-			this.TabPageSanPham_LabelSoLuongTonKho.Name = "TabPageSanPham_LabelSoLuongTonKho";
-			this.TabPageSanPham_LabelSoLuongTonKho.Size = new System.Drawing.Size(459, 23);
-			this.TabPageSanPham_LabelSoLuongTonKho.TabIndex = 68;
-			this.TabPageSanPham_LabelSoLuongTonKho.Text = "Số lượng tồn kho";
-			// 
-			// TabPageSanPham_LabelThoiGianBaoHanh
-			// 
-			this.TabPageSanPham_LabelThoiGianBaoHanh.Location = new System.Drawing.Point(1005, 455);
-			this.TabPageSanPham_LabelThoiGianBaoHanh.Name = "TabPageSanPham_LabelThoiGianBaoHanh";
-			this.TabPageSanPham_LabelThoiGianBaoHanh.Size = new System.Drawing.Size(459, 23);
-			this.TabPageSanPham_LabelThoiGianBaoHanh.TabIndex = 69;
-			this.TabPageSanPham_LabelThoiGianBaoHanh.Text = "Thời gian bảo hành";
-			// 
-			// TabPageSanPham_ButtonDSKM
-			// 
-			this.TabPageSanPham_ButtonDSKM.AutoSize = false;
-			this.TabPageSanPham_ButtonDSKM.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TabPageSanPham_ButtonDSKM.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.TabPageSanPham_ButtonDSKM.Depth = 0;
-			this.TabPageSanPham_ButtonDSKM.HighEmphasis = true;
-			this.TabPageSanPham_ButtonDSKM.Icon = null;
-			this.TabPageSanPham_ButtonDSKM.Location = new System.Drawing.Point(1005, 715);
-			this.TabPageSanPham_ButtonDSKM.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.TabPageSanPham_ButtonDSKM.MouseState = MaterialSkin.MouseState.HOVER;
-			this.TabPageSanPham_ButtonDSKM.Name = "TabPageSanPham_ButtonDSKM";
-			this.TabPageSanPham_ButtonDSKM.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.TabPageSanPham_ButtonDSKM.Size = new System.Drawing.Size(160, 36);
-			this.TabPageSanPham_ButtonDSKM.TabIndex = 71;
-			this.TabPageSanPham_ButtonDSKM.Text = "Danh sách giảm giá";
-			this.TabPageSanPham_ButtonDSKM.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.TabPageSanPham_ButtonDSKM.UseAccentColor = false;
-			this.TabPageSanPham_ButtonDSKM.UseVisualStyleBackColor = true;
-			// 
-			// TabPageSanPham_ButtonLoadSP
-			// 
-			this.TabPageSanPham_ButtonLoadSP.AutoSize = false;
-			this.TabPageSanPham_ButtonLoadSP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.TabPageSanPham_ButtonLoadSP.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-			this.TabPageSanPham_ButtonLoadSP.Depth = 0;
-			this.TabPageSanPham_ButtonLoadSP.HighEmphasis = true;
-			this.TabPageSanPham_ButtonLoadSP.Icon = null;
-			this.TabPageSanPham_ButtonLoadSP.Location = new System.Drawing.Point(1304, 715);
-			this.TabPageSanPham_ButtonLoadSP.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-			this.TabPageSanPham_ButtonLoadSP.MouseState = MaterialSkin.MouseState.HOVER;
-			this.TabPageSanPham_ButtonLoadSP.Name = "TabPageSanPham_ButtonLoadSP";
-			this.TabPageSanPham_ButtonLoadSP.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.TabPageSanPham_ButtonLoadSP.Size = new System.Drawing.Size(160, 36);
-			this.TabPageSanPham_ButtonLoadSP.TabIndex = 70;
-			this.TabPageSanPham_ButtonLoadSP.Text = "Danh sách tất cả sản phẩm";
-			this.TabPageSanPham_ButtonLoadSP.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-			this.TabPageSanPham_ButtonLoadSP.UseAccentColor = false;
-			this.TabPageSanPham_ButtonLoadSP.UseVisualStyleBackColor = true;
 			// 
 			// FormMain
 			// 
@@ -3501,5 +3524,6 @@ namespace WinformWithExternalLibrary
 		private MaterialSkin.Controls.MaterialButton TabPageSanPham_ButtonDSKM;
 		private MaterialSkin.Controls.MaterialButton TabPageSanPham_ButtonLoadSP;
 		private System.Windows.Forms.Label TabPageSanPham_LabelThoiGianBaoHanh;
+		private MaterialSkin.Controls.MaterialButton TabPageNhaCungCap_XoaNhaCungCap;
 	}
 }

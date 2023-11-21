@@ -20,6 +20,28 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public NhaCungCapDAO() { }
 
+		public bool DeleteNhaCungCap(Guid maNhaCungCap)
+		{
+			string xoaNhaCungCap = $"DELETE FROM {DataProvider.NHACUNGCAP_TABLE} " +
+				$"WHERE MaNhaCungCap = '{maNhaCungCap}'";
+
+			Debug.WriteLine(xoaNhaCungCap);
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(xoaNhaCungCap);
+
+			return rowChanged > 0;
+		}
+
+		public bool CheckIfNhaCungCapHasHDNhap(Guid maNhaCungCap)
+		{
+			string check = $"SELECT MaHDNhap FROM {DataProvider.HOADONNHAP_TABLE} " +
+				$"WHERE MaNhaCungCap = '{maNhaCungCap}'";
+			Debug.WriteLine(check);
+
+			object temp = DataProvider.Instance.ExecuteScalar(check);
+
+			return temp != null;
+		}
+
 		public Guid GetMaNhaCungCapWithPhoneNumbers(string phoneNumber)
 		{
 			string selectSupplier = $"SELECT MaNhaCungCap FROM " +

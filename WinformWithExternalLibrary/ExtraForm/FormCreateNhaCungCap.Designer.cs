@@ -36,21 +36,23 @@
 			this.NhaCungCapDVO_DiaChi = new MaterialSkin.Controls.MaterialMultiLineTextBox();
 			this.NhaCungCapDVO_DienThoai = new MaterialSkin.Controls.MaterialTextBox();
 			this.NhaCungCapDVO_TenNhaCungCap = new MaterialSkin.Controls.MaterialTextBox();
+			this.materialButtonReset = new MaterialSkin.Controls.MaterialButton();
 			this.SuspendLayout();
 			// 
 			// materialButtonSubmit
 			// 
+			this.materialButtonSubmit.AutoSize = false;
 			this.materialButtonSubmit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.materialButtonSubmit.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
 			this.materialButtonSubmit.Depth = 0;
 			this.materialButtonSubmit.HighEmphasis = true;
 			this.materialButtonSubmit.Icon = null;
-			this.materialButtonSubmit.Location = new System.Drawing.Point(611, 348);
+			this.materialButtonSubmit.Location = new System.Drawing.Point(585, 336);
 			this.materialButtonSubmit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.materialButtonSubmit.MouseState = MaterialSkin.MouseState.HOVER;
 			this.materialButtonSubmit.Name = "materialButtonSubmit";
 			this.materialButtonSubmit.NoAccentTextColor = System.Drawing.Color.Empty;
-			this.materialButtonSubmit.Size = new System.Drawing.Size(75, 36);
+			this.materialButtonSubmit.Size = new System.Drawing.Size(100, 44);
 			this.materialButtonSubmit.TabIndex = 18;
 			this.materialButtonSubmit.Text = "Submit";
 			this.materialButtonSubmit.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -113,7 +115,7 @@
 			this.NhaCungCapDVO_DienThoai.AnimateReadOnly = false;
 			this.NhaCungCapDVO_DienThoai.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhaCungCapDVO_DienThoai.Depth = 0;
-			this.NhaCungCapDVO_DienThoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhaCungCapDVO_DienThoai.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhaCungCapDVO_DienThoai.LeadingIcon = null;
 			this.NhaCungCapDVO_DienThoai.Location = new System.Drawing.Point(5, 152);
 			this.NhaCungCapDVO_DienThoai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -131,7 +133,7 @@
 			this.NhaCungCapDVO_TenNhaCungCap.AnimateReadOnly = false;
 			this.NhaCungCapDVO_TenNhaCungCap.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.NhaCungCapDVO_TenNhaCungCap.Depth = 0;
-			this.NhaCungCapDVO_TenNhaCungCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.NhaCungCapDVO_TenNhaCungCap.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.NhaCungCapDVO_TenNhaCungCap.LeadingIcon = null;
 			this.NhaCungCapDVO_TenNhaCungCap.Location = new System.Drawing.Point(5, 81);
 			this.NhaCungCapDVO_TenNhaCungCap.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -144,11 +146,32 @@
 			this.NhaCungCapDVO_TenNhaCungCap.Text = "";
 			this.NhaCungCapDVO_TenNhaCungCap.TrailingIcon = null;
 			// 
+			// materialButtonReset
+			// 
+			this.materialButtonReset.AutoSize = false;
+			this.materialButtonReset.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.materialButtonReset.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+			this.materialButtonReset.Depth = 0;
+			this.materialButtonReset.HighEmphasis = true;
+			this.materialButtonReset.Icon = null;
+			this.materialButtonReset.Location = new System.Drawing.Point(477, 336);
+			this.materialButtonReset.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+			this.materialButtonReset.MouseState = MaterialSkin.MouseState.HOVER;
+			this.materialButtonReset.Name = "materialButtonReset";
+			this.materialButtonReset.NoAccentTextColor = System.Drawing.Color.Empty;
+			this.materialButtonReset.Size = new System.Drawing.Size(100, 44);
+			this.materialButtonReset.TabIndex = 23;
+			this.materialButtonReset.Text = "Reset";
+			this.materialButtonReset.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+			this.materialButtonReset.UseAccentColor = false;
+			this.materialButtonReset.UseVisualStyleBackColor = true;
+			// 
 			// FormCreateNhaCungCap
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(693, 390);
+			this.Controls.Add(this.materialButtonReset);
 			this.Controls.Add(this.materialButtonSubmit);
 			this.Controls.Add(this.LabelForFocus);
 			this.Controls.Add(this.NhaCungCapDVO_DiaChi_Validation);
@@ -175,5 +198,6 @@
 		private MaterialSkin.Controls.MaterialMultiLineTextBox NhaCungCapDVO_DiaChi;
 		private MaterialSkin.Controls.MaterialTextBox NhaCungCapDVO_DienThoai;
 		private MaterialSkin.Controls.MaterialTextBox NhaCungCapDVO_TenNhaCungCap;
+		private MaterialSkin.Controls.MaterialButton materialButtonReset;
 	}
 }

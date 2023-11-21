@@ -252,7 +252,10 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 			textboxTemp.Text = this.GetTextboxTextIfEmptyThenPlaceholder(textboxTemp);
 
-			this.TryValidation();
+			if (FormMain.Instance.IsAutoValidate())
+			{
+				this.TryValidation();
+			}
 		}
 
 		#endregion
@@ -374,6 +377,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 				if (label.Name.Contains(textBoxName))
 				{
 					label.Text = text;
+					label.ForeColor = Color.Red;
 
 					return;
 				}

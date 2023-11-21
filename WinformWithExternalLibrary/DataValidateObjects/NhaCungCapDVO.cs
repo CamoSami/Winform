@@ -16,8 +16,8 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 			)]
         [StringLength(
             maximumLength: 30,
-            MinimumLength = 2,
-            ErrorMessage = "Tên sản phẩm phải có độ dài từ 2 đến 30 ký tự"
+            MinimumLength = 4,
+            ErrorMessage = "Tên nhà cung cấp phải có độ dài từ 4 đến 30 ký tự"
 			)]
         [DisplayName(
             "Tên nhà cung cấp"

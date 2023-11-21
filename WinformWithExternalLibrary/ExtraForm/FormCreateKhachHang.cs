@@ -126,6 +126,12 @@ namespace WinformWithExternalLibrary
 			this.KhachHangDVO_TenKhachHang.KeyPress += this.TextBoxBase_KeyPress_AlphabetOnly;
 
 			//		Button
+			//			Reset
+			this.materialButtonReset.Click += (obj, e) =>
+			{
+				this.ResetInput();
+			};
+
 			//			Submit
 			this.materialButtonSubmit.Click += (obj, e) => 
 			{
@@ -144,6 +150,8 @@ namespace WinformWithExternalLibrary
 				//		Send Query
 				if (KhachHangDAO.Instance.InsertKhachHang(this.GetInput() as KhachHangDVO))
 				{
+					this.ResetInput();
+
 					MaterialMessageBox.Show(
 						text: "Dữ liệu khách hàng đã được nhập",
 						caption: this.Text,
@@ -284,6 +292,16 @@ namespace WinformWithExternalLibrary
 		#endregion
 
 		#region Generalist Function
+
+		private void ResetInput()
+		{
+			foreach (TextBoxBase textBox in this.listOfTextboxes)
+			{
+				textBox.Text = this.GetPlaceholder(textBox);
+
+				this.SetStringLabelForTextbox(textBox, "");
+			}
+		}
 
 		private bool TryValidation()
 		{
