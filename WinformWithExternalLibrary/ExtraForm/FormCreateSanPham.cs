@@ -26,6 +26,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 		private bool isUpdate;
 		private Guid maDMSanPham;
 		private FormCreateSanPhamDVO formCreateSanPhamDVO;
+
 		public FormCreateSanPham(FormCreateSanPhamDVO formCreateSanPhamDVO = null,
 								Guid maDMSanPham = new Guid(),
 								bool isUpdate = false)
@@ -135,8 +136,20 @@ namespace WinformWithExternalLibrary.ExtraForm
 			};
 
 			this.FormCreateSanPham_btnThemSanPham.Click += FormCreateSanPham_btnThemSanPham_Click;
+
 			this.FormCreateSanPham_btnThietLapVeBanDau.Click += FormCreateSanPham_btnThietLapVeBanDau_Click;
 
+			this.FormCreateSanPham_btnScanMaSanPham.Click += (obj, e) =>
+			{
+				FormScanBarCode formScanBarCode = new FormScanBarCode();
+
+				formScanBarCode.OnScanBarcodeComplete += (objj, ee) =>
+				{
+					this.FormCreateSanPhamDVO_MaSanPham.Text = ee.maSanPham;
+				};
+
+				formScanBarCode.Show();
+			};
 		}
 
 		private void FormCreateSanPham_btnThietLapVeBanDau_Click(object sender, EventArgs e)

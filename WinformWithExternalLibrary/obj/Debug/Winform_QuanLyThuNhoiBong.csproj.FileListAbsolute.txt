@@ -356,3 +356,15 @@ E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalL
 E:\Winform\Winform-BTL\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormListSellBill.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormCreateGiamGia.resources
 D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormDanhSachGiamGia.resources
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\AForge.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\AForge.Video.DirectShow.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\AForge.Video.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\Zen.Barcode.Core.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\zxing.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\zxing.presentation.dll
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\AForge.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\AForge.Video.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\AForge.Video.DirectShow.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\zxing.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\bin\Debug\zxing.presentation.xml
+D:\06_C#_exe\_Group Project\Winform\WinformWithExternalLibrary\obj\Debug\WinformWithExternalLibrary.ExtraForm.FormScanBarCode.resources
