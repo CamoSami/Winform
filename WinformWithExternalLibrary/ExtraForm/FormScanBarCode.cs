@@ -42,13 +42,13 @@ namespace WinformWithExternalLibrary.ExtraForm
 			// Select type camera on Combobox
 			foreach (FilterInfo device in this.filterInfoCollection)
 			{
-				cameraCb.Items.Add(device.Name);
+				this.cameraCb.Items.Add(device.Name);
 			}
 
-			cameraCb.SelectedIndex = 0;
+			this.cameraCb.SelectedIndex = 0;
 
 			this.btnScan.Click += (object sender, EventArgs e) => {
-				this.videoCaptureDevice = new VideoCaptureDevice(this.filterInfoCollection[cameraCb.SelectedIndex].MonikerString);
+				this.videoCaptureDevice = new VideoCaptureDevice(this.filterInfoCollection[this.cameraCb.SelectedIndex].MonikerString);
 
 				this.videoCaptureDevice.NewFrame += (obj, eventArgs) => 
 				{
@@ -56,11 +56,16 @@ namespace WinformWithExternalLibrary.ExtraForm
 					BarcodeReader reader = new BarcodeReader();
 
 					var result = reader.Decode(bitmap);
+
 					if (result != null)
 					{
-						barCodeScannerTb.Text = result.ToString();
+						this.barCodeScannerTb.Invoke(new MethodInvoker(delegate ()
+						{
+							this.barCodeScannerTb.Text = result.ToString();
+						}));
 					}
-					scannerPictureBox.Image = bitmap;
+					
+					this.scannerPictureBox.Image = bitmap;
 				};
 
 				this.videoCaptureDevice.Start();

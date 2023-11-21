@@ -28,75 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ChiTietHoaDonBanInfoLV = new MaterialSkin.Controls.MaterialListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.SuspendLayout();
-            // 
-            // ChiTietHoaDonBanInfoLV
-            // 
-            this.ChiTietHoaDonBanInfoLV.AutoSizeTable = false;
-            this.ChiTietHoaDonBanInfoLV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ChiTietHoaDonBanInfoLV.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ChiTietHoaDonBanInfoLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.ChiTietHoaDonBanInfoLV = new MaterialSkin.Controls.MaterialListView();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.SuspendLayout();
+			// 
+			// ChiTietHoaDonBanInfoLV
+			// 
+			this.ChiTietHoaDonBanInfoLV.AutoSizeTable = false;
+			this.ChiTietHoaDonBanInfoLV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.ChiTietHoaDonBanInfoLV.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.ChiTietHoaDonBanInfoLV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-            this.ChiTietHoaDonBanInfoLV.Depth = 0;
-            this.ChiTietHoaDonBanInfoLV.FullRowSelect = true;
-            this.ChiTietHoaDonBanInfoLV.HideSelection = false;
-            this.ChiTietHoaDonBanInfoLV.Location = new System.Drawing.Point(4, 70);
-            this.ChiTietHoaDonBanInfoLV.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.ChiTietHoaDonBanInfoLV.MinimumSize = new System.Drawing.Size(150, 81);
-            this.ChiTietHoaDonBanInfoLV.MouseLocation = new System.Drawing.Point(-1, -1);
-            this.ChiTietHoaDonBanInfoLV.MouseState = MaterialSkin.MouseState.OUT;
-            this.ChiTietHoaDonBanInfoLV.Name = "ChiTietHoaDonBanInfoLV";
-            this.ChiTietHoaDonBanInfoLV.OwnerDraw = true;
-            this.ChiTietHoaDonBanInfoLV.Size = new System.Drawing.Size(720, 246);
-            this.ChiTietHoaDonBanInfoLV.TabIndex = 0;
-            this.ChiTietHoaDonBanInfoLV.UseCompatibleStateImageBehavior = false;
-            this.ChiTietHoaDonBanInfoLV.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "STT";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Mã sản phẩm";
-            this.columnHeader2.Width = 160;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Tên sản phẩm";
-            this.columnHeader3.Width = 210;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Số lượng";
-            this.columnHeader4.Width = 100;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Thành tiền";
-            this.columnHeader5.Width = 150;
-            // 
-            // FormChiTietHoaDonBanFormInfo
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 332);
-            this.Controls.Add(this.ChiTietHoaDonBanInfoLV);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "FormChiTietHoaDonBanFormInfo";
-            this.Padding = new System.Windows.Forms.Padding(2, 52, 2, 2);
-            this.Text = "Danh sách các sản phẩm";
-            this.ResumeLayout(false);
+			this.ChiTietHoaDonBanInfoLV.Depth = 0;
+			this.ChiTietHoaDonBanInfoLV.FullRowSelect = true;
+			this.ChiTietHoaDonBanInfoLV.HideSelection = false;
+			this.ChiTietHoaDonBanInfoLV.Location = new System.Drawing.Point(5, 86);
+			this.ChiTietHoaDonBanInfoLV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.ChiTietHoaDonBanInfoLV.MinimumSize = new System.Drawing.Size(200, 100);
+			this.ChiTietHoaDonBanInfoLV.MouseLocation = new System.Drawing.Point(-1, -1);
+			this.ChiTietHoaDonBanInfoLV.MouseState = MaterialSkin.MouseState.OUT;
+			this.ChiTietHoaDonBanInfoLV.Name = "ChiTietHoaDonBanInfoLV";
+			this.ChiTietHoaDonBanInfoLV.OwnerDraw = true;
+			this.ChiTietHoaDonBanInfoLV.Size = new System.Drawing.Size(960, 303);
+			this.ChiTietHoaDonBanInfoLV.TabIndex = 0;
+			this.ChiTietHoaDonBanInfoLV.UseCompatibleStateImageBehavior = false;
+			this.ChiTietHoaDonBanInfoLV.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "STT";
+			// 
+			// columnHeader2
+			// 
+			this.columnHeader2.Text = "Mã sản phẩm";
+			this.columnHeader2.Width = 160;
+			// 
+			// columnHeader3
+			// 
+			this.columnHeader3.Text = "Tên sản phẩm";
+			this.columnHeader3.Width = 210;
+			// 
+			// columnHeader4
+			// 
+			this.columnHeader4.Text = "Số lượng";
+			this.columnHeader4.Width = 100;
+			// 
+			// columnHeader5
+			// 
+			this.columnHeader5.Text = "Thành tiền";
+			this.columnHeader5.Width = 150;
+			// 
+			// FormChiTietHoaDonBanInfo
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(991, 409);
+			this.Controls.Add(this.ChiTietHoaDonBanInfoLV);
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.Name = "FormChiTietHoaDonBanInfo";
+			this.Padding = new System.Windows.Forms.Padding(3, 64, 3, 2);
+			this.Sizable = false;
+			this.Text = "Danh sách các sản phẩm";
+			this.ResumeLayout(false);
 
         }
 

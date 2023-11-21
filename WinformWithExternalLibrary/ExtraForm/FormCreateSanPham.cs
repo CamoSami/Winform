@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using WinformWithExternalLibrary.DataAccessObjects;
 using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary.DataValidateObjects;
+using WinformWithExternalLibrary.DataValidateObjects.CustomValidation;
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
@@ -158,21 +159,21 @@ namespace WinformWithExternalLibrary.ExtraForm
 			{
 				if (!this.isUpdate)
 				{
-					this.FormCreateSanPhamDVO_MaSanPham.Text = "";
-					this.FormCreateSanPhamDVO_TenSanPham.Text = "";
-					this.FormCreateSanPhamDVO_DonGiaBan.Text = "";
-					this.FormCreateSanPhamDVO_DonGiaNhap.Text = "";
-					this.FormCreateSanPhamDVO_SoLuongTonKho.Text = "";
-					this.FormCreateSanPhamDVO_ThoiGianBaoHanh.Text = "";
+					this.FormCreateSanPhamDVO_MaSanPham.Text = this.GetPlaceholder(this.FormCreateSanPhamDVO_MaSanPham);
+					this.FormCreateSanPhamDVO_TenSanPham.Text = this.GetPlaceholder(this.FormCreateSanPhamDVO_TenSanPham);
+					this.FormCreateSanPhamDVO_DonGiaBan.Text = this.GetPlaceholder(this.FormCreateSanPhamDVO_DonGiaBan);
+					this.FormCreateSanPhamDVO_DonGiaNhap.Text = this.GetPlaceholder(this.FormCreateSanPhamDVO_DonGiaNhap);
+					this.FormCreateSanPhamDVO_SoLuongTonKho.Text = this.GetPlaceholder(this.FormCreateSanPhamDVO_SoLuongTonKho);
+					this.FormCreateSanPhamDVO_ThoiGianBaoHanh.Value = DateTime.Now;
 				}
 				else
 				{
-					this.FormCreateSanPhamDVO_MaSanPham.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_MaSanPham;
-					this.FormCreateSanPhamDVO_TenSanPham.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_TenSanPham;
-					this.FormCreateSanPhamDVO_DonGiaBan.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaBan.ToString();
-					this.FormCreateSanPhamDVO_DonGiaNhap.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaNhap.ToString();
-					this.FormCreateSanPhamDVO_SoLuongTonKho.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_SoLuongTonKho.ToString();
-					this.FormCreateSanPhamDVO_ThoiGianBaoHanh.Text = formCreateSanPhamDVO.FormCreateSanPhamDVO_ThoiGianBaoHanh.ToString();
+					this.FormCreateSanPhamDVO_MaSanPham.Text = this.formCreateSanPhamDVO.FormCreateSanPhamDVO_MaSanPham;
+					this.FormCreateSanPhamDVO_TenSanPham.Text = this.formCreateSanPhamDVO.FormCreateSanPhamDVO_TenSanPham;
+					this.FormCreateSanPhamDVO_DonGiaBan.Text = this.formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaBan.ToString();
+					this.FormCreateSanPhamDVO_DonGiaNhap.Text = this.formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaNhap.ToString();
+					this.FormCreateSanPhamDVO_SoLuongTonKho.Text = this.formCreateSanPhamDVO.FormCreateSanPhamDVO_SoLuongTonKho.ToString();
+					this.FormCreateSanPhamDVO_ThoiGianBaoHanh.Value = this.formCreateSanPhamDVO.FormCreateSanPhamDVO_ThoiGianBaoHanh;
 				}
 			}
 
@@ -186,6 +187,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 				{
 					FormCreateSanPhamDVO formCreateSPDVO = this.GetInput();
 					DMSanPhamDTO dMSanPhamDTO = new DMSanPhamDTO();
+
 					if (!this.isUpdate)
 					{
 						dMSanPhamDTO.DMSanPhamDTO_MaDMSanPham = Guid.NewGuid();
@@ -194,6 +196,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 					{
 						dMSanPhamDTO.DMSanPhamDTO_MaDMSanPham = maDMSanPham;
 					}
+
 					dMSanPhamDTO.DMSanPhamDTO_MaSanPham = formCreateSPDVO.FormCreateSanPhamDVO_MaSanPham;
 					dMSanPhamDTO.DMSanPhamDTO_TenSanPham = formCreateSPDVO.FormCreateSanPhamDVO_TenSanPham;
 					dMSanPhamDTO.DMSanPhamDTO_DonGiaBan = formCreateSPDVO.FormCreateSanPhamDVO_DonGiaBan;
@@ -206,24 +209,28 @@ namespace WinformWithExternalLibrary.ExtraForm
 						if (DMSanPhamDAO.Instance.UpdateSanPham(dMSanPhamDTO, this.maDMSanPham))
 						{
 							this.ShowMessageBox("Cập nhật sản phẩm thành công!");
+
+							this.Close();
 						}
 						else
 						{
 							this.ShowMessageBox("Đã xảy ra lỗi gì đó", "!UpdateSanPham");
 						}
-						this.Hide();
+
 						return;
 					}
+
 					if (DMSanPhamDAO.Instance.InsertSanPham(dMSanPhamDTO))
 					{
 						this.ShowMessageBox("Nhập sản phẩm thành công!");
+
+						this.Close();
 					}
 					else
 					{
 						this.ShowMessageBox("Đã xảy ra lỗi gì đó", "!InsertSanPham");
 					}
 				}
-				this.Hide();
 			}
 		}
 

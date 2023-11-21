@@ -233,6 +233,7 @@
 			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "FormChiTietHoaDonBan";
 			this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
+			this.Sizable = false;
 			this.Text = "Danh sách hóa đơn bán";
 			this.materialCard1.ResumeLayout(false);
 			this.materialCard1.PerformLayout();
