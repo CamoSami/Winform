@@ -61,7 +61,7 @@
 			this.FormConfirmHoaDonNhap_TongTien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.FormConfirmHoaDonNhap_TongTien.Depth = 0;
 			this.FormConfirmHoaDonNhap_TongTien.Enabled = false;
-			this.FormConfirmHoaDonNhap_TongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.FormConfirmHoaDonNhap_TongTien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.FormConfirmHoaDonNhap_TongTien.LeadingIcon = null;
 			this.FormConfirmHoaDonNhap_TongTien.Location = new System.Drawing.Point(6, 178);
 			this.FormConfirmHoaDonNhap_TongTien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -111,7 +111,7 @@
 			this.FormConfirmHoaDonNhap_NhaCungCap.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.FormConfirmHoaDonNhap_NhaCungCap.Depth = 0;
 			this.FormConfirmHoaDonNhap_NhaCungCap.Enabled = false;
-			this.FormConfirmHoaDonNhap_NhaCungCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.FormConfirmHoaDonNhap_NhaCungCap.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.FormConfirmHoaDonNhap_NhaCungCap.LeadingIcon = null;
 			this.FormConfirmHoaDonNhap_NhaCungCap.Location = new System.Drawing.Point(6, 123);
 			this.FormConfirmHoaDonNhap_NhaCungCap.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -130,7 +130,7 @@
 			this.FormConfirmHoaDonNhap_NhanVien.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.FormConfirmHoaDonNhap_NhanVien.Depth = 0;
 			this.FormConfirmHoaDonNhap_NhanVien.Enabled = false;
-			this.FormConfirmHoaDonNhap_NhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.FormConfirmHoaDonNhap_NhanVien.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.FormConfirmHoaDonNhap_NhanVien.LeadingIcon = null;
 			this.FormConfirmHoaDonNhap_NhanVien.Location = new System.Drawing.Point(6, 66);
 			this.FormConfirmHoaDonNhap_NhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -156,6 +156,7 @@
 			this.Controls.Add(this.FormConfirmHoaDonNhap_NhanVien);
 			this.Name = "FormConfirmHoaDonNhap";
 			this.Padding = new System.Windows.Forms.Padding(3, 64, 3, 2);
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Xác Nhận Hóa Đơn Nhập";
 			this.ResumeLayout(false);
 			this.PerformLayout();

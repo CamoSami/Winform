@@ -182,6 +182,7 @@
 			this.Controls.Add(this.NhaCungCapDVO_TenNhaCungCap);
 			this.Name = "FormCreateNhaCungCap";
 			this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Tạo nhà Cung Cấp";
 			this.ResumeLayout(false);
 			this.PerformLayout();

@@ -118,7 +118,7 @@
 			this.CongViecDVO_MucLuong.AnimateReadOnly = false;
 			this.CongViecDVO_MucLuong.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.CongViecDVO_MucLuong.Depth = 0;
-			this.CongViecDVO_MucLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.CongViecDVO_MucLuong.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.CongViecDVO_MucLuong.LeadingIcon = null;
 			this.CongViecDVO_MucLuong.Location = new System.Drawing.Point(149, 130);
 			this.CongViecDVO_MucLuong.MaxLength = 50;
@@ -135,7 +135,7 @@
 			this.CongViecDVO_TenCongViec.AnimateReadOnly = false;
 			this.CongViecDVO_TenCongViec.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.CongViecDVO_TenCongViec.Depth = 0;
-			this.CongViecDVO_TenCongViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.CongViecDVO_TenCongViec.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.CongViecDVO_TenCongViec.LeadingIcon = null;
 			this.CongViecDVO_TenCongViec.Location = new System.Drawing.Point(149, 62);
 			this.CongViecDVO_TenCongViec.MaxLength = 50;
@@ -154,6 +154,7 @@
 			this.ClientSize = new System.Drawing.Size(620, 376);
 			this.Controls.Add(this.materialCard1);
 			this.Name = "FormCreateCongViec";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Chi Tiết Công Việc";
 			this.materialCard1.ResumeLayout(false);
 			this.materialCard1.PerformLayout();

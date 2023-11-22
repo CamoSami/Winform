@@ -51,7 +51,7 @@
 			this.PhanTichDVO_HDN_TimKiemIP.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.PhanTichDVO_HDN_TimKiemIP.Depth = 0;
 			this.PhanTichDVO_HDN_TimKiemIP.DetectUrls = false;
-			this.PhanTichDVO_HDN_TimKiemIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.PhanTichDVO_HDN_TimKiemIP.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.PhanTichDVO_HDN_TimKiemIP.LeadingIcon = null;
 			this.PhanTichDVO_HDN_TimKiemIP.Location = new System.Drawing.Point(8, 593);
 			this.PhanTichDVO_HDN_TimKiemIP.Margin = new System.Windows.Forms.Padding(4);
@@ -217,6 +217,7 @@
 			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "FormChiTietHoaDonNhap";
 			this.Padding = new System.Windows.Forms.Padding(4, 79, 4, 4);
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Danh sách hóa đơn nhập";
 			this.ResumeLayout(false);
 			this.PerformLayout();

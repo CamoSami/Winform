@@ -216,6 +216,7 @@
 			this.Controls.Add(this.materialButton_XuatLS);
 			this.Controls.Add(this.materialListView_LichSuMuaHang);
 			this.Name = "FormListSellBill";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FormListSellBill";
 			this.ResumeLayout(false);
 

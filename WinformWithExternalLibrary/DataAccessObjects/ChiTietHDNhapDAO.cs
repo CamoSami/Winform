@@ -52,6 +52,16 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return dataTable;
 		}
 
+		//Hạnh add
+		public bool CheckChiTietHoaDonNhapHasDMSP(Guid MaDMSP)
+		{
+			string query = $"SELECT * FROM {DataProvider.CHITIETHDNHAP_TABLE} WHERE MaDMSanPham = {this.GetString(MaDMSP)} ";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable.Rows.Count > 0;
+		}
+
 
 
 		private string GetString(dynamic obj)

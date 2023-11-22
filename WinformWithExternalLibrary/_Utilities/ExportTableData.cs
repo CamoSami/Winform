@@ -23,6 +23,7 @@ namespace WinformWithExternalLibrary._Utilities
 			NhaCungCap,
 			NhanVien,
 			DMSanPham,
+			GiamGia,
 			Empty
 		} 
 
@@ -50,9 +51,36 @@ namespace WinformWithExternalLibrary._Utilities
 				{
 					case TypeOfExcel.DMSanPham:
 
+						workSheet.Column(1).Width = 5;
+						workSheet.Column(2).Width = 30;
+						workSheet.Column(3).Width = 50;
+						workSheet.Column(4).Width = 15;
+						workSheet.Column(5).Width = 15;
+						workSheet.Column(6).Width = 18;
+						workSheet.Column(7).Width = 20;
+
+						break;
+
+					case TypeOfExcel.GiamGia:
+
+						workSheet.Column(1).Width = 40;
+						workSheet.Column(2).Width = 40;
+						workSheet.Column(3).Width = 15;
+						workSheet.Column(4).Width = 15;
+						workSheet.Column(5).Width = 10;
+						workSheet.Column(6).Width = 20;
+
 						break;
 
 					case TypeOfExcel.NhanVien:
+
+						workSheet.Column(1).Width = 40;
+						workSheet.Column(2).Width = 25;
+						workSheet.Column(3).Width = 12.5;
+						workSheet.Column(4).Width = 7.5;
+						workSheet.Column(5).Width = 12.5;
+						workSheet.Column(6).Width = 40;
+						workSheet.Column(7).Width = 30;
 
 						break;
 

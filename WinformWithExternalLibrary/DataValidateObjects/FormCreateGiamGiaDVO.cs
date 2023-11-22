@@ -19,7 +19,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects
         [Range(
             minimum: 0.01,
             maximum: 0.99,
-            ErrorMessage = "Phần trăm giảm giá phải nhỏ hơn 100")]
+            ErrorMessage = "Phần trăm giảm giá phải nhỏ hơn 1")]
         [DisplayName("Phần trăm giảm giá")]
         public float FormCreateGiamGiaDVO_PhanTramGiamGia { get; set; }
 

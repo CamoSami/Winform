@@ -64,7 +64,7 @@
 			this.barCodeScannerTb.AnimateReadOnly = false;
 			this.barCodeScannerTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.barCodeScannerTb.Depth = 0;
-			this.barCodeScannerTb.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.barCodeScannerTb.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.barCodeScannerTb.LeadingIcon = null;
 			this.barCodeScannerTb.Location = new System.Drawing.Point(71, 560);
 			this.barCodeScannerTb.MaxLength = 50;
@@ -164,6 +164,7 @@
 			this.Controls.Add(this.cameraCb);
 			this.Controls.Add(this.webcamLb);
 			this.Name = "FormScanBarCode";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Scan Mã Sản Phẩm";
 			((System.ComponentModel.ISupportInitialize)(this.scannerPictureBox)).EndInit();
 			this.ResumeLayout(false);

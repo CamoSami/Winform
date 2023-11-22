@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary._DataProvider;
+using System.Diagnostics;
 
 namespace WinformWithExternalLibrary.DataAccessObjects
 {
@@ -110,6 +111,17 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 				this.OnDAODatabaseChanged?.Invoke(this, EventArgs.Empty);
 			}
 
+			return rowChanged > 0;
+		}
+
+		public bool DeleteGiamGia(Guid maGiamGia)
+		{
+			string query = $"DELETE FROM {DataProvider.GIAMGIA_TABLE} WHERE MaGiamGia = {this.GetString(maGiamGia)} ";
+		
+			//Debug.WriteLine(query);
+
+			int rowChanged = DataProvider.Instance.ExecuteNonQuery(query);
+			
 			return rowChanged > 0;
 		}
 

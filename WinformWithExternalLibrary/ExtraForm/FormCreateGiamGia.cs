@@ -156,19 +156,19 @@ namespace WinformWithExternalLibrary.ExtraForm
 			{
 				if (!this.isUpdate)
 				{
-					this.FormCreateGiamGiaDVO_TenGiamGia.Text = "";
-					this.FormCreateGiamGiaDVO_PhanTramGiamGia.Text = "";
-					this.FormCreateGiamGiaDVO_MaxGiamGia.Text = "";
-					this.FormCreateGiamGiaDVO_NgayBatDau.Text = "";
-					this.FormCreateGiamGiaDVO_NgayKetThuc.Text = "";
+					this.FormCreateGiamGiaDVO_TenGiamGia.Text = this.GetPlaceholder(this.FormCreateGiamGiaDVO_TenGiamGia);
+					this.FormCreateGiamGiaDVO_PhanTramGiamGia.Text = this.GetPlaceholder(this.FormCreateGiamGiaDVO_TenGiamGia);
+					this.FormCreateGiamGiaDVO_MaxGiamGia.Text = this.GetPlaceholder(this.FormCreateGiamGiaDVO_TenGiamGia);
+					this.FormCreateGiamGiaDVO_NgayBatDau.Value = DateTime.Now;
+					this.FormCreateGiamGiaDVO_NgayKetThuc.Value = DateTime.Now;
 				}
 				else
 				{
 					this.FormCreateGiamGiaDVO_TenGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_TenGiamGia;
 					this.FormCreateGiamGiaDVO_PhanTramGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_PhanTramGiamGia.ToString();
 					this.FormCreateGiamGiaDVO_MaxGiamGia.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_MaxGiamGia.ToString();
-					this.FormCreateGiamGiaDVO_NgayBatDau.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayBatDau.ToString();
-					this.FormCreateGiamGiaDVO_NgayKetThuc.Text = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayKetThuc.ToString();
+					this.FormCreateGiamGiaDVO_NgayBatDau.Value = DateTime.Now;
+					this.FormCreateGiamGiaDVO_NgayKetThuc.Value = DateTime.Now;
 				}
 			}
 		}
@@ -177,10 +177,20 @@ namespace WinformWithExternalLibrary.ExtraForm
 		{
 			if (this.ShowMessageBoxYesNo("Bạn có muốn lưu thay đổi không ?"))
 			{
+				if (FormCreateGiamGiaDVO_NgayKetThuc.Value < FormCreateGiamGiaDVO_NgayBatDau.Value)
+				{
+					this.ShowMessageBox("Ngày kết thúc đang trước ngày bắt đầu");
+
+					this.FormCreateGiamGiaDVO_NgayKetThuc.Focus();
+
+					return;
+				}
 				if (this.TryValidation())
 				{
 					FormCreateGiamGiaDVO formCreateGiamGiaDVO = this.GetInput();
+
 					GiamGiaDTO giamGiaDTO = new GiamGiaDTO();
+
 					if (!this.isUpdate)
 					{
 						giamGiaDTO.GiamGiaDTO_MaGiamGia = Guid.NewGuid();
@@ -189,6 +199,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 					{
 						giamGiaDTO.GiamGiaDTO_MaGiamGia = maGiamGia;
 					}
+
 					giamGiaDTO.GiamGiaDTO_TenGiamGia = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_TenGiamGia;
 					giamGiaDTO.GiamGiaDTO_PhanTramGiamGia = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_PhanTramGiamGia;
 					giamGiaDTO.GiamGiaDTO_MaxGiamGia = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_MaxGiamGia;
@@ -196,12 +207,11 @@ namespace WinformWithExternalLibrary.ExtraForm
 					giamGiaDTO.GiamGiaDTO_NgayKetThuc = formCreateGiamGiaDVO.FormCreateGiamGiaDVO_NgayKetThuc;
 
 
-
 					if (this.isUpdate)
 					{
 						if (GiamGiaDAO.Instance.UpdateGiamGia(giamGiaDTO, this.maGiamGia))
 						{
-							this.ShowMessageBox("Cập nhật khuyến mạithành công!");
+							this.ShowMessageBox("Cập nhật khuyến mại thành công!");
 						}
 						else
 						{
@@ -210,13 +220,13 @@ namespace WinformWithExternalLibrary.ExtraForm
 						this.Hide();
 						return;
 					}
-					if (DMSanPhamDAO.Instance.InsertSanPham(giamGiaDTO))
+					if (GiamGiaDAO.Instance.InsertGiamGia(giamGiaDTO))
 					{
-						this.ShowMessageBox("Nhập sản phẩm thành công!");
+						this.ShowMessageBox("Nhập giảm giá mới thành công!");
 					}
 					else
 					{
-						this.ShowMessageBox("Đã xảy ra lỗi gì đó", "!InsertSanPham");
+						this.ShowMessageBox("Đã xảy ra lỗi gì đó", "!InsertGiamGia");
 					}
 				}
 				this.Hide();

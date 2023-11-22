@@ -265,7 +265,7 @@
 			this.FormCreateSanPham_btnThemSanPham.UseAccentColor = false;
 			this.FormCreateSanPham_btnThemSanPham.UseVisualStyleBackColor = true;
 			// 
-			// materialButton1
+			// FormCreateSanPham_btnScanMaSanPham
 			// 
 			this.FormCreateSanPham_btnScanMaSanPham.AutoSize = false;
 			this.FormCreateSanPham_btnScanMaSanPham.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -276,7 +276,7 @@
 			this.FormCreateSanPham_btnScanMaSanPham.Location = new System.Drawing.Point(363, 70);
 			this.FormCreateSanPham_btnScanMaSanPham.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
 			this.FormCreateSanPham_btnScanMaSanPham.MouseState = MaterialSkin.MouseState.HOVER;
-			this.FormCreateSanPham_btnScanMaSanPham.Name = "materialButton1";
+			this.FormCreateSanPham_btnScanMaSanPham.Name = "FormCreateSanPham_btnScanMaSanPham";
 			this.FormCreateSanPham_btnScanMaSanPham.NoAccentTextColor = System.Drawing.Color.Empty;
 			this.FormCreateSanPham_btnScanMaSanPham.Size = new System.Drawing.Size(175, 36);
 			this.FormCreateSanPham_btnScanMaSanPham.TabIndex = 45;
@@ -306,6 +306,7 @@
 			this.Controls.Add(this.FormCreateSanPhamDVO_MaSanPham);
 			this.Controls.Add(this.FormCreateSanPham_btnThemSanPham);
 			this.Name = "FormCreateSanPham";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Tạo Sản Phẩm";
 			this.ResumeLayout(false);
 			this.PerformLayout();

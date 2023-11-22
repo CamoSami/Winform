@@ -166,6 +166,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			}
 
 			if (temp != "") temp += " AND ";
+
 			if (TGBHMin <= TGBHMax)
 			{
 				temp += $"ThoiGianBaoHanh >= {this.GetString(TGBHMin)} AND ThoiGianBaoHanh <= {this.GetString(TGBHMax)} ";

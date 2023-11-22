@@ -2910,7 +2910,7 @@ namespace WinformWithExternalLibrary
 			if (this.ShowMessageBoxYesNo("Bạn có muốn xem danh sách khuyến mại không ?"))
 			{
 				FormDanhSachGiamGia formDanhSachGiamGia = new FormDanhSachGiamGia();
-				
+
 				formDanhSachGiamGia.Show();
 			}
 		}
@@ -2920,6 +2920,7 @@ namespace WinformWithExternalLibrary
 			if (this.ShowMessageBoxYesNo("Bạn có muốn load lại dữ liệu tất cả các sản phẩm không?"))
 			{
 				System.Data.DataTable sanPham = DMSanPhamDAO.Instance.GetAllSanPham();
+
 				LoadSanPham(sanPham);
 			}
 		}
@@ -2928,7 +2929,6 @@ namespace WinformWithExternalLibrary
 		{
 			System.Data.DataTable sanPham;
 
-			//		HieuNote: cái lúc trước của m là check null là không đúng, check bằng "" sẽ chuẩn hơn, t ở đây cứ dùng phương thức có sẵn
 			if (!this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_MaSanPham))
 			{
 				sanPham = DMSanPhamDAO.Instance.GetSanPhamFromMSP(this.GetControlTextIfPlaceholderThenEmpty(DMSanPhamDVO_MaSanPham));
@@ -2939,7 +2939,6 @@ namespace WinformWithExternalLibrary
 				int SoLuongTonKhoMin, SoLuongTonKhoMax;
 				DateTime ThoiGianBaoHanhMin, ThoiGianBaoHanhMax, ThoiGianBaoHanhDefault;
 
-				//		HieuNote: t sửa để dùng các phương thức có sẵn, m ko hiểu cũng ko sao
 				if (this.CheckIfControlEmptyOrPlaceholder(this.DMSanPhamDVO_DonGiaBanMin)) DonGiaBanMin = 0;
 				else DonGiaBanMin = long.Parse(DMSanPhamDVO_DonGiaBanMin.Text.Trim());
 
@@ -2976,8 +2975,6 @@ namespace WinformWithExternalLibrary
 
 			}
 
-			//		HieuNote: lúc trước m cho check null, nhưng mà phương thức ExecuteQuery luôn trả về một biến DataTable
-			//					dù có dữ liệu hay không, nên giờ check xem .Rows.Count > 0
 			if (sanPham.Rows.Count > 0)
 			{
 				this.LoadSanPham(sanPham);
@@ -3016,7 +3013,8 @@ namespace WinformWithExternalLibrary
 			this.exportTableData.ExportToExcel(
 				dataTable: dataTable,
 				workSheetName: "DMSanPham" + this.getDateTime.GetDateTimeNow_Date(),
-				filePath: ""
+				filePath: "",
+				typeOfFile: ExportTableData.TypeOfExcel.DMSanPham
 			);
 
 			this.ResetColorForLabel();
@@ -3024,14 +3022,15 @@ namespace WinformWithExternalLibrary
 
 		private void TabPageSanPham_ButtonXoaSanPham_Click(object sender, EventArgs e)
 		{
+			if (TabPageSanPham_MaterialListView.SelectedIndices.Count <= 0)
+			{
+				this.ShowMessageBox("Hãy chọn sản phẩm muốn xóa");
+
+				return;
+			}
+
 			if (this.ShowMessageBoxYesNo("Bạn có chắc chắn muốn xóa sản phẩm này không?"))
 			{
-				if (TabPageSanPham_MaterialListView.SelectedIndices.Count <= 0)
-				{
-					this.ShowMessageBox("Hãy chọn sản phẩm muốn xóa");
-
-					return;
-				}
 				int selectedIndex = TabPageSanPham_MaterialListView.SelectedIndices[0];
 
 				ListViewItem listViewItem = this.TabPageSanPham_MaterialListView.Items[selectedIndex];
@@ -3039,11 +3038,32 @@ namespace WinformWithExternalLibrary
 				string MSP;
 
 				MSP = listViewItem.SubItems[1].Text;
-				Debug.WriteLine(MSP);
+
+				Guid maDMSP = DMSanPhamDAO.Instance.GetMaDMSanPhamFromMaSanPham(MSP);
+
+				if (ChiTietHDBanDAO.Instance.CheckChiTietHDBanHasDMSP(maDMSP))
+				{
+					this.ShowMessageBox("Dữ liệu về sản phẩm này đang được sử dụng trong chi tiết hóa đơn bán");
+
+					return;
+				}
+
+				else if (ChiTietHDNhapDAO.Instance.CheckChiTietHoaDonNhapHasDMSP(maDMSP))
+				{
+					this.ShowMessageBox("Dữ liệu về sản phẩm này đang được sử dụng trong chi tiết hóa đơn nhập");
+
+					return;
+				}
+
+				//Debug.WriteLine(MSP);
+				//Debug.WriteLine(maDMSP);
+
 				if (DMSanPhamDAO.Instance.DeleteSanPham(MSP))
 				{
 					this.ShowMessageBox("Đã xóa sản phẩm thành công");
+
 					System.Data.DataTable sanPham = DMSanPhamDAO.Instance.GetAllSanPham();
+
 					LoadSanPham(sanPham);
 				}
 			}
@@ -3057,10 +3077,13 @@ namespace WinformWithExternalLibrary
 		private void TabPageSanPham_materialListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			ListView.SelectedIndexCollection selectedIndices = TabPageSanPham_MaterialListView.SelectedIndices;
+			
 			if (selectedIndices.Count > 0)
 			{
 				int selectedIndex = TabPageSanPham_MaterialListView.SelectedIndices[0];
+				
 				ListViewItem listViewItem = this.TabPageSanPham_MaterialListView.Items[selectedIndex];
+				
 				DMSanPhamDVO_MaSanPham.Text = listViewItem.SubItems[1].Text;
 				DMSanPhamDVO_TenSanPham.Text = listViewItem.SubItems[2].Text;
 				DMSanPhamDVO_DonGiaBanMin.Text = listViewItem.SubItems[3].Text;
@@ -3077,6 +3100,7 @@ namespace WinformWithExternalLibrary
 		private void TabPageSanPham_materialListView_Load(object sender, EventArgs e)
 		{
 			System.Data.DataTable sanPham = DMSanPhamDAO.Instance.GetAllSanPham();
+			
 			LoadSanPham(sanPham);
 		}
 
@@ -3090,26 +3114,36 @@ namespace WinformWithExternalLibrary
 
 					return;
 				}
+				
 				int selectedIndex = TabPageSanPham_MaterialListView.SelectedIndices[0];
+				
 				ListViewItem listViewItem = this.TabPageSanPham_MaterialListView.Items[selectedIndex];
+				
 				string MSP;
 				Guid MDMSP;
+				
 				MSP = listViewItem.SubItems[1].Text;
 				MDMSP = DMSanPhamDAO.Instance.GetMaDMSanPhamFromMaSanPham(MSP);
+				
 				FormCreateSanPhamDVO formCreateSanPhamDVO = new FormCreateSanPhamDVO();
 				formCreateSanPhamDVO.FormCreateSanPhamDVO_MaSanPham = MSP;
+				
 				foreach (object obj in listViewItem.SubItems)
 				{
 					Debug.WriteLine(obj.ToString());
 				}
+				
 				formCreateSanPhamDVO.FormCreateSanPhamDVO_TenSanPham = listViewItem.SubItems[2].Text;
 				formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaBan = long.Parse(listViewItem.SubItems[3].Text);
 				formCreateSanPhamDVO.FormCreateSanPhamDVO_DonGiaNhap = long.Parse(listViewItem.SubItems[4].Text);
 				formCreateSanPhamDVO.FormCreateSanPhamDVO_SoLuongTonKho = int.Parse(listViewItem.SubItems[5].Text);
 				formCreateSanPhamDVO.FormCreateSanPhamDVO_ThoiGianBaoHanh = DateTime.Parse(listViewItem.SubItems[6].Text);
+				
 				FormCreateSanPham formCreateSanPham = new FormCreateSanPham(formCreateSanPhamDVO, MDMSP, true);
 				formCreateSanPham.Show();
+				
 				System.Data.DataTable sanPham = DMSanPhamDAO.Instance.GetAllSanPham();
+
 				LoadSanPham(sanPham);
 			}
 		}

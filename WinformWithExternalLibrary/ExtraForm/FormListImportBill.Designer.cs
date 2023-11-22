@@ -216,6 +216,7 @@
 			this.Controls.Add(this.materialButton_XuatLS);
 			this.Controls.Add(this.materialListView_LichSuNhapHang);
 			this.Name = "FormListImportBill";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FormListImportBill";
 			this.ResumeLayout(false);
 

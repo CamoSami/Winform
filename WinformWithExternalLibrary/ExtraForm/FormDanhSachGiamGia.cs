@@ -11,8 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinformWithExternalLibrary._Utilities;
 using WinformWithExternalLibrary.DataAccessObjects;
+using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary.DataValidateObjects;
+
 
 namespace WinformWithExternalLibrary.ExtraForm
 {
@@ -23,6 +26,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 		private readonly List<TextBoxBase> listOfTextboxes = new List<TextBoxBase>();
 		private readonly List<Label> listOfLabels = new List<Label>();
 		private readonly List<bool> isInterracted = new List<bool>();
+		private readonly GetDateTime getDateTime = new GetDateTime();
+		private readonly ExportTableData exportTableData = new ExportTableData();
 
 		public FormDanhSachGiamGia()
 		{
@@ -36,7 +41,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 			//		Events
 			this.InitializeSpecializedEvent();
-
 		}
 
 		#region Initialize
@@ -76,42 +80,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 			}
 		}
 
-		#endregion
-
-		#region Event
-
-		private void TextBoxBase_KeyPress_AlphabetOnly(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsLetter(e.KeyChar) &&
-				!char.IsWhiteSpace(e.KeyChar) &&
-				!char.IsControl(e.KeyChar))
-			{
-				e.Handled = true;
-			}
-		}
-
-		private void TextBoxBase_KeyPress_NumericOnly(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) &&
-				!char.IsControl(e.KeyChar))
-			{
-				e.Handled = true;
-			}
-		}
-
-		private void MaterialTextBox_GotFocus(object sender, EventArgs e)
-		{
-			TextBoxBase textboxTemp = sender as TextBoxBase;
-
-			this.isInterracted[this.listOfTextboxes.IndexOf(textboxTemp)] = true;
-
-			textboxTemp.Text = this.GetTextboxTextIfPlaceholderThenEmpty(textboxTemp);
-		}
-
-		#endregion
-
-		#region Generalist Function
-
 		private void InitializeSpecializedEvent()
 		{
 			this.Load += (obj, e) =>
@@ -119,7 +87,7 @@ namespace WinformWithExternalLibrary.ExtraForm
 				this.ResetColorForLabel();
 			};
 
-			this.Load += (obj, e) => 
+			this.Load += (obj, e) =>
 			{
 				DataTable dataTable = GiamGiaDAO.Instance.GetAllGiamGia();
 
@@ -158,7 +126,86 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 				formCreateGiamGia.Show();
 			};
+
+			this.FormDanhSachGiamGia_btnXoaGG.Click += (obj, e) =>
+			{
+				if (this.FormDanhSachGiamGia_materialListView.SelectedIndices.Count <= 0)
+				{
+					this.ShowMessageBox("Hãy chọn mã giảm giá bạn muốn xóa!");
+
+					return;
+				}
+
+				Guid maGiamGia = Guid.Parse(this.FormDanhSachGiamGia_materialListView.SelectedItems[0].SubItems[1].Text);
+
+				if (HoaDonBanDAO.Instance.CheckHoaDonBanHasGiamGia(maGiamGia))
+				{
+					this.ShowMessageBox("Mã giảm giá đang được sử dụng trong hóa đơn bán");
+					return;
+				}
+
+				if (GiamGiaDAO.Instance.DeleteGiamGia(maGiamGia))
+				{
+					this.ShowMessageBox("Đã xóa sản phẩm thành công");
+				}
+			};
+
+			this.FormDanhSachGiamGia_btnLoadGG.Click += (obj, e) =>
+			{
+				DataTable giamGia = GiamGiaDAO.Instance.GetAllGiamGia();
+				LoadGiamGia(giamGia);
+			};
+
+			this.FormDanhSachGiamGia_btnXuatExcel.Click += (obj, e) =>
+			{
+				System.Data.DataTable dataTable = GiamGiaDAO.Instance.GetAllGiamGia();
+
+				this.exportTableData.ExportToExcel(
+					dataTable: dataTable,
+					workSheetName: "GiamGia" + this.getDateTime.GetDateTimeNow_Date(),
+					filePath: "",
+					typeOfFile: ExportTableData.TypeOfExcel.GiamGia
+				); ;
+
+				this.ResetColorForLabel();
+			};
 		}
+
+		#endregion
+
+		#region Event
+
+		private void TextBoxBase_KeyPress_AlphabetOnly(object sender, KeyPressEventArgs e)
+		{
+			if (!char.IsLetter(e.KeyChar) &&
+				!char.IsWhiteSpace(e.KeyChar) &&
+				!char.IsControl(e.KeyChar))
+			{
+				e.Handled = true;
+			}
+		}
+
+		private void TextBoxBase_KeyPress_NumericOnly(object sender, KeyPressEventArgs e)
+		{
+			if (!char.IsDigit(e.KeyChar) &&
+				!char.IsControl(e.KeyChar))
+			{
+				e.Handled = true;
+			}
+		}
+
+		private void MaterialTextBox_GotFocus(object sender, EventArgs e)
+		{
+			TextBoxBase textboxTemp = sender as TextBoxBase;
+
+			this.isInterracted[this.listOfTextboxes.IndexOf(textboxTemp)] = true;
+
+			textboxTemp.Text = this.GetTextboxTextIfPlaceholderThenEmpty(textboxTemp);
+		}
+
+		#endregion
+
+		#region Generalist Function
 
 		private void LoadGiamGia(System.Data.DataTable giamGia)
 		{

@@ -96,6 +96,7 @@
 			this.Name = "FormChiTietHoaDonBanInfo";
 			this.Padding = new System.Windows.Forms.Padding(3, 64, 3, 2);
 			this.Sizable = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Danh sách các sản phẩm";
 			this.ResumeLayout(false);
 

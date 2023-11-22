@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.FormCreateGiamGiaDVO_MaxGiamGia = new MaterialSkin.Controls.MaterialTextBox();
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia = new MaterialSkin.Controls.MaterialTextBox();
 			this.FormCreateGiamGiaDVO_TenGiamGia = new MaterialSkin.Controls.MaterialTextBox();
 			this.LabelForFocus = new System.Windows.Forms.Label();
 			this.FormCreateGiamGia_btnThietLapVeBanDau = new MaterialSkin.Controls.MaterialButton();
@@ -41,8 +40,8 @@
 			this.FormCreateGiamGiaDVO_TenGiamGia_Validation = new MaterialSkin.Controls.MaterialLabel();
 			this.FormCreateGiamGiaDVO_NgayKetThuc = new WinformWithExternalLibrary._Utilities.RJDatePicker();
 			this.FormCreateGiamGiaDVO_NgayBatDau = new WinformWithExternalLibrary._Utilities.RJDatePicker();
-			this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
 			this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia = new MaterialSkin.Controls.MaterialTextBox();
 			this.SuspendLayout();
 			// 
 			// FormCreateGiamGiaDVO_MaxGiamGia
@@ -50,7 +49,7 @@
 			this.FormCreateGiamGiaDVO_MaxGiamGia.AnimateReadOnly = false;
 			this.FormCreateGiamGiaDVO_MaxGiamGia.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.FormCreateGiamGiaDVO_MaxGiamGia.Depth = 0;
-			this.FormCreateGiamGiaDVO_MaxGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.FormCreateGiamGiaDVO_MaxGiamGia.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.FormCreateGiamGiaDVO_MaxGiamGia.LeadingIcon = null;
 			this.FormCreateGiamGiaDVO_MaxGiamGia.Location = new System.Drawing.Point(6, 212);
 			this.FormCreateGiamGiaDVO_MaxGiamGia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -63,30 +62,12 @@
 			this.FormCreateGiamGiaDVO_MaxGiamGia.Text = "";
 			this.FormCreateGiamGiaDVO_MaxGiamGia.TrailingIcon = null;
 			// 
-			// FormCreateGiamGiaDVO_PhanTramGiamGia
-			// 
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.AnimateReadOnly = false;
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Depth = 0;
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.LeadingIcon = null;
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Location = new System.Drawing.Point(6, 139);
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.MaxLength = 50;
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.MouseState = MaterialSkin.MouseState.OUT;
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Multiline = false;
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Name = "FormCreateGiamGiaDVO_PhanTramGiamGia";
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Size = new System.Drawing.Size(371, 50);
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.TabIndex = 56;
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Text = "";
-			this.FormCreateGiamGiaDVO_PhanTramGiamGia.TrailingIcon = null;
-			// 
 			// FormCreateGiamGiaDVO_TenGiamGia
 			// 
 			this.FormCreateGiamGiaDVO_TenGiamGia.AnimateReadOnly = false;
 			this.FormCreateGiamGiaDVO_TenGiamGia.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.FormCreateGiamGiaDVO_TenGiamGia.Depth = 0;
-			this.FormCreateGiamGiaDVO_TenGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.FormCreateGiamGiaDVO_TenGiamGia.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
 			this.FormCreateGiamGiaDVO_TenGiamGia.LeadingIcon = null;
 			this.FormCreateGiamGiaDVO_TenGiamGia.Location = new System.Drawing.Point(6, 66);
 			this.FormCreateGiamGiaDVO_TenGiamGia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -229,17 +210,6 @@
 			this.FormCreateGiamGiaDVO_NgayBatDau.TabIndex = 45;
 			this.FormCreateGiamGiaDVO_NgayBatDau.TextColor = System.Drawing.Color.White;
 			// 
-			// materialLabel2
-			// 
-			this.materialLabel2.Depth = 0;
-			this.materialLabel2.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-			this.materialLabel2.Location = new System.Drawing.Point(386, 157);
-			this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
-			this.materialLabel2.Name = "materialLabel2";
-			this.materialLabel2.Size = new System.Drawing.Size(37, 15);
-			this.materialLabel2.TabIndex = 44;
-			this.materialLabel2.Text = "%";
-			// 
 			// materialLabel1
 			// 
 			this.materialLabel1.Depth = 0;
@@ -251,13 +221,31 @@
 			this.materialLabel1.TabIndex = 43;
 			this.materialLabel1.Text = "VNĐ";
 			// 
+			// FormCreateGiamGiaDVO_PhanTramGiamGia
+			// 
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.AnimateReadOnly = false;
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Depth = 0;
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.LeadingIcon = null;
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Location = new System.Drawing.Point(6, 139);
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.MaxLength = 50;
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.MouseState = MaterialSkin.MouseState.OUT;
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Multiline = false;
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Name = "FormCreateGiamGiaDVO_PhanTramGiamGia";
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Size = new System.Drawing.Size(417, 50);
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.TabIndex = 58;
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.Text = "";
+			this.FormCreateGiamGiaDVO_PhanTramGiamGia.TrailingIcon = null;
+			// 
 			// FormCreateGiamGia
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(427, 497);
-			this.Controls.Add(this.FormCreateGiamGiaDVO_MaxGiamGia);
 			this.Controls.Add(this.FormCreateGiamGiaDVO_PhanTramGiamGia);
+			this.Controls.Add(this.FormCreateGiamGiaDVO_MaxGiamGia);
 			this.Controls.Add(this.FormCreateGiamGiaDVO_TenGiamGia);
 			this.Controls.Add(this.LabelForFocus);
 			this.Controls.Add(this.FormCreateGiamGia_btnThietLapVeBanDau);
@@ -269,9 +257,9 @@
 			this.Controls.Add(this.FormCreateGiamGiaDVO_TenGiamGia_Validation);
 			this.Controls.Add(this.FormCreateGiamGiaDVO_NgayKetThuc);
 			this.Controls.Add(this.FormCreateGiamGiaDVO_NgayBatDau);
-			this.Controls.Add(this.materialLabel2);
 			this.Controls.Add(this.materialLabel1);
 			this.Name = "FormCreateGiamGia";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FormCreateGiamGia";
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -281,7 +269,6 @@
 		#endregion
 
 		private MaterialSkin.Controls.MaterialTextBox FormCreateGiamGiaDVO_MaxGiamGia;
-		private MaterialSkin.Controls.MaterialTextBox FormCreateGiamGiaDVO_PhanTramGiamGia;
 		private MaterialSkin.Controls.MaterialTextBox FormCreateGiamGiaDVO_TenGiamGia;
 		private System.Windows.Forms.Label LabelForFocus;
 		private MaterialSkin.Controls.MaterialButton FormCreateGiamGia_btnThietLapVeBanDau;
@@ -293,7 +280,7 @@
 		private MaterialSkin.Controls.MaterialLabel FormCreateGiamGiaDVO_TenGiamGia_Validation;
 		private _Utilities.RJDatePicker FormCreateGiamGiaDVO_NgayKetThuc;
 		private _Utilities.RJDatePicker FormCreateGiamGiaDVO_NgayBatDau;
-		private MaterialSkin.Controls.MaterialLabel materialLabel2;
 		private MaterialSkin.Controls.MaterialLabel materialLabel1;
+		private MaterialSkin.Controls.MaterialTextBox FormCreateGiamGiaDVO_PhanTramGiamGia;
 	}
 }

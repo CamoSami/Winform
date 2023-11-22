@@ -83,6 +83,16 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return dataTable.Rows.Count > 0;
 		}
 
+		//hạnh add
+		public bool CheckHoaDonBanHasGiamGia(Guid MaGiamGia)
+		{
+			string query = $"SELECT * FROM {DataProvider.HOADONBAN_TABLE} WHERE MaGiamGia = {this.GetString(MaGiamGia)} ";
+
+			DataTable dataTable = DataProvider.Instance.ExecuteQuery(query);
+
+			return dataTable.Rows.Count > 0;
+		}
+
 
 
 		private string GetString(dynamic obj)
