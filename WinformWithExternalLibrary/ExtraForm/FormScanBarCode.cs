@@ -1,4 +1,5 @@
 ﻿using AForge.Video.DirectShow;
+using MaterialSkin;
 using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 		public FormScanBarCode()
 		{
 			this.InitializeComponent();
+
+			//		Material Skin Manager
+			MaterialSkinManager.Instance.AddFormToManage(this);
 
 			this.barCodeScannerTb.Enabled = false;
 

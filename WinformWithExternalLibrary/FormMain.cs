@@ -87,43 +87,6 @@ namespace WinformWithExternalLibrary
 		#region Initialize
 
 		//		Initializing
-		private void InitializeContextMenuStrip()
-		{
-			this.ContextMenuStrip = this.contextMenuStrip;
-
-			foreach (TabPage tabPage in this.materialTabControl.TabPages)
-			{
-				tabPage.ContextMenuStrip = this.contextMenuStrip;
-			}
-
-			this.darkModeToolStripMenuItem.Click += (obj, e) =>
-			{
-				if (this.darkModeToolStripMenuItem.Checked == true)
-				{
-					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(isDark: true);
-					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.DARK;
-
-					this.contextMenuStrip.ForeColor = Color.White;
-
-					this.ResetColorForLabel(-1, ifAllTabPage: true);
-				}
-				else
-				{
-					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(isDark: false);
-					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.LIGHT;
-
-					this.contextMenuStrip.ForeColor = Color.Black;
-
-					this.ResetColorForLabel(-1, ifAllTabPage: true);
-				}
-			};
-
-			this.autoValidationToolStripMenuItem.Click += (obj, e) =>
-			{
-				this.IfAutoValidate = this.autoValidationToolStripMenuItem.Checked;
-			};
-		}
-
 		private void InitializeHardCodedAttributes()
 		{
 			//		Material Skin Manager
@@ -376,6 +339,43 @@ namespace WinformWithExternalLibrary
 			{
 				this.UpdateDataSource(this.NhanVienThuNganHDNhapDVO_NhanVien, NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList);
 				this.UpdateDataSource(this.NhanVienThuNganHDBanDVO_NhanVien, NhanVienDAO.Instance.GetTenNhanVienAndNgaySinhList);
+			};
+		}
+
+		private void InitializeContextMenuStrip()
+		{
+			this.ContextMenuStrip = this.contextMenuStrip;
+
+			foreach (TabPage tabPage in this.materialTabControl.TabPages)
+			{
+				tabPage.ContextMenuStrip = this.contextMenuStrip;
+			}
+
+			this.darkModeToolStripMenuItem.Click += (obj, e) =>
+			{
+				if (this.darkModeToolStripMenuItem.Checked == true)
+				{
+					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(isDark: true);
+					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.DARK;
+
+					this.contextMenuStrip.ForeColor = Color.White;
+
+					this.ResetColorForLabel(-1, ifAllTabPage: true);
+				}
+				else
+				{
+					MaterialSkinManager.Instance.ColorScheme = FormLogin.Instance.GetColorScheme(isDark: false);
+					MaterialSkinManager.Instance.Theme = MaterialSkinManager.Themes.LIGHT;
+
+					this.contextMenuStrip.ForeColor = Color.Black;
+
+					this.ResetColorForLabel(-1, ifAllTabPage: true);
+				}
+			};
+
+			this.autoValidationToolStripMenuItem.Click += (obj, e) =>
+			{
+				this.IfAutoValidate = this.autoValidationToolStripMenuItem.Checked;
 			};
 		}
 

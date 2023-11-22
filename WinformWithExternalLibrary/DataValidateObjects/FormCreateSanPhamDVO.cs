@@ -15,6 +15,14 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 		[Required(
 			ErrorMessage = "Vui lòng nhập mã của sản phẩm"
 		)]
+		//[FormCreateSanPhamDVO_UniqueMaSanPham(
+		//	ErrorMessage = "Mã sản phẩm đã tồn tại"
+		//	)]
+		[StringLength(
+			maximumLength: 12,
+			MinimumLength = 12,
+			ErrorMessage = "Mã sản phẩm phải có độ dài 12 ký tự"
+			)]
 		[DisplayName("Mã sản phẩm")]
 		public string FormCreateSanPhamDVO_MaSanPham { get; set; }
 

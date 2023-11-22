@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +34,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 								bool isUpdate = false)
 		{
 			InitializeComponent();
+
+			//		Material Skin Manager
+			MaterialSkinManager.Instance.AddFormToManage(this);
 
 			//		Attributes
 			this.InitializeHardCodedAttributes();
@@ -131,10 +135,9 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 		private void InitializeSpecializedEvent()
 		{
-			this.Load += (obj, e) =>
-			{
-				this.ResetColorForLabel();
-			};
+			this.FormCreateSanPhamDVO_DonGiaBan.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+			this.FormCreateSanPhamDVO_DonGiaNhap.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
+			this.FormCreateSanPhamDVO_SoLuongTonKho.KeyPress += this.TextBoxBase_KeyPress_NumericOnly;
 
 			this.FormCreateSanPham_btnThemSanPham.Click += FormCreateSanPham_btnThemSanPham_Click;
 
@@ -185,6 +188,13 @@ namespace WinformWithExternalLibrary.ExtraForm
 			{
 				if (this.TryValidation())
 				{
+					if (!this.isUpdate && DMSanPhamDAO.Instance.CheckMaSanPhamExist(this.FormCreateSanPhamDVO_MaSanPham.Text))
+					{
+						this.ShowMessageBox("Mã sản phẩm đã tồn tại!");
+
+						return;
+					}
+
 					FormCreateSanPhamDVO formCreateSPDVO = this.GetInput();
 					DMSanPhamDTO dMSanPhamDTO = new DMSanPhamDTO();
 
@@ -299,7 +309,8 @@ namespace WinformWithExternalLibrary.ExtraForm
 			{
 				foreach (ValidationResult result in results)
 				{
-					Debug.WriteLine(result.ErrorMessage);
+					//Debug.WriteLine(result.ErrorMessage);
+					
 					for (int i = 0; i < this.listOfTextboxes.Count; i++)
 					{
 						if (result.MemberNames.Contains(this.listOfTextboxes[i].Name) &&
@@ -411,12 +422,18 @@ namespace WinformWithExternalLibrary.ExtraForm
 				label.ForeColor = Color.Red;
 			}
 		}
+
 		//       Hiện MessageBox với các lựa chọn Yes No cho TabPage
 		private bool ShowMessageBoxYesNo(string message, string title = "")
 		{
+			if (title == "")
+			{
+				title = this.Text;
+			}
+
 			bool ifYes = MaterialMessageBox.Show(
 							text: message,
-							caption: this.Text,
+							caption: title,
 							buttons: MessageBoxButtons.YesNo,
 							icon: MessageBoxIcon.Question,
 							UseRichTextBox: false,
@@ -432,7 +449,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 		//Hiện MessageBox cho TabPage
 		private void ShowMessageBox(string message, string title = "")
 		{
-
 			if (title == "")
 			{
 				title = this.Text;

@@ -15,7 +15,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 			{
 				if (long.TryParse(value.ToString(), out var longValue))
 				{
-					if (longValue % 100 == 0)
+					if (longValue % 100 == 0 && longValue != 0)
 					{
 						return ValidationResult.Success;
 					}
