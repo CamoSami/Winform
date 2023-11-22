@@ -2651,7 +2651,7 @@ namespace WinformWithExternalLibrary
 			};
 		}
 
-		// Xóa Nhân Viên Hiện Có
+		//		Xóa Nhân Viên Hiện Có
 		private void DeleteNhanVien()
 		{
 			TabPageNhanVien_btnXoa.Click += (object sender, EventArgs e) =>
@@ -2664,16 +2664,21 @@ namespace WinformWithExternalLibrary
 						{
 							// Lấy giá trị của mã nhân viên từ SubItems[1], cột mã nhân viên là cột thứ 1
 							string maNhanVien = item.SubItems[1].Text;
+							if (NhanVienDAO.Instance.IsInOtherTable(maNhanVien))
+							{
+								this.ShowMessageBox($"Nhân viên {maNhanVien} đang tồn tại trong bảng khác, không thể xóa", "Thông báo");
+							}
+							else
+							{
+								// Gọi hàm xóa dữ liệu dựa trên mã nhân viên
+								NhanVienDAO.Instance.XoaNhanVienTheoMa(maNhanVien);
+								this.TabPageNhanVien_MaterialListView.Items.Clear();
 
-							// Gọi hàm xóa dữ liệu dựa trên mã nhân viên
-							NhanVienDAO.Instance.XoaNhanVienTheoMa(maNhanVien);
+								this.CallDataNhanVien();
+
+								this.ShowMessageBox("Dữ liệu đã được xóa thành công.", "Thông báo");
+							}
 						}
-
-						this.TabPageNhanVien_MaterialListView.Items.Clear();
-
-						this.CallDataNhanVien();
-						
-						this.ShowMessageBox("Dữ liệu đã được xóa thành công.", "Thông báo");
 					}
 				}
 				else
@@ -2724,6 +2729,15 @@ namespace WinformWithExternalLibrary
 
 			TabPageNhanVien_btnMacDinh.Click += (object sender, EventArgs e) =>
 			{
+				//Debug.WriteLine("Triggered!");
+
+				this.NhanVienDVO_MatKhau.Password = false;
+				this.NhanVienDVO_NhapLaiMatKhau.Password = false;
+
+				this.ResetInputForTabPage();
+
+				this.TabPageNhanVien_TextboxSelectNhanVien.Text = "";
+
 				TabPageNhanVien_MaterialListView.Items.Clear();
 
 				this.CallDataNhanVien();
@@ -3378,7 +3392,7 @@ namespace WinformWithExternalLibrary
 				{
 					dateTimePicker.Value = this.defaultDateTime;
 
-					return;
+					continue;
 				}
 				else if (controlTemp is ComboBox comboBox)
 				{

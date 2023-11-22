@@ -24,6 +24,21 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
         public NhanVienDAO() { }
 
+		// Kiểm tra nhân viên có trong bảng hóa đơn bán hoặc bảng hóa đơn nhập không 
+		public bool IsInOtherTable(string employeeCode)
+		{
+			// Kiểm tra xem mã nhân viên có trong bảng HoaDonBan không
+			string queryHoaDonBan = $"SELECT COUNT(*) FROM {DataProvider.HOADONBAN_TABLE} WHERE MaNhanVien = '{employeeCode}'";
+			int countHoaDonBan = (int)DataProvider.Instance.ExecuteScalar(queryHoaDonBan);
+
+			// Kiểm tra xem mã nhân viên có trong bảng HoaDonNhap không
+			string queryHoaDonNhap = $"SELECT COUNT(*) FROM {DataProvider.HOADONNHAP_TABLE} WHERE MaNhanVien = '{employeeCode}'";
+			int countHoaDonNhap = (int)DataProvider.Instance.ExecuteScalar(queryHoaDonNhap);
+
+			// Trả về true nếu mã nhân viên tồn tại trong ít nhất một bảng, ngược lại trả về false
+			return countHoaDonBan > 0 || countHoaDonNhap > 0;
+		}
+
 		//		Check MatKhau
 		public bool CheckMatKhauNhanVien(Guid maNhanVien, string matKhau)
 		{
