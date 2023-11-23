@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinformWithExternalLibrary._Utilities;
 using WinformWithExternalLibrary.DataAccessObjects;
 using WinformWithExternalLibrary.DataTransferObjects;
 using WinformWithExternalLibrary.DataValidateObjects;
@@ -96,7 +97,12 @@ namespace WinformWithExternalLibrary.ExtraForm
 
 					//		Get the DisplayName attribute
 					tempMaterialTextBox.Text = this.GetPlaceholder(tempMaterialTextBox);
-
+				}
+				//		RJDatePicker
+				else if (control is RJDatePicker rJDatePicker)
+				{
+					rJDatePicker.SkinColor = System.Drawing.Color.PaleVioletRed;
+					rJDatePicker.BorderColor = System.Drawing.Color.PaleVioletRed;
 				}
 			}
 		}
