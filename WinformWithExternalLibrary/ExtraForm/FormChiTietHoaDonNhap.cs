@@ -119,7 +119,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 				this.exportTableData.ExportToExcel(
 					dataTable: dataTable,
 					workSheetName: "HoaDonNhap" + this.getDateTime.GetDateTimeNow_Date(),
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.HoaDonNhap
 				);
 			};

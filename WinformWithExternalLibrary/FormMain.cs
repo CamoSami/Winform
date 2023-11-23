@@ -1095,7 +1095,6 @@ namespace WinformWithExternalLibrary
 				this.exportTableData.ExportToExcel(
 					dataTable: Bill,
 					workSheetName: $"ChiTietHDBan_{maHoaDonBan.ToString().Split('-')[0]}",
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.ChiTietHDBan
 				);
 			}
@@ -1163,7 +1162,6 @@ namespace WinformWithExternalLibrary
 				this.exportTableData.ExportToExcel(
 					dataTable: Bill,
 					workSheetName: $"ChiTietHDNhap_{maHoaDonNhap.ToString().Split('-')[0]}",
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.ChiTietHDNhap
 				);
 			}
@@ -2007,7 +2005,6 @@ namespace WinformWithExternalLibrary
 				this.exportTableData.ExportToExcel(
 					dataTable: dataTable,
 					workSheetName: "KhachHang" + this.getDateTime.GetDateTimeNow_Date(),
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.KhachHang
 				);
 
@@ -2248,7 +2245,6 @@ namespace WinformWithExternalLibrary
 				this.exportTableData.ExportToExcel(
 					dataTable: dataTable,
 					workSheetName: "NhaCungCap" + this.getDateTime.GetDateTimeNow_Date(),
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.NhaCungCap
 				);
 
@@ -2563,7 +2559,6 @@ namespace WinformWithExternalLibrary
 				this.exportTableData.ExportToExcel(
 					dataTable: dataTable,
 					workSheetName: "NhanVien" + this.getDateTime.GetDateTimeNow_Date(),
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.NhanVien
 				);
 
@@ -3013,7 +3008,6 @@ namespace WinformWithExternalLibrary
 			this.exportTableData.ExportToExcel(
 				dataTable: dataTable,
 				workSheetName: "DMSanPham" + this.getDateTime.GetDateTimeNow_Date(),
-				filePath: "",
 				typeOfFile: ExportTableData.TypeOfExcel.DMSanPham
 			);
 

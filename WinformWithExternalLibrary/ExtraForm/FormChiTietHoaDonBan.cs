@@ -77,7 +77,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 				this.exportTableData.ExportToExcel(
 					dataTable: dataTable,
 					workSheetName: "HoaDonBan" + this.getDateTime.GetDateTimeNow_Date(),
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.HoaDonBan
 				);
 

@@ -25,24 +25,39 @@ namespace WinformWithExternalLibrary._Utilities
 			DMSanPham,
 			GiamGia,
 			Empty
-		} 
+		}
 
-        public void ExportToExcel(DataTable dataTable, string workSheetName, string filePath, TypeOfExcel typeOfFile = TypeOfExcel.Empty)
+		private string filePath = $"D:\\06_C#_exe\\_Group Project\\Excel\\";
+
+
+		public void ExportToExcel(DataTable dataTable, string workSheetName, TypeOfExcel typeOfFile = TypeOfExcel.Empty)
         {
 			try
 			{
 				XLWorkbook workBook = new XLWorkbook();
 				workBook.Worksheets.Add(dataTable, sheetName: workSheetName);
 
-				string path = filePath != "" ? filePath : $"D:\\06_C#_exe\\_Group Project\\Excel\\{workSheetName}.xlsx";
+				string workSheetAdjustedName = $"{workSheetName}.xlsx";
 				int i = 0;
 
-				while (File.Exists(path))
+				while (File.Exists(this.filePath + workSheetAdjustedName))
 				{
-					path = filePath != "" ? filePath : $"D:\\06_C#_exe\\_Group Project\\Excel\\{workSheetName}({++i}).xlsx";
+					workSheetAdjustedName = $"{workSheetName}({++i}).xlsx";
 				}
 
-				workBook.SaveAs(path);
+				SaveFileDialog saveFileDialog = new SaveFileDialog();
+				saveFileDialog.Filter = "Excel files: (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+				saveFileDialog.FileName = workSheetAdjustedName;
+				saveFileDialog.InitialDirectory = this.filePath;
+
+				if (saveFileDialog.ShowDialog() != DialogResult.OK)
+				{
+					return;
+				}
+
+				this.filePath = saveFileDialog.FileName.Substring(0, saveFileDialog.FileName.Length - saveFileDialog.FileName.Split('\\').Last().Length);
+
+				workBook.SaveAs(saveFileDialog.FileName);
 
 				IXLWorksheet workSheet = workBook.Worksheet(1);
 
@@ -138,7 +153,7 @@ namespace WinformWithExternalLibrary._Utilities
 
 				workBook.Save();
 
-				MaterialMessageBox.Show("Xuất dữ liệu thành công vào " + path, "Message", UseRichTextBox: false);
+				MaterialMessageBox.Show("Xuất dữ liệu thành công vào " + saveFileDialog.FileName, "Message", UseRichTextBox: false);
 			} 
 			catch (Exception ex)
 			{

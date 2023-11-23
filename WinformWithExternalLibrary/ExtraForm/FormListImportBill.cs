@@ -55,7 +55,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 					this.exportTableData.ExportToExcel(
 						dataTable: Bill,
 						workSheetName: $"ChiTietHDNhap_{HoaDon_MaHoaDon.Split('-')[0]}",
-						filePath: "",
 						typeOfFile: ExportTableData.TypeOfExcel.ChiTietHDNhap
 					);
 				}
@@ -76,7 +75,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 				this.exportTableData.ExportToExcel(
 					dataTable: DTBill,
 					workSheetName: $"HoaDonNhap_{this.NhaCungCap_DienThoaiCungCap}",
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.HoaDonNhap
 				);
 			};

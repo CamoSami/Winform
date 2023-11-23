@@ -73,7 +73,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 				this.exportTableData.ExportToExcel(
 					dataTable: Bill,
 					workSheetName: $"ChiTietHDBan_{HoaDon_MaHoaDon.Split('-')[0]}",
-					filePath: "",
 					typeOfFile: ExportTableData.TypeOfExcel.ChiTietHDBan
 				);
 			}
@@ -94,7 +93,6 @@ namespace WinformWithExternalLibrary.ExtraForm
 			this.exportTableData.ExportToExcel(
 				dataTable: DTBill,
 				workSheetName: $"HoaDonBan_{KhachHang_SoDienThoai}",
-				filePath: "",
 				typeOfFile: ExportTableData.TypeOfExcel.HoaDonBan
 			);
 
