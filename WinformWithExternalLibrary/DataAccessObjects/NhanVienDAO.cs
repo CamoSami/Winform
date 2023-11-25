@@ -43,8 +43,8 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 		public bool CheckMatKhauNhanVien(Guid maNhanVien, string matKhau)
 		{
 			string queryListNV = $"SELECT MaNhanVien FROM {DataProvider.NHANVIEN_TABLE} " +
-				$"WHERE MaNhanVien = {maNhanVien} " +
-				$"AND MatKhau = {matKhau}";
+				$"WHERE MaNhanVien = '{maNhanVien}' " +
+				$"AND MatKhau = '{matKhau}'";
 
 			DataTable dataTable = DataProvider.Instance.ExecuteQuery(queryListNV);
 

@@ -244,11 +244,11 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             if (searchValue != "" && dateTimeConverted != "")
             {
-                dateQuery = $" AND CONVERT(DATE, NgayBan) = '{dateTimeConverted}';";
+                dateQuery = $" AND CONVERT(DATE, NgayBan) = '{dateTimeConverted}'";
             }
             else if(searchValue == "" && dateTimeConverted != "")
             {
-                dateQuery = $" WHERE CONVERT(DATE, NgayBan) = '{dateTimeConverted}';";
+                dateQuery = $" WHERE CONVERT(DATE, NgayBan) = '{dateTimeConverted}'";
             }
 
             string query = "SELECT MaHDBan, TenNhanVien, tNhanVien.DienThoai AS DienThoaiNV, TenKhachHang, tKhachHang.DienThoai AS DienThoaiKH, SoSanPham, TenGiamGia, TongTien, NgayBan " +
@@ -362,11 +362,11 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 
             if (searchValue != "" && dateTimeConverted != "")
             {
-                dateQuery = $" AND CONVERT(DATE, NgayNhap) = '{dateTimeConverted}';";
+                dateQuery = $" AND CONVERT(DATE, NgayNhap) = '{dateTimeConverted}'";
             }
             else if (searchValue == "" && dateTimeConverted != "")
             {
-                dateQuery = $" WHERE CONVERT(DATE, NgayNhap) = '{dateTimeConverted}';";
+                dateQuery = $" WHERE CONVERT(DATE, NgayNhap) = '{dateTimeConverted}'";
             }
 
             string query = "SELECT MaHDNhap, TenNhanVien, tNhanVien.DienThoai AS DienThoaiNV, TenNhaCungCap, tNhaCungCap.DiaChi AS DiaChiNCC, tNhaCungCap.DienThoai AS DienThoaiNCC, SoSanPham, TongTien, NgayNhap " +

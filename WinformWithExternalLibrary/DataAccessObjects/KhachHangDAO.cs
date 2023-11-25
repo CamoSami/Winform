@@ -77,7 +77,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
 			return dienThoais;
 		}
 
-		public bool IfPhoneNumberExist(string KhachHangDVO_DienThoai)
+		public bool CheckIfPhoneNumberExist(string KhachHangDVO_DienThoai)
 		{
 			string selectDienThoai = "SELECT * FROM " +
 							DataProvider.KHACHHANG_TABLE +

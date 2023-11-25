@@ -30,6 +30,7 @@ namespace WinformWithExternalLibrary
 			unit: GraphicsUnit.Point,
 			gdiCharSet: ((byte)(128))
 			);
+
 		private readonly ColorScheme colorSchemeBlack = new ColorScheme
 				(
 				primary: Primary.Pink400,
@@ -38,6 +39,7 @@ namespace WinformWithExternalLibrary
 				accent: Accent.Pink200,
 				textShade: TextShade.BLACK
 				);
+
 		private readonly ColorScheme colorSchemeWhite = new ColorScheme
 				(
 				primary: Primary.Pink200,

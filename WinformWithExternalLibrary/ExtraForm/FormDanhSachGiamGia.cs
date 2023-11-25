@@ -147,13 +147,18 @@ namespace WinformWithExternalLibrary.ExtraForm
 				if (GiamGiaDAO.Instance.DeleteGiamGia(maGiamGia))
 				{
 					this.ShowMessageBox("Đã xóa sản phẩm thành công");
+
+					DataTable giamGia = GiamGiaDAO.Instance.GetAllGiamGia();
+
+					this.LoadGiamGia(giamGia);
 				}
 			};
 
 			this.FormDanhSachGiamGia_btnLoadGG.Click += (obj, e) =>
 			{
 				DataTable giamGia = GiamGiaDAO.Instance.GetAllGiamGia();
-				LoadGiamGia(giamGia);
+
+				this.LoadGiamGia(giamGia);
 			};
 
 			this.FormDanhSachGiamGia_btnXuatExcel.Click += (obj, e) =>

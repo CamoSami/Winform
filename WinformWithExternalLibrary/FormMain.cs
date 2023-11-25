@@ -583,10 +583,10 @@ namespace WinformWithExternalLibrary
 
 			//		Event For Buttons
 			//			TabPageHoaDonNhap_ButtonTaoSanPham
-			//				TODO:	Finish
 			this.TabPageHoaDonNhap_ButtonTaoSanPham.Click += (obj, e) =>
 			{
-
+				FormCreateSanPham formCreateSanPham = new FormCreateSanPham();
+				formCreateSanPham.Show();
 			};
 
 			//			TabPageHoaDonNhap_ButtonNhapSanPham
@@ -878,7 +878,8 @@ namespace WinformWithExternalLibrary
 			//				TODO:	Finish
 			this.TabPageHoaDonBan_ButtonTaoSanPham.Click += (obj, e) =>
 			{
-
+				FormCreateSanPham formCreateSanPham = new FormCreateSanPham();
+				formCreateSanPham.Show();
 			};
 
 			//			TabPageHoaDonBan_ButtonNhapChiTiet
@@ -1965,6 +1966,14 @@ namespace WinformWithExternalLibrary
 						string KhachHang_TenKhachHangTMP = listViewItem.SubItems[2].Text;
 						string KhachHang_DienThoaiTMP = listViewItem.SubItems[4].Text;
 
+						if (KhachHang_DienThoaiTMP != this.GetControlTextIfPlaceholderThenEmpty(this.KhachHangDVO_DienThoai) &&
+							KhachHangDAO.Instance.CheckIfPhoneNumberExist(KhachHang_DienThoaiTMP))
+						{
+							this.KhachHangDVO_DienThoai_Validation.Text = "Số điện thoại đã tồn tại!";
+
+							return;
+						}
+
 						if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi khách hàng {KhachHang_TenKhachHangTMP} có số điện thoại {KhachHang_DienThoaiTMP}?"))
 						{
 							if (KhachHangDAO.Instance.UpdateKhachHangFull(khachHangDVO, KhachHang_DienThoaiTMP))
@@ -1993,6 +2002,8 @@ namespace WinformWithExternalLibrary
 
 			this.TabPageKhachHang_RefreshKhachHang.Click += (obj, e) =>
 			{
+				this.ResetColorForLabel();
+
 				this.ResetKhachHangDVO();
 
 				this.LoadKhachHang();
@@ -2234,6 +2245,8 @@ namespace WinformWithExternalLibrary
 
 			this.TabPageNhaCungCap_RefreshNhaCungCap.Click += (obj, e) =>
 			{
+				this.ResetColorForLabel();
+
 				ResetNhaCungCapDVO();
 
 				LoadNhaCungCap();
@@ -2356,6 +2369,7 @@ namespace WinformWithExternalLibrary
 			{
 				NhaCungCapDVO nhaCungCapDVO = baseDVO as NhaCungCapDVO;
 				// Update Controls
+				
 				int index = this.TabPageNhaCungCap_MaterialListView.SelectedIndices[0];
 
 				if (index >= 0)
@@ -2364,6 +2378,15 @@ namespace WinformWithExternalLibrary
 
 					string NhaCungCap_TenNhaCungCapTMP = listViewItem.SubItems[2].Text;
 					string NhaCungCap_DienThoaiTMP = listViewItem.SubItems[3].Text;
+
+					if (NhaCungCap_DienThoaiTMP != this.GetControlTextIfPlaceholderThenEmpty(this.NhaCungCapDVO_DienThoai) &&
+							NhaCungCapDAO.Instance.CheckIfPhoneNumberExist(NhaCungCap_DienThoaiTMP))
+					{
+						this.NhaCungCapDVO_DienThoai_Validation.Text = "Số điện thoại đã tồn tại!";
+
+						return;
+					}
+
 
 					if (ShowMessageBoxYesNo($"Bạn có chắc chắn muốn thay đổi nhà cung cấp {NhaCungCap_TenNhaCungCapTMP} có số điện thoại {NhaCungCap_DienThoaiTMP}?"))
 					{
@@ -2608,6 +2631,13 @@ namespace WinformWithExternalLibrary
 						return;
 					}
 
+					if (string.Compare(this.GetControlTextIfPlaceholderThenEmpty(NhanVienDVO_MatKhau), this.GetControlTextIfPlaceholderThenEmpty(NhanVienDVO_NhapLaiMatKhau)) != 0)
+					{
+						this.ShowMessageBox("Mật khẩu nhập lại không trùng với mật khẩu đã nhập!");
+
+						return;
+					}
+
 					NhanVienDVO nhanVienDVO = baseDVO as NhanVienDVO;
 
 					NhanVienDTO nhanVienDTO = new NhanVienDTO();
@@ -2730,6 +2760,8 @@ namespace WinformWithExternalLibrary
 				this.NhanVienDVO_NhapLaiMatKhau.Password = false;
 
 				this.ResetInputForTabPage();
+				this.ResetValidationForTabPage();
+				this.ResetColorForLabel();
 
 				this.TabPageNhanVien_TextboxSelectNhanVien.Text = "";
 
@@ -2792,6 +2824,13 @@ namespace WinformWithExternalLibrary
 					if (!NhanVienDAO.Instance.CheckMatKhauNhanVien(this.maNhanVien, nhanVienDVO.NhanVienDVO_MatKhau))
 					{
 						this.ShowMessageBox("Mật khẩu vừa nhập không khớp với mật khẩu nhân viên đã lưu");
+
+						return;
+					}
+
+					if (string.Compare(this.GetControlTextIfPlaceholderThenEmpty(NhanVienDVO_MatKhau), this.GetControlTextIfPlaceholderThenEmpty(NhanVienDVO_NhapLaiMatKhau)) != 0)
+					{
+						this.ShowMessageBox("Mật khẩu nhập lại không trùng với mật khẩu đã nhập!");
 
 						return;
 					}
@@ -3066,6 +3105,7 @@ namespace WinformWithExternalLibrary
 		private void TabPageSanPham_NhapMoiTimKiem_Click(object sender, EventArgs e)
 		{
 			this.ResetInputForTabPage();
+			this.ResetColorForLabel();
 		}
 
 		private void TabPageSanPham_materialListView_SelectedIndexChanged(object sender, EventArgs e)

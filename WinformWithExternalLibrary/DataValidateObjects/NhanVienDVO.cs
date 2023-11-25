@@ -9,7 +9,7 @@ using WinformWithExternalLibrary.DataValidateObjects.CustomValidation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WinformWithExternalLibrary.DataValidateObjects
 {
@@ -45,7 +45,10 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 		public string NhanVienDVO_TenCongViec { get; set; }
 
 		[Required(ErrorMessage = "Vui lòng nhập địa chỉ email.")]
-		[EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ.")]
+		[RegularExpression(
+			@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+			ErrorMessage = "Địa chỉ email không hợp lệ."
+			)]
 		[DisplayName("Email")]
 		public string NhanVienDVO_Email { get; set; }
 
@@ -54,7 +57,6 @@ namespace WinformWithExternalLibrary.DataValidateObjects
 		public string NhanVienDVO_MatKhau { get; set; }
 
 		[Required(ErrorMessage = "Vui lòng nhập lại mật khẩu.")]
-		[Compare("NhanVienDVO_MatKhau", ErrorMessage = "Mật khẩu nhập lại không khớp")]
 		[DisplayName("Nhập lại mật khẩu")]
 		public string NhanVienDVO_NhapLaiMatKhau { get; set; }
 	}

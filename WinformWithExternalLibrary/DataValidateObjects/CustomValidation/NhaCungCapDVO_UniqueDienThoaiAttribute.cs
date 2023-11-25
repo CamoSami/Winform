@@ -14,7 +14,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 		{
 			if (value != null && value is string)
 			{
-				if(!NhaCungCapDAO.Instance.IfPhoneNumberExist(value.ToString()))
+				if(!NhaCungCapDAO.Instance.CheckIfPhoneNumberExist(value.ToString()))
 				{
 					return ValidationResult.Success;
 				}

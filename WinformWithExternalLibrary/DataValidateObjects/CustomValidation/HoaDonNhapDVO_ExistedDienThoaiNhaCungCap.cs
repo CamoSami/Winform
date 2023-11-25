@@ -22,7 +22,7 @@ namespace WinformWithExternalLibrary.DataValidateObjects.CustomValidation
 			{
 				//Debug.WriteLine(value.ToString());
 
-				if (NhaCungCapDAO.Instance.IfPhoneNumberExist(value.ToString()))
+				if (NhaCungCapDAO.Instance.CheckIfPhoneNumberExist(value.ToString()))
 				{
 					//Debug.WriteLine("Success!");
 

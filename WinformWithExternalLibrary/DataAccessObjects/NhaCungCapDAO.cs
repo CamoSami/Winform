@@ -98,7 +98,7 @@ namespace WinformWithExternalLibrary.DataAccessObjects
             return phoneNumbers;
         }
 
-        public bool IfPhoneNumberExist(string NhaCungCapDVO_DienThoai)
+        public bool CheckIfPhoneNumberExist(string NhaCungCapDVO_DienThoai)
         {
             string selectPhoneNumber = $"SELECT * FROM " +
                 $"{DataProvider.NHACUNGCAP_TABLE}" +

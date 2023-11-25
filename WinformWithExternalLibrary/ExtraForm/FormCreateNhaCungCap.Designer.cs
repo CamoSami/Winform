@@ -54,7 +54,7 @@
 			this.materialButtonSubmit.NoAccentTextColor = System.Drawing.Color.Empty;
 			this.materialButtonSubmit.Size = new System.Drawing.Size(100, 44);
 			this.materialButtonSubmit.TabIndex = 18;
-			this.materialButtonSubmit.Text = "Submit";
+			this.materialButtonSubmit.Text = "Nhập";
 			this.materialButtonSubmit.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
 			this.materialButtonSubmit.UseAccentColor = false;
 			this.materialButtonSubmit.UseVisualStyleBackColor = true;
@@ -161,7 +161,7 @@
 			this.materialButtonReset.NoAccentTextColor = System.Drawing.Color.Empty;
 			this.materialButtonReset.Size = new System.Drawing.Size(100, 44);
 			this.materialButtonReset.TabIndex = 23;
-			this.materialButtonReset.Text = "Reset";
+			this.materialButtonReset.Text = "Làm Mới";
 			this.materialButtonReset.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
 			this.materialButtonReset.UseAccentColor = false;
 			this.materialButtonReset.UseVisualStyleBackColor = true;
